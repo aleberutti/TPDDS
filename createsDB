@@ -27,6 +27,7 @@ CREATE TABLE clave(
         PRIMARY KEY (valor, fecha, hora),
         UNIQUE KEY (userID),
         FOREIGN KEY (userID) REFERENCES usuario(userID));
+	FOREIGN KEY (politicaID) REFERENCES politicacontraseña(politicaID));
 	FOREIGN KEY (historialID) REFERENCES historialClaves(historialID));
 
 CREATE TABLE historialClaves(
@@ -43,10 +44,8 @@ CREATE TABLE politicascontraseña(
         letraMay BOOL NOT NULL,
         digito BOOL NOT NULL,
         passIgual BOOL NOT NULL,
-        userID INT NOT NULL,
         PRIMARY KEY (politicaID),
-        UNIQUE KEY (userID),
-        FOREIGN KEY (userID) REFERENCES clave(userID));
+        UNIQUE KEY (userID));
 
 CREATE TABLE docente(
         docenteID INT NOT NULL AUTO_INCREMENT,
