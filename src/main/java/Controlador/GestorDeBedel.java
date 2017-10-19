@@ -29,7 +29,7 @@ public void cancelarModificacion(){
 
 }
 
-public boolean validarContrasenia(String nom, String ap, int id, String pass){
+public boolean validarContrasenia(String nom, String ap, int id, String pass){ //NO SE USA
 
 }
 
