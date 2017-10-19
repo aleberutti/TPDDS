@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Aulainformatica" table="aulainformatica" catalog="tpdds" optimistic-lock="version">
+        <id name="aulaId" type="java.lang.Integer">
+            <column name="aulaID" />
+            <generator class="foreign">
+                <param name="property">aula</param>
+            </generator>
+        </id>
+        <one-to-one name="aula" class="Modelo.Aula" constrained="true"></one-to-one>
+        <property name="cantPcs" type="java.lang.Integer">
+            <column name="cantPCS" />
+        </property>
+        <property name="ca&#241;on" type="java.lang.Boolean">
+            <column name="ca&#241;on" />
+        </property>
+    </class>
+</hibernate-mapping>

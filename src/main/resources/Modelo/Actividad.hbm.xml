@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Actividad" table="actividad" catalog="tpdds" optimistic-lock="version">
+        <id name="actividadId" type="java.lang.Integer">
+            <column name="actividadID" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="40" />
+        </property>
+        <one-to-one name="seminario" class="Modelo.Seminario"></one-to-one>
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="actividadID" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Reserva" />
+        </set>
+        <one-to-one name="catedra" class="Modelo.Catedra"></one-to-one>
+        <one-to-one name="curso" class="Modelo.Curso"></one-to-one>
+    </class>
+</hibernate-mapping>

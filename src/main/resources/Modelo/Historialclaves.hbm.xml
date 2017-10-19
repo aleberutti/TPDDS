@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Historialclaves" table="historialclaves" catalog="tpdds" optimistic-lock="version">
+        <id name="historialId" type="java.lang.Integer">
+            <column name="historialID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
+            <column name="userID" not-null="true" unique="true" />
+        </many-to-one>
+        <set name="claves" table="clave" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="historialID" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Clave" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -8,5 +8,22 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</property>
+    <mapping resource="Modelo/Aulainformatica.hbm.xml"/>
+    <mapping resource="Modelo/Reserva.hbm.xml"/>
+    <mapping resource="Modelo/Usuario.hbm.xml"/>
+    <mapping resource="Modelo/Catedra.hbm.xml"/>
+    <mapping resource="Modelo/Aulamultimedios.hbm.xml"/>
+    <mapping resource="Modelo/Historialclaves.hbm.xml"/>
+    <mapping resource="Modelo/Curso.hbm.xml"/>
+    <mapping resource="Modelo/Seminario.hbm.xml"/>
+    <mapping resource="Modelo/Docente.hbm.xml"/>
+    <mapping resource="Modelo/Bedel.hbm.xml"/>
+    <mapping resource="Modelo/Aula.hbm.xml"/>
+    <mapping resource="Modelo/Clave.hbm.xml"/>
+    <mapping resource="Modelo/Diareserva.hbm.xml"/>
+    <mapping resource="Modelo/Admin.hbm.xml"/>
+    <mapping resource="Modelo/Actividad.hbm.xml"/>
+    <mapping resource="Modelo/Aulasra.hbm.xml"/>
+    <mapping resource="Modelo/Fechalectivas.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

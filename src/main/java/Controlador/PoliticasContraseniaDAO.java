@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Controlador;
 
 /**
  *
  * @author juani
  */
-public class AulaInformatica extends Aula{
-    private int cantidadPCs;
-    private boolean canion;
+public class PoliticasContraseniaDAO {
+    
 }

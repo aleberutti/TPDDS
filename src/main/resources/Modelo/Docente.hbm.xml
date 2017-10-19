@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Docente" table="docente" catalog="tpdds" optimistic-lock="version">
+        <id name="docenteId" type="java.lang.Integer">
+            <column name="docenteID" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="20" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="30" unique="true" />
+        </property>
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="docenteID" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Reserva" />
+        </set>
+    </class>
+</hibernate-mapping>

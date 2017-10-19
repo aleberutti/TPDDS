@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Clave" table="clave" catalog="tpdds" optimistic-lock="version">
+        <id name="claveId" type="java.lang.Integer">
+            <column name="claveID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="historialclaves" class="Modelo.Historialclaves" fetch="select">
+            <column name="historialID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
+            <column name="userID" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="politicaId" type="int">
+            <column name="politicaID" not-null="true" />
+        </property>
+        <property name="valor" type="string">
+            <column name="valor" length="30" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="hora" type="time">
+            <column name="hora" length="8" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

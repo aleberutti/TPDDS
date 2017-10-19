@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Fechalectivas" table="fechalectivas" catalog="tpdds" optimistic-lock="version">
+        <id name="fechalectivaId" type="java.lang.Integer">
+            <column name="fechalectivaID" />
+            <generator class="identity" />
+        </id>
+        <property name="fechainicio1c" type="date">
+            <column name="fechainicio1C" length="10" />
+        </property>
+        <property name="fechafin1c" type="date">
+            <column name="fechafin1C" length="10" />
+        </property>
+        <property name="fechainicio2c" type="date">
+            <column name="fechainicio2C" length="10" />
+        </property>
+        <property name="fechafin2c" type="date">
+            <column name="fechafin2C" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
