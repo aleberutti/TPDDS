@@ -9,6 +9,6 @@ package Controlador;
  *
  * @author juani
  */
-public class PoliticasContraseñaDAO {
+public class PoliticasContraseñaDAO extends GenericDAO{
     
 }
