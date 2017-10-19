@@ -8,6 +8,8 @@ package Modelo;
  */
 public class Catedra extends Actividad implements java.io.Serializable {
 
+
+     private Integer actividadId;
      private Actividad actividad;
      private String carrera;
      private String comision;
@@ -21,10 +23,13 @@ public class Catedra extends Actividad implements java.io.Serializable {
        this.comision = comision;
     }
     
-    public void setActividadId(int actividadId) {
-        super.setActividadId(actividadId);
+    public Integer getActividadId() {
+        return this.actividadId;
     }
     
+    public void setActividadId(int actividadId) {
+        this.actividadId = actividadId;
+    }
     public Actividad getActividad() {
         return this.actividad;
     }

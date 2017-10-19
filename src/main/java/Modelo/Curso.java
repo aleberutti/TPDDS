@@ -8,6 +8,8 @@ package Modelo;
  */
 public class Curso extends Actividad implements java.io.Serializable {
 
+
+     private Integer actividadId;
      private Actividad actividad;
      private String carrera;
 
@@ -18,11 +20,14 @@ public class Curso extends Actividad implements java.io.Serializable {
        this.actividad = actividad;
        this.carrera = carrera;
     }
-    
-    public void setActividadId(int actividadId) {
-        super.setActividadId(actividadId);
+   
+    public Integer getActividadId() {
+        return this.actividadId;
     }
     
+    public void setActividadId(int actividadId) {
+        this.actividadId = actividadId;
+    }
     public Actividad getActividad() {
         return this.actividad;
     }
