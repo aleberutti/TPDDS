@@ -12,8 +12,8 @@ package Modelo;
 public class Bedel extends Usuario{
     private Turno turno;
     private String email;
-}
 
-public void actualizarDatos(){
+    public void actualizarDatos(){
 
+    }
 }

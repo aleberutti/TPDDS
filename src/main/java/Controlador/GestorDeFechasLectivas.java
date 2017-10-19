@@ -11,12 +11,11 @@ package Controlador;
  */
 public class GestorDeFechasLectivas {
     
-}
-
 public void obtenerFechas(){
 
 }
 
 public void notificarError(){
 
+}
 }

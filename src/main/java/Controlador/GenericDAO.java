@@ -10,8 +10,6 @@ package Controlador;
  * @author juani
  */
 public class GenericDAO {
-    
-}
 
 public void create(Object o){
 
@@ -26,4 +24,5 @@ public void update(Object o){
 
 public void delete(Object o){
 
+}    
 }

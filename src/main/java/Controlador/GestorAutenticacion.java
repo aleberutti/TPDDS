@@ -10,8 +10,6 @@ package Controlador;
  * @author juani
  */
 public class GestorAutenticacion {
-    
-}
 
 public void autenticarUsuario(String user, String pass){
 
@@ -22,5 +20,7 @@ public void determinarTipoUsuario(){
 }
 
 public void notificarError(){
+
+}
 
 }

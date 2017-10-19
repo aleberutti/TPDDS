@@ -5,30 +5,31 @@
  */
 package Controlador;
 
+import Modelo.Actividad;
+
 /**
  *
  * @author juani
  */
 public class GestorDeActividad {
     
-}
-
 public Actividad obtenerActividad(){
-
+    return new Actividad();
 }
 
 public void notificarError(){
 
 }
 
-public Carrera obtenerCarrera(){
-
+public String obtenerCarrera(){
+    return "asd";
 }
 
-public Comision obtenerComision(){
-
+public String obtenerComision(){
+    return "asd";
 }
 
-public Tema obtenerTema(){
-
+public String obtenerTema(){
+    return "asd";
+}
 }

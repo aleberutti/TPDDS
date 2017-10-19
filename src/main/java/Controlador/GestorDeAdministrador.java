@@ -11,14 +11,12 @@ package Controlador;
  */
 public class GestorDeAdministrador {
     
-}
-
-public Object elegirOpcion(){
+public void elegirOpcion(){
 
 }
 
 public boolean verificarOpcion(Object opc){
-
+    return false;
 }
 
 public void notificarError(){
@@ -27,4 +25,5 @@ public void notificarError(){
 
 public void iniciarSesion(String user, String pass){
 
+}
 }

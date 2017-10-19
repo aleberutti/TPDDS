@@ -5,16 +5,16 @@
  */
 package Controlador;
 
+import Modelo.Docente;
+
 /**
  *
  * @author juani
  */
 public class GestorDeDocente {
-    
-}
 
-public Docente obtenerDocente(idDocente){
-
+public Docente obtenerDocente(int idDocente){
+    return new Docente();
 }
 
 public void notificarError(){
@@ -23,4 +23,5 @@ public void notificarError(){
 
 public void listarDocentes(){
 
+}    
 }

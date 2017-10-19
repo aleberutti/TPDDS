@@ -5,24 +5,26 @@
  */
 package Controlador;
 
+import Modelo.Reserva;
+import java.awt.List;
+import java.util.Date;
+
 /**
  *
  * @author juani
  */
 public class GestorDeReserva {
     
-}
-
 public void registrarReserva(Reserva r){
 
 }
 
 public List buscarReservaCurso(String curso){
-
+    return new List();
 }
 
 public List buscarReservaDia(Date d){
-
+    return new List();
 }
 public void notificarError(){
 
@@ -34,4 +36,5 @@ public void listarCurso(List curso){
 
 public void listarDia(List dia){
 
+}
 }
