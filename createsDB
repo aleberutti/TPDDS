@@ -1,0 +1,147 @@
+CREATE TABLE USUARIO(
+	userID INT NOT NULL AUTO_INCREMENT,
+        nombreUsuario VARCHAR(15) NOT NULL,
+        nombre VARCHAR(20) NOT NULL,
+        apellido VARCHAR(20) NOT NULL,
+        PRIMARY KEY (userID),
+        UNIQUE KEY(nombreUsuario));
+
+CREATE TABLE admin(
+	userID INT NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (userID),
+        FOREIGN KEY (userID) REFERENCES usuario(userID));
+
+CREATE TABLE bedel(
+	userID INT NOT NULL AUTO_INCREMENT,
+        turno VARCHAR(10),
+        email VARCHAR(35) NOT NULL,
+        PRIMARY KEY (userID),
+        FOREIGN KEY (userID) REFERENCES usuario(userID));
+
+CREATE TABLE clave(
+        valor VARCHAR(30) NOT NULL,
+        fecha DATE NOT NULL,
+        hora TIME NOT NULL,
+        userID INT NOT NULL,
+	historialID INT NOT NULL,
+        PRIMARY KEY (valor, fecha, hora),
+        UNIQUE KEY (userID),
+        FOREIGN KEY (userID) REFERENCES usuario(userID));
+	FOREIGN KEY (historialID) REFERENCES historialClaves(historialID));
+
+CREATE TABLE historialClaves(
+        historialID INT NOT NULL AUTO_INCREMENT,
+        userID INT NOT NULL,
+        PRIMARY KEY (historialID),
+        UNIQUE KEY (userID),
+        FOREIGN KEY (userID) REFERENCES usuario(userID));
+
+CREATE TABLE politicascontraseña(
+	politicaID INT NOT NULL AUTO_INCREMENT,
+        longMin INT NOT NULL,
+        signosEspeciales BOOL NOT NULL,
+        letraMay BOOL NOT NULL,
+        digito BOOL NOT NULL,
+        passIgual BOOL NOT NULL,
+        userID INT NOT NULL,
+        PRIMARY KEY (politicaID),
+        UNIQUE KEY (userID),
+        FOREIGN KEY (userID) REFERENCES clave(userID));
+
+CREATE TABLE docente(
+        docenteID INT NOT NULL AUTO_INCREMENT,
+        nombre VARCHAR(20),
+        apellido VARCHAR(20),
+        email VARCHAR(30),
+        PRIMARY KEY (docenteID),
+        UNIQUE KEY (email));
+
+CREATE TABLE actividad(
+        actividadID INT NOT NULL AUTO_INCREMENT,
+        nombre VARCHAR(40),
+        PRIMARY KEY (actividadID));
+
+CREATE TABLE seminario(
+        actividadID INT NOT NULL,
+        tema VARCHAR(40) NOT NULL,
+        PRIMARY KEY (actividadID),
+	FOREIGN KEY (actividadID) REFERENCES actividad(actividadID));
+
+CREATE TABLE curso(
+        actividadID INT NOT NULL,
+        carrera VARCHAR(40) NOT NULL,
+        PRIMARY KEY (actividadID),
+	FOREIGN KEY (actividadID) REFERENCES actividad(actividadID));
+
+CREATE TABLE catedra(
+        actividadID INT NOT NULL,
+        carrera VARCHAR(40) NOT NULL,
+        comision VARCHAR(40) NOT NULL,
+        PRIMARY KEY (actividadID),
+	FOREIGN KEY (actividadID) REFERENCES actividad(actividadID));
+
+CREATE TABLE reserva(
+        reservaID INT NOT NULL AUTO_INCREMENT,
+        cantAlumnos INT NOT NULL,
+        fecha_solicitud DATETIME NOT NULL,
+        periodo VARCHAR(15) NOT NULL,
+        userID INT NOT NULL,
+        docenteID INT NOT NULL,
+        actividadID INT NOT NULL,
+        PRIMARY KEY (reservaID),
+	FOREIGN KEY (userID) REFERENCES bedel(userID),
+        FOREIGN KEY (docenteID) REFERENCES docente(docenteID),
+        FOREIGN KEY (actividadID) REFERENCES actividad(actividadID));
+
+
+CREATE TABLE aula(
+        aulaID INT NOT NULL AUTO_INCREMENT,
+        nombre varchar(20),
+        capacidad INT,
+        piso INT,
+        estado VARCHAR(15),
+        aireacond BOOL,
+        pizarron VARCHAR(10),
+        ventiladores INT,
+        PRIMARY KEY (aulaID));
+
+CREATE TABLE aulamultimedios(
+	aulaID INT NOT NULL AUTO_INCREMENT,
+        televisor BOOL,
+        cañon BOOL,
+        computadora BOOL,
+        dvd BOOL,
+        PRIMARY KEY (aulaID),
+        FOREIGN KEY (aulaID) REFERENCES aula(aulaID));
+
+CREATE TABLE aulainformatica(
+	aulaID INT NOT NULL AUTO_INCREMENT,
+        cantPCS INT,
+        cañon BOOL,
+        PRIMARY KEY (aulaID),
+        FOREIGN KEY (aulaID) REFERENCES aula(aulaID));
+
+CREATE TABLE aulaSRA(
+	aulaID INT NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (aulaID),
+        FOREIGN KEY (aulaID) REFERENCES aula(aulaID));
+
+CREATE TABLE diaReserva(
+	diaReservaID INT NOT NULL AUTO_INCREMENT,
+        diaSemana VARCHAR(15) NOT NULL,
+        fecha DATE NOT NULL,
+        horainicio TIME NOT NULL,
+        horafin TIME NOT NULL,
+        aulaID INT NOT NULL,
+        reservaID INT NOT NULL,
+        PRIMARY KEY (diaReservaID),
+        FOREIGN KEY (aulaID) REFERENCES aula(aulaID),
+        FOREIGN KEY (reservaID) REFERENCES reserva(reservaID));
+
+CREATE TABLE fechalectivas(
+	fechalectivaID INT NOT NULL AUTO_INCREMENT,
+        fechainicio1C DATE,
+        fechafin1C DATE,
+        fechainicio2C DATE,
+        fechafin2C DATE,
+        PRIMARY KEY (fechalectivaID));
