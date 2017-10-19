@@ -8,7 +8,6 @@ package Modelo;
  */
 public class Aulamultimedios extends Aula implements java.io.Serializable {
 
-
      private Integer aulaId;
      private Aula aula;
      private Boolean televisor;
@@ -18,7 +17,6 @@ public class Aulamultimedios extends Aula implements java.io.Serializable {
 
     public Aulamultimedios() {
     }
-
 	
     public Aulamultimedios(Aula aula) {
         this.aula = aula;
