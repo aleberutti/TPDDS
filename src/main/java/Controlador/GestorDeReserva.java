@@ -12,3 +12,26 @@ package Controlador;
 public class GestorDeReserva {
     
 }
+
+public void registrarReserva(Reserva r){
+
+}
+
+public List buscarReservaCurso(String curso){
+
+}
+
+public List buscarReservaDia(Date d){
+
+}
+public void notificarError(){
+
+}
+
+public void listarCurso(List curso){
+
+}
+
+public void listarDia(List dia){
+
+}

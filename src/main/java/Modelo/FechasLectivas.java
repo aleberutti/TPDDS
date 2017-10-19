@@ -9,6 +9,9 @@ package Modelo;
  *
  * @author juani
  */
-public class FechaLectivas {
-    
+public class FechasLectivas {
+    private Date fechaInicio1C;
+    private Date fechaFin1C;
+    private Date fechaInicio2C;
+    private Date fechaFin2C;
 }

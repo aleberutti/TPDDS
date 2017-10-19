@@ -12,3 +12,55 @@ package Controlador;
 public class GestorDeBedel {
     
 }
+
+public void seleccionarOpcion(){
+
+}
+
+public boolean verificarOpcion(Object opc){
+
+}
+
+public void confirmarEliminacion(){
+
+}
+
+public void cancelarModificacion(){
+
+}
+
+public boolean validarContrasenia(String nom, String ap, int id, String pass){
+
+}
+
+public void notificarError(){
+
+}
+
+public void guardarModificacion(){
+
+}
+
+public boolean validar(String nom, String ap, int id){
+
+}
+
+public boolean validarPass(String nom, String ap, int id, String pass){
+
+}
+
+public void eliminarBedel(Bedel b){
+
+}
+
+public boolean matchPass(String nom, String ap, int id, String pass){
+
+}
+
+public void modificarDatosBedel(Bedel b){
+
+}
+
+public void registrarBedel(Bedel b){
+
+}

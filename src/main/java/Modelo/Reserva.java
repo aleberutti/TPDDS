@@ -10,5 +10,12 @@ package Modelo;
  * @author juani
  */
 public class Reserva {
-    
+    private int idReserva;
+    private int cantidadAlumnos;
+    private Date fechaSolicitud;
+    private Periodo periodo;
+    private Docente docente;
+    private DiaReserva[] dias;
+    private Actividad actividad;
+    private FechasLectivas fechasLectivas;
 }

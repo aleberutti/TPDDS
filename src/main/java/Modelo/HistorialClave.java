@@ -10,5 +10,7 @@ package Modelo;
  * @author juani
  */
 public class HistorialClave {
-    
+    private int idHistorial;
+    private Clave[] claves;
+    private Usuario usuario;
 }

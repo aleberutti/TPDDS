@@ -12,3 +12,19 @@ package Controlador;
 public class GestorDeAdministrador {
     
 }
+
+public Object elegirOpcion(){
+
+}
+
+public boolean verificarOpcion(Object opc){
+
+}
+
+public void notificarError(){
+
+}
+
+public void iniciarSesion(String user, String pass){
+
+}

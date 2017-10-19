@@ -9,6 +9,11 @@ package Modelo;
  *
  * @author juani
  */
-public class Bedel {
-    
+public class Bedel extends Usuario{
+    private Turno turno;
+    private String email;
+}
+
+public void actualizarDatos(){
+
 }

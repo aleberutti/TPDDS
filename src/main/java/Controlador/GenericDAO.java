@@ -12,3 +12,18 @@ package Controlador;
 public class GenericDAO {
     
 }
+
+public void create(Object o){
+
+}
+
+public void read(Object o){
+
+}
+public void update(Object o){
+
+}
+
+public void delete(Object o){
+
+}

@@ -10,5 +10,11 @@ package Modelo;
  * @author juani
  */
 public class DiaReserva {
-    
+    private int idDiaReserva;
+    private DiaSemana dia;
+    private Date fecha;
+    private Time horaInicio;
+    private Time horaFin;
+    private Aula aula;
+    private Reserva reserva;
 }

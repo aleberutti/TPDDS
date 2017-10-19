@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author juani
  */
-public class Seminario {
-    
+public class Seminario extends Actividad{
+    private String tema;
 }

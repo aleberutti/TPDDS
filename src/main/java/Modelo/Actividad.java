@@ -10,5 +10,7 @@ package Modelo;
  * @author juani
  */
 public class Actividad {
-    
+    private int id_actividad;
+    private String nombre;
+    private Reserva[] reservas;
 }

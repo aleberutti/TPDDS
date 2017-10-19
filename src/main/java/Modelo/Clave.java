@@ -10,5 +10,8 @@ package Modelo;
  * @author juani
  */
 public class Clave {
-    
+    private String valor;
+    private Date fecha;
+    private Time hora;
+    private PoliticaContraseña politica;
 }

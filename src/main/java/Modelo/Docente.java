@@ -10,5 +10,8 @@ package Modelo;
  * @author juani
  */
 public class Docente {
-    
+    private int idDocente;
+    private String nombre;
+    private String email;
+    private Reserva[] reservas;
 }

@@ -10,5 +10,9 @@ package Modelo;
  * @author juani
  */
 public class PoliticaContraseña {
-    
+    private int longMinima;
+    private boolean signosEspeciales;
+    private boolean letraMay;
+    private boolean digito;
+    private boolean passIgual;
 }

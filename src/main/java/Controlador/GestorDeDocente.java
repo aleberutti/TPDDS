@@ -12,3 +12,15 @@ package Controlador;
 public class GestorDeDocente {
     
 }
+
+public Docente obtenerDocente(idDocente){
+
+}
+
+public void notificarError(){
+
+}
+
+public void listarDocentes(){
+
+}

@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author juani
  */
-public class Esporadica {
+public class Esporadica extends Reserva{
     
 }

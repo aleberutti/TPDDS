@@ -9,6 +9,7 @@ package Modelo;
  *
  * @author juani
  */
-public class Catedra {
-    
+public class Catedra extends Actividad{
+    private Carrera carrera;
+    private char comision;
 }

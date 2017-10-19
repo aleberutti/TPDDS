@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author juani
  */
-public class Periodica {
-    
+public class Periodica extends Reserva{
+    private TipoReservaPeriodica tipo;
 }

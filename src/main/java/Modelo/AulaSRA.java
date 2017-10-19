@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author juani
  */
-public class AulaSRA {
+public class AulaSRA extends Aula{
     
 }

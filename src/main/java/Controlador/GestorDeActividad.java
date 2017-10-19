@@ -12,3 +12,23 @@ package Controlador;
 public class GestorDeActividad {
     
 }
+
+public Actividad obtenerActividad(){
+
+}
+
+public void notificarError(){
+
+}
+
+public Carrera obtenerCarrera(){
+
+}
+
+public Comision obtenerComision(){
+
+}
+
+public Tema obtenerTema(){
+
+}

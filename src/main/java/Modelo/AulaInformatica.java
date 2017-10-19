@@ -9,6 +9,7 @@ package Modelo;
  *
  * @author juani
  */
-public class AulaInformatica {
-    
+public class AulaInformatica extends Aula{
+    private int cantidadPCs;
+    private boolean canion;
 }

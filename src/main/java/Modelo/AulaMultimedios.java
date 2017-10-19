@@ -9,6 +9,9 @@ package Modelo;
  *
  * @author juani
  */
-public class AulaMultimedios {
-    
+public class AulaMultimedios extends Aula{
+    private boolean televisor;
+    private boolean canion;
+    private boolean computadora;
+    private boolean dvd;
 }

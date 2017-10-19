@@ -9,6 +9,6 @@ package Modelo;
  *
  * @author juani
  */
-public class Administrador {
+public class Administrador extends Usuario{
     
 }
