@@ -9,6 +9,6 @@ package Controlador;
  *
  * @author juani
  */
-public class DocenteDAO {
+public class DocenteDAO extends GenericDAO{
     
 }
