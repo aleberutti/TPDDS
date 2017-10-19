@@ -10,5 +10,5 @@ package Recursos;
  * @author Fausto
  */
 public class ffff {
-    
+    int asd;
 }
