@@ -10,5 +10,5 @@ package Modelo;
  * @author juani
  */
 public enum DiaSemana {
-    
+    DOMINGO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES
 }

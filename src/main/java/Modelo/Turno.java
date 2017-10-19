@@ -10,5 +10,5 @@ package Modelo;
  * @author juani
  */
 public enum Turno {
-    
+    MAÑANA, TARDE, NOCHE
 }

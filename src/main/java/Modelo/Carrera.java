@@ -11,4 +11,6 @@ package Modelo;
  */
 public enum Carrera {
     
+    ISI, INDUSTRIAL, MECANICA, ELECTRICA, CIVIL   
+    
 }
