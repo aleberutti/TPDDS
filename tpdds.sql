@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 -- Base de datos: `tpdds`
 --
 
+CREATE DATABASE IF NOT EXISTS tpdds;
+
 -- --------------------------------------------------------
 
 --
@@ -133,13 +135,14 @@ CREATE TABLE IF NOT EXISTS `catedra` (
 --
 
 CREATE TABLE IF NOT EXISTS `clave` (
+  `claveID` INT NOT NULL AUTO_INCREMENT,
   `valor` varchar(30) NOT NULL DEFAULT '',
   `fecha` date NOT NULL DEFAULT '0000-00-00',
   `hora` time NOT NULL DEFAULT '00:00:00',
   `userID` int(11) NOT NULL,
   `historialID` int(11) NOT NULL,
   `politicaID` int(11) NOT NULL,
-  PRIMARY KEY (`valor`,`fecha`,`hora`),
+  PRIMARY KEY (`claveID`),
   UNIQUE KEY `userID` (`userID`),
   KEY `fk_id` (`historialID`),
   KEY `fk_politica` (`politicaID`)
