@@ -14,8 +14,8 @@
         <property name="cantPcs" type="java.lang.Integer">
             <column name="cantPCS" />
         </property>
-        <property name="ca&#241;on" type="java.lang.Boolean">
-            <column name="ca&#241;on" />
+        <property name="canion" type="java.lang.Boolean">
+            <column name="canion" />
         </property>
     </class>
 </hibernate-mapping>
