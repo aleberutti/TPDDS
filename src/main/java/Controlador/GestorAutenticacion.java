@@ -5,6 +5,14 @@
  */
 package Controlador;
 
+import Modelo.Admin;
+import Modelo.Bedel;
+import Modelo.Usuario;
+import Vista.OpcionesDelAdministrador;
+import Vista.OpcionesDelBedel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author juani
@@ -15,12 +23,24 @@ public void autenticarUsuario(String user, String pass){
 
 }
 
-public void determinarTipoUsuario(){
-
+public Usuario determinarTipoUsuario(String user, JPasswordField pass){
+        String contra="";
+        char a;
+        for (int i=0; i<pass.getPassword().length; i++){
+            a= pass.getPassword()[i];
+            contra = contra + a;
+        }
+        if (user.equals("bedel") && contra.equals("bedel")){
+            return new Bedel();
+            }if(user.equals("admin") && contra.equals("admin")){
+                return new Admin();
+            }else{
+                return this.notificarError();
+            }
 }
 
-public void notificarError(){
-
+public Usuario notificarError(){
+    return null;
 }
 
 }

@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Controlador.GestorAutenticacion;
+import Modelo.Admin;
+import Modelo.Bedel;
+import Modelo.Usuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -29,6 +33,7 @@ public class Autenticacion extends javax.swing.JFrame {
     public Autenticacion() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -256,31 +261,29 @@ public class Autenticacion extends javax.swing.JFrame {
     }//GEN-LAST:event_passMouseClicked
 
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
-        String contra="";
-        char a;
-        for (int i=0; i<pass.getPassword().length; i++){
-            a= pass.getPassword()[i];
-            contra = contra + a;
-        }
-        if (user.getText().equals("bedel") && contra.equals("bedel")){
+        GestorAutenticacion ga = new GestorAutenticacion();
+        Usuario us = ga.determinarTipoUsuario(user.getText(), pass);
+        if (us instanceof Bedel){
             OpcionesDelBedel b = new OpcionesDelBedel();
             this.dispose();
             b.setVisible(true);
-            }if(user.getText().equals("admin") && contra.equals("admin")){
+        }else{
+            if (us instanceof Admin){
                 OpcionesDelAdministrador ad= new OpcionesDelAdministrador();
                 ad.setVisible(true);
             }else{
                 Autenticacion esta=this;
                 esta.setAlwaysOnTop(true);
-                ErrorDeDatos edd = new ErrorDeDatos();
+                ErrorDeAutenticacion eda = new ErrorDeAutenticacion();
                 esta.setEnabled(false);
-                edd.addWindowListener(new WindowAdapter(){
+                eda.addWindowListener(new WindowAdapter(){
                     public void windowClosed(WindowEvent e){
                         esta.setEnabled(true);
                         esta.user.requestFocus();
                     }
                 });
             }
+        }
     }//GEN-LAST:event_ingresarActionPerformed
 
     private void userFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusGained
@@ -325,44 +328,7 @@ public class Autenticacion extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Autenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Autenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Autenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Autenticacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Autenticacion().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ingresar;
