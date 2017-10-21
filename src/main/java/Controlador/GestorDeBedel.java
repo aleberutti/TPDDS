@@ -78,9 +78,7 @@ public void eliminarBedel(Bedel b){
 }
 
 public boolean matchPass(String ap, String pass){
-    if (ap.equals(pass))
-        return true;
-    else return false;
+    return ap.equals(pass);
 }
 
 public void modificarDatosBedel(Bedel b){
