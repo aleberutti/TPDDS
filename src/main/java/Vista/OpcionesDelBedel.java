@@ -333,35 +333,35 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Coco Gothic", 3, 14));
     }//GEN-LAST:event_jLabel4MouseExited
 
-    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        jButton8.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton8MouseEntered
-
-    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
-        // TODO add your handling code here:
-        jButton8.setContentAreaFilled(false);
-    }//GEN-LAST:event_jButton8MouseExited
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
-        // TODO add your handling code here:
-        jButton9.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton9MouseEntered
+        System.exit(0);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseExited
         // TODO add your handling code here:
         jButton9.setContentAreaFilled(false);
     }//GEN-LAST:event_jButton9MouseExited
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton9ActionPerformed
+        jButton9.setContentAreaFilled(true);
+    }//GEN-LAST:event_jButton9MouseEntered
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
+        // TODO add your handling code here:
+        jButton8.setContentAreaFilled(false);
+    }//GEN-LAST:event_jButton8MouseExited
+
+    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
+        // TODO add your handling code here:
+        jButton8.setContentAreaFilled(true);
+    }//GEN-LAST:event_jButton8MouseEntered
 
     /**
      * @param args the command line arguments

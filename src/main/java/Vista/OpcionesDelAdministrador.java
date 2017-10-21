@@ -68,6 +68,11 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(158, 158, 158));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText(" Registrar Bedel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,35 +244,41 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
 	popup.setVisible(true);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        jButton4.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton4MouseEntered
-
-    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        // TODO add your handling code here:
-        jButton4.setContentAreaFilled(false);
-    }//GEN-LAST:event_jButton4MouseExited
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
-        // TODO add your handling code here:
-        jButton5.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton5MouseEntered
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
         // TODO add your handling code here:
         jButton5.setContentAreaFilled(false);
     }//GEN-LAST:event_jButton5MouseExited
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
         // TODO add your handling code here:
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_jButton5ActionPerformed
+        jButton5.setContentAreaFilled(true);
+    }//GEN-LAST:event_jButton5MouseEntered
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
+        // TODO add your handling code here:
+        jButton4.setContentAreaFilled(false);
+    }//GEN-LAST:event_jButton4MouseExited
+
+    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
+        // TODO add your handling code here:
+        jButton4.setContentAreaFilled(true);
+    }//GEN-LAST:event_jButton4MouseEntered
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        RegistrarBedel rb = new RegistrarBedel();
+        rb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
   
     /**
      * @param args the command line arguments
