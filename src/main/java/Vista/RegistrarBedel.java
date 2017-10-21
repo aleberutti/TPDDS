@@ -17,6 +17,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     public RegistrarBedel() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

@@ -276,7 +276,6 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         RegistrarBedel rb = new RegistrarBedel();
-        rb.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
   
