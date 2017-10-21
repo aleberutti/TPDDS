@@ -351,7 +351,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String validacion;
-        validacion = gdb.validar(id.getText(), pass1, pass2);
+        validacion = gdb.validar(username.getText(), name.getText(), last.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2);
         RegistrarBedel esta=this;
         switch (validacion){
             case "confirmacion":

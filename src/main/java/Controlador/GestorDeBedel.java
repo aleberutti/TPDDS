@@ -42,7 +42,7 @@ public void guardarModificacion(){
 
 }
 
-public String validar(String id, JPasswordField pass1, JPasswordField pass2){
+public String validar(String username, String name, String last, String id, String turno, JPasswordField pass1, JPasswordField pass2){
     String contra="", contra2="";
     char a;
     for (int i=0; i<pass2.getPassword().length; i++){
@@ -64,6 +64,13 @@ public String validar(String id, JPasswordField pass1, JPasswordField pass2){
         }
     }else
         return "politica";
+//    Bedel b = new Bedel(username, name, last, id, turno, contra);
+//    try{
+//    UsuarioDAO ud = new UsuarioDAO();
+//    ud.create(b);
+//    }catch(Exception e){
+//        Crear en frame RegistrarBedel la pantalla correspondiente al error de la base de datos.
+//    }
     return "asd"; //PARA QUE NO JODA EL ERROR DE LA ADVERTENCIA QUE NO ESPECIFICAMOS RETORNO.
 }
 
