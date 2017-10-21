@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author azuli
@@ -50,6 +55,8 @@ public class RegistrarBedel extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -93,6 +100,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(158, 158, 158));
         jButton2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jPasswordField1.setBackground(new java.awt.Color(55, 64, 70));
         jPasswordField1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -188,6 +200,19 @@ public class RegistrarBedel extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Registrar bedel");
 
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Nombre de usuario:");
+
+        username.setBackground(new java.awt.Color(55, 64, 70));
+        username.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        username.setForeground(new java.awt.Color(255, 255, 255));
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -237,6 +262,13 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel7)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(username, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,6 +282,10 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -294,7 +330,9 @@ public class RegistrarBedel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -304,49 +342,87 @@ public class RegistrarBedel extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void backButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseEntered
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String contra="", contra2="";
+        char a;
+        for (int i=0; i<this.jPasswordField2.getPassword().length; i++){
+            a= this.jPasswordField2.getPassword()[i];
+            contra = contra + a;
+        }
+        for (int i=0; i<this.jPasswordField1.getPassword().length; i++){
+            a= this.jPasswordField1.getPassword()[i];
+            contra2 = contra2 + a;
+        }
+        if (!(this.jTextField4.getText().isEmpty() && this.username.getText().isEmpty() && this.jTextField2.getText().isEmpty() && this.jComboBox1.getSelectedItem().toString().isEmpty() && this.jTextField3.getText().isEmpty() && contra.equals("") && contra2.equals(""))){
+            RegistrarBedel esta=this;
+            esta.setAlwaysOnTop(true);
+            ConfirmacionCancelarModificar ccm = new ConfirmacionCancelarModificar();
+            esta.setEnabled(false);
+            ccm.getCancelar().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                esta.setEnabled(true);
+                esta.username.requestFocus();
+                esta.username.grabFocus();
+            }
+            });
+            ccm.getConfirmar().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                esta.dispose();
+            }
+            });
+        }else{
+            this.dispose();
+            OpcionesDelBedel opc = new OpcionesDelBedel();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        
+    }//GEN-LAST:event_usernameActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        backButton.setContentAreaFilled(true);
-    }//GEN-LAST:event_backButtonMouseEntered
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void backButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseExited
         // TODO add your handling code here:
         backButton.setContentAreaFilled(false);
     }//GEN-LAST:event_backButtonMouseExited
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+    private void backButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
-        // TODO add your handling code here:
-        minimizeButton.setContentAreaFilled(true);
-    }//GEN-LAST:event_minimizeButtonMouseEntered
-
-    private void minimizeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseExited
-        // TODO add your handling code here:
-        minimizeButton.setContentAreaFilled(false);
-    }//GEN-LAST:event_minimizeButtonMouseExited
+        backButton.setContentAreaFilled(true);
+    }//GEN-LAST:event_backButtonMouseEntered
 
     private void minimizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButtonActionPerformed
         // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_minimizeButtonActionPerformed
 
-    private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
+    private void minimizeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseExited
         // TODO add your handling code here:
-        exitButton.setContentAreaFilled(true);
-    }//GEN-LAST:event_exitButtonMouseEntered
+        minimizeButton.setContentAreaFilled(false);
+    }//GEN-LAST:event_minimizeButtonMouseExited
+
+    private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
+        // TODO add your handling code here:
+        minimizeButton.setContentAreaFilled(true);
+    }//GEN-LAST:event_minimizeButtonMouseEntered
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     private void exitButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseExited
         // TODO add your handling code here:
         exitButton.setContentAreaFilled(false);
     }//GEN-LAST:event_exitButtonMouseExited
 
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+    private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_exitButtonActionPerformed
+        exitButton.setContentAreaFilled(true);
+    }//GEN-LAST:event_exitButtonMouseEntered
 
     /**
      * @param args the command line arguments
@@ -400,6 +476,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
@@ -408,5 +485,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton minimizeButton;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

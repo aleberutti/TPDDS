@@ -17,6 +17,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
     public OpcionesDelBedel() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
