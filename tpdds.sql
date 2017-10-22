@@ -288,8 +288,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `nombreUsuario` varchar(15) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
+  `claveID` int(11) NOT NULL,
   PRIMARY KEY (`userID`),
-  UNIQUE KEY `nombreUsuario` (`nombreUsuario`)
+  UNIQUE KEY `nombreUsuario` (`nombreUsuario`),
+  UNIQUE KEY `claveID` (`claveID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -371,18 +373,24 @@ ALTER TABLE `reserva`
 --
 ALTER TABLE `seminario`
   ADD CONSTRAINT `seminario_ibfk_1` FOREIGN KEY (`actividadID`) REFERENCES `actividad` (`actividadID`);
-  
+
 --
 -- Filtros para la tabla `esporadica`
 --
 ALTER TABLE `esporadica`
   ADD CONSTRAINT `esporadica_ibfk_1` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
-  
+
 --
 -- Filtros para la tabla `periodica`
 --
 ALTER TABLE `periodica`
   ADD CONSTRAINT `periodica_ibfk_1` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`claveID`) REFERENCES `clave` (`claveID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
