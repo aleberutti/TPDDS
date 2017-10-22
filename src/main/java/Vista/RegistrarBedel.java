@@ -161,7 +161,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(55, 64, 70));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/closed.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\closed.png")); // NOI18N
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
@@ -182,7 +182,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(55, 64, 70));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/diminish.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\diminish.png")); // NOI18N
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
@@ -203,7 +203,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         });
 
         jButton5.setBackground(new java.awt.Color(55, 64, 70));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/back-left-arrow-circular-button-outline.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\back-left-arrow-circular-button-outline.png")); // NOI18N
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
         jButton5.setContentAreaFilled(false);

@@ -137,6 +137,11 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(158, 158, 158));
         jButton5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton5.setText("Registar reserva");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Coco Gothic", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 255));
@@ -160,7 +165,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jButton6.setText("Listado de reservas de un dia");
 
         jButton8.setBackground(new java.awt.Color(55, 64, 70));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/diminish.png"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\diminish.png")); // NOI18N
         jButton8.setBorder(null);
         jButton8.setBorderPainted(false);
         jButton8.setContentAreaFilled(false);
@@ -181,7 +186,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         });
 
         jButton9.setBackground(new java.awt.Color(55, 64, 70));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/closed.png"))); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\closed.png")); // NOI18N
         jButton9.setBorder(null);
         jButton9.setBorderPainted(false);
         jButton9.setContentAreaFilled(false);
@@ -363,6 +368,11 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         // TODO add your handling code here:
         jButton8.setContentAreaFilled(true);
     }//GEN-LAST:event_jButton8MouseEntered
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        RegistrarBedel rb = new RegistrarBedel();
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
