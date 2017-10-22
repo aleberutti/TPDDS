@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 19/10/2017 11:32:13 by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 22, 2017 3:35:49 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Modelo.Reserva" table="reserva" catalog="tpdds" optimistic-lock="version">
         <id name="reservaId" type="java.lang.Integer">
@@ -26,11 +26,13 @@
         <property name="periodo" type="string">
             <column name="periodo" length="15" not-null="true" />
         </property>
+        <one-to-one name="periodica" class="Modelo.Periodica"></one-to-one>
         <set name="diareservas" table="diareserva" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="reservaID" not-null="true" />
             </key>
             <one-to-many class="Modelo.Diareserva" />
         </set>
+        <one-to-one name="esporadica" class="Modelo.Esporadica"></one-to-one>
     </class>
 </hibernate-mapping>

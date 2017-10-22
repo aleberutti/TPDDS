@@ -207,10 +207,10 @@ CREATE TABLE IF NOT EXISTS `fechalectivas` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `politicascontraseña`
+-- Estructura de tabla para la tabla `politicascontrasenia`
 --
 
-CREATE TABLE IF NOT EXISTS `politicascontraseña` (
+CREATE TABLE IF NOT EXISTS `politicascontrasenia` (
   `politicaID` int(11) NOT NULL AUTO_INCREMENT,
   `longMin` int(11) NOT NULL,
   `signosEspeciales` tinyint(1) NOT NULL,
@@ -338,7 +338,7 @@ ALTER TABLE `catedra`
 -- Filtros para la tabla `clave`
 --
 ALTER TABLE `clave`
-  ADD CONSTRAINT `fk_politica` FOREIGN KEY (`politicaID`) REFERENCES `politicascontraseña` (`politicaID`),
+  ADD CONSTRAINT `fk_politica` FOREIGN KEY (`politicaID`) REFERENCES `politicascontrasenia` (`politicaID`),
   ADD CONSTRAINT `clave_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `usuario` (`userID`);
 
 --
@@ -355,10 +355,10 @@ ALTER TABLE `diareserva`
   ADD CONSTRAINT `diareserva_ibfk_2` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
 
 --
--- Filtros para la tabla `politicascontraseña`
+-- Filtros para la tabla `politicascontrasenia`
 --
-ALTER TABLE `politicascontraseña`
-  ADD CONSTRAINT `politicascontrase@0xa_ibfk_1` FOREIGN KEY (`claveID`) REFERENCES `clave` (`claveID`);
+ALTER TABLE `politicascontrasenia`
+  ADD CONSTRAINT `politicascontrasenia_ibfk_1` FOREIGN KEY (`claveID`) REFERENCES `clave` (`claveID`);
 
 --
 -- Filtros para la tabla `reserva`

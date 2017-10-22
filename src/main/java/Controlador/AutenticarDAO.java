@@ -9,9 +9,9 @@ package Controlador;
  *
  * @author Fausto
  */
-public class DiaReservaDAO extends GenericDAO{
+public class AutenticarDAO extends GenericDAO{
 
-    public DiaReservaDAO() {
+    public AutenticarDAO() {
     }
     
 }

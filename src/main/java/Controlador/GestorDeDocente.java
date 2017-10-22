@@ -13,15 +13,18 @@ import Modelo.Docente;
  */
 public class GestorDeDocente {
 
-public Docente obtenerDocente(int idDocente){
-    return new Docente();
-}
+    public GestorDeDocente() {
+    }
 
-public void notificarError(){
+    public Docente obtenerDocente(int idDocente){
+        return new Docente();
+    }
 
-}
+    public void notificarError(){
 
-public void listarDocentes(){
+    }
 
-}    
+    public void listarDocentes(){
+
+    }    
 }

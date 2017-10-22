@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 22, 2017 3:35:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Politicascontrasenia" table="politicascontrasenia" catalog="tpdds" optimistic-lock="version">
+        <id name="politicaId" type="java.lang.Integer">
+            <column name="politicaID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="clave" class="Modelo.Clave" fetch="select">
+            <column name="claveID" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="longMin" type="int">
+            <column name="longMin" not-null="true" />
+        </property>
+        <property name="signosEspeciales" type="boolean">
+            <column name="signosEspeciales" not-null="true" />
+        </property>
+        <property name="letraMay" type="boolean">
+            <column name="letraMay" not-null="true" />
+        </property>
+        <property name="digito" type="boolean">
+            <column name="digito" not-null="true" />
+        </property>
+        <property name="passIgual" type="boolean">
+            <column name="passIgual" not-null="true" />
+        </property>
+        <set name="claves" table="clave" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="politicaID" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Clave" />
+        </set>
+    </class>
+</hibernate-mapping>

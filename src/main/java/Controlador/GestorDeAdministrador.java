@@ -10,20 +10,23 @@ package Controlador;
  * @author juani
  */
 public class GestorDeAdministrador {
+
+    public GestorDeAdministrador() {
+    }
     
-public void elegirOpcion(){
+    public void elegirOpcion(){
 
-}
+    }
 
-public boolean verificarOpcion(Object opc){
-    return false;
-}
+    public boolean verificarOpcion(Object opc){
+        return false;
+    }
 
-public void notificarError(){
+    public void notificarError(){
 
-}
+    }
 
-public void iniciarSesion(String user, String pass){
+    public void iniciarSesion(String user, String pass){
 
-}
+    }
 }

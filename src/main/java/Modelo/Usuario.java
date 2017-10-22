@@ -1,5 +1,5 @@
 package Modelo;
-// Generated 19/10/2017 11:32:12 by Hibernate Tools 4.3.1
+// Generated Oct 22, 2017 3:35:48 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,10 +12,10 @@ public class Usuario  implements java.io.Serializable {
 
 
      private Integer userId;
+     private Clave clave;
      private String nombreUsuario;
      private String nombre;
      private String apellido;
-     private Set historialclaveses = new HashSet(0);
      private Bedel bedel;
      private Set claves = new HashSet(0);
      private Admin admin;
@@ -24,16 +24,17 @@ public class Usuario  implements java.io.Serializable {
     }
 
 	
-    public Usuario(String nombreUsuario, String nombre, String apellido) {
+    public Usuario(Clave clave, String nombreUsuario, String nombre, String apellido) {
+        this.clave = clave;
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
     }
-    public Usuario(String nombreUsuario, String nombre, String apellido, Set historialclaveses, Bedel bedel, Set claves, Admin admin) {
+    public Usuario(Clave clave, String nombreUsuario, String nombre, String apellido, Bedel bedel, Set claves, Admin admin) {
+       this.clave = clave;
        this.nombreUsuario = nombreUsuario;
        this.nombre = nombre;
        this.apellido = apellido;
-       this.historialclaveses = historialclaveses;
        this.bedel = bedel;
        this.claves = claves;
        this.admin = admin;
@@ -45,6 +46,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+    public Clave getClave() {
+        return this.clave;
+    }
+    
+    public void setClave(Clave clave) {
+        this.clave = clave;
     }
     public String getNombreUsuario() {
         return this.nombreUsuario;
@@ -66,13 +74,6 @@ public class Usuario  implements java.io.Serializable {
     
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-    public Set getHistorialclaveses() {
-        return this.historialclaveses;
-    }
-    
-    public void setHistorialclaveses(Set historialclaveses) {
-        this.historialclaveses = historialclaveses;
     }
     public Bedel getBedel() {
         return this.bedel;

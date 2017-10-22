@@ -1,5 +1,5 @@
 package Modelo;
-// Generated 19/10/2017 11:32:12 by Hibernate Tools 4.3.1
+// Generated Oct 22, 2017 3:35:48 AM by Hibernate Tools 4.3.1
 
 
 
@@ -22,7 +22,8 @@ public class Catedra extends Actividad implements java.io.Serializable {
        this.carrera = carrera;
        this.comision = comision;
     }
-    
+   
+    @Override
     public Integer getActividadId() {
         return this.actividadId;
     }

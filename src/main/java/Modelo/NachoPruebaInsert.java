@@ -83,7 +83,8 @@ public class NachoPruebaInsert extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        Usuario m = new Usuario("NachoAkd","Nacho","Cabrera");
+        Clave p = new Clave("Nacho123");
+        Usuario m = new Usuario(p, "NachoAkd","Nacho","Cabrera");
         
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();

@@ -10,5 +10,8 @@ package Controlador;
  * @author juani
  */
 public class ReservaDAO extends GenericDAO{
+
+    public ReservaDAO() {
+    }
     
 }

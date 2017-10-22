@@ -14,27 +14,30 @@ import java.util.Date;
  * @author juani
  */
 public class GestorDeReserva {
+
+    public GestorDeReserva() {
+    }
     
-public void registrarReserva(Reserva r){
+    public void registrarReserva(Reserva r){
 
-}
+    }
 
-public List buscarReservaCurso(String curso){
-    return new List();
-}
+    public List buscarReservaCurso(String curso){
+        return new List();
+    }
 
-public List buscarReservaDia(Date d){
-    return new List();
-}
-public void notificarError(){
+    public List buscarReservaDia(Date d){
+        return new List();
+    }
+    public void notificarError(){
 
-}
+    }
 
-public void listarCurso(List curso){
+    public void listarCurso(List curso){
 
-}
+    }
 
-public void listarDia(List dia){
+    public void listarDia(List dia){
 
-}
+    }
 }

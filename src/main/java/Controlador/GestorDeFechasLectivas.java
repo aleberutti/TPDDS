@@ -10,12 +10,15 @@ package Controlador;
  * @author juani
  */
 public class GestorDeFechasLectivas {
+
+    public GestorDeFechasLectivas() {
+    }
     
-public void obtenerFechas(){
+    public void obtenerFechas(){
 
-}
+    }
 
-public void notificarError(){
+    public void notificarError(){
 
-}
+    }
 }

@@ -10,5 +10,8 @@ package Controlador;
  * @author juani
  */
 public class AulasDAO {
+
+    public AulasDAO() {
+    }
     
 }

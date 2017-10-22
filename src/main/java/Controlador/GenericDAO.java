@@ -5,24 +5,33 @@
  */
 package Controlador;
 
+import org.hibernate.Session;
+
 /**
  *
  * @author juani
  */
 public class GenericDAO {
+    
+    private Modelo.NewHibernateUtil HU;
+    private Session SS;
+    
+    public GenericDAO(){
+        
+    }
 
-public void create(Object o){
+    public void create(Object o){
 
-}
+    }
 
-public void read(Object o){
+    public void read(Object o){
 
-}
-public void update(Object o){
+    }
+    public void update(Object o){
 
-}
+    }
 
-public void delete(Object o){
+    public void delete(Object o){
 
-}    
+    }    
 }

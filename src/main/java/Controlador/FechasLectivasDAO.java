@@ -10,5 +10,8 @@ package Controlador;
  * @author juani
  */
 public class FechasLectivasDAO extends GenericDAO{
+
+    public FechasLectivasDAO() {
+    }
     
 }

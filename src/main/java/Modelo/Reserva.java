@@ -1,5 +1,5 @@
 package Modelo;
-// Generated 19/10/2017 11:32:12 by Hibernate Tools 4.3.1
+// Generated Oct 22, 2017 3:35:48 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,7 +19,9 @@ public class Reserva  implements java.io.Serializable {
      private int cantAlumnos;
      private Date fechaSolicitud;
      private String periodo;
+     private Periodica periodica;
      private Set diareservas = new HashSet(0);
+     private Esporadica esporadica;
 
     public Reserva() {
     }
@@ -33,14 +35,16 @@ public class Reserva  implements java.io.Serializable {
         this.fechaSolicitud = fechaSolicitud;
         this.periodo = periodo;
     }
-    public Reserva(Actividad actividad, Bedel bedel, Docente docente, int cantAlumnos, Date fechaSolicitud, String periodo, Set diareservas) {
+    public Reserva(Actividad actividad, Bedel bedel, Docente docente, int cantAlumnos, Date fechaSolicitud, String periodo, Periodica periodica, Set diareservas, Esporadica esporadica) {
        this.actividad = actividad;
        this.bedel = bedel;
        this.docente = docente;
        this.cantAlumnos = cantAlumnos;
        this.fechaSolicitud = fechaSolicitud;
        this.periodo = periodo;
+       this.periodica = periodica;
        this.diareservas = diareservas;
+       this.esporadica = esporadica;
     }
    
     public Integer getReservaId() {
@@ -92,12 +96,26 @@ public class Reserva  implements java.io.Serializable {
     public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
+    public Periodica getPeriodica() {
+        return this.periodica;
+    }
+    
+    public void setPeriodica(Periodica periodica) {
+        this.periodica = periodica;
+    }
     public Set getDiareservas() {
         return this.diareservas;
     }
     
     public void setDiareservas(Set diareservas) {
         this.diareservas = diareservas;
+    }
+    public Esporadica getEsporadica() {
+        return this.esporadica;
+    }
+    
+    public void setEsporadica(Esporadica esporadica) {
+        this.esporadica = esporadica;
     }
 
 

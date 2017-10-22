@@ -13,40 +13,43 @@ import java.awt.List;
  * @author juani
  */
 public class GestorDeAula {
+
+    public GestorDeAula() {
+    }
     
-public void buscarAula(Aula a){
+    public void buscarAula(Aula a){
 
-}
+    }
 
-public void modificarAula(Aula a){
+    public void modificarAula(Aula a){
 
-}
+    }
 
-public void guardarBusqueda(){ //¿???????????? parametro que iría: Busqueda b?
+    public void guardarBusqueda(){ //¿???????????? parametro que iría: Busqueda b?
 
-}
+    }
 
-public boolean validarAula(Aula a){
-    return false;
-}
+    public boolean validarAula(Aula a){
+        return false;
+    }
 
-public boolean validarDisponibilidad(Aula a){
-    return false;
-}
+    public boolean validarDisponibilidad(Aula a){
+        return false;
+    }
 
-public void notificarError(){
-    
-}
+    public void notificarError(){
 
-public List obtenerAula(String num, String tipo, String cap){ //YO CAMBIE LOS PARAMETROS, este es para BuscarAula
-    return new List();
-}
+    }
 
-public Aula obtenerAula(String num, int piso, String tipo, String cap, String estado){ //Este lo cree yo, es para ModifciarOEliminarAula
-    return new Aula();
-}
+    public List obtenerAula(String num, String tipo, String cap){ //YO CAMBIE LOS PARAMETROS, este es para BuscarAula
+        return new List();
+    }
 
-public void eliminarAula(Aula a){
-    
-}
+    public Aula obtenerAula(String num, int piso, String tipo, String cap, String estado){ //Este lo cree yo, es para ModifciarOEliminarAula
+        return new Aula();
+    }
+
+    public void eliminarAula(Aula a){
+
+    }
 }
