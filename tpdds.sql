@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `aula` (
 CREATE TABLE IF NOT EXISTS `aulainformatica` (
   `aulaID` int(11) NOT NULL AUTO_INCREMENT,
   `cantPCS` int(11) DEFAULT NULL,
-  `cañon` tinyint(1) DEFAULT NULL,
+  `canion` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`aulaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `aulainformatica` (
 CREATE TABLE IF NOT EXISTS `aulamultimedios` (
   `aulaID` int(11) NOT NULL AUTO_INCREMENT,
   `televisor` tinyint(1) DEFAULT NULL,
-  `cañon` tinyint(1) DEFAULT NULL,
+  `canion` tinyint(1) DEFAULT NULL,
   `computadora` tinyint(1) DEFAULT NULL,
   `dvd` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`aulaID`)
@@ -140,11 +140,8 @@ CREATE TABLE IF NOT EXISTS `clave` (
   `fecha` date NOT NULL DEFAULT '0000-00-00',
   `hora` time NOT NULL DEFAULT '00:00:00',
   `userID` int(11) NOT NULL,
-  `historialID` int(11) NOT NULL,
   `politicaID` int(11) NOT NULL,
   PRIMARY KEY (`claveID`),
-  UNIQUE KEY `userID` (`userID`),
-  KEY `fk_id` (`historialID`),
   KEY `fk_politica` (`politicaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -201,25 +198,10 @@ CREATE TABLE IF NOT EXISTS `docente` (
 --
 
 CREATE TABLE IF NOT EXISTS `fechalectivas` (
-  `fechalectivaID` int(11) NOT NULL AUTO_INCREMENT,
   `fechainicio1C` date DEFAULT NULL,
   `fechafin1C` date DEFAULT NULL,
   `fechainicio2C` date DEFAULT NULL,
-  `fechafin2C` date DEFAULT NULL,
-  PRIMARY KEY (`fechalectivaID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historialclaves`
---
-
-CREATE TABLE IF NOT EXISTS `historialclaves` (
-  `historialID` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) NOT NULL,
-  PRIMARY KEY (`historialID`),
-  UNIQUE KEY `userID` (`userID`)
+  `fechafin2C` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -235,9 +217,9 @@ CREATE TABLE IF NOT EXISTS `politicascontraseña` (
   `letraMay` tinyint(1) NOT NULL,
   `digito` tinyint(1) NOT NULL,
   `passIgual` tinyint(1) NOT NULL,
-  `userID` int(11) NOT NULL,
+  `claveID` int(11) NOT NULL,
   PRIMARY KEY (`politicaID`),
-  UNIQUE KEY `userID` (`userID`)
+  UNIQUE KEY `claveID` (`claveID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -258,6 +240,29 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   KEY `userID` (`userID`),
   KEY `docenteID` (`docenteID`),
   KEY `actividadID` (`actividadID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `periodica`
+--
+
+CREATE TABLE IF NOT EXISTS `periodica` (
+  `reservaID` int(11) NOT NULL AUTO_INCREMENT,
+  `tipoReservaPeriodica` varchar(15) NOT NULL,
+  PRIMARY KEY (`reservaID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `esporadica`
+--
+
+CREATE TABLE IF NOT EXISTS `esporadica` (
+  `reservaID` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`reservaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -332,8 +337,7 @@ ALTER TABLE `catedra`
 --
 ALTER TABLE `clave`
   ADD CONSTRAINT `fk_politica` FOREIGN KEY (`politicaID`) REFERENCES `politicascontraseña` (`politicaID`),
-  ADD CONSTRAINT `clave_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `usuario` (`userID`),
-  ADD CONSTRAINT `fk_id` FOREIGN KEY (`historialID`) REFERENCES `historialclaves` (`historialID`);
+  ADD CONSTRAINT `clave_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `usuario` (`userID`);
 
 --
 -- Filtros para la tabla `curso`
@@ -349,16 +353,10 @@ ALTER TABLE `diareserva`
   ADD CONSTRAINT `diareserva_ibfk_2` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
 
 --
--- Filtros para la tabla `historialclaves`
---
-ALTER TABLE `historialclaves`
-  ADD CONSTRAINT `historialclaves_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `usuario` (`userID`);
-
---
 -- Filtros para la tabla `politicascontraseña`
 --
 ALTER TABLE `politicascontraseña`
-  ADD CONSTRAINT `politicascontrase@0xa_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `clave` (`userID`);
+  ADD CONSTRAINT `politicascontrase@0xa_ibfk_1` FOREIGN KEY (`claveID`) REFERENCES `clave` (`claveID`);
 
 --
 -- Filtros para la tabla `reserva`
@@ -373,6 +371,18 @@ ALTER TABLE `reserva`
 --
 ALTER TABLE `seminario`
   ADD CONSTRAINT `seminario_ibfk_1` FOREIGN KEY (`actividadID`) REFERENCES `actividad` (`actividadID`);
+  
+--
+-- Filtros para la tabla `esporadica`
+--
+ALTER TABLE `esporadica`
+  ADD CONSTRAINT `esporadica_ibfk_1` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
+  
+--
+-- Filtros para la tabla `periodica`
+--
+ALTER TABLE `periodica`
+  ADD CONSTRAINT `periodica_ibfk_1` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
