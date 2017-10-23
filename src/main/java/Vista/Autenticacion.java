@@ -257,13 +257,11 @@ public class Autenticacion extends javax.swing.JFrame {
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         GestorAutenticacion ga = new GestorAutenticacion();
         Usuario us = ga.determinarTipoUsuario(user.getText(), pass);
-        Bedel be = new Bedel();
-        if (us.getClass().equals(be.getClass())){
+        if (us instanceof Bedel){
             OpcionesDelBedel b = new OpcionesDelBedel();
             this.dispose();
         }else{
-            Admin adm = new Admin();
-            if (us.getClass().equals(adm.getClass())){
+            if (us instanceof Admin){
                 this.dispose();
                 OpcionesDelAdministrador ad= new OpcionesDelAdministrador();
             }else{

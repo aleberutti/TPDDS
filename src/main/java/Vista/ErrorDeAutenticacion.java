@@ -17,6 +17,8 @@ public class ErrorDeAutenticacion extends javax.swing.JFrame {
     public ErrorDeAutenticacion() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     /**

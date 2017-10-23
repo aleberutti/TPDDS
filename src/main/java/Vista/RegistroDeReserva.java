@@ -18,6 +18,7 @@ public class RegistroDeReserva extends javax.swing.JFrame {
     public RegistroDeReserva() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

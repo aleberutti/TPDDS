@@ -19,6 +19,7 @@ public class BuscarBedel extends javax.swing.JFrame {
     public BuscarBedel() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

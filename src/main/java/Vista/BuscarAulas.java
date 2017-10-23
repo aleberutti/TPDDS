@@ -17,6 +17,7 @@ public class BuscarAulas extends javax.swing.JFrame {
     public BuscarAulas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

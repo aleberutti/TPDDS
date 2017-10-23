@@ -19,6 +19,7 @@ public class ListadoDeUnDia extends javax.swing.JFrame {
     public ListadoDeUnDia() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.dispose();
     }
    
     /**

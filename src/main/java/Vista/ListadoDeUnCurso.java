@@ -17,6 +17,7 @@ public class ListadoDeUnCurso extends javax.swing.JFrame {
     public ListadoDeUnCurso() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**

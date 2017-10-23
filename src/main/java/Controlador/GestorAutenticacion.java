@@ -37,26 +37,26 @@ public class GestorAutenticacion {
             if(user.equals("admin") && contra.equals("admin")){
                 return new Admin();
             }else{
-//                UsuarioDAO ud = new UsuarioDAO();
-//                ArrayList up=ud.readAllUserPass();
-//                for(int i=0; i<up.size(); i++){
-//                    if (user.equals(((ArrayList)up.get(i)).get(1)) && contra.equals(((ArrayList)up.get(i)).get(2))){
-//                        Bedel b = new Bedel();
-//                        if (ud.isAoB((int) ((ArrayList)up.get(i)).get(0)).getClass().equals(b.getClass())){
-//                            return new Bedel();
-//                        }else
-//                            return new Admin();
-//                    }else {
+                UsuarioDAO ud = new UsuarioDAO();
+                ArrayList up=ud.readAllUserPass();
+                for(int i=0; i<up.size(); i++){
+                    if (user.equals(((ArrayList)up.get(i)).get(1)) && contra.equals(((ArrayList)up.get(i)).get(2))){
+                        Bedel b = new Bedel();
+                        if (ud.isAoB((int) ((ArrayList)up.get(i)).get(0)).getClass().equals(b.getClass())){
+                            return new Bedel();
+                        }else
+                            return new Admin();
+                    }else {
                         return this.notificarError();
-//                    }
-//                }
+                    }
+                }
             }
         }
-//        return this.notificarError();
+        return this.notificarError();
     }
 
     public Usuario notificarError(){
-        return null;
+        return new Usuario();
     }
 
 }

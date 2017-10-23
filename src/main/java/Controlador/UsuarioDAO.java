@@ -53,60 +53,68 @@ public class UsuarioDAO extends GenericDAO{
     }
     
     public ArrayList readAllUserPass(){
-//        SS = HU.getSessionFactory().openSession();
-//        SS.beginTransaction();
-//        String sentencia = "SELECT usuario.userID, nombreUsuario, valor FROM usuario, clave WHERE usuario.claveID=clave.claveID;";
-//        Query query = SS.createSQLQuery(sentencia);
-//        List lista = query.list();
-//        System.out.println(((Usuario)lista.get(0)).getNombreUsuario());
-//        ArrayList up = new ArrayList();
-//        for (int i=0; i<lista.size(); i++){
-//            ArrayList aux = new ArrayList(3);
-//            for(int j=0; j<3;j++){
-//                aux.add(lista.get(i));
-//                i++;
-//            }
-//            up.add(aux);
-//        }
-//        if (lista.isEmpty()){
-//            //ERROR
-//            SS.getTransaction().commit();
-//            SS.close();
-//            return new ArrayList();
-//        }else{
-//            SS.getTransaction().commit();
-//            SS.close();
-//            return up;
-//        }
-        return new ArrayList(); 
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT U.userID, nombreUsuario, valor FROM usuario U, clave C WHERE U.claveID=C.claveID;";
+        Query query = SS.createSQLQuery(sentencia);
+        List lista = query.list();
+/*  La query guarda los atributos del select en listas de Objetos SIEMPRE, se debe Castear el objeto para poder darle el uso que se quiera
+    Cuando los argumentos de SELECT son mas de uno, query.list() devuelve una lista de arreglos de objetos, es decir, List<Object[]>, un ejemplo
+    seria para la sentencia que esta arriba, la query va a devolver una lista de arreglo de objetos de manera que en todas las posiciones de la
+    lista se encontrará un arreglo de 3 componentes correspondientes a objetos que refieren en primer lugar [0] a userID, eb segundo lugar [1] a
+    nombreUsuario y en tercer lugar [2] a valor (String de la clave); la primer posicion de la lista lista.get(0) va a contener los valores de la
+    primer celda obtenida como resultado de la consulta establecida y así sucesivamente. Por ejemplo, este system.out.println, va a devolver 4
+    valores, los 3 correspondientes al primer resultado y el primero de la segunda fila resultante. El orden siempre será el determinado en el
+    argumento de SELECT ...
+        System.out.println(((Object[])lista.get(0))[0] + " " + ((Object[])lista.get(0))[1] + " " + ((Object[])lista.get(0))[2] + " " + ((Object[])lista.get(1))[0]);
+        */    
+        ArrayList up = new ArrayList();
+        for (int i=0; i<lista.size(); i++){
+            ArrayList aux = new ArrayList(3);
+            for(int j=0; j<3;j++){
+                aux.add(((Object[])lista.get(i))[j]);
+            }
+            i++;
+            up.add(aux);
+        }
+        if (lista.isEmpty()){
+            //ERROR
+            SS.getTransaction().commit();
+            SS.close();
+            return new ArrayList();
+        }else{
+            SS.getTransaction().commit();
+            SS.close();
+            return up;
+        }
     }
     
     public Usuario isAoB(Integer id){
-//        SS = HU.getSessionFactory().openSession();
-//        SS.beginTransaction();
-//        String sentencia = "SELECT userID FROM bedel WHERE userID=" + id.toString() + ";";
-//        Query query = SS.createSQLQuery(sentencia);
-//        List lista = query.list();
-//        int i;
-//        if (lista.isEmpty()){
-//            sentencia = "SELECT userID FROM bedel WHERE userID=" + id.toString() + ";";
-//            query = SS.createSQLQuery(sentencia);
-//            lista = query.list();
-//            if (lista.isEmpty()){
-//                SS.getTransaction().commit();
-//                SS.close();
-//                return null;
-//            }else{
-//                SS.getTransaction().commit();
-//                SS.close();
-//                return new Admin();
-//            }
-//        }else{
-//            SS.getTransaction().commit();
-//            SS.close();
-//            return new Bedel();
-//        }
-        return new Bedel();
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sid = id.toString();
+        String sentencia = "SELECT userID FROM bedel WHERE userID=" + sid + ";";
+        Query query = SS.createSQLQuery(sentencia);
+        List lista = query.list();
+        int i;
+        if (lista.isEmpty()){
+            sentencia = "SELECT userID FROM admin WHERE userID=" + sid + ";";
+            query = SS.createSQLQuery(sentencia);
+            lista = query.list();
+            if (lista.isEmpty()){
+                SS.getTransaction().commit();
+                SS.close();
+                return new Usuario();
+            }else{
+                SS.getTransaction().commit();
+                SS.close();
+                return new Admin();
+            }
+        }else{
+            SS.getTransaction().commit();
+            SS.close();
+            return new Bedel();
+        }
     }
         
 }
