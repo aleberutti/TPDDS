@@ -9,14 +9,8 @@ import Controlador.GestorAutenticacion;
 import Modelo.Admin;
 import Modelo.Bedel;
 import Modelo.Usuario;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import static java.lang.Thread.sleep;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 
@@ -263,14 +257,15 @@ public class Autenticacion extends javax.swing.JFrame {
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         GestorAutenticacion ga = new GestorAutenticacion();
         Usuario us = ga.determinarTipoUsuario(user.getText(), pass);
-        if (us instanceof Bedel){
+        Bedel be = new Bedel();
+        if (us.getClass().equals(be.getClass())){
             OpcionesDelBedel b = new OpcionesDelBedel();
             this.dispose();
-            b.setVisible(true);
         }else{
-            if (us instanceof Admin){
+            Admin adm = new Admin();
+            if (us.getClass().equals(adm.getClass())){
+                this.dispose();
                 OpcionesDelAdministrador ad= new OpcionesDelAdministrador();
-                ad.setVisible(true);
             }else{
                 Autenticacion esta=this;
                 esta.setAlwaysOnTop(true);

@@ -10,12 +10,12 @@ import javax.swing.ButtonGroup;
  *
  * @author azuli
  */
-public class RegistroDeReserva1 extends javax.swing.JFrame {
+public class RegistroDeReserva extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistroDeReserva
      */
-    public RegistroDeReserva1() {
+    public RegistroDeReserva() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -520,11 +520,11 @@ public class RegistroDeReserva1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1013, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
         );
 
         pack();

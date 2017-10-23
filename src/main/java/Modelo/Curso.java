@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 3:35:48 AM by Hibernate Tools 4.3.1
+// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package Modelo;
 public class Curso extends Actividad implements java.io.Serializable {
 
 
-     private Integer actividadId;
+     private int actividadId;
      private Actividad actividad;
      private String carrera;
 
@@ -21,7 +21,6 @@ public class Curso extends Actividad implements java.io.Serializable {
        this.carrera = carrera;
     }
    
-    @Override
     public Integer getActividadId() {
         return this.actividadId;
     }

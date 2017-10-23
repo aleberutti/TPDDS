@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Bedel;
 import org.hibernate.Session;
 
 /**
@@ -13,7 +14,7 @@ import org.hibernate.Session;
  */
 public class GenericDAO {
     
-    private Modelo.NewHibernateUtil HU;
+    private HibernateUtil HU;
     private Session SS;
     
     public GenericDAO(){
@@ -21,17 +22,36 @@ public class GenericDAO {
     }
 
     public void create(Object o){
-
+        SS = HibernateUtil.getSessionFactory().openSession();
+        SS.beginTransaction();
+        SS.save(o);
+        SS.getTransaction().commit();
+        SS.close();
     }
-
-    public void read(Object o){
-
+    
+    
+    public Object read(Object o, int id){
+        SS = HibernateUtil.getSessionFactory().openSession();
+        SS.beginTransaction();
+        Class c = o.getClass();
+        Object obj = SS.get(c, id);
+        SS.getTransaction().commit();
+        SS.close();
+        return obj;
     }
     public void update(Object o){
-
+        SS = HibernateUtil.getSessionFactory().openSession();
+        SS.beginTransaction();
+        SS.update(o);
+        SS.getTransaction().commit();
+        SS.close();
     }
 
     public void delete(Object o){
-
+        SS = HibernateUtil.getSessionFactory().openSession();
+        SS.beginTransaction();
+        SS.delete(o);
+        SS.getTransaction().commit();
+        SS.close();
     }    
 }

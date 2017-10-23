@@ -370,7 +370,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8MouseEntered
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        RegistrarBedel rb = new RegistrarBedel();
+        RegistroDeReserva rr = new RegistroDeReserva();
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 

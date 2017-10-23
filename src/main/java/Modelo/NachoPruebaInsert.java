@@ -5,8 +5,11 @@
  */
 package Modelo;
 
+import Controlador.HibernateUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 
@@ -18,7 +21,7 @@ public class NachoPruebaInsert extends javax.swing.JFrame {
 
     private Usuario m;
     private Usuario m2;
-    private NewHibernateUtil HU;
+    private HibernateUtil HU;
     private Session SS;
         
     public NachoPruebaInsert() {
@@ -83,12 +86,22 @@ public class NachoPruebaInsert extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        Clave p = new Clave("Nacho123");
-        Usuario m = new Usuario(p, "NachoAkd","Nacho","Cabrera");
+        Clave c = new Clave("asd");
+        Usuario u = new Usuario(c, "NachoAKD", "Nacho", "Cabrera");
         
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
-        SS.save(m);
+        SS.save(c);
+        SS.save(u);
+        Query query = SS.createSQLQuery("SELECT userID FROM usuario WHERE nombreUsuario='NachoAKD';");
+        List lista = query.list();
+        int i;
+        if (lista.isEmpty())
+            i=0;//ERROR
+        else
+            u.setUserId((Integer)lista.get(0));
+        c.setUsuario(u);
+        SS.update(c);
         SS.getTransaction().commit();
         SS.close();
         

@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `clave` (
   `valor` varchar(30) NOT NULL DEFAULT '',
   `fecha` date NOT NULL DEFAULT '0000-00-00',
   `hora` time NOT NULL DEFAULT '00:00:00',
-  `userID` int(11) NOT NULL,
+  `userID` int(11),
   `politicaID` int(11) NOT NULL,
   PRIMARY KEY (`claveID`),
   KEY `fk_politica` (`politicaID`)
@@ -217,9 +217,7 @@ CREATE TABLE IF NOT EXISTS `politicascontrasenia` (
   `letraMay` tinyint(1) NOT NULL,
   `digito` tinyint(1) NOT NULL,
   `passIgual` tinyint(1) NOT NULL,
-  `claveID` int(11) NOT NULL,
-  PRIMARY KEY (`politicaID`),
-  UNIQUE KEY `claveID` (`claveID`)
+  PRIMARY KEY (`politicaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -353,12 +351,6 @@ ALTER TABLE `curso`
 ALTER TABLE `diareserva`
   ADD CONSTRAINT `diareserva_ibfk_1` FOREIGN KEY (`aulaID`) REFERENCES `aula` (`aulaID`),
   ADD CONSTRAINT `diareserva_ibfk_2` FOREIGN KEY (`reservaID`) REFERENCES `reserva` (`reservaID`);
-
---
--- Filtros para la tabla `politicascontrasenia`
---
-ALTER TABLE `politicascontrasenia`
-  ADD CONSTRAINT `politicascontrasenia_ibfk_1` FOREIGN KEY (`claveID`) REFERENCES `clave` (`claveID`);
 
 --
 -- Filtros para la tabla `reserva`

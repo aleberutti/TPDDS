@@ -18,6 +18,7 @@ public class ErrorCoincidenciaContraseñas extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
     }
 
     /**

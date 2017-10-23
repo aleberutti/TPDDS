@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 22, 2017 3:35:49 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 22, 2017 10:44:09 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Modelo.Clave" table="clave" catalog="tpdds" optimistic-lock="version">
         <id name="claveId" type="java.lang.Integer">
@@ -12,7 +12,7 @@
             <column name="politicaID" not-null="true" />
         </many-to-one>
         <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
-            <column name="userID" not-null="true" />
+            <column name="userID" />
         </many-to-one>
         <property name="valor" type="string">
             <column name="valor" length="30" not-null="true" />
@@ -28,12 +28,6 @@
                 <column name="claveID" not-null="true" unique="true" />
             </key>
             <one-to-many class="Modelo.Usuario" />
-        </set>
-        <set name="politicascontrasenias" table="politicascontrasenia" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="claveID" not-null="true" unique="true" />
-            </key>
-            <one-to-many class="Modelo.Politicascontrasenia" />
         </set>
     </class>
 </hibernate-mapping>

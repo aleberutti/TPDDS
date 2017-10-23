@@ -132,7 +132,6 @@ public class ConfirmacionCancelarModificar extends javax.swing.JFrame {
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
         this.dispose();
-        OpcionesDelBedel opc = new OpcionesDelBedel();
     }//GEN-LAST:event_confirmarActionPerformed
 
     /**

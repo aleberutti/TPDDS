@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 3:35:48 AM by Hibernate Tools 4.3.1
+// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,7 +12,6 @@ public class Politicascontrasenia  implements java.io.Serializable {
 
 
      private Integer politicaId;
-     private Clave clave;
      private int longMin;
      private boolean signosEspeciales;
      private boolean letraMay;
@@ -23,17 +22,24 @@ public class Politicascontrasenia  implements java.io.Serializable {
     public Politicascontrasenia() {
     }
 
-	
-    public Politicascontrasenia(Clave clave, int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
-        this.clave = clave;
+    public Politicascontrasenia(int politicaID, int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
+        this.politicaId=politicaID;
         this.longMin = longMin;
         this.signosEspeciales = signosEspeciales;
         this.letraMay = letraMay;
         this.digito = digito;
         this.passIgual = passIgual;
     }
-    public Politicascontrasenia(Clave clave, int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual, Set claves) {
-       this.clave = clave;
+    
+    public Politicascontrasenia(int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
+        this.longMin = longMin;
+        this.signosEspeciales = signosEspeciales;
+        this.letraMay = letraMay;
+        this.digito = digito;
+        this.passIgual = passIgual;
+    }
+    
+    public Politicascontrasenia(int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual, Set claves) {
        this.longMin = longMin;
        this.signosEspeciales = signosEspeciales;
        this.letraMay = letraMay;
@@ -48,13 +54,6 @@ public class Politicascontrasenia  implements java.io.Serializable {
     
     public void setPoliticaId(Integer politicaId) {
         this.politicaId = politicaId;
-    }
-    public Clave getClave() {
-        return this.clave;
-    }
-    
-    public void setClave(Clave clave) {
-        this.clave = clave;
     }
     public int getLongMin() {
         return this.longMin;

@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 3:35:48 AM by Hibernate Tools 4.3.1
+// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,30 +19,31 @@ public class Clave  implements java.io.Serializable {
      private Date fecha;
      private Date hora;
      private Set usuarios = new HashSet(0);
-     private Set politicascontrasenias = new HashSet(0);
 
     public Clave() {
     }
 
     public Clave(String valor){
         this.valor=valor;
+        this.fecha= new Date();
+        this.hora= new Date();
+        this.politicascontrasenia = new Politicascontrasenia();
+        this.politicascontrasenia.setPoliticaId(1);
     }
 	
-    public Clave(Politicascontrasenia politicascontrasenia, Usuario usuario, String valor, Date fecha, Date hora) {
+    public Clave(Politicascontrasenia politicascontrasenia, String valor, Date fecha, Date hora) {
         this.politicascontrasenia = politicascontrasenia;
-        this.usuario = usuario;
         this.valor = valor;
         this.fecha = fecha;
         this.hora = hora;
     }
-    public Clave(Politicascontrasenia politicascontrasenia, Usuario usuario, String valor, Date fecha, Date hora, Set usuarios, Set politicascontrasenias) {
+    public Clave(Politicascontrasenia politicascontrasenia, Usuario usuario, String valor, Date fecha, Date hora, Set usuarios) {
        this.politicascontrasenia = politicascontrasenia;
        this.usuario = usuario;
        this.valor = valor;
        this.fecha = fecha;
        this.hora = hora;
        this.usuarios = usuarios;
-       this.politicascontrasenias = politicascontrasenias;
     }
    
     public Integer getClaveId() {
@@ -93,13 +94,6 @@ public class Clave  implements java.io.Serializable {
     
     public void setUsuarios(Set usuarios) {
         this.usuarios = usuarios;
-    }
-    public Set getPoliticascontrasenias() {
-        return this.politicascontrasenias;
-    }
-    
-    public void setPoliticascontrasenias(Set politicascontrasenias) {
-        this.politicascontrasenias = politicascontrasenias;
     }
 
 
