@@ -332,7 +332,7 @@
               <Color blue="46" green="40" red="37" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Fausto\Documents\Tpdds\TPDDS\src\main\java\Recursos\diminish.png"/>
+              <Image iconType="3" name="/Recursos/diminish.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -354,7 +354,7 @@
               <Color blue="46" green="40" red="37" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Fausto\Documents\Tpdds\TPDDS\src\main\java\Recursos\closed.png"/>
+              <Image iconType="3" name="/Recursos/closed.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>

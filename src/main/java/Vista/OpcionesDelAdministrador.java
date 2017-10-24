@@ -124,7 +124,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         jLabel5.setText("¿Qué desea hacer?");
 
         jButton4.setBackground(new java.awt.Color(55, 64, 70));
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\closed.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/closed.png"))); // NOI18N
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
@@ -145,7 +145,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         });
 
         jButton5.setBackground(new java.awt.Color(55, 64, 70));
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fausto\\Documents\\Tpdds\\TPDDS\\src\\main\\java\\Recursos\\diminish.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/diminish.png"))); // NOI18N
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
         jButton5.setContentAreaFilled(false);
