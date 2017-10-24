@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
+// Generated Oct 23, 2017 11:09:42 PM by Hibernate Tools 4.3.1
 
 
 
@@ -33,8 +33,6 @@ public class Admin extends Usuario implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-
 
 
 }

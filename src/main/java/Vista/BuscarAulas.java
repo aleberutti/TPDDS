@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Modelo.Bedel;
+
 /**
  *
  * @author azuli
@@ -14,10 +16,13 @@ public class BuscarAulas extends javax.swing.JFrame {
     /**
      * Creates new form BuscarAula
      */
-    public BuscarAulas() {
+    Bedel bed;
+    
+    public BuscarAulas(Bedel bed) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.bed=bed;
     }
 
     /**

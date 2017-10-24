@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
+// Generated Oct 23, 2017 11:09:42 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -22,8 +22,8 @@ public class Politicascontrasenia  implements java.io.Serializable {
     public Politicascontrasenia() {
     }
 
-    public Politicascontrasenia(int politicaID, int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
-        this.politicaId=politicaID;
+	
+    public Politicascontrasenia(int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
         this.longMin = longMin;
         this.signosEspeciales = signosEspeciales;
         this.letraMay = letraMay;
@@ -31,7 +31,8 @@ public class Politicascontrasenia  implements java.io.Serializable {
         this.passIgual = passIgual;
     }
     
-    public Politicascontrasenia(int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
+    public Politicascontrasenia(int politicaId, int longMin, boolean signosEspeciales, boolean letraMay, boolean digito, boolean passIgual) {
+        this.politicaId=politicaId;
         this.longMin = longMin;
         this.signosEspeciales = signosEspeciales;
         this.letraMay = letraMay;

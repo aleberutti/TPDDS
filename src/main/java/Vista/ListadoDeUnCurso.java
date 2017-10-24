@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Modelo.Bedel;
+
 /**
  *
  * @author azuli
@@ -14,10 +16,13 @@ public class ListadoDeUnCurso extends javax.swing.JFrame {
     /**
      * Creates new form ListadoDeUnCurso
      */
-    public ListadoDeUnCurso() {
+    Bedel bed;
+    
+    public ListadoDeUnCurso(Bedel bed) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.bed=bed;
     }
 
     /**

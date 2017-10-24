@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Vista;
+import Modelo.Bedel;
 import javax.swing.ButtonGroup;
 
 /**
@@ -15,10 +16,13 @@ public class RegistroDeReserva extends javax.swing.JFrame {
     /**
      * Creates new form RegistroDeReserva
      */
-    public RegistroDeReserva() {
+    Bedel bed;
+    
+    public RegistroDeReserva(Bedel bed) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.bed=bed;
     }
 
     /**

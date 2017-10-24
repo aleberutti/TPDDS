@@ -93,7 +93,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -113,13 +113,13 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton3" max="32767" attributes="0"/>
-                              <Component id="jButton5" max="32767" attributes="0"/>
+                              <Component id="listCurso" max="32767" attributes="0"/>
+                              <Component id="regReserva" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="54" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton6" max="32767" attributes="0"/>
-                              <Component id="jButton4" max="32767" attributes="0"/>
+                              <Component id="listDia" max="32767" attributes="0"/>
+                              <Component id="buscarAula" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="49" max="32767" attributes="0"/>
                       </Group>
@@ -147,7 +147,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -155,13 +155,13 @@
                   <Component id="jLabel5" min="-2" pref="66" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton5" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="regReserva" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="buscarAula" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="listCurso" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="listDia" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
@@ -252,7 +252,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="listCurso">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9e" green="9e" red="9e" type="rgb"/>
@@ -263,10 +263,10 @@
             <Property name="text" type="java.lang.String" value="Listado de reservas de un curso"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listCursoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="buscarAula">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9e" green="9e" red="9e" type="rgb"/>
@@ -277,10 +277,10 @@
             <Property name="text" type="java.lang.String" value="Buscar aula"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarAulaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="regReserva">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9e" green="9e" red="9e" type="rgb"/>
@@ -291,10 +291,10 @@
             <Property name="text" type="java.lang.String" value="Registar reserva"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regReservaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="usernameLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Coco Gothic" size="14" style="2"/>
@@ -307,12 +307,12 @@
             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="usernameLabelMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="usernameLabelMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="usernameLabelMouseExited"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="listDia">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="9e" green="9e" red="9e" type="rgb"/>
@@ -323,7 +323,7 @@
             <Property name="text" type="java.lang.String" value="Listado de reservas de un dia"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listDiaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton8">

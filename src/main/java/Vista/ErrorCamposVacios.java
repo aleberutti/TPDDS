@@ -11,12 +11,12 @@ import javax.swing.JFrame;
  *
  * @author azuli
  */
-public class ErrorDeDatos extends javax.swing.JFrame {
+public class ErrorCamposVacios extends javax.swing.JFrame {
 
     /**
      * Creates new form AutenticacionConError
      */
-    public ErrorDeDatos() {
+    public ErrorCamposVacios() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -34,7 +34,7 @@ public class ErrorDeDatos extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        aceptar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,14 +49,14 @@ public class ErrorDeDatos extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("ERROR: Los datos ingresados son erróneos.");
+        jLabel4.setText("ERROR. No se pueden omitir datos en el registro.");
 
-        jButton1.setBackground(new java.awt.Color(158, 158, 158));
-        jButton1.setFont(new java.awt.Font("Coco Gothic", 0, 12)); // NOI18N
-        jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        aceptar.setBackground(new java.awt.Color(158, 158, 158));
+        aceptar.setFont(new java.awt.Font("Coco Gothic", 0, 12)); // NOI18N
+        aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                aceptarActionPerformed(evt);
             }
         });
 
@@ -67,7 +67,7 @@ public class ErrorDeDatos extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(128, Short.MAX_VALUE))
             .addComponent(jSeparator1)
         );
@@ -79,7 +79,7 @@ public class ErrorDeDatos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -97,16 +97,16 @@ public class ErrorDeDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_aceptarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton aceptar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;

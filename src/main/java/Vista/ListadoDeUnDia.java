@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Bedel;
 import java.util.logging.Logger;
 
 /**
@@ -16,10 +17,13 @@ public class ListadoDeUnDia extends javax.swing.JFrame {
     /**
      * Creates new form ListadoDeUnDiaTabla
      */
-    public ListadoDeUnDia() {
+    Bedel bed;
+    
+    public ListadoDeUnDia(Bedel bed) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.dispose();
+        this.bed=bed;
     }
    
     /**

@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Admin;
 import javax.swing.JComboBox;
 
 /**
@@ -16,7 +17,7 @@ public class BuscarBedel extends javax.swing.JFrame {
     /**
      * Creates new form BuscarBedel
      */
-    public BuscarBedel() {
+    public BuscarBedel(Admin adm) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);

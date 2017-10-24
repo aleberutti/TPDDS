@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
+// Generated Oct 23, 2017 11:09:42 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -23,13 +23,6 @@ public class Clave  implements java.io.Serializable {
     public Clave() {
     }
 
-    public Clave(String valor){
-        this.valor=valor;
-        this.fecha= new Date();
-        this.hora= new Date();
-        this.politicascontrasenia = new Politicascontrasenia();
-        this.politicascontrasenia.setPoliticaId(1);
-    }
 	
     public Clave(Politicascontrasenia politicascontrasenia, String valor, Date fecha, Date hora) {
         this.politicascontrasenia = politicascontrasenia;
@@ -37,6 +30,21 @@ public class Clave  implements java.io.Serializable {
         this.fecha = fecha;
         this.hora = hora;
     }
+    
+    public Clave(Politicascontrasenia pc, String valor){
+        this.politicascontrasenia = pc;
+        this.valor = valor;
+        this.fecha = new Date();
+        this.hora = new Date();
+    }
+    
+    public Clave (String valor){
+        this.politicascontrasenia = new Politicascontrasenia();
+        this.valor = valor;
+        this.fecha = new Date();
+        this.hora = new Date();
+    }
+    
     public Clave(Politicascontrasenia politicascontrasenia, Usuario usuario, String valor, Date fecha, Date hora, Set usuarios) {
        this.politicascontrasenia = politicascontrasenia;
        this.usuario = usuario;

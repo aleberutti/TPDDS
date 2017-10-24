@@ -11,6 +11,8 @@ import Modelo.Bedel;
 import Modelo.Usuario;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -24,10 +26,19 @@ public class Autenticacion extends javax.swing.JFrame {
     /**
      * Creates new form Autenticacion2
      */
+    List uap = new ArrayList();
+    
     public Autenticacion() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+    
+    public Autenticacion(List uap){
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.uap=uap;
     }
 
     /**
@@ -255,15 +266,15 @@ public class Autenticacion extends javax.swing.JFrame {
     }//GEN-LAST:event_passMouseClicked
 
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
-        GestorAutenticacion ga = new GestorAutenticacion();
-        Usuario us = ga.determinarTipoUsuario(user.getText(), pass);
+        GestorAutenticacion ga = new GestorAutenticacion(uap);
+        Usuario us = ga.autenticarUsuario(user.getText(), pass);
         if (us instanceof Bedel){
-            OpcionesDelBedel b = new OpcionesDelBedel();
+            OpcionesDelBedel b = new OpcionesDelBedel((Bedel)us);
             this.dispose();
         }else{
             if (us instanceof Admin){
                 this.dispose();
-                OpcionesDelAdministrador ad= new OpcionesDelAdministrador();
+                OpcionesDelAdministrador ad= new OpcionesDelAdministrador((Admin)us);
             }else{
                 Autenticacion esta=this;
                 esta.setAlwaysOnTop(true);

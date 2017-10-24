@@ -1,5 +1,5 @@
 package Modelo;
-// Generated Oct 22, 2017 10:44:08 PM by Hibernate Tools 4.3.1
+// Generated Oct 23, 2017 11:09:42 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Usuario  implements java.io.Serializable {
 
 
-     private Integer userId;
+     private int userId;
      private Clave clave;
      private String nombreUsuario;
      private String nombre;
@@ -22,14 +22,18 @@ public class Usuario  implements java.io.Serializable {
 
     public Usuario() {
     }
+
 	
-    public Usuario(Clave clave, String nombreUsuario, String nombre, String apellido) {
+    public Usuario(int userId, Clave clave, String nombreUsuario, String nombre, String apellido) {
+        this.userId = userId;
         this.clave = clave;
         this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
     }
-    public Usuario(Clave clave, String nombreUsuario, String nombre, String apellido, Bedel bedel, Set claves, Admin admin) {
+    
+    public Usuario(int userId, Clave clave, String nombreUsuario, String nombre, String apellido, Bedel bedel, Set claves, Admin admin) {
+       this.userId = userId;
        this.clave = clave;
        this.nombreUsuario = nombreUsuario;
        this.nombre = nombre;
@@ -43,7 +47,7 @@ public class Usuario  implements java.io.Serializable {
         return this.userId;
     }
     
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
     public Clave getClave() {

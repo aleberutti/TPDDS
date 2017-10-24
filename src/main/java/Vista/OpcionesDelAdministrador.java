@@ -5,20 +5,30 @@
  */
 package Vista;
 
+import Controlador.Principal;
+import Controlador.UsuarioDAO;
+import Modelo.Admin;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 /**
  *
  * @author azuli
  */
 public class OpcionesDelAdministrador extends javax.swing.JFrame {
         
-    
+    Admin adm;
     /**
      * Creates new form ElegirOpcionAdministrador
      */
-    public OpcionesDelAdministrador() {
+    public OpcionesDelAdministrador(Admin adm) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.usernameLabel.setText(adm.getUsuario().getNombreUsuario());
+        this.adm=adm;
     }
 
     /**
@@ -38,7 +48,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -91,21 +101,21 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("administrador");
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 255));
-        jLabel4.setText("nombre de usuario");
-        jLabel4.setComponentPopupMenu(popup);
-        jLabel4.setFocusCycleRoot(true);
-        jLabel4.setFocusTraversalPolicyProvider(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        usernameLabel.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(204, 204, 255));
+        usernameLabel.setText("nombre de usuario");
+        usernameLabel.setComponentPopupMenu(popup);
+        usernameLabel.setFocusCycleRoot(true);
+        usernameLabel.setFocusTraversalPolicyProvider(true);
+        usernameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                usernameLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                usernameLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                usernameLabelMouseExited(evt);
             }
         });
 
@@ -171,7 +181,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)))
+                                .addComponent(usernameLabel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,7 +219,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4))))
+                            .addComponent(usernameLabel))))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
@@ -233,21 +243,28 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+    private void usernameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseExited
         // TODO add your handling code here:
-        jLabel4.setFont(new java.awt.Font("Coco Gothic", 3, 14));
-    }//GEN-LAST:event_jLabel4MouseExited
+    }//GEN-LAST:event_usernameLabelMouseExited
 
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+    private void usernameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseEntered
         // TODO add your handling code here:
-        jLabel4.setFont(new java.awt.Font("Coco Gothic Heavy", 3, 14));
-    }//GEN-LAST:event_jLabel4MouseEntered
+    }//GEN-LAST:event_usernameLabelMouseEntered
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void usernameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseClicked
         // TODO add your handling code here:
         popup.setLocation(evt.getLocationOnScreen());
 	popup.setVisible(true);
-    }//GEN-LAST:event_jLabel4MouseClicked
+        OpcionesDelAdministrador esta = this;
+        this.jMenuItem1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                popup.setVisible(false);
+                esta.dispose();
+                Principal p = new Principal();
+                p.main(null);
+            }
+        });
+    }//GEN-LAST:event_usernameLabelMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -280,12 +297,12 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseEntered
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RegistrarBedel rb = new RegistrarBedel();
+        RegistrarBedel rb = new RegistrarBedel(adm);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BuscarBedel bb = new BuscarBedel();
+        BuscarBedel bb = new BuscarBedel(adm);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
   
@@ -301,10 +318,10 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu popup;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

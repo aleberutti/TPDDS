@@ -10,7 +10,7 @@ import Modelo.Bedel;
 import Modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.TypedQuery;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -34,6 +34,29 @@ public class UsuarioDAO extends GenericDAO{
         SS.close();
     }
     
+    public Usuario read(Class u, int id){
+        SS = HibernateUtil.getSessionFactory().openSession();
+        SS.beginTransaction();
+        Bedel b = new Bedel();
+        Admin adm = new Admin();
+        if (u.equals(b.getClass())){
+            b = (Bedel) SS.get(Bedel.class, id);
+            Hibernate.initialize(b.getUsuario());
+            SS.getTransaction().commit();
+            SS.close();
+            return b;
+        }if (u.equals(adm.getClass())){
+            adm = (Admin) SS.get(Admin.class, id);
+            Hibernate.initialize(adm.getUsuario()); //Para que cargue lo definido en el lazy load
+            SS.getTransaction().commit();
+            SS.close();
+            return adm;
+        }else{
+            //ERROR
+            return new Usuario();
+        }
+    }
+    
     public List<Integer> readAll(){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
@@ -41,7 +64,6 @@ public class UsuarioDAO extends GenericDAO{
         Query query = SS.createSQLQuery(sentencia);
         List<Integer> lista = query.list();
         if (lista.isEmpty()){
-            //ERROR
             SS.getTransaction().commit();
             SS.close();
             return new ArrayList();
@@ -78,7 +100,6 @@ public class UsuarioDAO extends GenericDAO{
             up.add(aux);
         }
         if (lista.isEmpty()){
-            //ERROR
             SS.getTransaction().commit();
             SS.close();
             return new ArrayList();
@@ -95,11 +116,10 @@ public class UsuarioDAO extends GenericDAO{
         String sid = id.toString();
         String sentencia = "SELECT userID FROM bedel WHERE userID=" + sid + ";";
         Query query = SS.createSQLQuery(sentencia);
-        List lista = query.list();
-        int i;
+        List<Integer> lista = query.list();
         if (lista.isEmpty()){
             sentencia = "SELECT userID FROM admin WHERE userID=" + sid + ";";
-            query = SS.createSQLQuery(sentencia);
+            query = SS.createSQLQuery(sentencia).addEntity(Admin.class);
             lista = query.list();
             if (lista.isEmpty()){
                 SS.getTransaction().commit();
@@ -108,13 +128,24 @@ public class UsuarioDAO extends GenericDAO{
             }else{
                 SS.getTransaction().commit();
                 SS.close();
-                return new Admin();
+                return this.read(Admin.class, lista.get(0));
             }
         }else{
             SS.getTransaction().commit();
             SS.close();
-            return new Bedel();
+            return this.read(Bedel.class, lista.get(0));
         }
+    }
+    
+    public List<String> getAllClaves(){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT C.valor FROM clave C,bedel B WHERE C.userID=B.userID;";
+        Query query = SS.createSQLQuery(sentencia);
+        List<String> claves = query.list();
+        SS.getTransaction().commit();
+        SS.close();
+        return claves;
     }
         
 }

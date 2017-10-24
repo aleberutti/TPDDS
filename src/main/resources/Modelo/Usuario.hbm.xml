@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 22, 2017 10:44:09 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 23, 2017 11:09:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Modelo.Usuario" table="usuario" catalog="tpdds" optimistic-lock="version">
-        <id name="userId" type="java.lang.Integer">
+        <id name="userId" type="int">
             <column name="userID" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="clave" class="Modelo.Clave" fetch="select">
             <column name="claveID" not-null="true" unique="true" />

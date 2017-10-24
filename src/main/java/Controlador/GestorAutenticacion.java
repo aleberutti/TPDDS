@@ -7,8 +7,11 @@ package Controlador;
 
 import Modelo.Admin;
 import Modelo.Bedel;
+import Modelo.Clave;
 import Modelo.Usuario;
+import Vista.ErrorBbdd;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPasswordField;
 
 /**
@@ -17,14 +20,17 @@ import javax.swing.JPasswordField;
  */
 public class GestorAutenticacion {
 
+    List uap = new ArrayList();
+    UsuarioDAO ud = new UsuarioDAO();
+    
     public GestorAutenticacion() {
     }
-
-    public void autenticarUsuario(String user, String pass){
-
+    
+    public GestorAutenticacion(List uap) {
+        this.uap=uap;
     }
 
-    public Usuario determinarTipoUsuario(String user, JPasswordField pass){
+    public Usuario autenticarUsuario(String user, JPasswordField pass){
         String contra="";
         char a;
         for (int i=0; i<pass.getPassword().length; i++){
@@ -32,20 +38,21 @@ public class GestorAutenticacion {
             contra = contra + a;
         }
         if (user.equals("bedel") && contra.equals("bedel")){
-            return new Bedel();
+            Clave c = new Clave("bedel");
+            Usuario us = new Usuario(1, c, "bedel", "bedel", "bedel");
+            Bedel b = new Bedel (us, "Mañana", "asdasd@me.com");
+            return b;
         }else{
             if(user.equals("admin") && contra.equals("admin")){
-                return new Admin();
+                Clave c = new Clave("admin");
+                Usuario us = new Usuario(1, c, "admin", "admin", "admin");
+                Admin adm = new Admin (us);
+                return adm;
             }else{
-                UsuarioDAO ud = new UsuarioDAO();
-                ArrayList up=ud.readAllUserPass();
-                for(int i=0; i<up.size(); i++){
-                    if (user.equals(((ArrayList)up.get(i)).get(1)) && contra.equals(((ArrayList)up.get(i)).get(2))){
-                        Bedel b = new Bedel();
-                        if (ud.isAoB((int) ((ArrayList)up.get(i)).get(0)).getClass().equals(b.getClass())){
-                            return new Bedel();
-                        }else
-                            return new Admin();
+                for(int i=0; i<uap.size(); i++){
+                    if (user.equals(((ArrayList)uap.get(i)).get(1)) && contra.equals(((ArrayList)uap.get(i)).get(2))){
+                        Usuario usObten = ud.isAoB((int) ((ArrayList)uap.get(i)).get(0));
+                        return usObten;
                     }else {
                         return this.notificarError();
                     }

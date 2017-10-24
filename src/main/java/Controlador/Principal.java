@@ -6,6 +6,7 @@
 package Controlador;
 
 import Vista.Autenticacion;
+import Vista.ErrorBbdd;
 
 /**
  *
@@ -17,7 +18,13 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Autenticacion au = new Autenticacion();
+        try{
+        UsuarioDAO ud = new UsuarioDAO();
+        Autenticacion au = new Autenticacion(ud.readAllUserPass());
+        }catch(Exception e){
+            e.printStackTrace();
+            ErrorBbdd eb = new ErrorBbdd();
+        }
     }
     
 }

@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Controlador.Principal;
+import Modelo.Bedel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author azuli
@@ -14,10 +19,14 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
     /**
      * Creates new form BuscarBedel1
      */
-    public OpcionesDelBedel() {
+    Bedel bed;
+    
+    public OpcionesDelBedel(Bedel bed) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.usernameLabel.setText(bed.getUsuario().getNombreUsuario());
+        this.bed=bed;
     }
 
     /**
@@ -38,11 +47,11 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        listCurso = new javax.swing.JButton();
+        buscarAula = new javax.swing.JButton();
+        regReserva = new javax.swing.JButton();
+        usernameLabel = new javax.swing.JLabel();
+        listDia = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
@@ -121,56 +130,56 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(158, 158, 158));
-        jButton3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton3.setText("Listado de reservas de un curso");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        listCurso.setBackground(new java.awt.Color(158, 158, 158));
+        listCurso.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        listCurso.setText("Listado de reservas de un curso");
+        listCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                listCursoActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(158, 158, 158));
-        jButton4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton4.setText("Buscar aula");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buscarAula.setBackground(new java.awt.Color(158, 158, 158));
+        buscarAula.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        buscarAula.setText("Buscar aula");
+        buscarAula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                buscarAulaActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(158, 158, 158));
-        jButton5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton5.setText("Registar reserva");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        regReserva.setBackground(new java.awt.Color(158, 158, 158));
+        regReserva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        regReserva.setText("Registar reserva");
+        regReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                regReservaActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Coco Gothic", 2, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 255));
-        jLabel4.setText("nombre de usuario");
-        jLabel4.setFocusCycleRoot(true);
-        jLabel4.setFocusTraversalPolicyProvider(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        usernameLabel.setFont(new java.awt.Font("Coco Gothic", 2, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(204, 204, 255));
+        usernameLabel.setText("nombre de usuario");
+        usernameLabel.setFocusCycleRoot(true);
+        usernameLabel.setFocusTraversalPolicyProvider(true);
+        usernameLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                usernameLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                usernameLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                usernameLabelMouseExited(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(158, 158, 158));
-        jButton6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton6.setText("Listado de reservas de un dia");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        listDia.setBackground(new java.awt.Color(158, 158, 158));
+        listDia.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        listDia.setText("Listado de reservas de un dia");
+        listDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                listDiaActionPerformed(evt);
             }
         });
 
@@ -229,7 +238,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4))
+                                .addComponent(usernameLabel))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -245,12 +254,12 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(listCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(regReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(listDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buscarAula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 49, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -271,17 +280,17 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4))))
+                            .addComponent(usernameLabel))))
                 .addGap(0, 31, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(regReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarAula, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listDia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -329,26 +338,33 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        BuscarAulas ba = new BuscarAulas();
+    private void buscarAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAulaActionPerformed
+        BuscarAulas ba = new BuscarAulas(bed);
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_buscarAulaActionPerformed
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void usernameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseClicked
         // TODO add your handling code here:
         popup.setLocation(evt.getLocationOnScreen());
-        popup.setVisible(true);
-    }//GEN-LAST:event_jLabel4MouseClicked
+	popup.setVisible(true);
+        OpcionesDelBedel esta = this;
+        this.jMenuItem1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                popup.setVisible(false);
+                esta.dispose();
+                Principal p = new Principal();
+                p.main(null);
+            }
+        });
+    }//GEN-LAST:event_usernameLabelMouseClicked
 
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+    private void usernameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseEntered
         // TODO add your handling code here:
-        jLabel4.setFont(new java.awt.Font("Coco Gothic Heavy", 3, 14));
-    }//GEN-LAST:event_jLabel4MouseEntered
+    }//GEN-LAST:event_usernameLabelMouseEntered
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+    private void usernameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseExited
         // TODO add your handling code here:
-        jLabel4.setFont(new java.awt.Font("Coco Gothic", 3, 14));
-    }//GEN-LAST:event_jLabel4MouseExited
+    }//GEN-LAST:event_usernameLabelMouseExited
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -380,41 +396,45 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jButton8.setContentAreaFilled(true);
     }//GEN-LAST:event_jButton8MouseEntered
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        RegistroDeReserva rr = new RegistroDeReserva();
+    private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
+        RegistroDeReserva rr = new RegistroDeReserva(bed);
         this.dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_regReservaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ListadoDeUnCurso lduc = new ListadoDeUnCurso();
+    private void listCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listCursoActionPerformed
+        ListadoDeUnCurso lduc = new ListadoDeUnCurso(bed);
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_listCursoActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ListadoDeUnDia ldud = new ListadoDeUnDia();
+    private void listDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listDiaActionPerformed
+        ListadoDeUnDia ldud = new ListadoDeUnDia(bed);
         this.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_listDiaActionPerformed
 
+    private void popupActionPerformed (java.awt.event.ActionEvent evt){
+        this.dispose();
+        Principal p = new Principal();
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscarAula;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton listCurso;
+    private javax.swing.JButton listDia;
     private javax.swing.JPopupMenu popup;
+    private javax.swing.JButton regReserva;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
