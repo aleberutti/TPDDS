@@ -45,15 +45,13 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         listCurso = new javax.swing.JButton();
         buscarAula = new javax.swing.JButton();
         regReserva = new javax.swing.JButton();
         usernameLabel = new javax.swing.JLabel();
         listDia = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        minish = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         popup.setBackground(new java.awt.Color(55, 64, 70));
         popup.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -89,46 +87,6 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("¿Qué desea hacer?");
-
-        jButton1.setBackground(new java.awt.Color(55, 64, 70));
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(55, 64, 70));
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setFocusable(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton2MouseExited(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         listCurso.setBackground(new java.awt.Color(158, 158, 158));
         listCurso.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -183,45 +141,45 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(55, 64, 70));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/diminish.png"))); // NOI18N
-        jButton8.setBorder(null);
-        jButton8.setBorderPainted(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setFocusPainted(false);
-        jButton8.setFocusable(false);
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+        minish.setBackground(new java.awt.Color(55, 64, 70));
+        minish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/diminish.png"))); // NOI18N
+        minish.setBorder(null);
+        minish.setBorderPainted(false);
+        minish.setContentAreaFilled(false);
+        minish.setFocusPainted(false);
+        minish.setFocusable(false);
+        minish.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton8MouseEntered(evt);
+                minishMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton8MouseExited(evt);
+                minishMouseExited(evt);
             }
         });
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        minish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                minishActionPerformed(evt);
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(55, 64, 70));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/closed.png"))); // NOI18N
-        jButton9.setBorder(null);
-        jButton9.setBorderPainted(false);
-        jButton9.setContentAreaFilled(false);
-        jButton9.setFocusPainted(false);
-        jButton9.setFocusable(false);
-        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+        exit.setBackground(new java.awt.Color(55, 64, 70));
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closed.png"))); // NOI18N
+        exit.setBorder(null);
+        exit.setBorderPainted(false);
+        exit.setContentAreaFilled(false);
+        exit.setFocusPainted(false);
+        exit.setFocusable(false);
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton9MouseEntered(evt);
+                exitMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton9MouseExited(evt);
+                exitMouseExited(evt);
             }
         });
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
 
@@ -244,13 +202,9 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(minish, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -269,10 +223,8 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(minish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -308,36 +260,6 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        // TODO add your handling code here:
-        jButton1.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton1MouseEntered
-
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        // TODO add your handling code here:
-        jButton1.setContentAreaFilled(false);
-    }//GEN-LAST:event_jButton1MouseExited
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        // TODO add your handling code here:
-        jButton2.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton2MouseEntered
-
-    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        // TODO add your handling code here:
-        jButton2.setContentAreaFilled(false);
-    }//GEN-LAST:event_jButton2MouseExited
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void buscarAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAulaActionPerformed
         BuscarAulas ba = new BuscarAulas(bed);
         this.dispose();
@@ -366,35 +288,35 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameLabelMouseExited
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_exitActionPerformed
 
-    private void jButton9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseExited
+    private void exitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseExited
         // TODO add your handling code here:
-        jButton9.setContentAreaFilled(false);
-    }//GEN-LAST:event_jButton9MouseExited
+        exit.setContentAreaFilled(false);
+    }//GEN-LAST:event_exitMouseExited
 
-    private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
+    private void exitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseEntered
         // TODO add your handling code here:
-        jButton9.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton9MouseEntered
+        exit.setContentAreaFilled(true);
+    }//GEN-LAST:event_exitMouseEntered
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void minishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minishActionPerformed
         // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_minishActionPerformed
 
-    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
+    private void minishMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minishMouseExited
         // TODO add your handling code here:
-        jButton8.setContentAreaFilled(false);
-    }//GEN-LAST:event_jButton8MouseExited
+        minish.setContentAreaFilled(false);
+    }//GEN-LAST:event_minishMouseExited
 
-    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
+    private void minishMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minishMouseEntered
         // TODO add your handling code here:
-        jButton8.setContentAreaFilled(true);
-    }//GEN-LAST:event_jButton8MouseEntered
+        minish.setContentAreaFilled(true);
+    }//GEN-LAST:event_minishMouseEntered
 
     private void regReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regReservaActionPerformed
         RegistroDeReserva rr = new RegistroDeReserva(bed);
@@ -421,10 +343,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarAula;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -433,6 +352,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton listCurso;
     private javax.swing.JButton listDia;
+    private javax.swing.JButton minish;
     private javax.swing.JPopupMenu popup;
     private javax.swing.JButton regReserva;
     private javax.swing.JLabel usernameLabel;
