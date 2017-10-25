@@ -44,7 +44,7 @@ public class ConfirmacionGuardarCambios extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(55, 64, 70));
-        jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setFocusable(false);
