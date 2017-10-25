@@ -68,17 +68,17 @@ public class GestorDeBedel {
     public String validar(String username, String name, String last, String email, String id, String turno, JPasswordField pass1, JPasswordField pass2){
         String contra="", contra2="";
         char a;
-        for (int i=0; i<pass2.getPassword().length; i++){
-            a= pass2.getPassword()[i];
-            contra = contra + a;
-        }
         for (int i=0; i<pass1.getPassword().length; i++){
             a= pass1.getPassword()[i];
+            contra = contra + a;
+        }
+        for (int i=0; i<pass2.getPassword().length; i++){
+            a= pass2.getPassword()[i];
             contra2 = contra2 + a;
         }
         int idAux = parseInt(id);
-        if (this.matchPass(contra, contra2)){
-            if (this.validarPass(contra)){
+        if (this.validarPass(contra)){
+            if (this.matchPass(contra, contra2)){
                 List lista = new ArrayList();
                 try{
                 UsuarioDAO ud = new UsuarioDAO();
@@ -93,11 +93,24 @@ public class GestorDeBedel {
                             return "coincidencia";
                     }
                 }
+                try{
+                UsuarioDAO ud = new UsuarioDAO();
+                lista = ud.readAllUsernames();
+                }catch(Exception e){
+                    e.printStackTrace();
+                    ErrorBbdd eb = new ErrorBbdd();
+                }
+                if (!lista.isEmpty()){
+                    for (int i=0; i<lista.size(); i++){
+                        if (lista.get(i).equals(username))
+                            return "errorusername";
+                    }
+                }
             }else{
-                return "politicas";
+                return "confirmacion";
             }
         }else{
-            return "confirmacion";
+            return "politicas";
         }
         Clave c = new Clave(pc, contra);
         Usuario u = new Usuario(idAux, c, username, name, last);

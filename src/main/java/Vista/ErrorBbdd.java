@@ -23,6 +23,14 @@ public class ErrorBbdd extends javax.swing.JFrame {
         this.setVisible(true);
         this.setAlwaysOnTop(true);
     }
+    
+    public ErrorBbdd(String asd){
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setAlwaysOnTop(true);
+        this.jLabel4.setText(asd);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

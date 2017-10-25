@@ -9,12 +9,12 @@ package Vista;
  *
  * @author azuli
  */
-public class ErrorRegistrarBedel extends javax.swing.JFrame {
+public class ErrorNombreUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistrarBedelError
      */
-    public ErrorRegistrarBedel() {
+    public ErrorNombreUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -47,7 +47,7 @@ public class ErrorRegistrarBedel extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Ya existe un bedel registrado con ese ID.");
+        jLabel4.setText("Ya existe un bedel registrado con ese nombre de usuario.");
 
         jButton1.setBackground(new java.awt.Color(158, 158, 158));
         jButton1.setFont(new java.awt.Font("Coco Gothic", 0, 14)); // NOI18N
@@ -62,12 +62,12 @@ public class ErrorRegistrarBedel extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
             .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(165, 165, 165)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

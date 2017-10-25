@@ -74,6 +74,23 @@ public class UsuarioDAO extends GenericDAO{
         }
     }
     
+    public List<String> readAllUsernames(){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT nombreUsuario FROM usuario;";
+        Query query = SS.createSQLQuery(sentencia);
+        List<String> lista = query.list();
+        if (lista.isEmpty()){
+            SS.getTransaction().commit();
+            SS.close();
+            return new ArrayList();
+        }else{
+            SS.getTransaction().commit();
+            SS.close();
+            return lista;
+        }
+    }
+    
     public ArrayList readAllUserPass(){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
@@ -147,5 +164,5 @@ public class UsuarioDAO extends GenericDAO{
         SS.close();
         return claves;
     }
-        
+    
 }

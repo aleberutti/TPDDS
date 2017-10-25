@@ -8,6 +8,7 @@ package Vista;
 import Controlador.GestorDeBedel;
 import Modelo.Admin;
 import Modelo.Politicascontrasenia;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,7 +27,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
     GestorDeBedel gdb = new GestorDeBedel();
     Admin adm;
     Politicascontrasenia pc;
-    int cont=0;
     
     public RegistrarBedel(Admin adm) {
         initComponents();
@@ -127,28 +127,23 @@ public class RegistrarBedel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(55, 64, 70));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre:");
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Apellido:");
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("ID:");
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Turno:");
 
         jLabelContrasenia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabelContrasenia.setForeground(new java.awt.Color(255, 255, 255));
         jLabelContrasenia.setText("Contraseña:");
         jLabelContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -157,20 +152,27 @@ public class RegistrarBedel extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Confirmar Contraseña:");
 
-        aceptar.setBackground(new java.awt.Color(158, 158, 158));
-        aceptar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        aceptar.setBackground(new java.awt.Color(204, 204, 204));
+        aceptar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         aceptar.setText("Aceptar");
         aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceptarActionPerformed(evt);
             }
         });
+        aceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                aceptarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                aceptarKeyTyped(evt);
+            }
+        });
 
-        cancelar.setBackground(new java.awt.Color(158, 158, 158));
-        cancelar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        cancelar.setBackground(new java.awt.Color(204, 204, 204));
+        cancelar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         cancelar.setText("Cancelar");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,42 +180,97 @@ public class RegistrarBedel extends javax.swing.JFrame {
             }
         });
 
-        pass2.setBackground(new java.awt.Color(55, 64, 70));
-        pass2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        pass2.setForeground(new java.awt.Color(255, 255, 255));
+        pass2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        pass2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pass2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                pass2FocusLost(evt);
+            }
+        });
+        pass2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pass2KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pass2KeyTyped(evt);
+            }
+        });
 
-        name.setBackground(new java.awt.Color(55, 64, 70));
-        name.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        name.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nameFocusLost(evt);
+            }
+        });
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nameKeyTyped(evt);
+            }
+        });
 
-        last.setBackground(new java.awt.Color(55, 64, 70));
-        last.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        last.setForeground(new java.awt.Color(255, 255, 255));
+        last.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        last.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        last.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastFocusLost(evt);
+            }
+        });
+        last.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lastKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lastKeyTyped(evt);
+            }
+        });
 
-        id.setBackground(new java.awt.Color(55, 64, 70));
-        id.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        id.setForeground(new java.awt.Color(255, 255, 255));
+        id.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        id.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idFocusLost(evt);
+            }
+        });
         id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idActionPerformed(evt);
             }
         });
         id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                idKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 idKeyTyped(evt);
             }
         });
 
-        pass1.setBackground(new java.awt.Color(55, 64, 70));
-        pass1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        pass1.setForeground(new java.awt.Color(255, 255, 255));
+        pass1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        pass1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pass1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                pass1FocusLost(evt);
+            }
+        });
+        pass1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pass1KeyPressed(evt);
+            }
+        });
 
-        turno.setBackground(new java.awt.Color(55, 64, 70));
-        turno.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        turno.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         turno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Mañana", "Tarde", "Noche" }));
+        turno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                turnoFocusLost(evt);
+            }
+        });
 
         politic.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        politic.setForeground(new java.awt.Color(255, 255, 255));
         politic.setLabelFor(pass1);
         politic.setText("Debe poseer como mínimo 8 caracteres");
         politic.setAutoscrolls(true);
@@ -222,19 +279,21 @@ public class RegistrarBedel extends javax.swing.JFrame {
         politic.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Registrar bedel");
 
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Nombre de usuario:");
 
-        username.setBackground(new java.awt.Color(55, 64, 70));
-        username.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        username.setForeground(new java.awt.Color(255, 255, 255));
+        username.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        username.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 usernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFocusLost(evt);
             }
         });
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -242,17 +301,26 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
+        username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                usernameKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Email:");
 
-        email.setBackground(new java.awt.Color(55, 64, 70));
-        email.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        email.setForeground(new java.awt.Color(255, 255, 255));
+        email.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        email.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 emailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFocusLost(evt);
             }
         });
         email.addActionListener(new java.awt.event.ActionListener() {
@@ -260,9 +328,16 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                emailKeyTyped(evt);
+            }
+        });
 
         digito.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        digito.setForeground(new java.awt.Color(255, 255, 255));
         digito.setLabelFor(pass1);
         digito.setText("Dígito");
         digito.setAutoscrolls(true);
@@ -271,7 +346,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         digito.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         cntener.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        cntener.setForeground(new java.awt.Color(255, 255, 255));
         cntener.setLabelFor(pass1);
         cntener.setText("Contener:");
         cntener.setAutoscrolls(true);
@@ -280,7 +354,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         cntener.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         sign.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        sign.setForeground(new java.awt.Color(255, 255, 255));
         sign.setLabelFor(pass1);
         sign.setText("Signos especiales (@#$%&*)");
         sign.setAutoscrolls(true);
@@ -289,7 +362,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         sign.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         passIg.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        passIg.setForeground(new java.awt.Color(255, 255, 255));
         passIg.setLabelFor(pass1);
         passIg.setText("Además no debe coincidir con una contraseña anterior.");
         passIg.setAutoscrolls(true);
@@ -298,7 +370,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         passIg.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         letraM.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        letraM.setForeground(new java.awt.Color(255, 255, 255));
         letraM.setLabelFor(pass1);
         letraM.setText("Letra mayúscula,");
         letraM.setAutoscrolls(true);
@@ -307,7 +378,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         letraM.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         y.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        y.setForeground(new java.awt.Color(255, 255, 255));
         y.setLabelFor(pass1);
         y.setText("y");
         y.setAutoscrolls(true);
@@ -316,7 +386,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         y.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         backButton.setBackground(new java.awt.Color(55, 64, 70));
-        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/back-left-arrow-circular-button-outline.png"))); // NOI18N
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back-left-arrow-circular-button-outline.png"))); // NOI18N
         backButton.setBorder(null);
         backButton.setBorderPainted(false);
         backButton.setContentAreaFilled(false);
@@ -337,7 +407,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         });
 
         minimizeButton.setBackground(new java.awt.Color(55, 64, 70));
-        minimizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/diminish.png"))); // NOI18N
+        minimizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/diminish.png"))); // NOI18N
         minimizeButton.setBorder(null);
         minimizeButton.setBorderPainted(false);
         minimizeButton.setContentAreaFilled(false);
@@ -358,7 +428,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         });
 
         exitButton.setBackground(new java.awt.Color(55, 64, 70));
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/closed.png"))); // NOI18N
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closed.png"))); // NOI18N
         exitButton.setBorder(null);
         exitButton.setBorderPainted(false);
         exitButton.setContentAreaFilled(false);
@@ -394,42 +464,45 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     .addComponent(name, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(username, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pass2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel7))
-                            .addComponent(passIg)
-                            .addComponent(jLabelContrasenia)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6)
-                            .addComponent(politic, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(35, 35, 35)
+                                        .addComponent(jLabel7))
+                                    .addComponent(passIg)
+                                    .addComponent(jLabelContrasenia)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel6)
+                                    .addComponent(politic, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cntener)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(letraM)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(digito)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(y)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(sign)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cntener)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(letraM)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(digito)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(y)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sign)))
-                        .addGap(0, 165, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(25, 25, 25)
                         .addComponent(minimizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -443,9 +516,9 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(backButton)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
@@ -561,6 +634,17 @@ public class RegistrarBedel extends javax.swing.JFrame {
                         }
                     });
                 break;
+                case "errorusername":
+                    esta.setAlwaysOnTop(true);
+                    ErrorNombreUsuario enu = new ErrorNombreUsuario();
+                    esta.setEnabled(false);
+                    enu.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.setEnabled(true);
+                            esta.username.requestFocus();
+                        }
+                    });
+                break;
             }
         }else{
             RegistrarBedel esta = this;
@@ -577,28 +661,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        if (!(gdb.camposVacios(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2))){
-            RegistrarBedel esta=this;
-            esta.setAlwaysOnTop(true);
-            ConfirmacionCancelarModificar ccm = new ConfirmacionCancelarModificar();
-            esta.setEnabled(false);
-            ccm.getCancelar().addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                esta.setEnabled(true);
-                esta.username.requestFocus();
-            }
-            });
-            ccm.getConfirmar().addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                esta.dispose();
-                OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
-            }
-            });
-        }else{
-            this.dispose();
-            OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
-        }
-        
+        this.verificarCamposCancelar();
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
@@ -622,7 +685,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_idActionPerformed
 
     private void idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyTyped
-        if (!(evt.getKeyChar()>=48 && evt.getKeyChar()<=57) || cont>3)
+        if (!(evt.getKeyChar()>=48 && evt.getKeyChar()<=57) || this.id.getText().length()>8)
             evt.consume();
     }//GEN-LAST:event_idKeyTyped
 
@@ -641,7 +704,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonMouseExited
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        this.verificarCamposCancelar();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
@@ -674,6 +737,206 @@ public class RegistrarBedel extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    private void aceptarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarKeyTyped
+        
+    }//GEN-LAST:event_aceptarKeyTyped
+
+    private void aceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_aceptarKeyPressed
+
+    private void usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_usernameKeyPressed
+
+    private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+            this.name.setText(name.getText()+" ");
+        }
+        switch (evt.getKeyCode()){
+            case 96:
+                this.name.setText(name.getText()+96);
+                break;
+            case 130:
+                this.name.setText(name.getText()+130);
+                break;
+            case 160:
+                this.name.setText(name.getText()+160);
+                break;
+            case 161:
+                this.name.setText(name.getText()+161);
+                break;
+            case 162:
+                this.name.setText(name.getText()+162);
+                break;
+            case 163:
+                this.name.setText(name.getText()+163);
+                break;
+        }
+    }//GEN-LAST:event_nameKeyPressed
+
+    private void lastKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_lastKeyPressed
+
+    private void emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_emailKeyPressed
+
+    private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_idKeyPressed
+
+    private void pass1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_pass1KeyPressed
+
+    private void pass2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.doClick();
+        }
+    }//GEN-LAST:event_pass2KeyPressed
+
+    private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)))
+            evt.consume();
+    }//GEN-LAST:event_nameKeyTyped
+
+    private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyCode() == KeyEvent.VK_SPACE) || (evt.getKeyCode() == 96) || (evt.getKeyCode()>=160 && evt.getKeyCode()<=163) || (evt.getKeyCode() == 130)))
+            evt.consume();
+    }//GEN-LAST:event_lastKeyTyped
+
+    private void usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameKeyTyped
+
+    private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailKeyTyped
+
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+        if (!this.email.getText().contains("@") || (this.email.getText().isEmpty())){
+            this.email.setBackground(new Color(255, 138, 128));
+        }else{
+            this.email.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_emailFocusLost
+
+    private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
+        String contra="";
+        char a;
+        for (int i=0; i<pass1.getPassword().length; i++){
+            a= pass1.getPassword()[i];
+            contra = contra + a;
+        }
+        if (!gdb.validarPass(contra)){
+            this.pass1.setBackground(new Color(255, 138, 128));
+        }else{
+            this.pass1.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_pass1FocusLost
+
+    private void pass2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pass2KeyTyped
+
+    private void pass2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusLost
+        String contra="", contra2="";
+        char a;
+        for (int i=0; i<pass1.getPassword().length; i++){
+            a= pass1.getPassword()[i];
+            contra = contra + a;
+        }
+        for (int i=0; i<pass2.getPassword().length; i++){
+            a= pass2.getPassword()[i];
+            contra2 = contra2 + a;
+        }
+        if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
+            this.pass2.setBackground(new Color(255, 138, 128));
+        }else{
+            this.pass2.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_pass2FocusLost
+
+    private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
+        if (this.username.getText().isEmpty()){
+            this.username.setBackground(new Color(255, 138, 128));
+        }else{
+            this.username.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_usernameFocusLost
+
+    private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
+        if (this.name.getText().isEmpty()){
+            this.name.setBackground(new Color(255, 138, 128));
+        }else{
+            this.name.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_nameFocusLost
+
+    private void lastFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastFocusLost
+        if (this.last.getText().isEmpty()){
+            this.last.setBackground(new Color(255, 138, 128));
+        }else{
+            this.last.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_lastFocusLost
+
+    private void idFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFocusLost
+        if (this.id.getText().isEmpty()){
+            this.id.setBackground(new Color(255, 138, 128));
+        }else{
+            this.id.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_idFocusLost
+
+    private void turnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_turnoFocusLost
+        if (this.turno.getSelectedItem().toString().isEmpty()){
+            this.turno.setBackground(new Color(255, 138, 128));
+        }else{
+            this.turno.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_turnoFocusLost
+
+    public void verificarCamposCancelar(){
+        if (!(gdb.camposVacios(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2))){
+            RegistrarBedel esta=this;
+            esta.setAlwaysOnTop(true);
+            ConfirmacionCancelarModificar ccm = new ConfirmacionCancelarModificar();
+            esta.setEnabled(false);
+            ccm.getCancelar().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                esta.setEnabled(true);
+                esta.username.requestFocus();
+            }
+            });
+            ccm.getConfirmar().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                esta.dispose();
+                OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
+            }
+            });
+        }else{
+            this.dispose();
+            OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
+        }
+    }
     /**
      * @param args the command line arguments
      */
