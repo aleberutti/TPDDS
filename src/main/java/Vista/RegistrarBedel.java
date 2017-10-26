@@ -651,6 +651,13 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     }
                     turn = turn.toUpperCase();
                     gdb.registrarBedel(c, u, turn, email.getText().toUpperCase());
+                    RegistroExitoso re = new RegistroExitoso();
+                    re.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.dispose();
+                            OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
+                        }
+                    });
 //                    ConfirmacionGuardarCambios cgc = new ConfirmacionGuardarCambios(adm);
 //                    cgc.getCancelar().addActionListener(new ActionListener(){
 //                    public void actionPerformed(ActionEvent e){
@@ -828,7 +835,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_nameKeyTyped
 
     private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyCode() == KeyEvent.VK_SPACE) || (evt.getKeyCode() == 96) || (evt.getKeyCode()>=160 && evt.getKeyCode()<=163) || (evt.getKeyCode() == 130)))
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)))
             evt.consume();
     }//GEN-LAST:event_lastKeyTyped
 
