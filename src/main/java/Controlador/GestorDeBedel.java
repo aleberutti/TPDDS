@@ -5,11 +5,20 @@
  */
 package Controlador;
 
+import Modelo.Admin;
 import Modelo.Bedel;
 import Modelo.Clave;
 import Modelo.Politicascontrasenia;
 import Modelo.Usuario;
+import Vista.ConfirmacionGuardarCambios;
 import Vista.ErrorBbdd;
+import Vista.OpcionesDelAdministrador;
+import Vista.RegistrarBedel;
+import Vista.RegistroExitoso;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +91,19 @@ public class GestorDeBedel {
                 List lista = new ArrayList();
                 try{
                 UsuarioDAO ud = new UsuarioDAO();
+                lista = ud.readAllUsernames();
+                }catch(Exception e){
+                    e.printStackTrace();
+                    ErrorBbdd eb = new ErrorBbdd();
+                }
+                if (!lista.isEmpty()){
+                    for (int i=0; i<lista.size(); i++){
+                        if (lista.get(i).equals(username.toUpperCase()))
+                            return "errorusername";
+                    }
+                }
+                try{
+                UsuarioDAO ud = new UsuarioDAO();
                 lista = ud.readAll();
                 }catch(Exception e){
                     e.printStackTrace();
@@ -93,28 +115,12 @@ public class GestorDeBedel {
                             return "coincidencia";
                     }
                 }
-                try{
-                UsuarioDAO ud = new UsuarioDAO();
-                lista = ud.readAllUsernames();
-                }catch(Exception e){
-                    e.printStackTrace();
-                    ErrorBbdd eb = new ErrorBbdd();
-                }
-                if (!lista.isEmpty()){
-                    for (int i=0; i<lista.size(); i++){
-                        if (lista.get(i).equals(username))
-                            return "errorusername";
-                    }
-                }
             }else{
                 return "confirmacion";
             }
         }else{
             return "politicas";
         }
-        Clave c = new Clave(pc, contra);
-        Usuario u = new Usuario(idAux, c, username, name, last);
-        this.registrarBedel(c, u, turno, email);
         return "exito";
     }
 
