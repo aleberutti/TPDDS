@@ -98,7 +98,7 @@ public class GestorDeBedel {
                 }
                 if (!lista.isEmpty()){
                     for (int i=0; i<lista.size(); i++){
-                        if (lista.get(i).equals(username.toUpperCase()))
+                        if (lista.get(i).equals(username))
                             return "errorusername";
                     }
                 }

@@ -644,7 +644,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     }
                     Clave c = new Clave(pc, contra);
                     int idAux = parseInt(id.getText());
-                    Usuario u = new Usuario(idAux, c, username.getText().toUpperCase(), name.getText().toUpperCase(), last.getText().toUpperCase());
+                    Usuario u = new Usuario(idAux, c, username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase());
                     String turn = turno.getSelectedItem().toString();
                     if (turn.equals("Mañana")){
                         turn = "Maniana";
