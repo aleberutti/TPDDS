@@ -7,24 +7,30 @@ package Controlador;
 
 import Vista.Autenticacion;
 import Vista.ErrorBbdd;
-
+import Vista.Logos;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Fausto
  */
+
+
+
 public class Principal {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+
+        Logos cp = new Logos();
+        cp.setVisible(true);
         try{
         UsuarioDAO ud = new UsuarioDAO();
         Autenticacion au = new Autenticacion(ud.readAllUserPass());
         }catch(Exception e){
             e.printStackTrace();
+            cp.setVisible(false);
             ErrorBbdd eb = new ErrorBbdd();
         }
+        cp.setVisible(false);
     }
     
 }
