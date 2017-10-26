@@ -125,58 +125,64 @@ public class GestorDeBedel {
     }
 
     public boolean validarPass(String pass){
-        boolean flag = false;
-        if (pass.length()>=pc.getLongMin()){
-            flag = true;
-            if (pc.isSignosEspeciales()){
-                boolean flagAux = false;
-                for (int i=0; i<pass.length(); i++){
-                    if (pass.charAt(i)=='$' || pass.charAt(i)=='%' || pass.charAt(i)=='&' || pass.charAt(i)=='*' || pass.charAt(i)=='@' || pass.charAt(i)=='#' || pass.charAt(i)=='(' || pass.charAt(i)==')'){
-                        flagAux = true;
-                    }
+        boolean flagAux = false;
+        if (!(pass.length()>=pc.getLongMin())){
+            System.out.println("Length");
+            return false;
+        }
+        if (pc.isSignosEspeciales()){
+            System.out.println("Signos");
+            for (int i=0; i<pass.length(); i++){
+                if (pass.charAt(i)=='$' || pass.charAt(i)=='%' || pass.charAt(i)=='&' || pass.charAt(i)=='*' || pass.charAt(i)=='@' || pass.charAt(i)=='#' || pass.charAt(i)=='(' || pass.charAt(i)==')'){
+                    flagAux = true;
                 }
-                if (!flagAux){
-                    return false;
-                }if (pc.isDigito()){
-                    flagAux = false;
-                    for (int i=0; i<pass.length(); i++){
-                        if (pass.charAt(i)>=48 && pass.charAt(i)<=57){
-                            flagAux = true;
-                        }
-                    }
-                    if (!flagAux){
+            }
+            if (!flagAux){
+                return false;
+            }
+        }if (pc.isDigito()){
+            System.out.println("Digito");
+            flagAux = false;
+            for (int i=0; i<pass.length(); i++){
+                if (pass.charAt(i)>=48 && pass.charAt(i)<=57){
+                    flagAux = true;
+                }
+            }
+            if (!flagAux){
+                return false;
+            }
+        }
+        if(pc.isLetraMay()){
+            System.out.println("LetraMay");
+            flagAux = false;
+            for (int i=0; i<pass.length(); i++){
+                if (pass.charAt(i)>=65 && pass.charAt(i)<=90){
+                    flagAux = true;
+                }
+            }
+            if (!flagAux){
+                return false;
+            }
+        }
+        if(pc.isPassIgual()){
+            List claves = new ArrayList();
+            try{
+            UsuarioDAO ud = new UsuarioDAO();
+            claves = ud.getAllClaves();
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!claves.isEmpty()){
+                for (int i=0; i<claves.size(); i++){
+                    System.out.println(claves.get(i) + " - " + pass);
+                    if (claves.get(i).equals(pass)){
                         return false;
-                    }if(pc.isLetraMay()){
-                        flagAux = false;
-                        for (int i=0; i<pass.length(); i++){
-                            if (pass.charAt(i)>=48 && pass.charAt(i)<=57){
-                                flagAux = true;
-                            }
-                        }
-                        if (!flagAux){
-                            return false;
-                        }if(!pc.isPassIgual()){
-                            flagAux = true;
-                            List claves = new ArrayList();
-                            try{
-                            UsuarioDAO ud = new UsuarioDAO();
-                            claves = ud.getAllClaves();
-                            }catch(Exception e){
-                                e.printStackTrace();
-                                ErrorBbdd eb = new ErrorBbdd();
-                            }
-                            for (int i=0; i<claves.size(); i++){
-                                if (claves.get(i).equals(pass)){
-                                    flagAux = false;
-                                }
-                            }
-                            return flagAux;
-                        }
                     }
                 }
             }
         }
-        return flag;
+        return true;
     }
 
     public void eliminarBedel(Bedel b){
