@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 /**
@@ -45,6 +46,11 @@ public class ErrorCamposVacios extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setFocusable(false);
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel2KeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -57,6 +63,11 @@ public class ErrorCamposVacios extends javax.swing.JFrame {
         aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceptarActionPerformed(evt);
+            }
+        });
+        aceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                aceptarKeyPressed(evt);
             }
         });
 
@@ -109,6 +120,18 @@ public class ErrorCamposVacios extends javax.swing.JFrame {
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         this.dispose();
     }//GEN-LAST:event_aceptarActionPerformed
+
+    private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jPanel2KeyPressed
+
+    private void aceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_aceptarKeyPressed
 
     /**
      * @param args the command line arguments

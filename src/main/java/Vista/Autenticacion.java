@@ -54,16 +54,16 @@ public class Autenticacion extends javax.swing.JFrame {
                 this.dispose();
                 OpcionesDelAdministrador ad= new OpcionesDelAdministrador((Admin)us);
             }else{
-                Autenticacion esta=this;
-                esta.setAlwaysOnTop(true);
-                ErrorDeAutenticacion eda = new ErrorDeAutenticacion();
-                esta.setEnabled(false);
-                eda.addWindowListener(new WindowAdapter(){
-                    public void windowClosed(WindowEvent e){
-                        esta.setEnabled(true);
-                        esta.user.requestFocus();
-                    }
-                });
+//                Autenticacion esta=this;
+//                esta.setAlwaysOnTop(true);
+//                ErrorDeAutenticacion eda = new ErrorDeAutenticacion();
+//                esta.setEnabled(false);
+//                eda.addWindowListener(new WindowAdapter(){
+//                    public void windowClosed(WindowEvent e){
+//                        esta.setEnabled(true);
+//                        esta.user.requestFocus();
+//                    }
+//                });
             }
         }
         

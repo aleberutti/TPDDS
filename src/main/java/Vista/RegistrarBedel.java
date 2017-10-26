@@ -7,13 +7,16 @@ package Vista;
 
 import Controlador.GestorDeBedel;
 import Modelo.Admin;
+import Modelo.Clave;
 import Modelo.Politicascontrasenia;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import static java.lang.Integer.parseInt;
 
 /**
  *
@@ -24,15 +27,16 @@ public class RegistrarBedel extends javax.swing.JFrame {
     /**
      * Creates new form RegistrarBedel
      */
-    GestorDeBedel gdb = new GestorDeBedel();
     Admin adm;
+    GestorDeBedel gdb;
     Politicascontrasenia pc;
     
     public RegistrarBedel(Admin adm) {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        setPoliticas();     
+        gdb = new GestorDeBedel();
+        this.setPoliticas();
         this.adm=adm;
     }
     
@@ -177,6 +181,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarActionPerformed(evt);
+            }
+        });
+        cancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cancelarKeyPressed(evt);
             }
         });
 
@@ -592,15 +601,15 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        RegistrarBedel esta=this;
+        this.setAlwaysOnTop(true);
+        this.setEnabled(false);
         if (gdb.camposLlenos(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2)){
             String validacion;
             validacion = gdb.validar(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2);
-            RegistrarBedel esta=this;
             switch (validacion){
                 case "confirmacion":
-                    esta.setAlwaysOnTop(true);
                     ErrorCoincidenciaContraseñas ecc = new ErrorCoincidenciaContraseñas();
-                    esta.setEnabled(false);
                     ecc.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
                             esta.setEnabled(true);
@@ -609,9 +618,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     });
                 break;
                 case "politicas":
-                    esta.setAlwaysOnTop(true);
                     ErrorCondicionesDeContraseñas eccoi = new ErrorCondicionesDeContraseñas();
-                    esta.setEnabled(false);
                     eccoi.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
                             esta.setEnabled(true);
@@ -620,9 +627,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     });
                 break;
                 case "coincidencia":
-                    esta.setAlwaysOnTop(true);
                     ErrorRegistrarBedel erb = new ErrorRegistrarBedel();
-                    esta.setEnabled(false);
                     erb.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
                             esta.setEnabled(true);
@@ -631,20 +636,45 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     });
                 break;
                 case "exito":
-                    esta.setAlwaysOnTop(true);
+                    String contra="";
+                    char a;
+                    for (int i=0; i<pass1.getPassword().length; i++){
+                        a= pass1.getPassword()[i];
+                        contra = contra + a;
+                    }
+                    Clave c = new Clave(pc, contra);
+                    int idAux = parseInt(id.getText());
+                    Usuario u = new Usuario(idAux, c, username.getText().toUpperCase(), name.getText().toUpperCase(), last.getText().toUpperCase());
+                    String turn = turno.getSelectedItem().toString();
+                    if (turn.equals("Mañana")){
+                        turn = "Maniana";
+                    }
+                    turn = turn.toUpperCase();
+                    gdb.registrarBedel(c, u, turn, email.getText().toUpperCase());
                     RegistroExitoso re = new RegistroExitoso();
-                    esta.setEnabled(false);
                     re.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
                             esta.dispose();
                             OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
                         }
                     });
+//                    ConfirmacionGuardarCambios cgc = new ConfirmacionGuardarCambios(adm);
+//                    cgc.getCancelar().addActionListener(new ActionListener(){
+//                    public void actionPerformed(ActionEvent e){
+//                        System.out.println("Cancelo.");
+//                        esta.setEnabled(true);
+//                    }
+//                    });
+//                    System.out.println("Ve confirmar.");
+//                    cgc.getConfirmar().addActionListener(new ActionListener(){
+//                        public void actionPerformed(ActionEvent e){
+//                            System.out.println("Confirmo.");
+//                            esta.registrarBedel(c, u, turn, email.getText().toUpperCase());
+//                        }
+//                    });
                 break;
                 case "errorusername":
-                    esta.setAlwaysOnTop(true);
                     ErrorNombreUsuario enu = new ErrorNombreUsuario();
-                    esta.setEnabled(false);
                     enu.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
                             esta.setEnabled(true);
@@ -654,10 +684,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 break;
             }
         }else{
-            RegistrarBedel esta = this;
-            esta.setAlwaysOnTop(true);
             ErrorCamposVacios ecv = new ErrorCamposVacios();
-            esta.setEnabled(false);
             ecv.addWindowListener(new WindowAdapter(){
                 public void windowClosed(WindowEvent e){
                     esta.setEnabled(true);
@@ -666,7 +693,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_aceptarActionPerformed
-
+    
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         this.verificarCamposCancelar();
     }//GEN-LAST:event_cancelarActionPerformed
@@ -767,31 +794,14 @@ public class RegistrarBedel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
             this.name.setText(name.getText()+" ");
         }
-        switch (evt.getKeyCode()){
-            case 96:
-                this.name.setText(name.getText()+96);
-                break;
-            case 130:
-                this.name.setText(name.getText()+130);
-                break;
-            case 160:
-                this.name.setText(name.getText()+160);
-                break;
-            case 161:
-                this.name.setText(name.getText()+161);
-                break;
-            case 162:
-                this.name.setText(name.getText()+162);
-                break;
-            case 163:
-                this.name.setText(name.getText()+163);
-                break;
-        }
     }//GEN-LAST:event_nameKeyPressed
 
     private void lastKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.aceptar.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+            this.last.setText(last.getText()+" ");
         }
     }//GEN-LAST:event_lastKeyPressed
 
@@ -825,7 +835,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_nameKeyTyped
 
     private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyCode() == KeyEvent.VK_SPACE) || (evt.getKeyCode() == 96) || (evt.getKeyCode()>=160 && evt.getKeyCode()<=163) || (evt.getKeyCode() == 130)))
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)))
             evt.consume();
     }//GEN-LAST:event_lastKeyTyped
 
@@ -838,7 +848,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_emailKeyTyped
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
-        if (!this.email.getText().contains("@") || (this.email.getText().isEmpty())){
+        if (!this.email.getText().contains("@") || !this.email.getText().contains(".") || (this.email.getText().isEmpty())){
             this.email.setBackground(new Color(255, 138, 128));
         }else{
             this.email.setBackground(Color.white);
@@ -920,6 +930,12 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.turno.setBackground(Color.white);
         }
     }//GEN-LAST:event_turnoFocusLost
+
+    private void cancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.cancelar.doClick();
+        }
+    }//GEN-LAST:event_cancelarKeyPressed
 
     public void verificarCamposCancelar(){
         if (!(gdb.camposVacios(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2))){
