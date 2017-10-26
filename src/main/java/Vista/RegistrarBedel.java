@@ -809,11 +809,17 @@ public class RegistrarBedel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.aceptar.doClick();
         }
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+            evt.consume();
+        }
     }//GEN-LAST:event_emailKeyPressed
 
     private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.aceptar.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+            evt.consume();
         }
     }//GEN-LAST:event_idKeyPressed
 

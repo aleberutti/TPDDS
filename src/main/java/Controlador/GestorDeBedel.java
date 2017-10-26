@@ -175,7 +175,6 @@ public class GestorDeBedel {
             }
             if (!claves.isEmpty()){
                 for (int i=0; i<claves.size(); i++){
-                    System.out.println(claves.get(i) + " - " + pass);
                     if (claves.get(i).equals(pass)){
                         return false;
                     }

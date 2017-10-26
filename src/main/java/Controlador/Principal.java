@@ -27,10 +27,10 @@ public class Principal {
         Autenticacion au = new Autenticacion(ud.readAllUserPass());
         }catch(Exception e){
             e.printStackTrace();
-            cp.setVisible(false);
+            cp.dispose();
             ErrorBbdd eb = new ErrorBbdd();
         }
-        cp.setVisible(false);
+        cp.dispose();
     }
     
 }
