@@ -636,21 +636,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     });
                 break;
                 case "exito":
-                    String contra="";
-                    char a;
-                    for (int i=0; i<pass1.getPassword().length; i++){
-                        a= pass1.getPassword()[i];
-                        contra = contra + a;
-                    }
-                    Clave c = new Clave(pc, contra);
-                    int idAux = parseInt(id.getText());
-                    Usuario u = new Usuario(idAux, c, username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase());
-                    String turn = turno.getSelectedItem().toString();
-                    if (turn.equals("Mañana")){
-                        turn = "Maniana";
-                    }
-                    turn = turn.toUpperCase();
-                    gdb.registrarBedel(c, u, turn, email.getText().toUpperCase());
                     RegistroExitoso re = new RegistroExitoso();
                     re.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
@@ -658,20 +643,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
                             OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
                         }
                     });
-//                    ConfirmacionGuardarCambios cgc = new ConfirmacionGuardarCambios(adm);
-//                    cgc.getCancelar().addActionListener(new ActionListener(){
-//                    public void actionPerformed(ActionEvent e){
-//                        System.out.println("Cancelo.");
-//                        esta.setEnabled(true);
-//                    }
-//                    });
-//                    System.out.println("Ve confirmar.");
-//                    cgc.getConfirmar().addActionListener(new ActionListener(){
-//                        public void actionPerformed(ActionEvent e){
-//                            System.out.println("Confirmo.");
-//                            esta.registrarBedel(c, u, turn, email.getText().toUpperCase());
-//                        }
-//                    });
                 break;
                 case "errorusername":
                     ErrorNombreUsuario enu = new ErrorNombreUsuario();
@@ -862,11 +833,20 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_emailFocusLost
 
     private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
-        String contra="";
+        String contra="", contra2="";
         char a;
         for (int i=0; i<pass1.getPassword().length; i++){
             a= pass1.getPassword()[i];
             contra = contra + a;
+        }
+        for (int i=0; i<pass2.getPassword().length; i++){
+            a= pass2.getPassword()[i];
+            contra2 = contra2 + a;
+        }
+        if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
+            this.pass2.setBackground(new Color(255, 138, 128));
+        }else{
+            this.pass2.setBackground(Color.white);
         }
         if (!gdb.validarPass(contra)){
             this.pass1.setBackground(new Color(255, 138, 128));

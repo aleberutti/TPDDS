@@ -121,6 +121,12 @@ public class GestorDeBedel {
         }else{
             return "politicas";
         }
+        Clave c = new Clave(pc, contra);
+        Usuario u = new Usuario(idAux, c, username, name.toUpperCase(), last.toUpperCase());
+        if (turno.equals("Mañana")){
+            turno = "Maniana";
+        }
+        this.registrarBedel(c, u, turno.toUpperCase(), email.toUpperCase());
         return "exito";
     }
 
