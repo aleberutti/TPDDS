@@ -53,11 +53,15 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         minimizeButton = new javax.swing.JButton();
 
-        popup.setBackground(new java.awt.Color(55, 64, 70));
-        popup.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        popup.setBackground(new java.awt.Color(204, 204, 204));
+        popup.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        popup.setToolTipText("");
+        popup.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        popup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        popup.setPreferredSize(new java.awt.Dimension(125, 30));
 
-        jMenuItem1.setBackground(new java.awt.Color(55, 64, 70));
-        jMenuItem1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jMenuItem1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuItem1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jMenuItem1.setText("Cerrar sesión");
         jMenuItem1.setToolTipText("");
         jMenuItem1.setBorder(null);
@@ -278,7 +282,10 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+                popup.setVisible(false);
+                this.dispose();
+                Principal p = new Principal();
+                p.main(null);      
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
@@ -339,7 +346,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton minimizeButton;
-    private javax.swing.JPopupMenu popup;
+    public javax.swing.JPopupMenu popup;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }
