@@ -79,6 +79,11 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -110,9 +115,19 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setText("Usted ha ingresado como:");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 3, 16)); // NOI18N
         jLabel3.setText("administrador");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         usernameLabel.setFont(new java.awt.Font("Century Gothic", 3, 16)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(204, 204, 255));
@@ -135,6 +150,11 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 25)); // NOI18N
         jLabel5.setText("¿Qué desea hacer?");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         exitButton.setBackground(new java.awt.Color(55, 64, 70));
         exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closed.png"))); // NOI18N
@@ -257,7 +277,6 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameLabelMouseEntered
 
     private void usernameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseClicked
-        // TODO add your handling code here:
         popup.setLocation(evt.getLocationOnScreen());
 	popup.setVisible(true);
         OpcionesDelAdministrador esta = this;
@@ -282,10 +301,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-                popup.setVisible(false);
-                this.dispose();
-                Principal p = new Principal();
-                p.main(null);      
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
@@ -331,6 +347,22 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_minimizeButtonActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        this.popup.setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        this.popup.setVisible(false);
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.popup.setVisible(false);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.popup.setVisible(false);
+    }//GEN-LAST:event_jLabel1MouseClicked
   
     /**
      * @param args the command line arguments
