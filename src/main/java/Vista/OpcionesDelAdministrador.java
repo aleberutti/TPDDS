@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,6 +27,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
      */
     public OpcionesDelAdministrador(Admin adm) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.usernameLabel.setText(adm.getUsuario().getNombreUsuario());
@@ -216,7 +218,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
+                                .addGap(80, 80, 80)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,7 +228,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(usernameLabel)))
-                        .addGap(0, 99, Short.MAX_VALUE)))
+                        .addGap(0, 70, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -297,8 +299,8 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BuscarBedel bb = new BuscarBedel(adm);
-        this.dispose();
+//        BuscarBedel bb = new BuscarBedel(adm);
+//        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

@@ -14,6 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 
 
@@ -31,12 +32,14 @@ public class Autenticacion extends javax.swing.JFrame {
     
     public Autenticacion() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
     public Autenticacion(List uap){
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.uap=uap;
@@ -140,6 +143,11 @@ public class Autenticacion extends javax.swing.JFrame {
                 userActionPerformed(evt);
             }
         });
+        user.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                userKeyPressed(evt);
+            }
+        });
 
         pass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pass.setText("123456789");
@@ -229,17 +237,11 @@ public class Autenticacion extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,6 +362,11 @@ public class Autenticacion extends javax.swing.JFrame {
             ingresoSistema();
         }
     }//GEN-LAST:event_ingresarKeyPressed
+
+    private void userKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            ingresoSistema();
+    }//GEN-LAST:event_userKeyPressed
 
     /**
      * @param args the command line arguments
