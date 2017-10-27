@@ -277,6 +277,7 @@ public class OpcionesDelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameLabelMouseEntered
 
     private void usernameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameLabelMouseClicked
+
         popup.setLocation(evt.getLocationOnScreen());
 	popup.setVisible(true);
         OpcionesDelAdministrador esta = this;
