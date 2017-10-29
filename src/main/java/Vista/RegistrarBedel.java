@@ -93,8 +93,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         
     }
     
-    public String getTurno(){
-        String turn = turno.getSelectedItem().toString();
+    public static String getTurno(String turn){
         if (turn.equals("Mañana")){
             return "Maniana".toUpperCase();
         }else{
@@ -587,7 +586,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(backButton)))
-                        .addGap(58, 58, 58))
+                        .addGap(61, 61, 61))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
@@ -667,10 +666,10 @@ public class RegistrarBedel extends javax.swing.JFrame {
         this.setEnabled(false);
         String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
         if (gdb.camposLlenos(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2)){
-            int validacion = gdb.validar(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2);
+            int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2);
             switch (validacion){
                 case 0:
-                    gdb.guardar(pc, contra, parseInt(id.getText()), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), getTurno(), email.getText().toUpperCase());
+                    gdb.guardar(pc, contra, parseInt(id.getText()), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase());
                     RegistroExitoso re = new RegistroExitoso();
                     re.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
@@ -828,7 +827,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
-        if (this.username.getText().length()>14){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
             evt.consume();
         }
     }//GEN-LAST:event_usernameKeyPressed
@@ -841,9 +840,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
             this.name.setText(name.getText()+" ");
         }
-        if (this.name.getText().length()>19){
-            evt.consume();
-        }
     }//GEN-LAST:event_nameKeyPressed
 
     private void lastKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyPressed
@@ -853,9 +849,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         }
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
             this.last.setText(last.getText()+" ");
-        }
-        if (this.last.getText().length()>19){
-            evt.consume();
         }
     }//GEN-LAST:event_lastKeyPressed
 
@@ -904,7 +897,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_lastKeyTyped
 
     private void usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyTyped
-        if (this.username.getText().length()>34){
+        if (this.username.getText().length()>14){
             evt.consume();
         }
     }//GEN-LAST:event_usernameKeyTyped

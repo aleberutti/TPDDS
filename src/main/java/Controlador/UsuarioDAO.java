@@ -42,6 +42,7 @@ public class UsuarioDAO extends GenericDAO{
         if (u.equals(b.getClass())){
             b = (Bedel) SS.get(Bedel.class, id);
             Hibernate.initialize(b.getUsuario());
+            Hibernate.initialize(b.getUsuario().getClave());
             SS.getTransaction().commit();
             SS.close();
             return b;
@@ -49,6 +50,7 @@ public class UsuarioDAO extends GenericDAO{
         if (u.equals(adm.getClass())){
             adm = (Admin) SS.get(Admin.class, id);
             Hibernate.initialize(adm.getUsuario()); //Para que cargue lo definido en el lazy load
+            Hibernate.initialize(adm.getUsuario().getClave());
             SS.getTransaction().commit();
             SS.close();
             return adm;

@@ -31,15 +31,19 @@ import javax.swing.JPasswordField;
 public class GestorDeBedel {
 
     Politicascontrasenia pc;
+    UsuarioDAO ud;
+    ClaveDAO cd;
     
     public GestorDeBedel() {
-        try{
         PoliticasContraseniaDAO pcd = new PoliticasContraseniaDAO();
-        this.pc = pcd.read();
+        try{
+            this.pc = pcd.read();
         }catch(Exception e){
             e.printStackTrace();
             ErrorBbdd eb = new ErrorBbdd();
         }
+        ud = new UsuarioDAO();
+        cd = new ClaveDAO();
     }
     
     public void seleccionarOpcion(){
@@ -71,10 +75,10 @@ public class GestorDeBedel {
     }
 
     public void guardarModificacion(){
-
+        
     }
 
-    public int validar(String username, String name, String last, String email, String id, String turno, String contra, String contra2){
+    public int validar(String username, String email, String id, String contra, String contra2){
         //    0 Correcto
         //    1 errorusername
         //    2 emailInvalido
@@ -93,14 +97,14 @@ public class GestorDeBedel {
         if (!(us == null)){
             return 1;
         }
+        if (!email.contains("@") || !email.contains("."))
+            return 2;
         try{
             us = ud.read(Usuario.class, idAux);
         }catch(Exception e){
             e.printStackTrace();
             ErrorBbdd eb = new ErrorBbdd();
         }
-        if (!email.contains("@") || !email.contains("."))
-            return 2;
         if (!(us == null))
             return 3;
         if (!(this.validarPass(contra) == 0)){
@@ -187,8 +191,30 @@ public class GestorDeBedel {
         return ap.equals(pass);
     }
 
-    public void modificarDatosBedel(Bedel b){
-
+    public void modificarDatosBedel(Politicascontrasenia pc, String pass, Clave c, String username, String name, String last, Usuario us, String turno, String email, Bedel b){
+        if (!(c.getValor().equals(pass) && c.getPoliticascontrasenia().equals(pc))){
+            Clave nueva = new Clave(c.getClaveId(), pass, pc, us);
+            try{
+                cd.update(nueva);
+            }catch (Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+        }
+        if (!(us.getNombreUsuario().equals(username) && us.getNombre().equals(name) && us.getApellido().equals(last))){
+            Usuario u = new Usuario(us.getUserId(), c, username, name, last);
+            try{
+            ud.update(u);
+            }catch (Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+        }
+        if (!(b.getTurno().equals(turno) && b.getEmail().equals(email))){
+            Bedel nuevo = new Bedel(us, turno, email);
+            ud.update(nuevo);
+        }
+        
     }
 
     public void guardar(Politicascontrasenia pc, String pass, int id, String username, String name, String last, String turno, String email){
@@ -199,8 +225,6 @@ public class GestorDeBedel {
     
     public void registrarBedel(Clave c, Usuario u, String turno, String email){
         try{
-            ClaveDAO cd = new ClaveDAO();
-            UsuarioDAO ud = new UsuarioDAO();
             cd.create(c);
             ud.create(u);
             cd.update(c, u);

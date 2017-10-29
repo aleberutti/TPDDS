@@ -23,7 +23,15 @@ public class Clave  implements java.io.Serializable {
     public Clave() {
     }
 
-	
+    public Clave (Integer id, String valor, Politicascontrasenia pc, Usuario us){
+        this.claveId = id;
+        this.valor = valor;
+        this.politicascontrasenia = pc;
+        this.usuario = us;
+        this.fecha = new Date();
+        this.hora = new Date();
+    }
+    
     public Clave(Politicascontrasenia politicascontrasenia, String valor, Date fecha, Date hora) {
         this.politicascontrasenia = politicascontrasenia;
         this.valor = valor;
