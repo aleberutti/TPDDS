@@ -34,6 +34,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     Admin adm;
     GestorDeBedel gdb;
     Politicascontrasenia pc;
+    final static Color ROJOERROR = new Color(255, 138, 128);
     
     public RegistrarBedel(Admin adm) {
         initComponents();
@@ -200,8 +201,16 @@ public class RegistrarBedel extends javax.swing.JFrame {
         pass2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         pass2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pass2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pass2FocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 pass2FocusLost(evt);
+            }
+        });
+        pass2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pass2MouseEntered(evt);
             }
         });
         pass2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -220,6 +229,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 nameFocusLost(evt);
             }
         });
+        name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nameMouseEntered(evt);
+            }
+        });
         name.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nameKeyPressed(evt);
@@ -236,6 +250,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 lastFocusLost(evt);
             }
         });
+        last.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lastMouseEntered(evt);
+            }
+        });
         last.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 lastKeyPressed(evt);
@@ -248,6 +267,9 @@ public class RegistrarBedel extends javax.swing.JFrame {
         id.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         id.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                idFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 idFocusLost(evt);
             }
@@ -274,13 +296,24 @@ public class RegistrarBedel extends javax.swing.JFrame {
         pass1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         pass1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pass1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pass1FocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 pass1FocusLost(evt);
+            }
+        });
+        pass1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pass1MouseEntered(evt);
             }
         });
         pass1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 pass1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pass1KeyTyped(evt);
             }
         });
 
@@ -289,6 +322,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
         turno.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 turnoFocusLost(evt);
+            }
+        });
+        turno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                turnoMouseEntered(evt);
             }
         });
 
@@ -349,6 +387,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 emailFocusLost(evt);
+            }
+        });
+        email.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                emailMouseEntered(evt);
             }
         });
         email.addActionListener(new java.awt.event.ActionListener() {
@@ -622,40 +665,12 @@ public class RegistrarBedel extends javax.swing.JFrame {
         RegistrarBedel esta=this;
         this.setAlwaysOnTop(true);
         this.setEnabled(false);
-        if (gdb.camposLlenos(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2)){
-            String validacion = gdb.validar(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2);
+        String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
+        if (gdb.camposLlenos(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2)){
+            int validacion = gdb.validar(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2);
             switch (validacion){
-                case "confirmacion":
-                    ErrorCoincidenciaContraseñas ecc = new ErrorCoincidenciaContraseñas();
-                    ecc.addWindowListener(new WindowAdapter(){
-                        public void windowClosed(WindowEvent e){
-                            esta.setEnabled(true);
-                            esta.username.requestFocus();
-                        }
-                    });
-                break;
-                case "politicas":
-                    ErrorCondicionesDeContraseñas eccoi = new ErrorCondicionesDeContraseñas();
-                    eccoi.addWindowListener(new WindowAdapter(){
-                        public void windowClosed(WindowEvent e){
-                            esta.setEnabled(true);
-                            esta.username.requestFocus();
-                        }
-                    });
-                break;
-                case "coincidencia":
-                    ErrorRegistrarBedel erb = new ErrorRegistrarBedel();
-                    erb.addWindowListener(new WindowAdapter(){
-                        public void windowClosed(WindowEvent e){
-                            esta.setEnabled(true);
-                            esta.username.requestFocus();
-                        }
-                    });
-                break;
-                case "exito":
-                    Clave cl = gdb.newClave(pc, String.valueOf(pass1.getPassword())); // PASAR A GESTORDEBEDEL
-                    Usuario u = gdb.newUser(parseInt(id.getText()), cl, username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase());
-                    gdb.registrarBedel(cl, u, getTurno(), email.getText().toUpperCase());
+                case 0:
+                    gdb.guardar(pc, contra, parseInt(id.getText()), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), getTurno(), email.getText().toUpperCase());
                     RegistroExitoso re = new RegistroExitoso();
                     re.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
@@ -663,13 +678,49 @@ public class RegistrarBedel extends javax.swing.JFrame {
                             OpcionesDelAdministrador opc = new OpcionesDelAdministrador(adm);
                         }
                     });
-                break;
-                case "errorusername":
+                    break;
+                case 1:
                     ErrorNombreUsuario enu = new ErrorNombreUsuario();
                     enu.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){
                             esta.setEnabled(true);
                             esta.username.requestFocus();
+                        }
+                    });
+                    break;
+                case 2:
+                    ErrorEmail ee = new ErrorEmail();
+                    ee.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.setEnabled(true);
+                            esta.email.requestFocus();
+                        }
+                    });
+                    break;
+                case 3:
+                    ErrorRegistrarBedel erb = new ErrorRegistrarBedel();
+                    erb.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.setEnabled(true);
+                            esta.id.requestFocus();
+                        }
+                    });
+                    break;
+                case 4:
+                    ErrorCondicionesDeContraseñas eccoi = new ErrorCondicionesDeContraseñas();
+                    eccoi.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.setEnabled(true);
+                            esta.pass1.requestFocus();
+                        }
+                    });
+                    break;
+                case 5:
+                    ErrorCoincidenciaContraseñas ecc = new ErrorCoincidenciaContraseñas();
+                    ecc.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.setEnabled(true);
+                            esta.pass2.requestFocus();
                         }
                     });
                 break;
@@ -698,7 +749,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFocusGained
 
     private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
-        // TODO add your handling code here:
+        this.setAlwaysOnTop(false);
     }//GEN-LAST:event_emailFocusGained
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
@@ -710,7 +761,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_idActionPerformed
 
     private void idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyTyped
-        if (!(evt.getKeyChar()>=48 && evt.getKeyChar()<=57) || this.id.getText().length()>8)
+        if (!(evt.getKeyChar()>=48 && evt.getKeyChar()<=57) || this.id.getText().length()>10)
             evt.consume();
     }//GEN-LAST:event_idKeyTyped
 
@@ -774,30 +825,43 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
+        }
+        if (this.username.getText().length()>14){
+            evt.consume();
         }
     }//GEN-LAST:event_usernameKeyPressed
 
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
             this.name.setText(name.getText()+" ");
         }
+        if (this.name.getText().length()>19){
+            evt.consume();
+        }
     }//GEN-LAST:event_nameKeyPressed
 
     private void lastKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
             this.last.setText(last.getText()+" ");
         }
+        if (this.last.getText().length()>19){
+            evt.consume();
+        }
     }//GEN-LAST:event_lastKeyPressed
 
     private void emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
@@ -807,6 +871,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
         if (evt.getKeyCode() == KeyEvent.VK_SPACE){
@@ -816,37 +881,43 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void pass1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass1KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
     }//GEN-LAST:event_pass1KeyPressed
 
     private void pass2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
     }//GEN-LAST:event_pass2KeyPressed
 
     private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)))
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)) || this.name.getText().length()>19)
             evt.consume();
     }//GEN-LAST:event_nameKeyTyped
 
     private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)))
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)) || this.last.getText().length()>19)
             evt.consume();
     }//GEN-LAST:event_lastKeyTyped
 
     private void usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyTyped
-        // TODO add your handling code here:
+        if (this.username.getText().length()>34){
+            evt.consume();
+        }
     }//GEN-LAST:event_usernameKeyTyped
 
     private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
-        // TODO add your handling code here:
+        if (this.email.getText().length()>34){
+            evt.consume();
+        }
     }//GEN-LAST:event_emailKeyTyped
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
         if (!this.email.getText().contains("@") || !this.email.getText().contains(".") || (this.email.getText().isEmpty())){
-            this.email.setBackground(new Color(255, 138, 128));
+            this.email.setBackground(ROJOERROR);
         }else{
             this.email.setBackground(Color.white);
         }
@@ -854,65 +925,57 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!gdb.validarPass(contra)){
-            this.pass1.setBackground(new Color(255, 138, 128));
+        if (!(gdb.validarPass(contra) == 0)){
+            this.pass1.setBackground(ROJOERROR);
         }else{
             this.pass1.setBackground(Color.white);
         }
         if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
-            this.pass2.setBackground(new Color(255, 138, 128));
+            this.pass2.setBackground(ROJOERROR);
         }else{
             this.pass2.setBackground(Color.white);
         }
     }//GEN-LAST:event_pass1FocusLost
 
     private void pass2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyTyped
-        // TODO add your handling code here:
+        if (String.valueOf(pass2.getPassword()).length()>29){
+            evt.consume();
+        }
     }//GEN-LAST:event_pass2KeyTyped
 
     private void pass2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
         if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
-            this.pass2.setBackground(new Color(255, 138, 128));
+            this.pass2.setBackground(ROJOERROR);
         }else{
             this.pass2.setBackground(Color.white);
         }
     }//GEN-LAST:event_pass2FocusLost
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        List lista = new ArrayList();
-        try{
-            UsuarioDAO ud = new UsuarioDAO();
-            lista = ud.readAllUsernames();
-        }catch(Exception e){
-            e.printStackTrace();
-            ErrorBbdd eb = new ErrorBbdd();
-        }
-        if (!lista.isEmpty()){
-            for (int i=0; i<lista.size(); i++){
-                if (lista.get(i).equals(username.getText())){
-                    this.username.setBackground(new Color(255, 138, 128));
-                }else{
-                    if (this.username.getText().isEmpty()){
-                        this.username.setBackground(new Color(255, 138, 128));
-                    }else{
-                        this.username.setBackground(Color.white);
-                    }
-                }
-            }
+        if (this.username.getText().isEmpty()){
+            this.username.setBackground(ROJOERROR);
         }else{
-            if (this.username.getText().isEmpty()){
-                this.username.setBackground(new Color(255, 138, 128));
-            }else{
+            Usuario us = new Usuario();
+            try{
+                UsuarioDAO ud = new UsuarioDAO();
+                us = ud.readUsername(this.username.getText());
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!(us == null)){
+                this.username.setBackground(ROJOERROR);
+            }
+            else{
                 this.username.setBackground(Color.white);
             }
-            this.username.setBackground(Color.white);
         }
     }//GEN-LAST:event_usernameFocusLost
 
     private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
         if (this.name.getText().isEmpty()){
-            this.name.setBackground(new Color(255, 138, 128));
+            this.name.setBackground(ROJOERROR);
         }else{
             this.name.setBackground(Color.white);
         }
@@ -920,36 +983,27 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void lastFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastFocusLost
         if (this.last.getText().isEmpty()){
-            this.last.setBackground(new Color(255, 138, 128));
+            this.last.setBackground(ROJOERROR);
         }else{
             this.last.setBackground(Color.white);
         }
     }//GEN-LAST:event_lastFocusLost
 
     private void idFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFocusLost
-        List lista = new ArrayList();
-        try{
-            UsuarioDAO ud = new UsuarioDAO();
-            lista = ud.readAll();
-        }catch(Exception e){
+        if (this.id.getText().isEmpty()){
+            this.id.setBackground(ROJOERROR);
+        }else{
+            Usuario us = new Usuario();
+            int idAux = parseInt(id.getText());
+            try{
+                UsuarioDAO ud = new UsuarioDAO();
+                us = ud.read(Usuario.class, idAux);
+            }catch(Exception e){
                 e.printStackTrace();
                 ErrorBbdd eb = new ErrorBbdd();
-        }
-        if(!lista.isEmpty()){
-            for (int i=0; i<lista.size(); i++){
-                if (this.id.getText().isEmpty()){
-                    this.id.setBackground(new Color(255, 138, 128));
-                }else{
-                    if (lista.get(i).equals(parseInt(id.getText()))){
-                        this.id.setBackground(new Color(255, 138, 128));
-                    }else{
-                        this.id.setBackground(Color.white);
-                    }
-                }
             }
-        }else{
-            if (this.id.getText().isEmpty()){
-                this.id.setBackground(new Color(255, 138, 128));
+            if (!(us == null)){
+                this.id.setBackground(ROJOERROR);
             }else{
                 this.id.setBackground(Color.white);
             }
@@ -958,7 +1012,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
     private void turnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_turnoFocusLost
         if (this.turno.getSelectedItem().toString().isEmpty()){
-            this.turno.setBackground(new Color(255, 138, 128));
+            this.turno.setBackground(ROJOERROR);
         }else{
             this.turno.setBackground(Color.white);
         }
@@ -971,11 +1025,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarKeyPressed
 
     private void usernameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseEntered
-        if(this.username.getBackground().equals(new Color(255, 138, 128)) && !this.username.getText().isEmpty()){
+        if(this.username.getBackground().equals(ROJOERROR) && !this.username.getText().isEmpty()){
             username.setToolTipText("El nombre de usuario ya existe.");
         }
         else{
-            if(this.username.getBackground().equals(new Color(255, 138, 128)) && this.username.getText().isEmpty()){
+            if(this.username.getBackground().equals(ROJOERROR)){
                 username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
             }else{
                 username.setToolTipText("");
@@ -984,11 +1038,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameMouseEntered
 
     private void idMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMouseEntered
-        if(this.id.getBackground().equals(new Color(255, 138, 128)) && !this.id.getText().isEmpty()){
+        if(this.id.getBackground().equals(ROJOERROR) && !this.id.getText().isEmpty()){
             id.setToolTipText("El ID ya existe.");
         }
         else{
-            if(this.id.getBackground().equals(new Color(255, 138, 128)) && this.id.getText().isEmpty()){
+            if(this.id.getBackground().equals(ROJOERROR) && this.id.getText().isEmpty()){
                 id.setToolTipText("No puede utilizarse un ID vacío.");
             }else{
                 id.setToolTipText("");
@@ -996,8 +1050,105 @@ public class RegistrarBedel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_idMouseEntered
 
+    private void pass1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass1KeyTyped
+        if (String.valueOf(pass1.getPassword()).length()>29){
+            evt.consume();
+        }
+    }//GEN-LAST:event_pass1KeyTyped
+
+    private void nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseEntered
+        if(this.name.getBackground().equals(ROJOERROR)){
+            name.setToolTipText("No puede utilizarse un nombre vacío.");
+        }else{
+            name.setToolTipText("");
+        }
+    }//GEN-LAST:event_nameMouseEntered
+
+    private void lastMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseEntered
+        if(this.last.getBackground().equals(ROJOERROR)){
+            last.setToolTipText("No puede utilizarse un apellido vacío.");
+        }else{
+            last.setToolTipText("");
+        }
+    }//GEN-LAST:event_lastMouseEntered
+
+    private void emailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseEntered
+        if(this.email.getBackground().equals(ROJOERROR) && this.email.getText().isEmpty()){
+            email.setToolTipText("No puede utilizarse un correo electrónico vacío.");
+        }else{
+            if (this.email.getBackground().equals(ROJOERROR)){
+                email.setToolTipText("El correo electrónico especificado no es válido.");
+            }else{
+                email.setToolTipText("");
+            }
+        }
+    }//GEN-LAST:event_emailMouseEntered
+
+    private void turnoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turnoMouseEntered
+        if(this.turno.getBackground().equals(ROJOERROR)){
+            turno.setToolTipText("No puede utilizarse un turno vacío.");
+        }else{
+            turno.setToolTipText("");
+        }
+    }//GEN-LAST:event_turnoMouseEntered
+
+    private void pass1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass1MouseEntered
+        String passtring = String.valueOf(pass1.getPassword());
+        if(this.pass1.getBackground().equals(ROJOERROR) && passtring.isEmpty()){
+            pass1.setToolTipText("No puede utilizarse una contraseña vacío.");
+        }else{
+            if(this.pass1.getBackground().equals(ROJOERROR)){
+                int error = gdb.validarPass(passtring);
+                switch (error){
+                    case 1:
+                        pass1.setToolTipText("La contraseña es demasiado corta.");
+                        break;
+                    case 2:
+                        pass1.setToolTipText("La contraseña no contiene signos especiales.");
+                        break;
+                    case 3:
+                        pass1.setToolTipText("La contraseña no contiene dígito.");
+                        break;
+                    case 4:
+                        pass1.setToolTipText("La contraseña no contiene letra mayúscula.");
+                        break;
+                    case 5:
+                        pass1.setToolTipText("La contraseña ya existe.");
+                        break;
+                }
+            }else{
+                pass1.setToolTipText("");
+            }
+        }
+    }//GEN-LAST:event_pass1MouseEntered
+
+    private void pass2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass2MouseEntered
+        if(this.pass2.getBackground().equals(ROJOERROR) && String.valueOf(pass2.getPassword()).isEmpty()){
+            pass2.setToolTipText("Debe confirmar la contraseña.");
+        }else{
+            if(this.pass2.getBackground().equals(ROJOERROR)){
+                pass2.setToolTipText("Las contraseñas no coinciden.");
+            }else{
+                pass2.setToolTipText("");
+            }
+        }
+    }//GEN-LAST:event_pass2MouseEntered
+
+    private void idFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFocusGained
+        this.setAlwaysOnTop(false);
+    }//GEN-LAST:event_idFocusGained
+
+    private void pass1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusGained
+        this.setAlwaysOnTop(false);
+    }//GEN-LAST:event_pass1FocusGained
+
+    private void pass2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusGained
+        this.setAlwaysOnTop(false);
+    }//GEN-LAST:event_pass2FocusGained
+
     public void verificarCamposCancelar(){
-        if (!(gdb.camposVacios(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), pass1, pass2))){
+        String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
+        if (!(gdb.camposVacios(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2))){
             RegistrarBedel esta=this;
             esta.setAlwaysOnTop(true);
             ConfirmacionCancelarModificar ccm = new ConfirmacionCancelarModificar();

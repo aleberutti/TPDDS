@@ -45,17 +45,44 @@ public class UsuarioDAO extends GenericDAO{
             SS.getTransaction().commit();
             SS.close();
             return b;
-        }if (u.equals(adm.getClass())){
+        }
+        if (u.equals(adm.getClass())){
             adm = (Admin) SS.get(Admin.class, id);
             Hibernate.initialize(adm.getUsuario()); //Para que cargue lo definido en el lazy load
             SS.getTransaction().commit();
             SS.close();
             return adm;
         }else{
-            //ERROR
-            return new Usuario();
+            Usuario us = new Usuario();
+            if (u.equals(us.getClass())){
+                us = (Usuario) SS.get(Usuario.class, id);
+                SS.getTransaction().commit();
+                SS.close();
+                return us;
+            }
+            SS.getTransaction().commit();
+            SS.close();
+            return us;
         }
     }
+    
+    public Usuario readUsername (String username){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM usuario U WHERE U.nombreUsuario='" + username + "';";
+        Query query = SS.createSQLQuery(sentencia).addEntity(Usuario.class);
+        List<Usuario> lista = query.list();
+        if (lista.isEmpty()){
+            SS.getTransaction().commit();
+            SS.close();
+            return null;
+        }else{
+            SS.getTransaction().commit();
+            SS.close();
+            return lista.get(0);
+        }
+    }
+    
     
     public List<Integer> readAll(){
         SS = HU.getSessionFactory().openSession();

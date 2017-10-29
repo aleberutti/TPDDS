@@ -31,6 +31,23 @@ public class ClaveDAO extends GenericDAO{
         SS.close();
     }
     
+    public Clave readPass (String pass){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM clave C WHERE C.valor='" + pass + "';";
+        Query query = SS.createSQLQuery(sentencia).addEntity(Clave.class);
+        List<Clave> lista = query.list();
+        if (lista.isEmpty()){
+            SS.getTransaction().commit();
+            SS.close();
+            return null;
+        }else{
+            SS.getTransaction().commit();
+            SS.close();
+            return lista.get(0);
+        }
+    }
+    
     public void update(Clave c, Usuario u){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();

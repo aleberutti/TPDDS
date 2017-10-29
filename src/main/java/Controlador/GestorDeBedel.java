@@ -74,81 +74,43 @@ public class GestorDeBedel {
 
     }
 
-    public String validar(String username, String name, String last, String email, String id, String turno, JPasswordField pass1, JPasswordField pass2){
-        String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
+    public int validar(String username, String name, String last, String email, String id, String turno, String contra, String contra2){
+        //    0 Correcto
+        //    1 errorusername
+        //    2 emailInvalido
+        //    3 coincidenciaID
+        //    4 politicas
+        //    5 Confirmacion
         int idAux = parseInt(id);
-        List lista = new ArrayList();
+        Usuario us = new Usuario();
+        UsuarioDAO ud = new UsuarioDAO();
         try{
-            UsuarioDAO ud = new UsuarioDAO();
-            lista = ud.readAllUsernames(); //PASAR PARAMETRO PARA BUSCAR SI EXISTE - DEVOLVER OBJETOS USUARIO
+            us = ud.readUsername(username);
         }catch(Exception e){
             e.printStackTrace();
             ErrorBbdd eb = new ErrorBbdd();
         }
-        if (!lista.isEmpty()){
-            for (int i=0; i<lista.size(); i++){
-                if (lista.get(i).equals(username))
-                    return "errorusername";
-            }
+        if (!(us == null)){
+            return 1;
         }
         try{
-            UsuarioDAO ud = new UsuarioDAO();
-            lista = ud.readAll();
+            us = ud.read(Usuario.class, idAux);
         }catch(Exception e){
             e.printStackTrace();
             ErrorBbdd eb = new ErrorBbdd();
         }
-        if(!lista.isEmpty()){
-            for (int i=0; i<lista.size(); i++){
-                if (lista.get(i).equals(idAux))
-                    return "coincidencia";
-            }
-        }
-        if (!this.validarPass(contra)){
-            return "politicas";
+        if (!email.contains("@") || !email.contains("."))
+            return 2;
+        if (!(us == null))
+            return 3;
+        if (!(this.validarPass(contra) == 0)){
+            return 4;
         }
         if (!this.matchPass(contra, contra2)){
-            return "confirmacion";
+            return 5;
         }
-        return "exito";
+        return 0;
     }
-//        if (this.validarPass(contra)){
-//            if (this.matchPass(contra, contra2)){
-//                List lista = new ArrayList();
-//                try{
-//                UsuarioDAO ud = new UsuarioDAO();
-//                lista = ud.readAllUsernames();
-//                }catch(Exception e){
-//                    e.printStackTrace();
-//                    ErrorBbdd eb = new ErrorBbdd();
-//                }
-//                if (!lista.isEmpty()){
-//                    for (int i=0; i<lista.size(); i++){
-//                        if (lista.get(i).equals(username))
-//                            return "errorusername";
-//                    }
-//                }
-//                try{
-//                UsuarioDAO ud = new UsuarioDAO();
-//                lista = ud.readAll();
-//                }catch(Exception e){
-//                    e.printStackTrace();
-//                    ErrorBbdd eb = new ErrorBbdd();
-//                }
-//                if(!lista.isEmpty()){
-//                    for (int i=0; i<lista.size(); i++){
-//                        if (lista.get(i).equals(idAux))
-//                            return "coincidencia";
-//                    }
-//                }
-//            }else{
-//                return "confirmacion";
-//            }
-//        }else{
-//            return "politicas";
-//        }
-//        return "exito";
-//    }
     
     public Usuario newUser(int id, Clave cl, String username, String name, String last){
         Usuario u = new Usuario(id, cl, username, name, last);
@@ -160,19 +122,26 @@ public class GestorDeBedel {
         return C;
     }
 
-    public boolean validarPass(String pass){
+    public int validarPass(String pass){
+        //    0 Correcta
+        //    1 MinLength
+        //    2 SignosEspeciales
+        //    3 Digito
+        //    4 LetraMay
+        //    5 Repetida
         boolean flagAux = false;
         if (!(pass.length()>=pc.getLongMin())){
-            return false;
+            return 1;
         }
         if (pc.isSignosEspeciales()){
             if (pass.contains("$") || pass.contains("%") || pass.contains("&") || pass.contains("*") || pass.contains("@") || pass.contains("#") || pass.contains("(") || pass.contains(")")){
                 flagAux = true;
             }
             if (!flagAux){
-                return false;
+                return 2;
             }
-        }if (pc.isDigito()){
+        }
+        if (pc.isDigito()){
             flagAux = false;
             for (int i=0; i<pass.length(); i++){
                 if (pass.charAt(i)>=48 && pass.charAt(i)<=57){
@@ -180,10 +149,10 @@ public class GestorDeBedel {
                 }
             }
             if (!flagAux){
-                return false;
+                return 3;
             }
         }
-        if(pc.isLetraMay()){;
+        if(pc.isLetraMay()){
             flagAux = false;
             for (int i=0; i<pass.length(); i++){
                 if (pass.charAt(i)>=65 && pass.charAt(i)<=90){
@@ -191,27 +160,23 @@ public class GestorDeBedel {
                 }
             }
             if (!flagAux){
-                return false;
+                return 4;
             }
         }
         if(pc.isPassIgual()){
-            List claves = new ArrayList();
+            Clave rdo = new Clave();
             try{
-            UsuarioDAO ud = new UsuarioDAO();
-            claves = ud.getAllClaves();
+            ClaveDAO cd = new ClaveDAO();
+            rdo = cd.readPass(pass);
             }catch(Exception e){
                 e.printStackTrace();
                 ErrorBbdd eb = new ErrorBbdd();
             }
-            if (!claves.isEmpty()){
-                for (int i=0; i<claves.size(); i++){
-                    if (claves.get(i).equals(pass)){
-                        return false;
-                    }
-                }
+            if (!(rdo == null)){
+                return 5;
             }
         }
-        return true;
+        return 0;
     }
 
     public void eliminarBedel(Bedel b){
@@ -226,6 +191,12 @@ public class GestorDeBedel {
 
     }
 
+    public void guardar(Politicascontrasenia pc, String pass, int id, String username, String name, String last, String turno, String email){
+        Clave cl = this.newClave(pc, pass);
+        Usuario u = this.newUser(id, cl, username, name, last);
+        this.registrarBedel(cl, u, turno, email);
+    }
+    
     public void registrarBedel(Clave c, Usuario u, String turno, String email){
         try{
             ClaveDAO cd = new ClaveDAO();
@@ -241,18 +212,13 @@ public class GestorDeBedel {
         }
     }
 
-    public boolean camposVacios(String username, String name, String last, String email, String id, String turno, JPasswordField pass1, JPasswordField pass2){
-        String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!(name.isEmpty() && username.isEmpty() && last.isEmpty() && email.isEmpty() && turno.isEmpty() && id.isEmpty() && contra.equals("") && contra2.equals(""))){
-            return false;
-        }
-        return true;
+    public boolean camposVacios(String username, String name, String last, String email, String id, String turno, String contra, String contra2){
+        return name.isEmpty() && username.isEmpty() && last.isEmpty() && email.isEmpty() && turno.isEmpty() && id.isEmpty() && contra.isEmpty() && contra2.isEmpty();
     }
     
-    public boolean camposLlenos(String username, String name, String last, String email, String id, String turno, JPasswordField pass1, JPasswordField pass2){
-        if (!this.camposVacios(username, name, last, email, id, turno, pass1, pass2)){
-            String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-            return !name.isEmpty() && !username.isEmpty() && !last.isEmpty() && !email.isEmpty() && !turno.isEmpty() && !id.isEmpty() && !contra.equals("") && !contra2.equals("");
+    public boolean camposLlenos(String username, String name, String last, String email, String id, String turno, String contra, String contra2){
+        if (!this.camposVacios(username, name, last, email, id, turno, contra, contra2)){
+            return !name.isEmpty() && !username.isEmpty() && !last.isEmpty() && !email.isEmpty() && !turno.isEmpty() && !id.isEmpty() && !contra.isEmpty() && !contra2.isEmpty();
         }else{
             return false;
         }
