@@ -44,6 +44,7 @@ public class ModificarBedel extends javax.swing.JFrame {
         this.name.setText(b.getUsuario().getNombre());
         this.last.setText(b.getUsuario().getApellido());
         this.email.setText(b.getEmail());
+        this.id.setEditable(false);
         this.id.setText(b.getUsuario().getUserId().toString());
         this.turno.setSelectedItem(b.getTurno());
         this.pass1.setText(b.getUsuario().getClave().getValor());
@@ -302,6 +303,7 @@ public class ModificarBedel extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setText("ID:");
 
+        id.setBackground(new java.awt.Color(204, 204, 204));
         id.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         id.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         id.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -592,55 +594,55 @@ public class ModificarBedel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        public void setPoliticas(){
-        
-            pc = gdb.getPoliticas();
+    
+    public void setPoliticas(){
+        pc = gdb.getPoliticas();
 
-            int nro = pc.getLongMin();
-            if(nro!=0){
-                String politica1="Debe poseer como mínimo " + nro + " caracteres";
-                this.politic.setVisible(true);
-                this.politic.setText(politica1);
-            }else{
-                this.politic.setVisible(false);
-            }
+        int nro = pc.getLongMin();
+        if(nro!=0){
+            String politica1="Debe poseer como mínimo " + nro + " caracteres";
+            this.politic.setVisible(true);
+            this.politic.setText(politica1);
+        }else{
+            this.politic.setVisible(false);
+        }
 
-            if (pc.isDigito() || pc.isLetraMay() || pc.isSignosEspeciales()){
-                this.cntener.setVisible(true);            
-            }else{
-                this.cntener.setVisible(false); 
-            }
+        if (pc.isDigito() || pc.isLetraMay() || pc.isSignosEspeciales()){
+            this.cntener.setVisible(true);            
+        }else{
+            this.cntener.setVisible(false); 
+        }
 
-            if(pc.isLetraMay()){
-                this.letraM.setVisible(true); 
-            }else{
-                this.letraM.setVisible(false);
-            }
+        if(pc.isLetraMay()){
+            this.letraM.setVisible(true); 
+        }else{
+            this.letraM.setVisible(false);
+        }
 
-            if(pc.isDigito()){
-                this.digito.setVisible(true);
-            }else{
-                this.digito.setVisible(false);
-            }
+        if(pc.isDigito()){
+            this.digito.setVisible(true);
+        }else{
+            this.digito.setVisible(false);
+        }
 
-            if(pc.isSignosEspeciales()){
-                this.y.setVisible(true);
-                this.sign.setVisible(true);
-            }else{
-                this.y.setVisible(false);
-                this.sign.setVisible(false);
-            }
+        if(pc.isSignosEspeciales()){
+            this.y.setVisible(true);
+            this.sign.setVisible(true);
+        }else{
+            this.y.setVisible(false);
+            this.sign.setVisible(false);
+        }
 
-            if(pc.isPassIgual()){
-                this.passIg.setVisible(true);
-            }else{
-                this.passIg.setVisible(false);
-            }
-        
+        if(pc.isPassIgual()){
+            this.passIg.setVisible(true);
+        }else{
+            this.passIg.setVisible(false);
+        }
     }
     
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         dispose();
+        BuscarBedel bb = new BuscarBedel(adm);
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

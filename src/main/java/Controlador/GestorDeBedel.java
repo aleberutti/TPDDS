@@ -77,6 +77,10 @@ public class GestorDeBedel {
     public void guardarModificacion(){
         
     }
+    
+    public List<Bedel> buscarBedel(String apellido, String turno){
+        return ud.readBedel(apellido, turno);
+    }
 
     public int validar(String username, String email, String id, String contra, String contra2){
         //    0 Correcto

@@ -85,6 +85,45 @@ public class UsuarioDAO extends GenericDAO{
         }
     }
     
+    public List<Bedel> readBedel(String apellido, String turno){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = null;
+        if (!(apellido == null) && !(turno ==null)){
+            sentencia = "SELECT B.* FROM bedel B, usuario U WHERE U.userID=B.userID "
+                        + "AND U.apellido='" + apellido + "' AND B.turno ='" + turno +"';";
+        }else{
+            if (!(apellido == null) && (turno ==null)){
+                sentencia = "SELECT B.* FROM bedel B, usuario U WHERE U.userID=B.userID "
+                            + "AND U.apellido='" + apellido + "';";
+            }else{
+                if ((apellido == null) && !(turno ==null)){
+                    sentencia = "SELECT B.* FROM bedel B, usuario U WHERE U.userID=B.userID "
+                                + "AND B.turno ='" + turno +"';";
+                }
+            }
+        }
+        if (!(sentencia == null)){
+            Query query = SS.createSQLQuery(sentencia).addEntity(Bedel.class);
+            List<Bedel> lista = query.list();
+            System.out.println(lista.size());
+            if (lista.isEmpty()){
+                SS.getTransaction().commit();
+                SS.close();
+                return null;
+            }else{
+                for (int i=0; i<lista.size(); i++){
+                    Hibernate.initialize(lista.get(i).getUsuario());
+                    Hibernate.initialize(lista.get(i).getUsuario().getClave());
+                }
+                SS.getTransaction().commit();
+                SS.close();
+                return lista;
+            }
+        }else{
+            return null;
+        }
+    }
     
     public List<Integer> readAll(){
         SS = HU.getSessionFactory().openSession();
