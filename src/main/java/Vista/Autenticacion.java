@@ -147,6 +147,9 @@ public class Autenticacion extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 userKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                userKeyTyped(evt);
+            }
         });
 
         pass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -173,6 +176,9 @@ public class Autenticacion extends javax.swing.JFrame {
         pass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passKeyTyped(evt);
             }
         });
 
@@ -367,6 +373,18 @@ public class Autenticacion extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             ingresoSistema();
     }//GEN-LAST:event_userKeyPressed
+
+    private void userKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userKeyTyped
+        if (this.user.getText().length()>14 || (evt.getKeyChar() == KeyEvent.VK_SPACE)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_userKeyTyped
+
+    private void passKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passKeyTyped
+        if (String.valueOf(pass.getPassword()).length()>29){
+            evt.consume();
+        }
+    }//GEN-LAST:event_passKeyTyped
 
     /**
      * @param args the command line arguments
