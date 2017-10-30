@@ -750,15 +750,14 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameKeyPressed
 
     private void usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyTyped
-        if (this.username.getText().length()>34){
-            evt.consume();
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+        if (this.username.getText().length()>34 || (evt.getKeyChar() == KeyEvent.VK_SPACE)){
             evt.consume();
         }
     }//GEN-LAST:event_usernameKeyTyped
 
     private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
+        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
+        this.name.setText(gdb.ignoreSpaces(this.name.getText()));
         if (this.name.getText().isEmpty()){
             this.name.setBackground(ROJOERROR);
         }else{
@@ -779,17 +778,16 @@ public class ModificarBedel extends javax.swing.JFrame {
             this.guardarCambios.requestFocus();
             this.guardarCambios.doClick();
         }
-        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.name.getText().length()<20){
-            this.name.setText(name.getText()+" ");
-        }
     }//GEN-LAST:event_nameKeyPressed
 
     private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)) || this.name.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.name.getText().length()>19)
         evt.consume();
     }//GEN-LAST:event_nameKeyTyped
 
     private void lastFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastFocusLost
+        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
+        this.last.setText(gdb.ignoreSpaces(this.last.getText()));
         if (this.last.getText().isEmpty()){
             this.last.setBackground(ROJOERROR);
         }else{
@@ -810,13 +808,10 @@ public class ModificarBedel extends javax.swing.JFrame {
             this.guardarCambios.requestFocus();
             this.guardarCambios.doClick();
         }
-        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.last.getText().length()<20){
-            this.last.setText(last.getText()+" ");
-        }
     }//GEN-LAST:event_lastKeyPressed
 
     private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)) || this.last.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.last.getText().length()>19)
         evt.consume();
     }//GEN-LAST:event_lastKeyTyped
 
@@ -857,13 +852,10 @@ public class ModificarBedel extends javax.swing.JFrame {
             this.guardarCambios.requestFocus();
             this.guardarCambios.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
-            evt.consume();
-        }
     }//GEN-LAST:event_emailKeyPressed
 
     private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
-        if (this.email.getText().length()>34){
+        if (this.email.getText().length()>34 || (evt.getKeyChar() == KeyEvent.VK_SPACE)){
             evt.consume();
         }
     }//GEN-LAST:event_emailKeyTyped
@@ -1016,7 +1008,6 @@ public class ModificarBedel extends javax.swing.JFrame {
             int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2, b);
             switch (validacion){
                 case 0:
-                    gdb.modificarDatosBedel(pc, contra, b.getUsuario().getClave(), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), b.getUsuario(), RegistrarBedel.getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase(), b);
                     ConfirmacionGuardarCambios cgc = new ConfirmacionGuardarCambios(adm, this);
                     cgc.getCancelar().addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
@@ -1026,7 +1017,7 @@ public class ModificarBedel extends javax.swing.JFrame {
                     });
                     cgc.getConfirmar().addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                        
+                        gdb.modificarDatosBedel(pc, contra, b.getUsuario().getClave(), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), b.getUsuario(), RegistrarBedel.getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase(), b);
                     }
                     });
                     break;

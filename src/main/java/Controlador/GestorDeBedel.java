@@ -89,6 +89,20 @@ public class GestorDeBedel {
         }
     }
     
+    public String ignoreSpaces(String str){
+        while (!str.isEmpty() && (str.charAt(0) == ' ')){
+            try{
+                str = str.substring(1);
+            }catch(java.lang.StringIndexOutOfBoundsException e){
+                str = "";
+            }
+        }
+        while (!str.isEmpty() && (str.charAt(str.length()-1) == ' ')){
+            str = str.substring(0, str.length()-1);
+        }
+        return str;
+    }
+    
     public List<Bedel> buscarBedel(String apellido, String turno){
         return ud.readBedel(apellido, turno);
     }
@@ -216,10 +230,10 @@ public class GestorDeBedel {
     }
 
     public void modificarDatosBedel(Politicascontrasenia pc, String pass, Clave c, String username, String name, String last, Usuario us, String turno, String email, Bedel b){
-        if (!(c.getValor().equals(pass) && c.getPoliticascontrasenia().equals(pc))){
+        if (!(c.getValor().equals(pass) && c.getPoliticascontrasenia().getPoliticaId().equals(pc.getPoliticaId()))){
             Clave nueva = new Clave(c.getClaveId(), pass, pc, us);
             try{
-                cd.update(nueva);
+                cd.create(nueva);
             }catch (Exception e){
                 e.printStackTrace();
                 ErrorBbdd eb = new ErrorBbdd();

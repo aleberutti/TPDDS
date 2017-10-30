@@ -25,7 +25,7 @@ public class PoliticasContraseniaDAO {
     public Politicascontrasenia read(){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
-        String sentencia = "SELECT * FROM politicascontrasenia ORDER BY politicaID ASC LIMIT 0,1;";
+        String sentencia = "SELECT * FROM politicascontrasenia ORDER BY politicaID DESC LIMIT 0,1;";
         Query query = SS.createSQLQuery(sentencia).addEntity(Politicascontrasenia.class);
         List<Politicascontrasenia> lista = query.list();
         int i;

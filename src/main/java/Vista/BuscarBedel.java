@@ -23,9 +23,11 @@ public class BuscarBedel extends javax.swing.JFrame {
      */
     Admin adm;
     List<Bedel> bedeles;
+    GestorDeBedel gdb;
     
     public BuscarBedel(Admin adm) {
         this.adm=adm;
+        this.gdb = new GestorDeBedel();
         initComponents();
         this.apellidotf.setEnabled(false);
         this.turnodesp.setEnabled(false);
@@ -195,9 +197,17 @@ public class BuscarBedel extends javax.swing.JFrame {
         });
 
         apellidotf.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        apellidotf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                apellidotfFocusLost(evt);
+            }
+        });
         apellidotf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 apellidotfKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellidotfKeyTyped(evt);
             }
         });
 
@@ -249,6 +259,7 @@ public class BuscarBedel extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabla.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
@@ -407,7 +418,6 @@ public class BuscarBedel extends javax.swing.JFrame {
                 }
             }
         }
-        GestorDeBedel gdb = new GestorDeBedel();
         try{
             this.bedeles = gdb.buscarBedel(apellido, turno);
             String turn = new String();
@@ -523,7 +533,7 @@ public class BuscarBedel extends javax.swing.JFrame {
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         try{
             this.bedeles.get(this.tabla.getSelectedRow()).getUserId();
-        }catch(java.lang.IndexOutOfBoundsException e){
+        }catch(Exception e){
             this.modificar.setEnabled(false);
             this.eliminar.setEnabled(false);
             return ;
@@ -567,6 +577,15 @@ public class BuscarBedel extends javax.swing.JFrame {
             this.buscar.doClick();
         }
     }//GEN-LAST:event_apellidotfKeyPressed
+
+    private void apellidotfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidotfKeyTyped
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.apellidotf.getText().length()>19)
+            evt.consume();
+    }//GEN-LAST:event_apellidotfKeyTyped
+
+    private void apellidotfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_apellidotfFocusLost
+        this.apellidotf.setText(gdb.ignoreSpaces(this.apellidotf.getText()));
+    }//GEN-LAST:event_apellidotfFocusLost
 
     /**
      * @param args the command line arguments

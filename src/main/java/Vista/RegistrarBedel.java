@@ -238,6 +238,9 @@ public class RegistrarBedel extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nameKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nameKeyTyped(evt);
             }
@@ -370,6 +373,9 @@ public class RegistrarBedel extends javax.swing.JFrame {
         username.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 usernameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                usernameKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 usernameKeyTyped(evt);
@@ -828,18 +834,12 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
-            evt.consume();
-        }
     }//GEN-LAST:event_usernameKeyPressed
 
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.aceptar.requestFocus();
             this.aceptar.doClick();
-        }
-        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.name.getText().length()<20){
-            this.name.setText(name.getText()+" ");
         }
     }//GEN-LAST:event_nameKeyPressed
 
@@ -848,9 +848,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
-        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.last.getText().length()<20){
-            this.last.setText(last.getText()+" ");
-        }
     }//GEN-LAST:event_lastKeyPressed
 
     private void emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyPressed
@@ -858,18 +855,12 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
-            evt.consume();
-        }
     }//GEN-LAST:event_emailKeyPressed
 
     private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.aceptar.requestFocus();
             this.aceptar.doClick();
-        }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
-            evt.consume();
         }
     }//GEN-LAST:event_idKeyPressed
 
@@ -888,23 +879,23 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_pass2KeyPressed
 
     private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)) || this.name.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.name.getText().length()>19)
             evt.consume();
     }//GEN-LAST:event_nameKeyTyped
 
     private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122)) || this.last.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.last.getText().length()>19)
             evt.consume();
     }//GEN-LAST:event_lastKeyTyped
 
     private void usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyTyped
-        if (this.username.getText().length()>14){
+        if (this.username.getText().length()>14 || (evt.getKeyChar() == KeyEvent.VK_SPACE)){
             evt.consume();
         }
     }//GEN-LAST:event_usernameKeyTyped
 
     private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
-        if (this.email.getText().length()>34){
+        if (this.email.getText().length()>34 || (evt.getKeyChar() == KeyEvent.VK_SPACE)){
             evt.consume();
         }
     }//GEN-LAST:event_emailKeyTyped
@@ -968,6 +959,8 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFocusLost
 
     private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
+        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
+        this.name.setText(gdb.ignoreSpaces(this.name.getText()));
         if (this.name.getText().isEmpty()){
             this.name.setBackground(ROJOERROR);
         }else{
@@ -976,6 +969,8 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_nameFocusLost
 
     private void lastFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastFocusLost
+        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
+        this.last.setText(gdb.ignoreSpaces(this.last.getText()));
         if (this.last.getText().isEmpty()){
             this.last.setBackground(ROJOERROR);
         }else{
@@ -1139,6 +1134,14 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private void pass2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusGained
         this.setAlwaysOnTop(false);
     }//GEN-LAST:event_pass2FocusGained
+
+    private void usernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyReleased
+
+    }//GEN-LAST:event_usernameKeyReleased
+
+    private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameKeyReleased
 
     public void verificarCamposCancelar(){
         String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
