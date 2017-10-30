@@ -122,13 +122,13 @@ public class RegistroExitoso extends javax.swing.JFrame {
 
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.dispose();
+            this.aceptar.doClick();
         }
     }//GEN-LAST:event_jPanel2KeyPressed
 
     private void aceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.dispose();
+            this.aceptar.doClick();
         }
     }//GEN-LAST:event_aceptarKeyPressed
 

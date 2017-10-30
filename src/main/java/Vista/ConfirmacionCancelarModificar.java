@@ -166,13 +166,13 @@ public class ConfirmacionCancelarModificar extends javax.swing.JFrame {
 
     private void confirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.dispose();
+            this.confirmar.doClick();
         }
     }//GEN-LAST:event_confirmarKeyPressed
 
     private void cancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.dispose();
+            this.cancelar.doClick();
         }
     }//GEN-LAST:event_cancelarKeyPressed
 

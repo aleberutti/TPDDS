@@ -129,14 +129,14 @@ public class ErrorBbdd extends javax.swing.JFrame {
 
     private void aceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           System.exit(0);
+           this.aceptar.doClick();
         }
         
     }//GEN-LAST:event_aceptarKeyPressed
 
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            System.exit(0);
+            this.aceptar.doClick();
         }
     }//GEN-LAST:event_jPanel2KeyPressed
 

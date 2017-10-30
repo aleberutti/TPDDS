@@ -99,6 +99,11 @@ public class BuscarBedel extends javax.swing.JFrame {
                 buscarActionPerformed(evt);
             }
         });
+        buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscarKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search.png"))); // NOI18N
@@ -190,6 +195,11 @@ public class BuscarBedel extends javax.swing.JFrame {
         });
 
         apellidotf.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        apellidotf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apellidotfKeyPressed(evt);
+            }
+        });
 
         lastcb.setBackground(new java.awt.Color(153, 153, 153));
         lastcb.setText("Apellido");
@@ -523,7 +533,10 @@ public class BuscarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaMouseClicked
 
     private void tablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyPressed
-
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER) && this.modificar.isEnabled()){
+            this.modificar.requestFocus();
+            this.modificar.doClick();
+        }
     }//GEN-LAST:event_tablaKeyPressed
 
     private void tablaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyTyped
@@ -541,6 +554,19 @@ public class BuscarBedel extends javax.swing.JFrame {
         this.modificar.setEnabled(true);
         this.eliminar.setEnabled(true);
     }//GEN-LAST:event_tablaKeyReleased
+
+    private void buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.buscar.doClick();
+        }
+    }//GEN-LAST:event_buscarKeyPressed
+
+    private void apellidotfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidotfKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.buscar.requestFocus();
+            this.buscar.doClick();
+        }
+    }//GEN-LAST:event_apellidotfKeyPressed
 
     /**
      * @param args the command line arguments

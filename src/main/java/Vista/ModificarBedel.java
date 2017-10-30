@@ -184,6 +184,11 @@ public class ModificarBedel extends javax.swing.JFrame {
                 cancelarActionPerformed(evt);
             }
         });
+        cancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cancelarKeyPressed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
@@ -1072,6 +1077,12 @@ public class ModificarBedel extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
+
+    private void cancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.cancelar.doClick();
+        }
+    }//GEN-LAST:event_cancelarKeyPressed
 
     private void confirmarCancelar(){
         ModificarBedel esta=this;

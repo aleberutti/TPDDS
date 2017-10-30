@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.Admin;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -80,6 +81,11 @@ public class ConfirmacionGuardarCambios extends javax.swing.JFrame {
                 cancelarActionPerformed(evt);
             }
         });
+        cancelar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cancelarKeyPressed(evt);
+            }
+        });
 
         confirmar.setBackground(new java.awt.Color(204, 204, 204));
         confirmar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -87,6 +93,11 @@ public class ConfirmacionGuardarCambios extends javax.swing.JFrame {
         confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarActionPerformed(evt);
+            }
+        });
+        confirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                confirmarKeyPressed(evt);
             }
         });
 
@@ -175,6 +186,18 @@ public class ConfirmacionGuardarCambios extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_confirmarActionPerformed
+
+    private void confirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.confirmar.doClick();
+        }
+    }//GEN-LAST:event_confirmarKeyPressed
+
+    private void cancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.cancelar.doClick();
+        }
+    }//GEN-LAST:event_cancelarKeyPressed
 
     /**
      * @param args the command line arguments
