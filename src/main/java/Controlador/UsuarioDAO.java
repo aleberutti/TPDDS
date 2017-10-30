@@ -91,11 +91,11 @@ public class UsuarioDAO extends GenericDAO{
         String sentencia = null;
         if (!(apellido == null) && !(turno ==null)){
             sentencia = "SELECT B.* FROM bedel B, usuario U WHERE U.userID=B.userID "
-                        + "AND U.apellido='" + apellido + "' AND B.turno ='" + turno +"';";
+                        + "AND U.apellido LIKE '%" + apellido + "%' AND B.turno ='" + turno +"';";
         }else{
             if (!(apellido == null) && (turno ==null)){
                 sentencia = "SELECT B.* FROM bedel B, usuario U WHERE U.userID=B.userID "
-                            + "AND U.apellido='" + apellido + "';";
+                            + "AND U.apellido LIKE '%" + apellido + "%';";
             }else{
                 if ((apellido == null) && !(turno ==null)){
                     sentencia = "SELECT B.* FROM bedel B, usuario U WHERE U.userID=B.userID "
