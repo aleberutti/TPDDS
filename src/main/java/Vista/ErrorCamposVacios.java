@@ -55,7 +55,7 @@ public class ErrorCamposVacios extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warning.png"))); // NOI18N
-        jLabel4.setText("ERROR. No se pueden omitir datos en el registro.");
+        jLabel4.setText("ERROR. No se pueden omitir datos.");
 
         aceptar.setBackground(new java.awt.Color(204, 204, 204));
         aceptar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N

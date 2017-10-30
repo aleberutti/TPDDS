@@ -27,9 +27,18 @@ public class Bedel extends Usuario implements java.io.Serializable {
     }
     
     public Bedel(Usuario usuario, String turno, String email) {
+       this.userId = usuario.getUserId();
        this.usuario = usuario;
        this.turno = turno;
        this.email = email;
+    }
+    
+    public Bedel (int a){
+        Clave c = new Clave(new Politicascontrasenia(), "#");
+        this.usuario = new Usuario(0, c, "#", "#", "#");
+        this.userId = 0;
+        this.turno = "#";
+        this.email = "#";
     }
     
     public Bedel(Usuario usuario, String turno, String email, Set reservas) {

@@ -82,7 +82,7 @@ public class GestorDeBedel {
         return ud.readBedel(apellido, turno);
     }
 
-    public int validar(String username, String email, String id, String contra, String contra2){
+    public int validar(String username, String email, String id, String contra, String contra2, Bedel bed){
         //    0 Correcto
         //    1 errorusername
         //    2 emailInvalido
@@ -91,31 +91,40 @@ public class GestorDeBedel {
         //    5 Confirmacion
         int idAux = parseInt(id);
         Usuario us = new Usuario();
-        UsuarioDAO ud = new UsuarioDAO();
-        try{
-            us = ud.readUsername(username);
-        }catch(Exception e){
-            e.printStackTrace();
-            ErrorBbdd eb = new ErrorBbdd();
+        if (bed.getTurno().equals("#") || !username.equals(bed.getUsuario().getNombreUsuario())){
+            try{
+                us = ud.readUsername(username);
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!(us == null)){
+                return 1;
+            }
         }
-        if (!(us == null)){
-            return 1;
+        if (bed.getTurno().equals("#") || !email.equals(bed.getEmail())){
+            if (!email.contains("@") || !email.contains("."))
+                return 2;
         }
-        if (!email.contains("@") || !email.contains("."))
-            return 2;
-        try{
-            us = ud.read(Usuario.class, idAux);
-        }catch(Exception e){
-            e.printStackTrace();
-            ErrorBbdd eb = new ErrorBbdd();
+        if (bed.getTurno().equals("#")){
+            try{
+                us = ud.read(Usuario.class, idAux);
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!(us == null))
+                return 3;
         }
-        if (!(us == null))
-            return 3;
-        if (!(this.validarPass(contra) == 0)){
-            return 4;
+        if (bed.getTurno().equals("#") || !contra.equals(bed.getUsuario().getClave().getValor())){
+            if (!(this.validarPass(contra) == 0)){
+                return 4;
         }
-        if (!this.matchPass(contra, contra2)){
-            return 5;
+        }
+        if (bed.getTurno().equals("#") || !contra2.equals(bed.getUsuario().getClave().getValor())){
+            if (!this.matchPass(contra, contra2)){
+                return 5;
+            }
         }
         return 0;
     }
@@ -215,6 +224,9 @@ public class GestorDeBedel {
             }
         }
         if (!(b.getTurno().equals(turno) && b.getEmail().equals(email))){
+            System.out.println(turno);
+            System.out.println(email);
+            System.out.println(us.getUserId() + " - " + us.getNombreUsuario());
             Bedel nuevo = new Bedel(us, turno, email);
             ud.update(nuevo);
         }

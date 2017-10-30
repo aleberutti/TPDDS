@@ -8,6 +8,7 @@ package Vista;
 import Controlador.GestorDeBedel;
 import Controlador.UsuarioDAO;
 import Modelo.Admin;
+import Modelo.Bedel;
 import Modelo.Clave;
 import Modelo.Politicascontrasenia;
 import Modelo.Usuario;
@@ -666,7 +667,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         this.setEnabled(false);
         String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
         if (gdb.camposLlenos(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2)){
-            int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2);
+            int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2, new Bedel(0));
             switch (validacion){
                 case 0:
                     gdb.guardar(pc, contra, parseInt(id.getText()), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase());
@@ -837,7 +838,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.name.getText().length()<20){
             this.name.setText(name.getText()+" ");
         }
     }//GEN-LAST:event_nameKeyPressed
@@ -847,7 +848,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.aceptar.requestFocus();
             this.aceptar.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.last.getText().length()<20){
             this.last.setText(last.getText()+" ");
         }
     }//GEN-LAST:event_lastKeyPressed

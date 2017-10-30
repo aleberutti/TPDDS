@@ -8,6 +8,7 @@ package Vista;
 import Controlador.GestorDeBedel;
 import Modelo.Admin;
 import Modelo.Bedel;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -241,6 +242,17 @@ public class BuscarBedel extends javax.swing.JFrame {
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
+            }
+        });
+        tabla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tablaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tablaKeyTyped(evt);
             }
         });
         jScrollPane2.setViewportView(tabla);
@@ -483,6 +495,7 @@ public class BuscarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_turnocbActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        System.out.println(this.tabla.getSelectedRow());
         try{
             this.bedeles.get(this.tabla.getSelectedRow()).getUserId();
         }catch(java.lang.IndexOutOfBoundsException e){
@@ -493,6 +506,27 @@ public class BuscarBedel extends javax.swing.JFrame {
         this.modificar.setEnabled(true);
         this.eliminar.setEnabled(true);
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void tablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyPressed
+
+    }//GEN-LAST:event_tablaKeyPressed
+
+    private void tablaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyTyped
+
+    }//GEN-LAST:event_tablaKeyTyped
+
+    private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
+        System.out.println(this.tabla.getSelectedRow());
+        try{
+            this.bedeles.get(this.tabla.getSelectedRow()).getUserId();
+        }catch(java.lang.IndexOutOfBoundsException e){
+            this.modificar.setEnabled(false);
+            this.eliminar.setEnabled(false);
+            return ;
+        }
+        this.modificar.setEnabled(true);
+        this.eliminar.setEnabled(true);
+    }//GEN-LAST:event_tablaKeyReleased
 
     /**
      * @param args the command line arguments

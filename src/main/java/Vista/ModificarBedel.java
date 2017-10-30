@@ -45,6 +45,7 @@ public class ModificarBedel extends javax.swing.JFrame {
         this.last.setText(b.getUsuario().getApellido());
         this.email.setText(b.getEmail());
         this.id.setEditable(false);
+        this.id.setFocusable(false);
         this.id.setText(b.getUsuario().getUserId().toString());
         this.turno.setSelectedItem(b.getTurno());
         this.pass1.setText(b.getUsuario().getClave().getValor());
@@ -641,8 +642,7 @@ public class ModificarBedel extends javax.swing.JFrame {
     }
     
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        dispose();
-        BuscarBedel bb = new BuscarBedel(adm);
+        this.confirmarCancelar();
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -676,7 +676,7 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeButtonMouseEntered
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        this.confirmarCancelar();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void backButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseExited
@@ -694,23 +694,27 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFocusGained
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        if (this.username.getText().isEmpty()){
-            this.username.setBackground(ROJOERROR);
-        }else{
-            Usuario us = new Usuario();
-            try{
-                UsuarioDAO ud = new UsuarioDAO();
-                us = ud.readUsername(this.username.getText());
-            }catch(Exception e){
-                e.printStackTrace();
-                ErrorBbdd eb = new ErrorBbdd();
-            }
-            if (!(us == null)){
+        if (!this.username.getText().equals(b.getUsuario().getNombreUsuario())){
+            if (this.username.getText().isEmpty()){
                 this.username.setBackground(ROJOERROR);
+            }else{
+                Usuario us = new Usuario();
+                try{
+                    UsuarioDAO ud = new UsuarioDAO();
+                    us = ud.readUsername(this.username.getText());
+                }catch(Exception e){
+                    e.printStackTrace();
+                    ErrorBbdd eb = new ErrorBbdd();
+                }
+                if (!(us == null)){
+                    this.username.setBackground(ROJOERROR);
+                }
+                else{
+                    this.username.setBackground(Color.white);
+                }
             }
-            else{
-                this.username.setBackground(Color.white);
-            }
+        }else{
+            this.username.setBackground(Color.white);
         }
     }//GEN-LAST:event_usernameFocusLost
 
@@ -768,7 +772,7 @@ public class ModificarBedel extends javax.swing.JFrame {
             this.guardarCambios.requestFocus();
             this.guardarCambios.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.name.getText().length()<20){
             this.name.setText(name.getText()+" ");
         }
     }//GEN-LAST:event_nameKeyPressed
@@ -799,7 +803,7 @@ public class ModificarBedel extends javax.swing.JFrame {
             this.guardarCambios.requestFocus();
             this.guardarCambios.doClick();
         }
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+        if ((evt.getKeyCode() == KeyEvent.VK_SPACE) && this.last.getText().length()<20){
             this.last.setText(last.getText()+" ");
         }
     }//GEN-LAST:event_lastKeyPressed
@@ -814,8 +818,12 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_emailFocusGained
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
-        if (!this.email.getText().contains("@") || !this.email.getText().contains(".") || (this.email.getText().isEmpty())){
-            this.email.setBackground(ROJOERROR);
+        if (!this.email.getText().equals(b.getEmail())){
+            if (!this.email.getText().contains("@") || !this.email.getText().contains(".") || (this.email.getText().isEmpty())){
+                this.email.setBackground(ROJOERROR);
+            }else{
+                this.email.setBackground(Color.white);
+            }
         }else{
             this.email.setBackground(Color.white);
         }
@@ -870,10 +878,7 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_idActionPerformed
 
     private void idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.guardarCambios.requestFocus();
-            this.guardarCambios.doClick();
-        }
+
     }//GEN-LAST:event_idKeyPressed
 
     private void idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyTyped
@@ -898,13 +903,17 @@ public class ModificarBedel extends javax.swing.JFrame {
 
     private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!(gdb.validarPass(contra) == 0)){
-            this.pass1.setBackground(ROJOERROR);
-        }else{
-            this.pass1.setBackground(Color.white);
-        }
-        if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
-            this.pass2.setBackground(ROJOERROR);
+        if (!contra.equals(b.getUsuario().getClave().getValor())){
+            if (!(gdb.validarPass(contra) == 0)){
+                this.pass1.setBackground(ROJOERROR);
+            }else{
+                this.pass1.setBackground(Color.white);
+            }
+            if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
+                this.pass2.setBackground(ROJOERROR);
+            }else{
+                this.pass2.setBackground(Color.white);
+            }
         }else{
             this.pass2.setBackground(Color.white);
         }
@@ -997,7 +1006,7 @@ public class ModificarBedel extends javax.swing.JFrame {
         this.setEnabled(false);
         String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
         if (gdb.camposLlenos(username.getText(), name.getText(), last.getText(), email.getText(), id.getText(), turno.getSelectedItem().toString(), contra, contra2)){
-            int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2);
+            int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2, b);
             switch (validacion){
                 case 0:
                     gdb.modificarDatosBedel(pc, contra, b.getUsuario().getClave(), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), b.getUsuario(), RegistrarBedel.getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase(), b);
@@ -1062,6 +1071,25 @@ public class ModificarBedel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardarCambiosActionPerformed
 
+    private void confirmarCancelar(){
+        ModificarBedel esta=this;
+        esta.setAlwaysOnTop(true);
+        ConfirmacionCancelarModificar ccm = new ConfirmacionCancelarModificar();
+        esta.setEnabled(false);
+        ccm.getCancelar().addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            esta.setEnabled(true);
+            esta.username.requestFocus();
+        }
+        });
+        ccm.getConfirmar().addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            esta.dispose();
+            BuscarBedel bb = new BuscarBedel(adm);
+        }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */
