@@ -106,7 +106,6 @@ public class UsuarioDAO extends GenericDAO{
         if (!(sentencia == null)){
             Query query = SS.createSQLQuery(sentencia).addEntity(Bedel.class);
             List<Bedel> lista = query.list();
-            System.out.println(lista.size());
             if (lista.isEmpty()){
                 SS.getTransaction().commit();
                 SS.close();

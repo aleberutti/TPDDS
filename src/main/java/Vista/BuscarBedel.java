@@ -371,14 +371,15 @@ public class BuscarBedel extends javax.swing.JFrame {
         dtm.setRowCount(6);
         String apellido = null, turno = null;
         if (this.apellidotf.isEnabled() && this.turnodesp.isEnabled()){
-            apellido = this.apellidotf.getText();
+            if (!this.apellidotf.getText().isEmpty())
+                apellido = this.apellidotf.getText();
             if (this.turnodesp.getSelectedItem().toString().equals("Mañana")){
                 turno = "MANIANA";
             }else{
                 turno = this.turnodesp.getSelectedItem().toString().toUpperCase();
             }
         }else{
-            if (this.apellidotf.isEnabled() && !this.turnodesp.isEnabled()){
+            if ((this.apellidotf.isEnabled() && !this.apellidotf.getText().isEmpty()) && !this.turnodesp.isEnabled()){
                 apellido = this.apellidotf.getText();
             }else{
                 if (!this.apellidotf.isEnabled() && this.turnodesp.isEnabled()){
@@ -387,33 +388,48 @@ public class BuscarBedel extends javax.swing.JFrame {
                     }else{
                         turno = this.turnodesp.getSelectedItem().toString().toUpperCase();
                     }
+                }else{
+                    dtm.setRowCount(0);
+                    dtm.setRowCount(6);
+                    this.modificar.setEnabled(false);
+                    this.eliminar.setEnabled(false);
+                    return ;
                 }
             }
         }
         GestorDeBedel gdb = new GestorDeBedel();
-        this.bedeles = gdb.buscarBedel(apellido, turno);
-        String turn = new String();
-        if (this.bedeles.size()>6){
-            dtm.setRowCount(this.bedeles.size());
-        }
-        if (!(this.bedeles == null)){
-            for (int i=0; i<this.bedeles.size(); i++){
-                    this.tabla.setValueAt(this.bedeles.get(i).getUserId(), i, 0);
-                    this.tabla.setValueAt(this.bedeles.get(i).getUsuario().getNombre(), i, 1);
-                    this.tabla.setValueAt(this.bedeles.get(i).getUsuario().getApellido(), i, 2);
-                    if (this.bedeles.get(i).getTurno().equals("MANIANA")){
-                        turn = "Mañana";
-                    }else{
-                        if (this.bedeles.get(i).getTurno().equals("TARDE")){
-                            turn = "Tarde";
+        try{
+            this.bedeles = gdb.buscarBedel(apellido, turno);
+            String turn = new String();
+            if (this.bedeles.size()>6){
+                dtm.setRowCount(this.bedeles.size());
+            }
+            if (!(this.bedeles == null)){
+                for (int i=0; i<this.bedeles.size(); i++){
+                        this.tabla.setValueAt(this.bedeles.get(i).getUserId(), i, 0);
+                        String nom = gdb.revertMayus(this.bedeles.get(i).getUsuario().getNombre());
+                        this.tabla.setValueAt(nom, i, 1);
+                        String ape = gdb.revertMayus(this.bedeles.get(i).getUsuario().getApellido());
+                        this.tabla.setValueAt(ape, i, 2);
+                        if (this.bedeles.get(i).getTurno().equals("MANIANA")){
+                            turn = "Mañana";
                         }else{
-                            if (this.bedeles.get(i).getTurno().equals("NOCHE")){
-                                turn = "Noche";
+                            if (this.bedeles.get(i).getTurno().equals("TARDE")){
+                                turn = "Tarde";
+                            }else{
+                                if (this.bedeles.get(i).getTurno().equals("NOCHE")){
+                                    turn = "Noche";
+                                }
                             }
                         }
-                    }
-                    this.tabla.setValueAt(turn, i, 3);
+                        this.tabla.setValueAt(turn, i, 3);
+                }
             }
+        }catch (java.lang.NullPointerException e){
+            dtm.setRowCount(0);
+            dtm.setRowCount(6);
+            this.modificar.setEnabled(false);
+            this.eliminar.setEnabled(false);
         }
     }//GEN-LAST:event_buscarActionPerformed
    
@@ -495,7 +511,6 @@ public class BuscarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_turnocbActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        System.out.println(this.tabla.getSelectedRow());
         try{
             this.bedeles.get(this.tabla.getSelectedRow()).getUserId();
         }catch(java.lang.IndexOutOfBoundsException e){
@@ -516,7 +531,6 @@ public class BuscarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaKeyTyped
 
     private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
-        System.out.println(this.tabla.getSelectedRow());
         try{
             this.bedeles.get(this.tabla.getSelectedRow()).getUserId();
         }catch(java.lang.IndexOutOfBoundsException e){

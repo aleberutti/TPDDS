@@ -78,6 +78,17 @@ public class GestorDeBedel {
         
     }
     
+    public String revertMayus(String str){
+        int spaces = 0;
+        if (str.contains(" ")){
+            String substr = str.substring(0, str.indexOf(" "));
+            String rest = str.substring((str.indexOf(" ")+1));
+            return substr.substring(0, 1).toUpperCase() + substr.substring(1).toLowerCase() + " " + revertMayus(rest);
+        }else{
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        }
+    }
+    
     public List<Bedel> buscarBedel(String apellido, String turno){
         return ud.readBedel(apellido, turno);
     }
@@ -224,9 +235,6 @@ public class GestorDeBedel {
             }
         }
         if (!(b.getTurno().equals(turno) && b.getEmail().equals(email))){
-            System.out.println(turno);
-            System.out.println(email);
-            System.out.println(us.getUserId() + " - " + us.getNombreUsuario());
             Bedel nuevo = new Bedel(us, turno, email);
             ud.update(nuevo);
         }

@@ -41,9 +41,11 @@ public class ModificarBedel extends javax.swing.JFrame {
         this.gdb = new GestorDeBedel();
         this.setPoliticas();
         this.username.setText(b.getUsuario().getNombreUsuario());
-        this.name.setText(b.getUsuario().getNombre());
-        this.last.setText(b.getUsuario().getApellido());
-        this.email.setText(b.getEmail());
+        String nom = gdb.revertMayus(b.getUsuario().getNombre());
+        String ape = gdb.revertMayus(b.getUsuario().getApellido());
+        this.name.setText(nom);
+        this.last.setText(ape);
+        this.email.setText(b.getEmail().toLowerCase());
         this.id.setEditable(false);
         this.id.setFocusable(false);
         this.id.setText(b.getUsuario().getUserId().toString());
