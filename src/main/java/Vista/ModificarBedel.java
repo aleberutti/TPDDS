@@ -781,7 +781,7 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_nameKeyPressed
 
     private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.name.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE) || (evt.getKeyChar() == 241)) || this.name.getText().length()>19)
         evt.consume();
     }//GEN-LAST:event_nameKeyTyped
 
@@ -811,7 +811,7 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_lastKeyPressed
 
     private void lastKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.last.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE) || (evt.getKeyChar() == 241)) || this.last.getText().length()>19)
         evt.consume();
     }//GEN-LAST:event_lastKeyTyped
 
