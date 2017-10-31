@@ -73,14 +73,14 @@ public class RegistrarBedel extends javax.swing.JFrame {
 
         if(pc.isLetraMay()){
             this.letraM.setVisible(true); 
-            pols = pols + "\t\t-Letra mayúscula\n";
+            pols = pols + "\t\t\t-Letra mayúscula\n";
         }else{
             this.letraM.setVisible(false);
         }
 
         if(pc.isDigito()){
             this.digito.setVisible(true);
-            pols = pols + "\t\t-Dígito\n";
+            pols = pols + "\t\t\t-Dígito\n";
         }else{
             this.digito.setVisible(false);
         }
@@ -88,7 +88,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         if(pc.isSignosEspeciales()){
             this.y.setVisible(true);
             this.sign.setVisible(true);
-            pols = pols + "\t\t-Signo especial\n";
+            pols = pols + "\t\t\t-Signo especial\n";
             polAux = "\nLos signos especiales pueden ser: (@#$%&*)";
         }else{
             this.y.setVisible(false);
