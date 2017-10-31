@@ -18,7 +18,10 @@ public class GenericDAO {
     private Session SS;
     
     public GenericDAO(){
-        
+        SS = HibernateUtil.getSessionFactory().openSession();
+        SS.beginTransaction();
+        SS.getTransaction().commit();
+        SS.close();
     }
 
     public void create(Object o){

@@ -28,7 +28,7 @@ public class Autenticacion extends javax.swing.JFrame {
     /**
      * Creates new form Autenticacion2
      */
-    List uap = new ArrayList();
+//    List<Usuario> uap = new ArrayList();
     
     public Autenticacion() {
         initComponents();
@@ -37,18 +37,19 @@ public class Autenticacion extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public Autenticacion(List uap){
-        initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.uap=uap;
-    }
+//    public Autenticacion(List<Usuario> uap){
+//        initComponents();
+//        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
+//        this.setLocationRelativeTo(null);
+//        this.setVisible(true);
+//        this.uap=uap;
+//    }
 
     public void ingresoSistema(){
         
-        GestorAutenticacion ga = new GestorAutenticacion(uap);
-        Usuario us = ga.autenticarUsuario(user.getText(), pass);
+        GestorAutenticacion ga = new GestorAutenticacion();
+        String contra=String.valueOf(pass.getPassword());
+        Usuario us = ga.autenticarUsuario(user.getText(), contra);
         if (us instanceof Bedel){
             OpcionesDelBedel b = new OpcionesDelBedel((Bedel)us);
             this.dispose();

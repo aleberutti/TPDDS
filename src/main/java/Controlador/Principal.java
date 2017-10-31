@@ -23,8 +23,8 @@ public class Principal {
         Logos cp = new Logos();
         cp.setVisible(true);
         try{
-        UsuarioDAO ud = new UsuarioDAO();
-        Autenticacion au = new Autenticacion(ud.readAllUserPass());
+        GenericDAO gd = new GenericDAO();
+        Autenticacion au = new Autenticacion();
         }catch(Exception e){
             e.printStackTrace();
             cp.dispose();

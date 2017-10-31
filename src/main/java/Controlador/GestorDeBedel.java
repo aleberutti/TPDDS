@@ -245,7 +245,7 @@ public class GestorDeBedel {
     public boolean matchPass(String ap, String pass){
         return ap.equals(pass);
     }
-
+    
     public void modificarDatosBedel(Politicascontrasenia pc, String pass, Clave c, String username, String name, String last, Usuario us, String turno, String email, Bedel b){
         Clave nueva = c;
         Usuario u = us;

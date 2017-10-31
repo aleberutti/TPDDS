@@ -392,23 +392,16 @@ public class BuscarBedel extends javax.swing.JFrame {
         dtm.setRowCount(6);
         String apellido = null, turno = null;
         if (this.apellidotf.isEnabled() && this.turnodesp.isEnabled()){
-            if (!this.apellidotf.getText().isEmpty())
+            if (!this.apellidotf.getText().isEmpty()){
                 apellido = this.apellidotf.getText();
-            if (this.turnodesp.getSelectedItem().toString().equals("Mañana")){
-                turno = "MANIANA";
-            }else{
-                turno = this.turnodesp.getSelectedItem().toString().toUpperCase();
+                turno = this.turnodesp.getSelectedItem().toString();
             }
         }else{
             if ((this.apellidotf.isEnabled() && !this.apellidotf.getText().isEmpty()) && !this.turnodesp.isEnabled()){
                 apellido = this.apellidotf.getText();
             }else{
                 if (!this.apellidotf.isEnabled() && this.turnodesp.isEnabled()){
-                    if (this.turnodesp.getSelectedItem().toString().equals("Mañana")){
-                        turno = "MANIANA";
-                    }else{
-                        turno = this.turnodesp.getSelectedItem().toString().toUpperCase();
-                    }
+                        turno = this.turnodesp.getSelectedItem().toString();
                 }else{
                     dtm.setRowCount(0);
                     dtm.setRowCount(6);
@@ -431,18 +424,7 @@ public class BuscarBedel extends javax.swing.JFrame {
                         this.tabla.setValueAt(nom, i, 1);
                         String ape = gdb.revertMayus(this.bedeles.get(i).getUsuario().getApellido());
                         this.tabla.setValueAt(ape, i, 2);
-                        if (this.bedeles.get(i).getTurno().equals("MANIANA")){
-                            turn = "Mañana";
-                        }else{
-                            if (this.bedeles.get(i).getTurno().equals("TARDE")){
-                                turn = "Tarde";
-                            }else{
-                                if (this.bedeles.get(i).getTurno().equals("NOCHE")){
-                                    turn = "Noche";
-                                }
-                            }
-                        }
-                        this.tabla.setValueAt(turn, i, 3);
+                        this.tabla.setValueAt(this.bedeles.get(i).getTurno(), i, 3);
                 }
             }
         }catch (java.lang.NullPointerException e){
@@ -544,8 +526,25 @@ public class BuscarBedel extends javax.swing.JFrame {
 
     private void tablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyPressed
         if ((evt.getKeyCode() == KeyEvent.VK_ENTER) && this.modificar.isEnabled()){
+            try{
+                this.bedeles.get(this.tabla.getSelectedRow());
+            }catch(Exception e){
+                this.modificar.setEnabled(false);
+                this.eliminar.setEnabled(false);
+                return ;
+            }
             this.modificar.requestFocus();
             this.modificar.doClick();
+        }else{
+            try{
+                this.bedeles.get(this.tabla.getSelectedRow()).getUserId();
+            }catch(java.lang.IndexOutOfBoundsException e){
+                this.modificar.setEnabled(false);
+                this.eliminar.setEnabled(false);
+                return ;
+            }
+            this.modificar.setEnabled(true);
+            this.eliminar.setEnabled(true);
         }
     }//GEN-LAST:event_tablaKeyPressed
 
@@ -579,7 +578,7 @@ public class BuscarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_apellidotfKeyPressed
 
     private void apellidotfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidotfKeyTyped
-        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE)) || this.apellidotf.getText().length()>19)
+        if (!((evt.getKeyChar()>=KeyEvent.VK_A && evt.getKeyChar()<=KeyEvent.VK_Z) || (evt.getKeyChar()>=97 && evt.getKeyChar()<=122) || (evt.getKeyChar() == KeyEvent.VK_SPACE) || gdb.isEnieOAcento(evt)) || this.apellidotf.getText().length()>19)
             evt.consume();
     }//GEN-LAST:event_apellidotfKeyTyped
 

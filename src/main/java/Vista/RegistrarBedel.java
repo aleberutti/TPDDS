@@ -94,13 +94,13 @@ public class RegistrarBedel extends javax.swing.JFrame {
         
     }
     
-    public static String getTurno(String turn){
-        if (turn.equals("Mañana")){
-            return "Maniana".toUpperCase();
-        }else{
-            return turn.toUpperCase();
-        }
-    }
+//    public static String getTurno(String turn){
+//        if (turn.equals("Mañana")){
+//            return "Maniana".toUpperCase();
+//        }else{
+//            return turn.toUpperCase();
+//        }
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -676,7 +676,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             int validacion = gdb.validar(username.getText(), email.getText(), id.getText(), contra, contra2, new Bedel(0));
             switch (validacion){
                 case 0:
-                    gdb.guardar(pc, contra, parseInt(id.getText()), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase());
+                    gdb.guardar(pc, contra, parseInt(id.getText()), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), turno.getSelectedItem().toString(), email.getText().toUpperCase());
                     RegistroExitoso re = new RegistroExitoso();
                     re.addWindowListener(new WindowAdapter(){
                         public void windowClosed(WindowEvent e){

@@ -1017,7 +1017,7 @@ public class ModificarBedel extends javax.swing.JFrame {
                     });
                     cgc.getConfirmar().addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-                        gdb.modificarDatosBedel(pc, contra, b.getUsuario().getClave(), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), b.getUsuario(), RegistrarBedel.getTurno(turno.getSelectedItem().toString()), email.getText().toUpperCase(), b);
+                        gdb.modificarDatosBedel(pc, contra, b.getUsuario().getClave(), username.getText(), name.getText().toUpperCase(), last.getText().toUpperCase(), b.getUsuario(), turno.getSelectedItem().toString(), email.getText().toUpperCase(), b);
                     }
                     });
                     break;

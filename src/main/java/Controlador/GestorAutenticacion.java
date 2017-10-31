@@ -20,23 +20,16 @@ import javax.swing.JPasswordField;
  */
 public class GestorAutenticacion {
 
-    List uap = new ArrayList();
     UsuarioDAO ud = new UsuarioDAO();
     
     public GestorAutenticacion() {
     }
     
-    public GestorAutenticacion(List uap) {
-        this.uap=uap;
-    }
+//    public GestorAutenticacion(List<Usuario> uap) {
+//        this.uap=uap;
+//    }
 
-    public Usuario autenticarUsuario(String user, JPasswordField pass){
-        String contra="";
-        char a;
-        for (int i=0; i<pass.getPassword().length; i++){
-            a= pass.getPassword()[i];
-            contra = contra + a;
-        }
+    public Usuario autenticarUsuario(String user, String contra){
         if (user.equals("bedel") && contra.equals("bedel")){
             Clave c = new Clave("bedel");
             Usuario us = new Usuario(1, c, "bedel", "bedel", "bedel");
@@ -49,21 +42,9 @@ public class GestorAutenticacion {
                 Admin adm = new Admin (us);
                 return adm;
             }else{
-                for(int i=0; i<uap.size(); i++){
-                    if (user.equals(((ArrayList)uap.get(i)).get(1)) && contra.equals(((ArrayList)uap.get(i)).get(2))){
-                        Usuario usObten = ud.isAoB((int) ((ArrayList)uap.get(i)).get(0));
-                        return usObten;
-                    }else {
-                        return this.notificarError();
-                    }
-                }
+                return ud.exists(user, contra);
             }
         }
-        return this.notificarError();
-    }
-
-    public Usuario notificarError(){
-        return new Usuario();
     }
 
 }
