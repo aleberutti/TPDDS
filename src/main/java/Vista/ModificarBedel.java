@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import static java.lang.Integer.parseInt;
+import javax.swing.ToolTipManager;
 
 /**
  *
@@ -96,6 +97,7 @@ public class ModificarBedel extends javax.swing.JFrame {
         passIg = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         pass2 = new javax.swing.JPasswordField();
+        infoPass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -465,6 +467,13 @@ public class ModificarBedel extends javax.swing.JFrame {
             }
         });
 
+        infoPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info.png"))); // NOI18N
+        infoPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                infoPassMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -490,7 +499,10 @@ public class ModificarBedel extends javax.swing.JFrame {
                             .addComponent(pass1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(turno, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(passIg, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelContrasenia, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelContrasenia)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(infoPass))
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,9 +571,12 @@ public class ModificarBedel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(turno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelContrasenia)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(turno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelContrasenia))
+                    .addComponent(infoPass))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -605,30 +620,37 @@ public class ModificarBedel extends javax.swing.JFrame {
     
     public void setPoliticas(){
         pc = gdb.getPoliticas();
+        String pols, polAux="";
 
         int nro = pc.getLongMin();
         if(nro!=0){
-            String politica1="Debe poseer como mínimo " + nro + " caracteres";
+            String politica1="Debe poseer como mínimo " + nro + " caracteres.\n";
             this.politic.setVisible(true);
             this.politic.setText(politica1);
+            pols = politica1;
         }else{
+            pols = "";
+            this.infoPass.setToolTipText(pols);
             this.politic.setVisible(false);
         }
 
         if (pc.isDigito() || pc.isLetraMay() || pc.isSignosEspeciales()){
-            this.cntener.setVisible(true);            
+            this.cntener.setVisible(true);
+            pols = pols + "Tiene que contener al menos un/a: \n";
         }else{
             this.cntener.setVisible(false); 
         }
 
         if(pc.isLetraMay()){
             this.letraM.setVisible(true); 
+            pols = pols + "\t\t-Letra mayúscula\n";
         }else{
             this.letraM.setVisible(false);
         }
 
         if(pc.isDigito()){
             this.digito.setVisible(true);
+            pols = pols + "\t\t-Dígito\n";
         }else{
             this.digito.setVisible(false);
         }
@@ -636,6 +658,8 @@ public class ModificarBedel extends javax.swing.JFrame {
         if(pc.isSignosEspeciales()){
             this.y.setVisible(true);
             this.sign.setVisible(true);
+            pols = pols + "\t\t-Signo especial\n";
+            polAux = "\nLos signos especiales pueden ser: (@#$%&*)";
         }else{
             this.y.setVisible(false);
             this.sign.setVisible(false);
@@ -643,9 +667,14 @@ public class ModificarBedel extends javax.swing.JFrame {
 
         if(pc.isPassIgual()){
             this.passIg.setVisible(true);
+            pols = pols + "Además no puede ser idéntica a una contraseña anterior.";
         }else{
             this.passIg.setVisible(false);
         }
+        pols = "<html><body><pre>" + pols;
+        pols = pols + polAux + "</pre></body></html>";
+        this.infoPass.setToolTipText(pols);
+        ToolTipManager.sharedInstance().setDismissDelay(10000);
     }
     
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
@@ -701,41 +730,31 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFocusGained
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        if (!this.username.getText().equals(b.getUsuario().getNombreUsuario())){
-            if (this.username.getText().isEmpty()){
-                this.username.setBackground(ROJOERROR);
-            }else{
-                Usuario us = new Usuario();
-                try{
-                    UsuarioDAO ud = new UsuarioDAO();
-                    us = ud.readUsername(this.username.getText());
-                }catch(Exception e){
-                    e.printStackTrace();
-                    ErrorBbdd eb = new ErrorBbdd();
-                }
-                if (!(us == null)){
-                    this.username.setBackground(ROJOERROR);
-                }
-                else{
-                    this.username.setBackground(Color.white);
-                }
-            }
+        if (this.username.getText().isEmpty()){
+            this.username.setBackground(ROJOERROR);
+            username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
         }else{
-            this.username.setBackground(Color.white);
+            Usuario us = new Usuario();
+            try{
+                UsuarioDAO ud = new UsuarioDAO();
+                us = ud.readUsername(this.username.getText());
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!(us == null)){
+                this.username.setBackground(ROJOERROR);
+                username.setToolTipText("El nombre de usuario ya existe.");
+            }
+            else{
+                this.username.setBackground(Color.white);
+                username.setToolTipText("");
+            }
         }
     }//GEN-LAST:event_usernameFocusLost
 
     private void usernameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseEntered
-        if(this.username.getBackground().equals(ROJOERROR) && !this.username.getText().isEmpty()){
-            username.setToolTipText("El nombre de usuario ya existe.");
-        }
-        else{
-            if(this.username.getBackground().equals(ROJOERROR)){
-                username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
-            }else{
-                username.setToolTipText("");
-            }
-        }
+
     }//GEN-LAST:event_usernameMouseEntered
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
@@ -760,8 +779,10 @@ public class ModificarBedel extends javax.swing.JFrame {
         this.name.setText(gdb.ignoreSpaces(this.name.getText()));
         if (this.name.getText().isEmpty()){
             this.name.setBackground(ROJOERROR);
+            name.setToolTipText("No puede utilizarse un nombre vacío.");
         }else{
             this.name.setBackground(Color.white);
+            name.setToolTipText("");
         }
     }//GEN-LAST:event_nameFocusLost
 
@@ -790,17 +811,15 @@ public class ModificarBedel extends javax.swing.JFrame {
         this.last.setText(gdb.ignoreSpaces(this.last.getText()));
         if (this.last.getText().isEmpty()){
             this.last.setBackground(ROJOERROR);
+            last.setToolTipText("No puede utilizarse un apellido vacío.");
         }else{
             this.last.setBackground(Color.white);
+            last.setToolTipText("");
         }
     }//GEN-LAST:event_lastFocusLost
 
     private void lastMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseEntered
-        if(this.last.getBackground().equals(ROJOERROR)){
-            last.setToolTipText("No puede utilizarse un apellido vacío.");
-        }else{
-            last.setToolTipText("");
-        }
+
     }//GEN-LAST:event_lastMouseEntered
 
     private void lastKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastKeyPressed
@@ -820,27 +839,22 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_emailFocusGained
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
-        if (!this.email.getText().equals(b.getEmail())){
-            if (!this.email.getText().contains("@") || !this.email.getText().contains(".") || (this.email.getText().isEmpty())){
+        if (this.email.getText().isEmpty()){
+            this.email.setBackground(ROJOERROR);
+            email.setToolTipText("No puede utilizarse un correo electrónico vacío.");
+        }else{
+            if(!this.email.getText().contains("@") || !this.email.getText().contains(".")){
                 this.email.setBackground(ROJOERROR);
+                email.setToolTipText("El correo electrónico no es válido.");
             }else{
                 this.email.setBackground(Color.white);
+                email.setToolTipText("");
             }
-        }else{
-            this.email.setBackground(Color.white);
         }
     }//GEN-LAST:event_emailFocusLost
 
     private void emailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseEntered
-        if(this.email.getBackground().equals(ROJOERROR) && this.email.getText().isEmpty()){
-            email.setToolTipText("No puede utilizarse un correo electrónico vacío.");
-        }else{
-            if (this.email.getBackground().equals(ROJOERROR)){
-                email.setToolTipText("El correo electrónico especificado no es válido.");
-            }else{
-                email.setToolTipText("");
-            }
-        }
+
     }//GEN-LAST:event_emailMouseEntered
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
@@ -902,50 +916,46 @@ public class ModificarBedel extends javax.swing.JFrame {
 
     private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!contra.equals(b.getUsuario().getClave().getValor())){
-            if (!(gdb.validarPass(contra) == 0)){
+        String passtring = String.valueOf(pass1.getPassword());
+        if(passtring.isEmpty()){
+            pass1.setToolTipText("No puede utilizarse una contraseña vacía.");
+        }else{
+            int error = gdb.validarPass(passtring);
+            if (!(error == 0)){
+                switch (error){
+                    case 1:
+                        pass1.setToolTipText("La contraseña es demasiado corta.");
+                        break;
+                    case 2:
+                        pass1.setToolTipText("La contraseña no contiene signos especiales.");
+                        break;
+                    case 3:
+                        pass1.setToolTipText("La contraseña no contiene dígito.");
+                        break;
+                    case 4:
+                        pass1.setToolTipText("La contraseña no contiene letra mayúscula.");
+                        break;
+                    case 5:
+                        pass1.setToolTipText("La contraseña ya existe.");
+                        break;
+                }
                 this.pass1.setBackground(ROJOERROR);
             }else{
                 this.pass1.setBackground(Color.white);
+                pass1.setToolTipText("");
             }
             if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
                 this.pass2.setBackground(ROJOERROR);
+                pass2.setToolTipText("Las contraseñas no coinciden.");
             }else{
                 this.pass2.setBackground(Color.white);
+                pass2.setToolTipText("");
             }
-        }else{
-            this.pass2.setBackground(Color.white);
         }
     }//GEN-LAST:event_pass1FocusLost
 
     private void pass1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass1MouseEntered
-        String passtring = String.valueOf(pass1.getPassword());
-        if(this.pass1.getBackground().equals(ROJOERROR) && passtring.isEmpty()){
-            pass1.setToolTipText("No puede utilizarse una contraseña vacío.");
-        }else{
-            if(this.pass1.getBackground().equals(ROJOERROR)){
-                int error = gdb.validarPass(passtring);
-                switch (error){
-                    case 1:
-                    pass1.setToolTipText("La contraseña es demasiado corta.");
-                    break;
-                    case 2:
-                    pass1.setToolTipText("La contraseña no contiene signos especiales.");
-                    break;
-                    case 3:
-                    pass1.setToolTipText("La contraseña no contiene dígito.");
-                    break;
-                    case 4:
-                    pass1.setToolTipText("La contraseña no contiene letra mayúscula.");
-                    break;
-                    case 5:
-                    pass1.setToolTipText("La contraseña ya existe.");
-                    break;
-                }
-            }else{
-                pass1.setToolTipText("");
-            }
-        }
+
     }//GEN-LAST:event_pass1MouseEntered
 
     private void pass1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass1KeyPressed
@@ -967,23 +977,21 @@ public class ModificarBedel extends javax.swing.JFrame {
 
     private void pass2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
+        if (contra2.isEmpty()){
             this.pass2.setBackground(ROJOERROR);
+            pass2.setToolTipText("Debe confirmar la contraseña.");
         }else{
-            this.pass2.setBackground(Color.white);
+            if (!gdb.matchPass(contra, contra2)){
+                this.pass2.setBackground(ROJOERROR);
+                pass2.setToolTipText("Las contraseñas no coinciden.");
+            }else{
+                this.pass2.setBackground(Color.white);
+            }
         }
     }//GEN-LAST:event_pass2FocusLost
 
     private void pass2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass2MouseEntered
-        if(this.pass2.getBackground().equals(ROJOERROR) && String.valueOf(pass2.getPassword()).isEmpty()){
-            pass2.setToolTipText("Debe confirmar la contraseña.");
-        }else{
-            if(this.pass2.getBackground().equals(ROJOERROR)){
-                pass2.setToolTipText("Las contraseñas no coinciden.");
-            }else{
-                pass2.setToolTipText("");
-            }
-        }
+
     }//GEN-LAST:event_pass2MouseEntered
 
     private void pass2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyPressed
@@ -1075,6 +1083,10 @@ public class ModificarBedel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cancelarKeyPressed
 
+    private void infoPassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoPassMouseEntered
+        
+    }//GEN-LAST:event_infoPassMouseEntered
+
     private void confirmarCancelar(){
         ModificarBedel esta=this;
         esta.setAlwaysOnTop(true);
@@ -1107,6 +1119,7 @@ public class ModificarBedel extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JButton guardarCambios;
     private javax.swing.JTextField id;
+    private javax.swing.JLabel infoPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

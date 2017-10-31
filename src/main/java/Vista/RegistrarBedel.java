@@ -22,6 +22,7 @@ import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.ToolTipManager;
 
 /**
  *
@@ -48,50 +49,62 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }
     
     public void setPoliticas(){
-        
         pc = gdb.getPoliticas();
-        
+        String pols, polAux="";
+
         int nro = pc.getLongMin();
         if(nro!=0){
-            String politica1="Debe poseer como mínimo " + nro + " caracteres";
+            String politica1="Debe poseer como mínimo " + nro + " caracteres.\n";
             this.politic.setVisible(true);
             this.politic.setText(politica1);
+            pols = politica1;
         }else{
+            pols = "";
+            this.infoPass.setToolTipText(pols);
             this.politic.setVisible(false);
         }
-        
+
         if (pc.isDigito() || pc.isLetraMay() || pc.isSignosEspeciales()){
-            this.cntener.setVisible(true);            
+            this.cntener.setVisible(true);
+            pols = pols + "Tiene que contener al menos un/a: \n";
         }else{
             this.cntener.setVisible(false); 
         }
-        
+
         if(pc.isLetraMay()){
             this.letraM.setVisible(true); 
+            pols = pols + "\t\t-Letra mayúscula\n";
         }else{
             this.letraM.setVisible(false);
         }
-        
+
         if(pc.isDigito()){
             this.digito.setVisible(true);
+            pols = pols + "\t\t-Dígito\n";
         }else{
             this.digito.setVisible(false);
         }
-        
+
         if(pc.isSignosEspeciales()){
             this.y.setVisible(true);
             this.sign.setVisible(true);
+            pols = pols + "\t\t-Signo especial\n";
+            polAux = "\nLos signos especiales pueden ser: (@#$%&*)";
         }else{
             this.y.setVisible(false);
             this.sign.setVisible(false);
         }
-        
+
         if(pc.isPassIgual()){
             this.passIg.setVisible(true);
+            pols = pols + "Además no puede ser idéntica a una contraseña anterior.";
         }else{
             this.passIg.setVisible(false);
         }
-        
+        pols = "<html><body><pre>" + pols;
+        pols = pols + polAux + "</pre></body></html>";
+        this.infoPass.setToolTipText(pols);
+        ToolTipManager.sharedInstance().setDismissDelay(10000);
     }
     
 //    public static String getTurno(String turn){
@@ -136,6 +149,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         minimizeButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        infoPass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -525,6 +539,13 @@ public class RegistrarBedel extends javax.swing.JFrame {
             }
         });
 
+        infoPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/info.png"))); // NOI18N
+        infoPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                infoPassMouseEntered(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -555,7 +576,10 @@ public class RegistrarBedel extends javax.swing.JFrame {
                             .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(passIg)
-                                .addComponent(jLabelContrasenia)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabelContrasenia)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(infoPass))
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2)
@@ -624,28 +648,31 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(turno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelContrasenia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(politic, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cntener, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(letraM, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(digito, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sign, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passIg, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pass2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aceptar)
-                    .addComponent(cancelar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelContrasenia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(politic, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cntener, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(letraM, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(digito, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sign, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passIg, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pass2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(aceptar)
+                            .addComponent(cancelar)))
+                    .addComponent(infoPass))
                 .addGap(39, 39, 39))
         );
 
@@ -902,193 +929,28 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_emailKeyTyped
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
-        if (!this.email.getText().contains("@") || !this.email.getText().contains(".") || (this.email.getText().isEmpty())){
+        if (this.email.getText().isEmpty()){
             this.email.setBackground(ROJOERROR);
+            email.setToolTipText("No puede utilizarse un correo electrónico vacío.");
         }else{
-            this.email.setBackground(Color.white);
+            if(!this.email.getText().contains("@") || !this.email.getText().contains(".")){
+                this.email.setBackground(ROJOERROR);
+                email.setToolTipText("El correo electrónico no es válido.");
+            }else{
+                this.email.setBackground(Color.white);
+                email.setToolTipText("");
+            }
         }
     }//GEN-LAST:event_emailFocusLost
 
     private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!(gdb.validarPass(contra) == 0)){
-            this.pass1.setBackground(ROJOERROR);
-        }else{
-            this.pass1.setBackground(Color.white);
-        }
-        if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
-            this.pass2.setBackground(ROJOERROR);
-        }else{
-            this.pass2.setBackground(Color.white);
-        }
-    }//GEN-LAST:event_pass1FocusLost
-
-    private void pass2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyTyped
-        if (String.valueOf(pass2.getPassword()).length()>29){
-            evt.consume();
-        }
-    }//GEN-LAST:event_pass2KeyTyped
-
-    private void pass2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusLost
-        String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
-        if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
-            this.pass2.setBackground(ROJOERROR);
-        }else{
-            this.pass2.setBackground(Color.white);
-        }
-    }//GEN-LAST:event_pass2FocusLost
-
-    private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        if (this.username.getText().isEmpty()){
-            this.username.setBackground(ROJOERROR);
-        }else{
-            Usuario us = new Usuario();
-            try{
-                UsuarioDAO ud = new UsuarioDAO();
-                us = ud.readUsername(this.username.getText());
-            }catch(Exception e){
-                e.printStackTrace();
-                ErrorBbdd eb = new ErrorBbdd();
-            }
-            if (!(us == null)){
-                this.username.setBackground(ROJOERROR);
-            }
-            else{
-                this.username.setBackground(Color.white);
-            }
-        }
-    }//GEN-LAST:event_usernameFocusLost
-
-    private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
-        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
-        this.name.setText(gdb.ignoreSpaces(this.name.getText()));
-        if (this.name.getText().isEmpty()){
-            this.name.setBackground(ROJOERROR);
-        }else{
-            this.name.setBackground(Color.white);
-        }
-    }//GEN-LAST:event_nameFocusLost
-
-    private void lastFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastFocusLost
-        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
-        this.last.setText(gdb.ignoreSpaces(this.last.getText()));
-        if (this.last.getText().isEmpty()){
-            this.last.setBackground(ROJOERROR);
-        }else{
-            this.last.setBackground(Color.white);
-        }
-    }//GEN-LAST:event_lastFocusLost
-
-    private void idFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFocusLost
-        if (this.id.getText().isEmpty()){
-            this.id.setBackground(ROJOERROR);
-        }else{
-            Usuario us = new Usuario();
-            int idAux = parseInt(id.getText());
-            try{
-                UsuarioDAO ud = new UsuarioDAO();
-                us = ud.read(Usuario.class, idAux);
-            }catch(Exception e){
-                e.printStackTrace();
-                ErrorBbdd eb = new ErrorBbdd();
-            }
-            if (!(us == null)){
-                this.id.setBackground(ROJOERROR);
-            }else{
-                this.id.setBackground(Color.white);
-            }
-        }
-    }//GEN-LAST:event_idFocusLost
-
-    private void turnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_turnoFocusLost
-        if (this.turno.getSelectedItem().toString().isEmpty()){
-            this.turno.setBackground(ROJOERROR);
-        }else{
-            this.turno.setBackground(Color.white);
-        }
-    }//GEN-LAST:event_turnoFocusLost
-
-    private void cancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            this.cancelar.doClick();
-        }
-    }//GEN-LAST:event_cancelarKeyPressed
-
-    private void usernameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseEntered
-        if(this.username.getBackground().equals(ROJOERROR) && !this.username.getText().isEmpty()){
-            username.setToolTipText("El nombre de usuario ya existe.");
-        }
-        else{
-            if(this.username.getBackground().equals(ROJOERROR)){
-                username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
-            }else{
-                username.setToolTipText("");
-            }
-        }
-    }//GEN-LAST:event_usernameMouseEntered
-
-    private void idMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMouseEntered
-        if(this.id.getBackground().equals(ROJOERROR) && !this.id.getText().isEmpty()){
-            id.setToolTipText("El ID ya existe.");
-        }
-        else{
-            if(this.id.getBackground().equals(ROJOERROR) && this.id.getText().isEmpty()){
-                id.setToolTipText("No puede utilizarse un ID vacío.");
-            }else{
-                id.setToolTipText("");
-            }
-        }
-    }//GEN-LAST:event_idMouseEntered
-
-    private void pass1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass1KeyTyped
-        if (String.valueOf(pass1.getPassword()).length()>29){
-            evt.consume();
-        }
-    }//GEN-LAST:event_pass1KeyTyped
-
-    private void nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseEntered
-        if(this.name.getBackground().equals(ROJOERROR)){
-            name.setToolTipText("No puede utilizarse un nombre vacío.");
-        }else{
-            name.setToolTipText("");
-        }
-    }//GEN-LAST:event_nameMouseEntered
-
-    private void lastMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseEntered
-        if(this.last.getBackground().equals(ROJOERROR)){
-            last.setToolTipText("No puede utilizarse un apellido vacío.");
-        }else{
-            last.setToolTipText("");
-        }
-    }//GEN-LAST:event_lastMouseEntered
-
-    private void emailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseEntered
-        if(this.email.getBackground().equals(ROJOERROR) && this.email.getText().isEmpty()){
-            email.setToolTipText("No puede utilizarse un correo electrónico vacío.");
-        }else{
-            if (this.email.getBackground().equals(ROJOERROR)){
-                email.setToolTipText("El correo electrónico especificado no es válido.");
-            }else{
-                email.setToolTipText("");
-            }
-        }
-    }//GEN-LAST:event_emailMouseEntered
-
-    private void turnoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turnoMouseEntered
-        if(this.turno.getBackground().equals(ROJOERROR)){
-            turno.setToolTipText("No puede utilizarse un turno vacío.");
-        }else{
-            turno.setToolTipText("");
-        }
-    }//GEN-LAST:event_turnoMouseEntered
-
-    private void pass1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass1MouseEntered
         String passtring = String.valueOf(pass1.getPassword());
-        if(this.pass1.getBackground().equals(ROJOERROR) && passtring.isEmpty()){
-            pass1.setToolTipText("No puede utilizarse una contraseña vacío.");
+        if(passtring.isEmpty()){
+            pass1.setToolTipText("No puede utilizarse una contraseña vacía.");
         }else{
-            if(this.pass1.getBackground().equals(ROJOERROR)){
-                int error = gdb.validarPass(passtring);
+            int error = gdb.validarPass(passtring);
+            if (!(error == 0)){
                 switch (error){
                     case 1:
                         pass1.setToolTipText("La contraseña es demasiado corta.");
@@ -1106,22 +968,166 @@ public class RegistrarBedel extends javax.swing.JFrame {
                         pass1.setToolTipText("La contraseña ya existe.");
                         break;
                 }
+                this.pass1.setBackground(ROJOERROR);
             }else{
+                this.pass1.setBackground(Color.white);
                 pass1.setToolTipText("");
             }
-        }
-    }//GEN-LAST:event_pass1MouseEntered
-
-    private void pass2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass2MouseEntered
-        if(this.pass2.getBackground().equals(ROJOERROR) && String.valueOf(pass2.getPassword()).isEmpty()){
-            pass2.setToolTipText("Debe confirmar la contraseña.");
-        }else{
-            if(this.pass2.getBackground().equals(ROJOERROR)){
+            if (!gdb.matchPass(contra, contra2) || contra2.isEmpty()){
+                this.pass2.setBackground(ROJOERROR);
                 pass2.setToolTipText("Las contraseñas no coinciden.");
             }else{
+                this.pass2.setBackground(Color.white);
                 pass2.setToolTipText("");
             }
         }
+    }//GEN-LAST:event_pass1FocusLost
+
+    private void pass2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass2KeyTyped
+        if (String.valueOf(pass2.getPassword()).length()>29){
+            evt.consume();
+        }
+    }//GEN-LAST:event_pass2KeyTyped
+
+    private void pass2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass2FocusLost
+        String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
+        if (contra2.isEmpty()){
+            this.pass2.setBackground(ROJOERROR);
+            pass2.setToolTipText("Debe confirmar la contraseña.");
+        }else{
+            if (!gdb.matchPass(contra, contra2)){
+                this.pass2.setBackground(ROJOERROR);
+                pass2.setToolTipText("Las contraseñas no coinciden.");
+            }else{
+                this.pass2.setBackground(Color.white);
+            }
+        }
+    }//GEN-LAST:event_pass2FocusLost
+
+    private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
+        if (this.username.getText().isEmpty()){
+            this.username.setBackground(ROJOERROR);
+            username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
+        }else{
+            Usuario us = new Usuario();
+            try{
+                UsuarioDAO ud = new UsuarioDAO();
+                us = ud.readUsername(this.username.getText());
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!(us == null)){
+                this.username.setBackground(ROJOERROR);
+                username.setToolTipText("El nombre de usuario ya existe.");
+            }
+            else{
+                this.username.setBackground(Color.white);
+                username.setToolTipText("");
+            }
+        }
+    }//GEN-LAST:event_usernameFocusLost
+
+    private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
+        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
+        this.name.setText(gdb.ignoreSpaces(this.name.getText()));
+        if (this.name.getText().isEmpty()){
+            this.name.setBackground(ROJOERROR);
+            name.setToolTipText("No puede utilizarse un nombre vacío.");
+        }else{
+            this.name.setBackground(Color.white);
+            name.setToolTipText("");
+        }
+    }//GEN-LAST:event_nameFocusLost
+
+    private void lastFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastFocusLost
+        //COMPRUEBO QUE NO HAYA ESPACIOS AL PRINCIPIO NI AL FINAL Y SI HAY, LOS ELIMINO
+        this.last.setText(gdb.ignoreSpaces(this.last.getText()));
+        if (this.last.getText().isEmpty()){
+            this.last.setBackground(ROJOERROR);
+            last.setToolTipText("No puede utilizarse un apellido vacío.");
+        }else{
+            this.last.setBackground(Color.white);
+            last.setToolTipText("");
+        }
+    }//GEN-LAST:event_lastFocusLost
+
+    private void idFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFocusLost
+        if (this.id.getText().isEmpty()){
+            this.id.setBackground(ROJOERROR);
+            id.setToolTipText("No puede utilizarse un ID vacío.");
+        }else{
+            Usuario us = new Usuario();
+            int idAux = parseInt(id.getText());
+            try{
+                UsuarioDAO ud = new UsuarioDAO();
+                us = ud.read(Usuario.class, idAux);
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            }
+            if (!(us == null)){
+                this.id.setBackground(ROJOERROR);
+                id.setToolTipText("El ID ya existe.");
+            }else{
+                this.id.setBackground(Color.white);
+                id.setToolTipText("");
+            }
+        }
+    }//GEN-LAST:event_idFocusLost
+
+    private void turnoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_turnoFocusLost
+        if (this.turno.getSelectedItem().toString().isEmpty()){
+            this.turno.setBackground(ROJOERROR);
+            turno.setToolTipText("No puede utilizarse un turno vacío.");
+        }else{
+            this.turno.setBackground(Color.white);
+            turno.setToolTipText("");
+        }
+    }//GEN-LAST:event_turnoFocusLost
+
+    private void cancelarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancelarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.cancelar.doClick();
+        }
+    }//GEN-LAST:event_cancelarKeyPressed
+
+    private void usernameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameMouseEntered
+
+    }//GEN-LAST:event_usernameMouseEntered
+
+    private void idMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idMouseEntered
+
+    }//GEN-LAST:event_idMouseEntered
+
+    private void pass1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pass1KeyTyped
+        if (String.valueOf(pass1.getPassword()).length()>29){
+            evt.consume();
+        }
+    }//GEN-LAST:event_pass1KeyTyped
+
+    private void nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseEntered
+
+    }//GEN-LAST:event_nameMouseEntered
+
+    private void lastMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseEntered
+
+    }//GEN-LAST:event_lastMouseEntered
+
+    private void emailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailMouseEntered
+
+    }//GEN-LAST:event_emailMouseEntered
+
+    private void turnoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_turnoMouseEntered
+
+    }//GEN-LAST:event_turnoMouseEntered
+
+    private void pass1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass1MouseEntered
+
+    }//GEN-LAST:event_pass1MouseEntered
+
+    private void pass2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pass2MouseEntered
+
     }//GEN-LAST:event_pass2MouseEntered
 
     private void idFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFocusGained
@@ -1143,6 +1149,10 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_nameKeyReleased
+
+    private void infoPassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoPassMouseEntered
+        
+    }//GEN-LAST:event_infoPassMouseEntered
 
     public void verificarCamposCancelar(){
         String contra= String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
@@ -1181,6 +1191,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField id;
+    private javax.swing.JLabel infoPass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
