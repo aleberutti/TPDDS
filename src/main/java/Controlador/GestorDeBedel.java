@@ -247,8 +247,10 @@ public class GestorDeBedel {
     }
 
     public void modificarDatosBedel(Politicascontrasenia pc, String pass, Clave c, String username, String name, String last, Usuario us, String turno, String email, Bedel b){
+        Clave nueva = c;
+        Usuario u = us;
         if (!(c.getValor().equals(pass) && c.getPoliticascontrasenia().getPoliticaId().equals(pc.getPoliticaId()))){
-            Clave nueva = new Clave(c.getClaveId(), pass, pc, us);
+            nueva = new Clave(c.getClaveId(), pass, pc, us);
             try{
                 cd.create(nueva);
             }catch (Exception e){
@@ -257,16 +259,26 @@ public class GestorDeBedel {
             }
         }
         if (!(us.getNombreUsuario().equals(username) && us.getNombre().equals(name) && us.getApellido().equals(last))){
-            Usuario u = new Usuario(us.getUserId(), c, username, name, last);
+            u = new Usuario(us.getUserId(), nueva, username, name, last);
             try{
-            ud.update(u);
+                ud.update(u);
             }catch (Exception e){
                 e.printStackTrace();
                 ErrorBbdd eb = new ErrorBbdd();
             }
+        }else{
+            if (!nueva.equals(c)){
+                u = new Usuario(us.getUserId(), nueva, username, name, last);
+                try{
+                    ud.update(u);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    ErrorBbdd eb = new ErrorBbdd();
+                }
+            }
         }
         if (!(b.getTurno().equals(turno) && b.getEmail().equals(email))){
-            Bedel nuevo = new Bedel(us, turno, email);
+            Bedel nuevo = new Bedel(u, turno, email);
             ud.update(nuevo);
         }
         
