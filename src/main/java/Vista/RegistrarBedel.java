@@ -50,56 +50,32 @@ public class RegistrarBedel extends javax.swing.JFrame {
     
     public void setPoliticas(){
         pc = gdb.getPoliticas();
-        String pols, polAux="";
+        String pols="", polAux="";
 
         int nro = pc.getLongMin();
         if(nro!=0){
-            String politica1="Debe poseer como mínimo " + nro + " caracteres.\n";
-            this.politic.setVisible(true);
-            this.politic.setText(politica1);
-            pols = politica1;
-        }else{
-            pols = "";
-            this.infoPass.setToolTipText(pols);
-            this.politic.setVisible(false);
+            pols="Debe poseer como mínimo " + nro + " caracteres.\n";
         }
 
         if (pc.isDigito() || pc.isLetraMay() || pc.isSignosEspeciales()){
-            this.cntener.setVisible(true);
             pols = pols + "Tiene que contener al menos un/a: \n";
-        }else{
-            this.cntener.setVisible(false); 
         }
 
         if(pc.isLetraMay()){
-            this.letraM.setVisible(true); 
             pols = pols + "\t\t\t-Letra mayúscula\n";
-        }else{
-            this.letraM.setVisible(false);
         }
 
         if(pc.isDigito()){
-            this.digito.setVisible(true);
             pols = pols + "\t\t\t-Dígito\n";
-        }else{
-            this.digito.setVisible(false);
         }
 
         if(pc.isSignosEspeciales()){
-            this.y.setVisible(true);
-            this.sign.setVisible(true);
             pols = pols + "\t\t\t-Signo especial\n";
             polAux = "\nLos signos especiales pueden ser: (@#$%&*)";
-        }else{
-            this.y.setVisible(false);
-            this.sign.setVisible(false);
         }
 
         if(pc.isPassIgual()){
-            this.passIg.setVisible(true);
             pols = pols + "Además no puede ser idéntica a una contraseña anterior.";
-        }else{
-            this.passIg.setVisible(false);
         }
         pols = "<html><body><pre>" + pols;
         pols = pols + polAux + "</pre></body></html>";
@@ -107,13 +83,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
         ToolTipManager.sharedInstance().setDismissDelay(10000);
     }
     
-//    public static String getTurno(String turn){
-//        if (turn.equals("Mañana")){
-//            return "Maniana".toUpperCase();
-//        }else{
-//            return turn.toUpperCase();
-//        }
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -133,19 +102,12 @@ public class RegistrarBedel extends javax.swing.JFrame {
         id = new javax.swing.JTextField();
         pass1 = new javax.swing.JPasswordField();
         turno = new javax.swing.JComboBox<>();
-        politic = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
-        digito = new javax.swing.JLabel();
-        cntener = new javax.swing.JLabel();
-        sign = new javax.swing.JLabel();
-        passIg = new javax.swing.JLabel();
-        letraM = new javax.swing.JLabel();
-        y = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         minimizeButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
@@ -347,14 +309,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
             }
         });
 
-        politic.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        politic.setLabelFor(pass1);
-        politic.setText("Debe poseer como mínimo 8 caracteres");
-        politic.setAutoscrolls(true);
-        politic.setFocusable(false);
-        politic.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        politic.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reg.png"))); // NOI18N
         jLabel7.setText("Registrar bedel");
@@ -427,54 +381,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
                 emailKeyTyped(evt);
             }
         });
-
-        digito.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        digito.setLabelFor(pass1);
-        digito.setText("Dígito");
-        digito.setAutoscrolls(true);
-        digito.setFocusable(false);
-        digito.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        digito.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        cntener.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        cntener.setLabelFor(pass1);
-        cntener.setText("Contener:");
-        cntener.setAutoscrolls(true);
-        cntener.setFocusable(false);
-        cntener.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        cntener.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        sign.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        sign.setLabelFor(pass1);
-        sign.setText("Signos especiales (@#$%&*)");
-        sign.setAutoscrolls(true);
-        sign.setFocusable(false);
-        sign.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        sign.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        passIg.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        passIg.setLabelFor(pass1);
-        passIg.setText("Además no debe coincidir con una contraseña anterior.");
-        passIg.setAutoscrolls(true);
-        passIg.setFocusable(false);
-        passIg.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        passIg.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        letraM.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        letraM.setLabelFor(pass1);
-        letraM.setText("Letra mayúscula,");
-        letraM.setAutoscrolls(true);
-        letraM.setFocusable(false);
-        letraM.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        letraM.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        y.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        y.setLabelFor(pass1);
-        y.setText("y");
-        y.setAutoscrolls(true);
-        y.setFocusable(false);
-        y.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        y.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         backButton.setBackground(new java.awt.Color(55, 64, 70));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back-left-arrow-circular-button-outline.png"))); // NOI18N
@@ -553,12 +459,13 @@ public class RegistrarBedel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pass2)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                         .addComponent(minimizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -568,40 +475,28 @@ public class RegistrarBedel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(pass2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pass1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(turno, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(passIg)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabelContrasenia)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(infoPass))
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel6)
-                                .addComponent(politic, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cntener)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(letraM)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(digito)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(y)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(sign))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(last, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
-                                    .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(id, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pass1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(turno, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(username, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabelContrasenia)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(infoPass))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(last, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                                        .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(id, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(jLabel6))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -652,28 +547,17 @@ public class RegistrarBedel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelContrasenia)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(politic, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cntener, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(letraM, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(digito, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sign, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passIg, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pass2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(aceptar)
-                            .addComponent(cancelar)))
+                        .addComponent(pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(infoPass))
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pass2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aceptar)
+                    .addComponent(cancelar))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -687,7 +571,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -948,6 +832,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         String passtring = String.valueOf(pass1.getPassword());
         if(passtring.isEmpty()){
             pass1.setToolTipText("No puede utilizarse una contraseña vacía.");
+            this.pass1.setBackground(ROJOERROR);
         }else{
             int error = gdb.validarPass(passtring);
             if (!(error == 0)){
@@ -1186,8 +1071,6 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private javax.swing.JButton aceptar;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cancelar;
-    private javax.swing.JLabel cntener;
-    private javax.swing.JLabel digito;
     private javax.swing.JTextField email;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField id;
@@ -1204,16 +1087,11 @@ public class RegistrarBedel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField last;
-    private javax.swing.JLabel letraM;
     private javax.swing.JButton minimizeButton;
     private javax.swing.JTextField name;
     private javax.swing.JPasswordField pass1;
     private javax.swing.JPasswordField pass2;
-    private javax.swing.JLabel passIg;
-    private javax.swing.JLabel politic;
-    private javax.swing.JLabel sign;
     private javax.swing.JComboBox<String> turno;
     private javax.swing.JTextField username;
-    private javax.swing.JLabel y;
     // End of variables declaration//GEN-END:variables
 }

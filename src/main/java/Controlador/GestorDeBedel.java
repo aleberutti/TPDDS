@@ -116,8 +116,9 @@ public class GestorDeBedel {
         //Ú = 218
         //ñ = 241
         //Ñ = 209
+        //' =39
         return (evt.getKeyChar()==225) || (evt.getKeyChar()==233) || (evt.getKeyChar()==237) || (evt.getKeyChar()==225) || (evt.getKeyChar()==243) || (evt.getKeyChar()==250) || (evt.getKeyChar()==241) || (evt.getKeyChar()==193)
-                || (evt.getKeyChar()==201) || (evt.getKeyChar()==205) || (evt.getKeyChar()==211) || (evt.getKeyChar()==218) || (evt.getKeyChar()==209);
+                || (evt.getKeyChar()==201) || (evt.getKeyChar()==205) || (evt.getKeyChar()==211) || (evt.getKeyChar()==218) || (evt.getKeyChar()==209) || (evt.getKeyChar()==39);
     }
     
     public List<Bedel> buscarBedel(String apellido, String turno){
