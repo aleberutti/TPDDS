@@ -42,7 +42,6 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         listCurso = new javax.swing.JButton();
@@ -53,11 +52,14 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         minish = new javax.swing.JButton();
         exit = new javax.swing.JButton();
 
-        popup.setBackground(new java.awt.Color(55, 64, 70));
-        popup.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        popup.setBackground(new java.awt.Color(204, 204, 204));
+        popup.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        popup.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        popup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        popup.setPreferredSize(new java.awt.Dimension(125, 30));
 
-        jMenuItem1.setBackground(new java.awt.Color(55, 64, 70));
-        jMenuItem1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jMenuItem1.setBackground(new java.awt.Color(204, 204, 204));
+        jMenuItem1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jMenuItem1.setText("Cerrar sesión");
         jMenuItem1.setToolTipText("");
         jMenuItem1.setBorder(null);
@@ -68,28 +70,21 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(55, 64, 70));
-        jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setText("Usted ha ingresado como:");
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Usuario:");
-
-        jLabel3.setFont(new java.awt.Font("Coco Gothic", 2, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 3, 16)); // NOI18N
         jLabel3.setText("bedel");
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 25)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("¿Qué desea hacer?");
 
-        listCurso.setBackground(new java.awt.Color(158, 158, 158));
-        listCurso.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        listCurso.setBackground(new java.awt.Color(204, 204, 204));
+        listCurso.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         listCurso.setText("Listado de reservas de un curso");
         listCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,8 +92,8 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
             }
         });
 
-        buscarAula.setBackground(new java.awt.Color(158, 158, 158));
-        buscarAula.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        buscarAula.setBackground(new java.awt.Color(204, 204, 204));
+        buscarAula.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         buscarAula.setText("Buscar aula");
         buscarAula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,8 +101,8 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
             }
         });
 
-        regReserva.setBackground(new java.awt.Color(158, 158, 158));
-        regReserva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        regReserva.setBackground(new java.awt.Color(204, 204, 204));
+        regReserva.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         regReserva.setText("Registar reserva");
         regReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,8 +110,9 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
             }
         });
 
-        usernameLabel.setFont(new java.awt.Font("Coco Gothic", 2, 14)); // NOI18N
+        usernameLabel.setFont(new java.awt.Font("Century Gothic", 3, 16)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(204, 204, 255));
+        usernameLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bedel.png"))); // NOI18N
         usernameLabel.setText("nombre de usuario");
         usernameLabel.setFocusCycleRoot(true);
         usernameLabel.setFocusTraversalPolicyProvider(true);
@@ -132,8 +128,8 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
             }
         });
 
-        listDia.setBackground(new java.awt.Color(158, 158, 158));
-        listDia.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        listDia.setBackground(new java.awt.Color(204, 204, 204));
+        listDia.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         listDia.setText("Listado de reservas de un dia");
         listDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,30 +188,28 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(usernameLabel))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(minish, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(listCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(regReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(listDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buscarAula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 49, Short.MAX_VALUE)))
+                        .addGap(0, 38, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(usernameLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,17 +219,14 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(minish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(usernameLabel))))
-                .addGap(0, 31, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3)))
+                .addGap(9, 9, 9)
+                .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarAula, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,7 +234,7 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(listCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(listDia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,7 +336,6 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
     private javax.swing.JButton buscarAula;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
