@@ -389,7 +389,6 @@ public class BuscarBedel extends javax.swing.JFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         DefaultTableModel dtm = (DefaultTableModel) this.tabla.getModel();
         dtm.setRowCount(0);
-        dtm.setRowCount(6);
         String apellido = null, turno = null;
         if (this.apellidotf.isEnabled() && this.turnodesp.isEnabled()){
             if (!this.apellidotf.getText().isEmpty()){
@@ -404,7 +403,6 @@ public class BuscarBedel extends javax.swing.JFrame {
                         turno = this.turnodesp.getSelectedItem().toString();
                 }else{
                     dtm.setRowCount(0);
-                    dtm.setRowCount(6);
                     this.modificar.setEnabled(false);
                     this.eliminar.setEnabled(false);
                     return ;
@@ -413,23 +411,18 @@ public class BuscarBedel extends javax.swing.JFrame {
         }
         try{
             this.bedeles = gdb.buscarBedel(apellido, turno);
-            String turn = new String();
-            if (this.bedeles.size()>6){
-                dtm.setRowCount(this.bedeles.size());
-            }
             if (!(this.bedeles == null)){
                 for (int i=0; i<this.bedeles.size(); i++){
-                        this.tabla.setValueAt(this.bedeles.get(i).getUserId(), i, 0);
-                        String nom = gdb.revertMayus(this.bedeles.get(i).getUsuario().getNombre());
-                        this.tabla.setValueAt(nom, i, 1);
-                        String ape = gdb.revertMayus(this.bedeles.get(i).getUsuario().getApellido());
-                        this.tabla.setValueAt(ape, i, 2);
-                        this.tabla.setValueAt(this.bedeles.get(i).getTurno(), i, 3);
+                        String datos[] = new String[4];
+                        datos[0] = this.bedeles.get(i).getUserId().toString();
+                        datos[1] = gdb.revertMayus(this.bedeles.get(i).getUsuario().getNombre());
+                        datos[2] = gdb.revertMayus(this.bedeles.get(i).getUsuario().getApellido());
+                        datos[3] = this.bedeles.get(i).getTurno();
+                        dtm.addRow(datos);
                 }
             }
         }catch (java.lang.NullPointerException e){
             dtm.setRowCount(0);
-            dtm.setRowCount(6);
             this.modificar.setEnabled(false);
             this.eliminar.setEnabled(false);
         }
