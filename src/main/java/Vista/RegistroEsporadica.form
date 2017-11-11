@@ -442,8 +442,6 @@
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel type="list">
-                <ListItem value="07:00"/>
-                <ListItem value="07:15"/>
                 <ListItem value="07:30"/>
                 <ListItem value="07:45"/>
                 <ListItem value="08:00"/>
@@ -513,6 +511,9 @@
               </SpinnerModel>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="hora_finStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="hora_inicio">
           <Properties>
@@ -584,8 +585,6 @@
                 <ListItem value="22:45"/>
                 <ListItem value="23:00"/>
                 <ListItem value="23:15"/>
-                <ListItem value="23:30"/>
-                <ListItem value="23:45"/>
               </SpinnerModel>
             </Property>
           </Properties>

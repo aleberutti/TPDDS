@@ -13,9 +13,12 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SpinnerModel;
+import javax.swing.event.ChangeEvent;
 
 /**
  *
@@ -29,6 +32,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     Bedel b;
     GestorDeReserva gdr;
     DefaultTableModel modelo;
+    Object prevValIn;
+    Object prevValFin;
     
     public RegistroEsporadica(Bedel b) {
         initComponents();
@@ -37,6 +42,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.setVisible(true);
         this.gdr = new GestorDeReserva();
         this.modelo = (DefaultTableModel) this.tabla.getModel();
+        this.fecha.setMinSelectableDate(new Date());
+        this.prevValIn=this.hora_inicio.getValue();
+        this.prevValFin=this.hora_fin.getValue();
     }
 
     /**
@@ -162,9 +170,14 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        hora_fin.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        hora_fin.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        hora_fin.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                hora_finStateChanged(evt);
+            }
+        });
 
-        hora_inicio.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        hora_inicio.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         hora_inicio.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 hora_inicioStateChanged(evt);
@@ -482,7 +495,25 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
-        hora_fin.setValue(hora_inicio.getNextValue());
+        SimpleDateFormat sdf = new SimpleDateFormat(this.fecha.getDateFormatString());
+        Date today = new Date();
+        String seleccionada = sdf.format(this.fecha.getDate());
+        String hoy = sdf.format(today);
+        if (hoy.equals(seleccionada)){
+            sdf = new SimpleDateFormat("HH:mm");
+            Date h_i = null;
+            try {
+                h_i = sdf.parse(this.hora_inicio.getValue().toString());
+                Date hora_hoy = sdf.parse(today.getHours() + ":" + today.getMinutes());
+                while(h_i.before(hora_hoy)){
+                    this.hora_inicio.setValue(this.hora_inicio.getNextValue());
+                    h_i = sdf.parse(this.hora_inicio.getValue().toString());
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(RegistroEsporadica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        this.hora_finStateChanged(evt);
     }//GEN-LAST:event_hora_inicioStateChanged
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
@@ -511,6 +542,40 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         if (this.tabla.getSelectedRow()>=0)
             modelo.removeRow(this.tabla.getSelectedRow());
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void hora_finStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_finStateChanged
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date h_f, h_i;
+        try {
+            h_f = sdf.parse(hora_fin.getValue().toString());
+            h_i = sdf.parse(hora_inicio.getValue().toString());
+            if (h_f.before(h_i) || h_f.equals(h_i)){
+                hora_fin.setValue(hora_inicio.getNextValue());
+            }
+            int aux = h_f.getMinutes() - h_i.getMinutes();
+            if (this.prevValFin.equals(this.hora_fin.getNextValue())){ //DECREMENTE EL SPINNER
+                if (aux%30!=0){
+                    if(!hora_fin.getPreviousValue().equals(hora_inicio.getValue())){
+                        hora_fin.setValue(hora_fin.getPreviousValue());
+                    }else{
+                        hora_fin.setValue(hora_fin.getNextValue());
+                    }
+                }
+            }else{
+                if (aux%30!=0){
+                    if (this.prevValIn.equals(this.hora_inicio.getNextValue())){
+                        hora_fin.setValue(hora_fin.getPreviousValue());
+                    }else{
+                        hora_fin.setValue(hora_fin.getNextValue());
+                    }
+                }
+            }
+        } catch (ParseException ex) {
+            System.out.println("Error parseo.");
+        }
+        this.prevValIn=this.hora_inicio.getValue();
+        this.prevValFin=this.hora_fin.getValue();
+    }//GEN-LAST:event_hora_finStateChanged
 
     /**
      * @param args the command line arguments
