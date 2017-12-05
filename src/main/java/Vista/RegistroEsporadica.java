@@ -5,12 +5,20 @@
  */
 package Vista;
 
+import Controlador.GestorDeReserva;
 import Modelo.Bedel;
+import java.text.ParseException;
 import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SpinnerModel;
+import javax.swing.event.ChangeEvent;
 
 /**
  *
@@ -22,13 +30,21 @@ public class RegistroEsporadica extends javax.swing.JFrame {
      * Creates new form RegistroPeriodica
      */
     Bedel b;
+    GestorDeReserva gdr;
     DefaultTableModel modelo;
+    Object prevValIn;
+    Object prevValFin;
     
     public RegistroEsporadica(Bedel b) {
         initComponents();
         this.b=b;
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.gdr = new GestorDeReserva();
+        this.modelo = (DefaultTableModel) this.tabla.getModel();
+        this.fecha.setMinSelectableDate(new Date());
+        this.prevValIn=this.hora_inicio.getValue();
+        this.prevValFin=this.hora_fin.getValue();
     }
 
     /**
@@ -73,6 +89,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         minimizeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
+        eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -80,6 +97,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
 
+        aceptar.setBackground(new java.awt.Color(204, 204, 204));
         aceptar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         aceptar.setText("Aceptar");
         aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,12 +145,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Día", "Hora inicio", "Hora fin"
@@ -157,9 +170,14 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        hora_fin.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        hora_fin.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        hora_fin.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                hora_finStateChanged(evt);
+            }
+        });
 
-        hora_inicio.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        hora_inicio.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         hora_inicio.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 hora_inicioStateChanged(evt);
@@ -247,6 +265,15 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
+        eliminar.setBackground(new java.awt.Color(204, 204, 204));
+        eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -277,36 +304,39 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addGap(105, 105, 105))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cargar)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(42, 42, 42)
+                                        .addComponent(jLabel4))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel17))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(27, 27, 27)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(cargar)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel14)
+                                                    .addComponent(jLabel13)
+                                                    .addComponent(jLabel17))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(hora_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(368, 368, 368)
                 .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,8 +380,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                 .addGap(45, 45, 45))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -463,36 +495,87 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
-        hora_fin.setValue(hora_inicio.getNextValue());
+        SimpleDateFormat sdf = new SimpleDateFormat(this.fecha.getDateFormatString());
+        Date today = new Date();
+        String seleccionada = sdf.format(this.fecha.getDate());
+        String hoy = sdf.format(today);
+        if (hoy.equals(seleccionada)){
+            sdf = new SimpleDateFormat("HH:mm");
+            Date h_i = null;
+            try {
+                h_i = sdf.parse(this.hora_inicio.getValue().toString());
+                Date hora_hoy = sdf.parse(today.getHours() + ":" + today.getMinutes());
+                while(h_i.before(hora_hoy)){
+                    this.hora_inicio.setValue(this.hora_inicio.getNextValue());
+                    h_i = sdf.parse(this.hora_inicio.getValue().toString());
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(RegistroEsporadica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        this.hora_finStateChanged(evt);
     }//GEN-LAST:event_hora_inicioStateChanged
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
         
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Fecha");
-        modelo.addColumn("Día");
-        modelo.addColumn("Hora inicio");
-        modelo.addColumn("Hora fin");
-        tabla.setModel(modelo);
-        tabla.getTableHeader().setReorderingAllowed(false);
         String datos[] = new String [4];
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date1 = sdf.format(fecha.getDate().getTime());
+        String horaIn = hora_inicio.getValue().toString(), horaFin = hora_fin.getValue().toString();
         
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fecha.getDate());
-        String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.US).toUpperCase();
+        String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, new Locale("es", "ES")).toUpperCase();
         
         datos[0] = date1;
         datos[1] = dayOfWeek;
-        datos[2] = hora_inicio.getValue().toString();
-        datos[3] = hora_fin.getValue().toString();
+        datos[2] = horaIn;
+        datos[3] = horaFin;
         
-        modelo.addRow(datos);
-        
-        tabla.setModel(modelo);
+        if (!horaIn.equals(horaFin) && !gdr.existe(date1, horaIn, horaFin, modelo)){
+            modelo.addRow(datos);
+        }
     }//GEN-LAST:event_cargarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        if (this.tabla.getSelectedRow()>=0)
+            modelo.removeRow(this.tabla.getSelectedRow());
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void hora_finStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_finStateChanged
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date h_f, h_i;
+        try {
+            h_f = sdf.parse(hora_fin.getValue().toString());
+            h_i = sdf.parse(hora_inicio.getValue().toString());
+            if (h_f.before(h_i) || h_f.equals(h_i)){
+                hora_fin.setValue(hora_inicio.getNextValue());
+            }
+            int aux = h_f.getMinutes() - h_i.getMinutes();
+            if (this.prevValFin.equals(this.hora_fin.getNextValue())){ //DECREMENTE EL SPINNER
+                if (aux%30!=0){
+                    if(!hora_fin.getPreviousValue().equals(hora_inicio.getValue())){
+                        hora_fin.setValue(hora_fin.getPreviousValue());
+                    }else{
+                        hora_fin.setValue(hora_fin.getNextValue());
+                    }
+                }
+            }else{
+                if (aux%30!=0){
+                    if (this.prevValIn.equals(this.hora_inicio.getNextValue())){
+                        hora_fin.setValue(hora_fin.getPreviousValue());
+                    }else{
+                        hora_fin.setValue(hora_fin.getNextValue());
+                    }
+                }
+            }
+        } catch (ParseException ex) {
+            System.out.println("Error parseo.");
+        }
+        this.prevValIn=this.hora_inicio.getValue();
+        this.prevValFin=this.hora_fin.getValue();
+    }//GEN-LAST:event_hora_finStateChanged
 
     /**
      * @param args the command line arguments
@@ -502,6 +585,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JButton aceptar;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cargar;
+    private javax.swing.JButton eliminar;
     private javax.swing.JButton exitButton;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JSpinner hora_fin;
