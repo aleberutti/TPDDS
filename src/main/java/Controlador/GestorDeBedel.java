@@ -162,7 +162,7 @@ public class GestorDeBedel {
                 return 3;
         }
         if (bed.getTurno().equals("#") || !contra.equals(bed.getUsuario().getClave().getValor())){
-            if (!(this.validarPass(contra) == 0)){
+            if (!(this.validarPass(contra, idAux) == 0)){
                 return 4;
         }
         }
@@ -184,7 +184,7 @@ public class GestorDeBedel {
         return C;
     }
 
-    public int validarPass(String pass){
+    public int validarPass(String pass, int ID){
         //    0 Correcta
         //    1 MinLength
         //    2 SignosEspeciales
@@ -229,7 +229,7 @@ public class GestorDeBedel {
             Clave rdo = new Clave();
             try{
             ClaveDAO cd = new ClaveDAO();
-            rdo = cd.readPass(pass);
+            rdo = cd.readPassUsr(pass, ID);
             }catch(Exception e){
                 e.printStackTrace();
                 ErrorBbdd eb = new ErrorBbdd();

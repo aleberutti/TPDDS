@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.Reserva;
@@ -47,7 +42,8 @@ public class GestorDeReserva {
     public boolean existe (String date1, String horaInS, String horaFinS, DefaultTableModel modelo){
         boolean existe=false;
         SimpleDateFormat sdfH = new SimpleDateFormat("HH:mm");
-        Date horaIn = new Date(), horaFin = new Date();
+        Date horaIn = new Date();
+        Date horaFin = new Date();
         try{
             horaIn = sdfH.parse(horaInS);
             horaFin = sdfH.parse(horaFinS);            

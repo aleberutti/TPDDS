@@ -830,12 +830,13 @@ public class ModificarBedel extends javax.swing.JFrame {
     private void pass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass1FocusLost
         String contra=String.valueOf(pass1.getPassword()), contra2=String.valueOf(pass2.getPassword());
         String passtring = String.valueOf(pass1.getPassword());
+        int ID = Integer.parseInt(this.id.getText());
         if(passtring.isEmpty()){
             pass1.setToolTipText("No puede utilizarse una contraseña vacía.");
             this.pass1.setBackground(ROJOERROR);
         }else{
             if (!passtring.equals(b.getUsuario().getClave().getValor())){
-                int error = gdb.validarPass(passtring);
+                int error = gdb.validarPass(passtring, ID);
                 if (!(error == 0)){
                     switch (error){
                         case 1:
