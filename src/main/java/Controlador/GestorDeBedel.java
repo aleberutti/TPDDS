@@ -22,6 +22,7 @@ import java.awt.event.WindowEvent;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 /**
@@ -139,6 +140,7 @@ public class GestorDeBedel {
                 us = ud.readUsername(username);
             }catch(Exception e){
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Error en la conexion o username duplicado - "+e.getMessage());
                 ErrorBbdd eb = new ErrorBbdd();
             }
             if (!(us == null)){

@@ -17,6 +17,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerModel;
 import javax.swing.event.ChangeEvent;
 
@@ -264,6 +265,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docente 1", "Docente 2", "Docente 3" }));
 
         eliminar.setBackground(new java.awt.Color(204, 204, 204));
         eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -532,6 +535,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         datos[1] = dayOfWeek;
         datos[2] = horaIn;
         datos[3] = horaFin;
+        
+        if(datos[1].equals("DOMINGO")){
+            JOptionPane.showMessageDialog(null,"Cuidado. El día especificado es DOMINGO");
+        }
         
         if (!horaIn.equals(horaFin) && !gdr.existe(date1, horaIn, horaFin, modelo)){
             modelo.addRow(datos);

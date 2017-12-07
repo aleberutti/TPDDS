@@ -75,7 +75,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
         }
 
         if(pc.isPassIgual()){
-            pols = pols + "Además no puede ser idéntica a una contraseña anterior.";
+            pols = pols + "No puede ser idéntica a una contraseña anterior.";
         }
         pols = "<html><body><pre>" + pols;
         pols = pols + polAux + "</pre></body></html>";

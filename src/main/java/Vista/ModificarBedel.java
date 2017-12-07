@@ -633,7 +633,11 @@ public class ModificarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFocusGained
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        if (this.username.getText().isEmpty()){
+        if(this.username.getText().length()>15){
+            this.username.setBackground(ROJOERROR);
+            username.setToolTipText("El nombre de usuario supera los 15 caracteres");
+        }else{
+            if (this.username.getText().isEmpty()){
             this.username.setBackground(ROJOERROR);
             username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
         }else{
@@ -658,6 +662,7 @@ public class ModificarBedel extends javax.swing.JFrame {
                 this.username.setBackground(Color.white);
                 username.setToolTipText("");
             }
+        }  
         }
     }//GEN-LAST:event_usernameFocusLost
 
