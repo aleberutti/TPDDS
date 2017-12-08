@@ -72,7 +72,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        emailprofe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         cargar = new javax.swing.JButton();
@@ -89,7 +89,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         minimizeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        ComboDocente = new javax.swing.JComboBox<>();
         eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,8 +141,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel18.setText("E-mail:");
 
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel15.setText("email");
+        emailprofe.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        emailprofe.setText("email");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -266,7 +266,12 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docente 1", "Docente 2", "Docente 3" }));
+        ComboDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".", "Docente 1", "Docente 2", "Docente 3" }));
+        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ComboDocenteFocusLost(evt);
+            }
+        });
 
         eliminar.setBackground(new java.awt.Color(204, 204, 204));
         eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -299,10 +304,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel15)
+                                .addComponent(emailprofe)
                                 .addComponent(jTextField1)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(ComboDocente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(105, 105, 105))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -392,14 +397,14 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -415,7 +420,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel15))
+                            .addComponent(emailprofe))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -584,26 +589,40 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.prevValFin=this.hora_fin.getValue();
     }//GEN-LAST:event_hora_finStateChanged
 
+    private void ComboDocenteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusLost
+        int Doc = this.ComboDocente.getSelectedIndex();
+        switch(Doc){
+            case 1: emailprofe.setText("docente1@frsf.com.ar");
+                break;
+            case 2: emailprofe.setText("docente2@frsf.com.ar");
+                break;
+            case 3: emailprofe.setText("docente3@frsf.com.ar");
+                break;    
+            default:  emailprofe.setText(".@frsf.com.ar");   
+                break;
+        }
+    }//GEN-LAST:event_ComboDocenteFocusLost
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboDocente;
     private javax.swing.JButton aceptar;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cargar;
     private javax.swing.JButton eliminar;
+    private javax.swing.JLabel emailprofe;
     private javax.swing.JButton exitButton;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JSpinner hora_fin;
     private javax.swing.JSpinner hora_inicio;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
