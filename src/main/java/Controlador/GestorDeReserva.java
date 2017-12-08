@@ -48,7 +48,6 @@ public class GestorDeReserva {
             horaIn = sdfH.parse(horaInS);
             horaFin = sdfH.parse(horaFinS);            
         }catch(ParseException e){
-            //ESTO NO VA PASAR PORQUE ES UN SPINNNNEEEEEEEEEEEEEEEERRRRRRRR
             return false;
         }
         for (int i=0; i<modelo.getRowCount(); i++){
@@ -58,8 +57,7 @@ public class GestorDeReserva {
                     fechaInFila = sdfH.parse(modelo.getValueAt(i, 2).toString());
                     fechaFinFila = sdfH.parse(modelo.getValueAt(i, 3).toString());
                 }catch(ParseException e){
-                    //SAME
-                    System.out.println("no esta parseando");
+                    System.out.println("Error en parseo. Vuelva a intentar");
                 }
                 if (date1.equals(modelo.getValueAt(i, 0)) && ((horaIn.after(fechaInFila) && horaIn.before(fechaFinFila)) || 
                         horaIn.equals(fechaInFila) || (horaFin.after(fechaInFila) && horaFin.before(fechaFinFila)))){
