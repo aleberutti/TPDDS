@@ -66,7 +66,7 @@ public class GestorDeAula {
                         c.add(Calendar.DATE, 7);
                         fecha=c.getTime();
                         List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
-                        if (!reservas.isEmpty()){
+                        if (!reservas.isEmpty()){ // SI LA LISTA ES VACIA SIGNIFICA QUE NO EXISTEN RESERVAS QUE COINCIDAN CON LA FECHA Y HORA EN ESE AULA, ES DECIR, ESTA DISPONIBLE
                             aulaDisponibleAux=false;
                         }
                     }
