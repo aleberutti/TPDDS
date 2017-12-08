@@ -1,10 +1,13 @@
 package Controlador;
 
+import Modelo.Periodo;
 import Modelo.Reserva;
 import java.awt.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,11 +16,33 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestorDeReserva {
 
+    ReservaDAO rd;
+    
     public GestorDeReserva() {
+        rd = new ReservaDAO();
     }
     
-    public void registrarReserva(Reserva r){
-
+    public void registrarReservaEsporadica(Vector v, int cantAlumnos, String tipoDeAula){
+        GestorDeAula gda = new GestorDeAula();
+        ArrayList listaReservas = new ArrayList();
+        for (int i=0; i<v.size(); i++){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha = new Date();
+            Date h_fin = new Date();
+            Date h_inicio = new Date();
+            try{
+                fecha = sdf.parse((String)(((Vector)v.get(i)).get(0)));
+                sdf = new SimpleDateFormat("HH:mm");
+                h_inicio = sdf.parse((String)(((Vector)v.get(i)).get(2)));
+                h_fin = sdf.parse((String)(((Vector)v.get(i)).get(3)));
+            }catch(ParseException e){
+                System.out.println("Excepcion.");
+            }
+            Integer aID = gda.validarDisponibilidad(fecha, h_inicio, h_fin, tipoDeAula, cantAlumnos, null);
+            if (aID!=null){ //ENCONTRO AULA LIBRE
+                
+            }
+        }
     }
 
     public List buscarReservaCurso(String curso){

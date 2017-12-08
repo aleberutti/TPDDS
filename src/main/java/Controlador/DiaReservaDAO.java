@@ -26,9 +26,10 @@ public class DiaReservaDAO extends GenericDAO{
     public List<Diareserva> getReservas(int aulaID, Date fecha, Date h_in, Date h_fin){ // DEVUELVE LAS RESERVAS QUE MATCHEEN CON LOS PARAMETROS
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
-        String sentencia = "SELECT * FROM diareserva D WHERE D.aulaID=" + aulaID + " AND D.fecha= " + fecha + " "
-                + "AND ((D.horainicio<=" + h_in + " AND D.horafin>" + h_in + ") OR (D.horainicio<" + h_fin + " "
-                + "AND D.horafin>=" + h_fin + "));";
+        //formatear dates antes
+        String sentencia = "SELECT * FROM diareserva D WHERE D.aulaID='" + aulaID + "' AND D.fecha='" + fecha + "' "
+                + "AND ((D.horainicio<='" + h_in + "' AND D.horafin>'" + h_in + "') OR (D.horainicio<'" + h_fin + "' "
+                + "AND D.horafin>='" + h_fin + "'));";
         Query query = SS.createSQLQuery(sentencia).addEntity(Diareserva.class);
         List<Diareserva> lista = query.list();
         SS.getTransaction().commit();

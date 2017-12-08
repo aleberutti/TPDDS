@@ -39,14 +39,14 @@ public class GestorDeAula {
         return false;
     }
 
-    public boolean validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
+    public Integer validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
         AulasDAO adao = new AulasDAO();
         DiaReservaDAO drdao = new DiaReservaDAO();
         boolean aulaDisponible=false;
         int cont = -1;
         List<Aula> listaAulas = adao.getPosibles(tipoDeAula, cantAlumnos);
         if (!listaAulas.isEmpty()){
-            if(fecha==null){//Periodica
+            if(!(periodo==null)){//Periodica
                 boolean aulaDisponibleAux=true;
                 while(!aulaDisponible || cont<listaAulas.size()){
                     cont++;
@@ -70,6 +70,9 @@ public class GestorDeAula {
                             aulaDisponibleAux=false;
                         }
                     }
+                    if (fecha.after(fechaCiclo)){
+                        return listaAulas.get(cont).getAulaId();
+                    }
                 }
             }else{//Esporadica
                 while(!aulaDisponible || cont<listaAulas.size()){
@@ -79,13 +82,15 @@ public class GestorDeAula {
                         aulaDisponible=true;
                     }
                 }
-                return aulaDisponible;
+                if (aulaDisponible){
+                    return listaAulas.get(cont).getAulaId();
+                }
             }
         }else{
             //NO HAY AULA DE ESE TIPO Y CANTIDAD
-            return false;
+            return null;
         }
-        return false;
+        return null;
     }
 
     public void notificarError(){
