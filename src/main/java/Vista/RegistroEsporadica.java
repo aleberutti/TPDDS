@@ -65,12 +65,12 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        info1 = new javax.swing.JLabel();
+        text2 = new javax.swing.JTextField();
+        info2 = new javax.swing.JLabel();
+        text1 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         emailprofe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -122,21 +122,26 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel7.setText("Apellido y nombre:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Curso", "Seminario", "Carrera de grado" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
+        comboTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTipoItemStateChanged(evt);
+            }
+        });
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                comboTipoActionPerformed(evt);
             }
         });
 
         jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel16.setText("Tipo:");
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel8.setText("Información");
+        info1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        info1.setText("Información");
 
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel12.setText("Información");
+        info2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        info2.setText("Información");
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel18.setText("E-mail:");
@@ -266,10 +271,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        ComboDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".", "Docente 1", "Docente 2", "Docente 3" }));
-        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ComboDocenteFocusLost(evt);
+        ComboDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Docente 1", "Docente 2", "Docente 3" }));
+        ComboDocente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboDocenteItemStateChanged(evt);
             }
         });
 
@@ -294,22 +299,29 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel8)
                             .addComponent(jLabel7)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel12))
-                        .addGap(17, 17, 17)
+                            .addComponent(jLabel16)
+                            .addComponent(info1)
+                            .addComponent(info2))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emailprofe)
-                                .addComponent(jTextField1)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                                .addComponent(ComboDocente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(105, 105, 105))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jComboBox1, 0, 422, Short.MAX_VALUE)
+                                        .addComponent(ComboDocente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(emailprofe))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(104, 104, 104))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -404,31 +416,36 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(emailprofe))
-                        .addGap(18, 18, 18)
+                            .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(137, 137, 137)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(emailprofe))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(info1)
+                            .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(info2)
+                            .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(91, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -449,9 +466,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_comboTipoActionPerformed
 
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
         // TODO add your handling code here:
@@ -489,7 +506,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonMouseEntered
 
     private void backButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseExited
-        // TODO add your handling code here:
         backButton.setContentAreaFilled(false);
     }//GEN-LAST:event_backButtonMouseExited
 
@@ -499,7 +515,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-
+        GestorDeReserva dgr = new GestorDeReserva();
+        
+        
+        
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
@@ -543,6 +562,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         
         if(datos[1].equals("DOMINGO")){
             JOptionPane.showMessageDialog(null,"Cuidado. El día especificado es DOMINGO");
+        }
+        
+        if(gdr.existe(date1, horaIn, horaFin, modelo)){
+            JOptionPane.showMessageDialog(null,"Ya registró un reserva en ese horario");
         }
         
         if (!horaIn.equals(horaFin) && !gdr.existe(date1, horaIn, horaFin, modelo)){
@@ -589,38 +612,54 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.prevValFin=this.hora_fin.getValue();
     }//GEN-LAST:event_hora_finStateChanged
 
-    private void ComboDocenteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusLost
+    private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
         int Doc = this.ComboDocente.getSelectedIndex();
         switch(Doc){
             case 1: emailprofe.setText("docente1@frsf.com.ar");
-                break;
+            break;
             case 2: emailprofe.setText("docente2@frsf.com.ar");
-                break;
+            break;
             case 3: emailprofe.setText("docente3@frsf.com.ar");
-                break;    
-            default:  emailprofe.setText(".@frsf.com.ar");   
-                break;
+            break;
+            default:  emailprofe.setText(".@frsf.com.ar");
+            break;
         }
-    }//GEN-LAST:event_ComboDocenteFocusLost
+    }//GEN-LAST:event_ComboDocenteItemStateChanged
 
-    /**
-     * @param args the command line arguments
-     */
+    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
+        switch(comboTipo.getSelectedItem().toString()){
+            case "Curso": info2.setVisible(false);
+                          text2.setVisible(false);
+                          info1.setText("Nombre:");
+                break;
+            case "Seminario": info2.setVisible(false);
+                              text2.setVisible(false);
+                              info1.setText("Nombre:");
+                break;
+            case "Carrera de grado": info2.setVisible(true);
+                                     text2.setVisible(true);
+                                     info1.setText("Carrera:");
+                                     info2.setText("Catedra:");
+                break;            
+        }
+    }//GEN-LAST:event_comboTipoItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboDocente;
     private javax.swing.JButton aceptar;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cargar;
+    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel emailprofe;
     private javax.swing.JButton exitButton;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JSpinner hora_fin;
     private javax.swing.JSpinner hora_inicio;
+    private javax.swing.JLabel info1;
+    private javax.swing.JLabel info2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
@@ -630,7 +669,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -638,9 +676,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton minimizeButton;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField text1;
+    private javax.swing.JTextField text2;
     // End of variables declaration//GEN-END:variables
 }
