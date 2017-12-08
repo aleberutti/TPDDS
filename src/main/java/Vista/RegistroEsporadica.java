@@ -123,24 +123,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jLabel7.setText("Apellido y nombre:");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
-        comboTipo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                comboTipoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                comboTipoFocusLost(evt);
-            }
-        });
-        comboTipo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                comboTipoMouseClicked(evt);
-            }
-        });
-        comboTipo.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                comboTipoCaretPositionChanged(evt);
+        comboTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTipoItemStateChanged(evt);
             }
         });
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -290,11 +275,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         ComboDocente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboDocenteItemStateChanged(evt);
-            }
-        });
-        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ComboDocenteFocusLost(evt);
             }
         });
 
@@ -632,93 +612,21 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.prevValFin=this.hora_fin.getValue();
     }//GEN-LAST:event_hora_finStateChanged
 
-    private void ComboDocenteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusLost
-        switch(this.ComboDocente.getSelectedIndex()){
-            case 1: emailprofe.setText("docente1@frsf.com.ar");
-                break;
-            case 2: emailprofe.setText("docente2@frsf.com.ar");
-                break;
-            case 3: emailprofe.setText("docente3@frsf.com.ar");
-                break;    
-            default:  emailprofe.setText("@frsf.com.ar");   
-                break;
-        }
-    }//GEN-LAST:event_ComboDocenteFocusLost
-
-    private void comboTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTipoMouseClicked
-        switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-                          text2.setVisible(false);
-                          info1.setText("Nombre");
-                break;
-            case "Seminario": info2.setVisible(false);
-                              text2.setVisible(false);
-                              info1.setText("Nombre");
-                break;
-            case "Carrera de grado": info2.setVisible(true);
-                                     text2.setVisible(true);
-                                     info1.setText("Carrera");
-                                     info2.setText("Cátedra");
-                break;            
-        }
-        
-    }//GEN-LAST:event_comboTipoMouseClicked
-
-    private void comboTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTipoFocusLost
-        switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-                          text2.setVisible(false);
-                          info1.setText("Nombre");
-                break;
-            case "Seminario": info2.setVisible(false);
-                              text2.setVisible(false);
-                              info1.setText("Nombre");
-                break;
-            case "Carrera de grado": info2.setVisible(true);
-                                     text2.setVisible(true);
-                                     info1.setText("Carrera");
-                                     info2.setText("Catedra");
-                break;            
-        }
-    }//GEN-LAST:event_comboTipoFocusLost
-
-    private void comboTipoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTipoFocusGained
-        switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-                          text2.setVisible(false);
-                          info1.setText("Nombre");
-                break;
-            case "Seminario": info2.setVisible(false);
-                              text2.setVisible(false);
-                              info1.setText("Nombre");
-                break;
-            case "Carrera de grado": info2.setVisible(true);
-                                     text2.setVisible(true);
-                                     info1.setText("Carrera");
-                                     info2.setText("Catedra");
-                break;            
-        }
-    }//GEN-LAST:event_comboTipoFocusGained
-
-    private void comboTipoCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboTipoCaretPositionChanged
-        switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-                          text2.setVisible(false);
-                          info1.setText("Nombre");
-                break;
-            case "Seminario": info2.setVisible(false);
-                              text2.setVisible(false);
-                              info1.setText("Nombre");
-                break;
-            case "Carrera de grado": info2.setVisible(true);
-                                     text2.setVisible(true);
-                                     info1.setText("Carrera");
-                                     info2.setText("Catedra");
-                break;            
-        }
-    }//GEN-LAST:event_comboTipoCaretPositionChanged
-
     private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
+        int Doc = this.ComboDocente.getSelectedIndex();
+        switch(Doc){
+            case 1: emailprofe.setText("docente1@frsf.com.ar");
+            break;
+            case 2: emailprofe.setText("docente2@frsf.com.ar");
+            break;
+            case 3: emailprofe.setText("docente3@frsf.com.ar");
+            break;
+            default:  emailprofe.setText(".@frsf.com.ar");
+            break;
+        }
+    }//GEN-LAST:event_ComboDocenteItemStateChanged
+
+    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso": info2.setVisible(false);
                           text2.setVisible(false);
@@ -734,7 +642,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                      info2.setText("Catedra:");
                 break;            
         }
-    }//GEN-LAST:event_ComboDocenteItemStateChanged
+    }//GEN-LAST:event_comboTipoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -252,9 +252,9 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         jLabel7.setText("Apellido y nombre:");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Curso", "Seminario", "Carrera de grado" }));
-        comboTipo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                comboTipoFocusLost(evt);
+        comboTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTipoItemStateChanged(evt);
             }
         });
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -349,11 +349,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         ComboDocente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboDocenteItemStateChanged(evt);
-            }
-        });
-        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ComboDocenteFocusLost(evt);
             }
         });
 
@@ -704,26 +699,22 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         this.viernes.setEnabled(true);
     }//GEN-LAST:event_segundoActionPerformed
 
-    private void comboTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTipoFocusLost
-        switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-                          text2.setVisible(false);
-                          info1.setText("Nombre");
-                break;
-            case "Seminario": info2.setVisible(false);
-                              text2.setVisible(false);
-                              info1.setText("Nombre");
-                break;
-            case "Carrera de grado": info2.setVisible(true);
-                                     text2.setVisible(true);
-                                     info1.setText("Carrera");
-                                     info2.setText("Cátedra");
-                break;            
-        }
-    }//GEN-LAST:event_comboTipoFocusLost
-
     private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
-        switch(comboTipo.getSelectedItem().toString()){
+        int Doc = this.ComboDocente.getSelectedIndex();
+        switch(Doc){
+            case 1: emailprofe.setText("docente1@frsf.com.ar");
+            break;
+            case 2: emailprofe.setText("docente2@frsf.com.ar");
+            break;
+            case 3: emailprofe.setText("docente3@frsf.com.ar");
+            break;
+            default:  emailprofe.setText(".@frsf.com.ar");
+            break;
+        }
+    }//GEN-LAST:event_ComboDocenteItemStateChanged
+
+    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
+                switch(comboTipo.getSelectedItem().toString()){
             case "Curso": info2.setVisible(false);
             text2.setVisible(false);
             info1.setText("Nombre:");
@@ -738,21 +729,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             info2.setText("Cátedra:");
             break;
         }
-    }//GEN-LAST:event_ComboDocenteItemStateChanged
-
-    private void ComboDocenteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusLost
-        int Doc = this.ComboDocente.getSelectedIndex();
-        switch(Doc){
-            case 1: emailprofe.setText("docente1@frsf.com.ar");
-            break;
-            case 2: emailprofe.setText("docente2@frsf.com.ar");
-            break;
-            case 3: emailprofe.setText("docente3@frsf.com.ar");
-            break;
-            default:  emailprofe.setText(".@frsf.com.ar");
-            break;
-        }
-    }//GEN-LAST:event_ComboDocenteFocusLost
+    }//GEN-LAST:event_comboTipoItemStateChanged
 
     /**
      * @param args the command line arguments
