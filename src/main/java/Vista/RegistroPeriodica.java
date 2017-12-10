@@ -235,6 +235,11 @@ public class RegistroPeriodica extends javax.swing.JFrame {
 
         aceptar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file.png"))); // NOI18N
@@ -731,6 +736,10 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             break;
         }
     }//GEN-LAST:event_comboTipoItemStateChanged
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aceptarActionPerformed
 
     /**
      * @param args the command line arguments

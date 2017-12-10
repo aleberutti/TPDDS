@@ -1,8 +1,10 @@
 package Controlador;
 
+import Modelo.Aula;
 import Modelo.Periodo;
 import Modelo.Reserva;
-import java.awt.List;
+import java.util.List;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class GestorDeReserva {
         rd = new ReservaDAO();
     }
     
-    public void registrarReservaEsporadica(Vector v, int cantAlumnos, String tipoDeAula){
+    public List<Aula> registrarReservaEsporadica(Vector v, int cantAlumnos, String tipoDeAula){
         GestorDeAula gda = new GestorDeAula();
         ArrayList listaReservas = new ArrayList();
         for (int i=0; i<v.size(); i++){
@@ -38,29 +40,36 @@ public class GestorDeReserva {
             }catch(ParseException e){
                 System.out.println("Excepcion.");
             }
-            Integer aID = gda.validarDisponibilidad(fecha, h_inicio, h_fin, tipoDeAula, cantAlumnos, null);
-            if (aID!=null){ //ENCONTRO AULA LIBRE
-                
+            List<Aula> aulas = gda.validarDisponibilidad(fecha, h_inicio, h_fin, tipoDeAula, cantAlumnos, null);
+            if (aulas!=null){ //ENCONTRO AULA LIBRE
+                return aulas;
+            }
+            else{
+                return null; 
             }
         }
+        return null;
+    }
+    
+    
+    //Los list estos tiene java.awt porque sino me quiere hacer implementar los metodos abstractos
+    //Necesito el java.util para el metodo de arriba NO SACAR
+    public java.awt.List buscarReservaCurso(String curso){
+        return new java.awt.List();
     }
 
-    public List buscarReservaCurso(String curso){
-        return new List();
-    }
-
-    public List buscarReservaDia(Date d){
-        return new List();
+    public java.awt.List buscarReservaDia(Date d){
+        return new java.awt.List();
     }
     public void notificarError(){
 
     }
 
-    public void listarCurso(List curso){
+    public void listarCurso(java.awt.List curso){
 
     }
 
-    public void listarDia(List dia){
+    public void listarDia(java.awt.List dia){
 
     }
     

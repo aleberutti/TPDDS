@@ -39,7 +39,7 @@ public class GestorDeAula {
         return false;
     }
 
-    public Integer validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
+    public List<Aula> validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
         AulasDAO adao = new AulasDAO();
         DiaReservaDAO drdao = new DiaReservaDAO();
         boolean aulaDisponible=false;
@@ -71,7 +71,7 @@ public class GestorDeAula {
                         }
                     }
                     if (fecha.after(fechaCiclo)){
-                        return listaAulas.get(cont).getAulaId();
+                        return listaAulas;
                     }
                 }
             }else{//Esporadica
@@ -83,7 +83,7 @@ public class GestorDeAula {
                     }
                 }
                 if (aulaDisponible){
-                    return listaAulas.get(cont).getAulaId();
+                    return listaAulas;
                 }
             }
         }else{

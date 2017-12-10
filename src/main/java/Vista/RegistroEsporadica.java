@@ -9,6 +9,7 @@ import Controlador.ActividadDAO;
 import Controlador.DocenteDAO;
 import Controlador.GestorDeReserva;
 import Controlador.UsuarioDAO;
+import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Docente;
 import java.awt.event.WindowAdapter;
@@ -543,8 +544,16 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         DocenteDAO dd = new DocenteDAO();
         Docente doc = dd.read(this.emailprofe.getText());
         ActividadDAO ad = new ActividadDAO();
-        
-        gdr.registrarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
+        List<Aula> aulas = gdr.registrarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
+        if(null!=aulas){
+            AulasDisponibles aulasd = new AulasDisponibles(aulas, gdr);
+            aulasd.setVisible(true);
+            this.dispose();
+        }
+        else{
+            ErrorNoExisteAula enea = new ErrorNoExisteAula();
+            enea.setVisible(true);
+        }
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged

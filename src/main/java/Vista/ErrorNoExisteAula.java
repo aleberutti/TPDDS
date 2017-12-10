@@ -145,7 +145,7 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel3.setBackground(new java.awt.Color(55, 64, 70));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
