@@ -9,6 +9,7 @@ import Controlador.Principal;
 import Modelo.Bedel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -107,6 +108,11 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         regReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regReservaActionPerformed(evt);
+            }
+        });
+        regReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                regReservaKeyPressed(evt);
             }
         });
 
@@ -323,6 +329,13 @@ public class OpcionesDelBedel extends javax.swing.JFrame {
         ListadoDeUnDia ldud = new ListadoDeUnDia(bed);
         this.dispose();
     }//GEN-LAST:event_listDiaActionPerformed
+
+    private void regReservaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_regReservaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            RegistroDeReserva rr = new RegistroDeReserva(bed);
+            this.dispose();
+        }
+    }//GEN-LAST:event_regReservaKeyPressed
 
     private void popupActionPerformed (java.awt.event.ActionEvent evt){
         this.dispose();
