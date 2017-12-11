@@ -60,6 +60,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.fecha.setMinSelectableDate(new Date());
         this.prevValIn=this.hora_inicio.getValue();
         this.prevValFin=this.hora_fin.getValue();
+        emailprofe.setText("Seleccione un docente de la lista");
     }
     
     public void setDocentes(){
@@ -75,7 +76,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         }else{
             emailprofe.setText("Seleccione un docente de la lista");
             for(int i=0;i<docentes.size();i++){
-                  datos[i]=docentes.get(i).getNombre()+", "+docentes.get(i).getApellido();  
+                datos[i]=docentes.get(i).getApellido()+", "+docentes.get(i).getNombre();  
             }
             ComboDocente.setModel(new DefaultComboBoxModel(datos));  
         }      
@@ -744,20 +745,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_text1FocusGained
 
     private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
-        //busco y seteo el mail del mismo a través del ID
-        setDocentes();
-        DocenteDAO dd = new DocenteDAO();
-        int docID = ComboDocente.getSelectedIndex()+1;
-        String mailDoc = dd.readMail(docID).get(0).getEmail();
-        if(docID==0){
-            emailprofe.setText("Seleccione un docente de la lista");
-        }else{
-            if(mailDoc.isEmpty()){
-                emailprofe.setText("El email no existe en la BD");
-            }else{
-                emailprofe.setText(mailDoc);
-            } 
-        }        
+        setDocentes();    
     }//GEN-LAST:event_ComboDocenteFocusGained
 
 

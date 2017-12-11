@@ -28,7 +28,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     
     public RegistroPeriodica(Bedel b) {
         initComponents();
-        setDocentes();
         this.setLocationRelativeTo(null);
         bgPer.add(anual);
         bgPer.add(cuatrimestral);
@@ -51,7 +50,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         }else{
             emailprofe.setText("Seleccione un docente de la lista");
             for(int i=0;i<docentes.size();i++){
-                  datos[i]=docentes.get(i).getNombre()+", "+docentes.get(i).getApellido();  
+                datos[i]=docentes.get(i).getApellido()+", "+docentes.get(i).getNombre(); 
             }
             ComboDocente.setModel(new DefaultComboBoxModel(datos));  
         }      
@@ -374,6 +373,11 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         ComboDocente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboDocenteItemStateChanged(evt);
+            }
+        });
+        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ComboDocenteFocusGained(evt);
             }
         });
 
@@ -758,6 +762,10 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptarActionPerformed
+
+    private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
+        setDocentes();
+    }//GEN-LAST:event_ComboDocenteFocusGained
 
     /**
      * @param args the command line arguments
