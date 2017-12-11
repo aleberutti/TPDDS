@@ -65,7 +65,16 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.fecha.setMinSelectableDate(new Date());
         this.prevValIn=this.hora_inicio.getValue();
         this.prevValFin=this.hora_fin.getValue();
+        setDocentes();
         emailprofe.setText("Seleccione un docente de la lista");
+        setNullCombos();
+    }
+    
+    public void setNullCombos(){
+        texto1.setVisible(false);
+        info1.setVisible(false);
+        texto2.setVisible(false);
+        info2.setVisible(false);
     }
     
     public void setDocentes(){
@@ -81,7 +90,11 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         }else{
             emailprofe.setText("Seleccione un docente de la lista");
             for(int i=0;i<docentes.size();i++){
-                datos[i]=docentes.get(i).getApellido()+", "+docentes.get(i).getNombre();  
+                if(i==0){
+                    datos[i]="Seleccione un docente de la lista";
+                }else{
+                    datos[i]=docentes.get(i-1).getApellido()+", "+docentes.get(i-1).getNombre();  
+                }                  
             }
             ComboDocente.setModel(new DefaultComboBoxModel(datos));  
         }      
@@ -103,7 +116,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         ltipo = new javax.swing.JLabel();
         info1 = new javax.swing.JLabel();
         info2 = new javax.swing.JLabel();
-        text1 = new javax.swing.JTextField();
         lmail = new javax.swing.JLabel();
         emailprofe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -124,8 +136,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         ComboDocente = new javax.swing.JComboBox<>();
         eliminar = new javax.swing.JButton();
-        combo1 = new javax.swing.JComboBox<>();
-        combo2 = new javax.swing.JComboBox<>();
+        texto1 = new javax.swing.JTextField();
+        texto2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -149,6 +161,12 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         lcant.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         lcant.setText("Cantidad de Alumnos:");
 
+        cantAlumnos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cantAlumnosFocusGained(evt);
+            }
+        });
+
         ltipoa.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         ltipoa.setText("Tipo de Aula:");
 
@@ -157,7 +175,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         lapel.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         lapel.setText("Apellido y nombre:");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Curso", "Seminario", "Carrera de grado" }));
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboTipoItemStateChanged(evt);
@@ -312,11 +330,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 ComboDocenteItemStateChanged(evt);
             }
         });
-        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ComboDocenteFocusGained(evt);
-            }
-        });
 
         eliminar.setBackground(new java.awt.Color(204, 204, 204));
         eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -327,29 +340,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
-        combo1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                combo1ItemStateChanged(evt);
-            }
-        });
-        combo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo1ActionPerformed(evt);
-            }
-        });
+        texto1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
-        combo2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                combo2ItemStateChanged(evt);
-            }
-        });
-        combo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo2ActionPerformed(evt);
-            }
-        });
+        texto2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -415,10 +408,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                     .addComponent(info1)
                                     .addComponent(info2))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboTipo, 0, 422, Short.MAX_VALUE)
+                                    .addComponent(texto1)
+                                    .addComponent(texto2))))
                         .addGap(115, 115, 115))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(368, 368, 368)
@@ -496,18 +489,17 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                     .addComponent(ltipo)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(info1)
-                    .addComponent(combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(texto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(info2)
-                        .addGap(24, 24, 24)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(info2)
+                    .addComponent(texto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
@@ -713,56 +705,71 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
         //busco y seteo el mail del mismo a través del ID
         DocenteDAO dd = new DocenteDAO();
-        int docID = ComboDocente.getSelectedIndex()+1;
-        String mailDoc = dd.readMail(docID).get(0).getEmail();
-        if(mailDoc.isEmpty() || docID==0){
-            emailprofe.setText("El email no existe en la BD");
+        int docID = ComboDocente.getSelectedIndex();
+        if(docID==0){
+            emailprofe.setText("Seleccione un docente");
         }else{
-            emailprofe.setText(mailDoc);
+            String mailDoc = dd.readMail(docID).get(0).getEmail();
+            if(mailDoc.isEmpty()){
+                emailprofe.setText("El email no existe en la BD");
+            }else{
+                emailprofe.setText(mailDoc);
+            }
         }
     }//GEN-LAST:event_ComboDocenteItemStateChanged
 
     private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
+        ArrayList <String> nombres= new ArrayList();
+        nombres.add("nacho");
+        AutoSuggestor autoSuggestor = new AutoSuggestor(this.texto1, this, nombres, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
         switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-                          combo2.setVisible(false);
-                          info1.setText("Nombre:");
+            case "Curso":   info1.setVisible(true);
+                            texto1.setVisible(true);
+                            info2.setVisible(false);
+                            texto2.setVisible(false);                          
+                            info1.setText("Nombre:");
+                            ArrayList <String> cursos= new ArrayList();
+                            cursos.add("Reparacion");
+                            cursos.add("Aire acond");
+                            cursos.add("C++");
+                            cursos.add("Futbol");
+                            cursos.add("Protocolos");
+                            cursos.add("Redes");
+                            cursos.add("Comunicacion");
+                            cursos.add("Guias");
+                            autoSuggestor.setDictionary(cursos);
+
                 break;
-            case "Seminario": info2.setVisible(false);
-                              combo2.setVisible(false);
-                              info1.setText("Nombre:");
+            case "Seminario":   info1.setVisible(true);
+                                texto1.setVisible(true);
+                                info2.setVisible(false);
+                                texto2.setVisible(false);                          
+                                info1.setText("Nombre:");
+                                ArrayList <String> sem= new ArrayList();
+                                sem.add("ASd");
+                                sem.add("JJ");
+                                sem.add("Safari");
+                                sem.add("Chrome");
+                                sem.add("IE");
+                                sem.add("sem fibra optica");
+                                sem.add("JAJA");
+                                sem.add("HAHA");
+                                autoSuggestor.setDictionary(sem);
+
                 break;
-            case "Carrera de grado": info2.setVisible(true);
-                                     combo2.setVisible(true);
-                                     info1.setText("Carrera:");
-                                     info2.setText("Catedra:");
+            case "Carrera de grado":    info1.setVisible(true);
+                                        texto1.setVisible(true);
+                                        info2.setVisible(true);
+                                        texto2.setVisible(true);
+                                        info1.setText("Carrera:");
+                                        info2.setText("Cátedra:");
                 break;            
         }
     }//GEN-LAST:event_comboTipoItemStateChanged
 
-    private void combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo1ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo1ItemStateChanged
-
-    private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo1ActionPerformed
-
-    private void combo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo2ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo2ItemStateChanged
-
-    private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo2ActionPerformed
-
     private void cantAlumnosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cantAlumnosFocusGained
         this.setAlwaysOnTop(false);
     }//GEN-LAST:event_cantAlumnosFocusGained
-
-    private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
-        setDocentes();    
-    }//GEN-LAST:event_ComboDocenteFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -771,8 +778,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JSpinner cantAlumnos;
     private javax.swing.JButton cargar;
-    private javax.swing.JComboBox<String> combo1;
-    private javax.swing.JComboBox<String> combo2;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel emailprofe;
@@ -799,6 +804,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JLabel ltipoa;
     private javax.swing.JButton minimizeButton;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField texto1;
+    private javax.swing.JTextField texto2;
     private javax.swing.JComboBox<String> tipoDeAula;
     // End of variables declaration//GEN-END:variables
 }

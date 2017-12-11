@@ -35,6 +35,8 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         bgCuat.add(segundo);
         this.b=b;
         this.setVisible(true);
+        setDocentes();
+        emailprofe.setText("Seleccione un docente de la lista");
     }
     
     public void setDocentes(){
@@ -50,10 +52,14 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         }else{
             emailprofe.setText("Seleccione un docente de la lista");
             for(int i=0;i<docentes.size();i++){
-                datos[i]=docentes.get(i).getApellido()+", "+docentes.get(i).getNombre(); 
+                if(i==0){
+                    datos[i]="Seleccione un docente de la lista";
+                }else{
+                    datos[i]=docentes.get(i-1).getApellido()+", "+docentes.get(i-1).getNombre();  
+                }                  
             }
             ComboDocente.setModel(new DefaultComboBoxModel(datos));  
-        }      
+        }     
     }
 
     @SuppressWarnings("unchecked")
@@ -373,11 +379,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         ComboDocente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboDocenteItemStateChanged(evt);
-            }
-        });
-        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ComboDocenteFocusGained(evt);
             }
         });
 
@@ -732,12 +733,16 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
         //busco y seteo el mail del mismo a través del ID
         DocenteDAO dd = new DocenteDAO();
-        int docID = ComboDocente.getSelectedIndex()+1;
-        String mailDoc = dd.readMail(docID).get(0).getEmail();
-        if(mailDoc.isEmpty() || docID==0){
-            emailprofe.setText("El email no existe en la BD");
+        int docID = ComboDocente.getSelectedIndex();
+        if(docID==0){
+            emailprofe.setText("Seleccione un docente");
         }else{
-            emailprofe.setText(mailDoc);
+            String mailDoc = dd.readMail(docID).get(0).getEmail();
+            if(mailDoc.isEmpty()){
+                emailprofe.setText("El email no existe en la BD");
+            }else{
+                emailprofe.setText(mailDoc);
+            }
         }
     }//GEN-LAST:event_ComboDocenteItemStateChanged
 
@@ -762,10 +767,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptarActionPerformed
-
-    private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
-        setDocentes();
-    }//GEN-LAST:event_ComboDocenteFocusGained
 
     /**
      * @param args the command line arguments
