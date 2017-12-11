@@ -46,12 +46,4 @@ public class ReservaDAO extends GenericDAO{
         SS.close();
     }
     
-    public void updateDR(Diareserva dr){
-        SS = HU.getSessionFactory().openSession();
-        SS.beginTransaction();
-        SS.save(rsv);
-        SS.getTransaction().commit();
-        SS.close();
-    }
-    
 }
