@@ -8,6 +8,7 @@ package Vista;
 import Controlador.GestorDeReserva;
 import Modelo.Aula;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,13 +16,22 @@ import javax.swing.table.DefaultTableModel;
  * @author azuli
  */
 public class AulasDisponibles extends javax.swing.JFrame {
+    
     List<Aula> aulas;
     GestorDeReserva gdr;
-    public AulasDisponibles(List<Aula> aulas, GestorDeReserva gdr) {
+    Aula selected;
+    
+    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, Aula selected) {
         initComponents();
         this.aulas = aulas;
         this.gdr = gdr;
+        this.fecha.setText(fechas.get(0).toString());
+        this.h_inicio.setText(fechas.get(2).toString());
+        this.h_fin.setText(fechas.get(3).toString());
         completarTabla();
+        this.selected=selected;
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
     
     public void completarTabla(){
@@ -32,7 +42,6 @@ public class AulasDisponibles extends javax.swing.JFrame {
             datos[0] = this.aulas.get(i).getNombre();
             datos[1] = this.aulas.get(i).getCapacidad().toString();
             datos[2] = this.aulas.get(i).getPiso().toString();
-            
             dtm.addRow(datos);
         }
     }
@@ -50,7 +59,13 @@ public class AulasDisponibles extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        seleccionar = new javax.swing.JButton();
+        fecha = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        h_inicio = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        h_fin = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel10.setText("Hora de inicio:");
@@ -58,9 +73,10 @@ public class AulasDisponibles extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel11.setText("Las aulas disponibles son");
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel11.setText("Aulas disponibles para:");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,70 +102,121 @@ public class AulasDisponibles extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButton1.setText("Seleccionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        seleccionar.setBackground(new java.awt.Color(204, 204, 204));
+        seleccionar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        seleccionar.setText("Seleccionar");
+        seleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                seleccionarActionPerformed(evt);
             }
         });
+
+        fecha.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        fecha.setText("2017/20/20");
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel2.setText("desde:");
+
+        h_inicio.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        h_inicio.setText("07:55");
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel4.setText("hasta:");
+
+        h_fin.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        h_fin.setText("55:55");
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(52, 52, 52)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(106, 106, 106)
-                            .addComponent(jLabel11))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fecha))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(h_inicio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(h_fin))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(seleccionar)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(fecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(h_inicio)
+                    .addComponent(jLabel4)
+                    .addComponent(h_fin))
                 .addGap(27, 27, 27)
-                .addComponent(jLabel11)
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jButton1)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(seleccionar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
         // TODO add your handling code here:
         //REGISTRAR RESERVA CON ESTE AULA
-        this.aulas.get(this.tabla.getSelectedRow());
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (this.tabla.getSelectedRow()!=-1){
+            selected = this.aulas.get(this.tabla.getSelectedRow());
+        }
+    }//GEN-LAST:event_seleccionarActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel fecha;
+    private javax.swing.JLabel h_fin;
+    private javax.swing.JLabel h_inicio;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton seleccionar;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

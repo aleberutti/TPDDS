@@ -1,8 +1,9 @@
 package Controlador;
 
+import Modelo.Actividad;
 import Modelo.Aula;
-import Modelo.Periodo;
-import Modelo.Reserva;
+import Modelo.Bedel;
+import Modelo.Docente;
 import java.util.List;
 
 import java.text.ParseException;
@@ -24,10 +25,11 @@ public class GestorDeReserva {
         rd = new ReservaDAO();
     }
     
-    public List<Aula> registrarReservaEsporadica(Vector v, int cantAlumnos, String tipoDeAula){
+    public List validarReservaEsporadica(Vector v, int cantAlumnos, String tipoDeAula){
         GestorDeAula gda = new GestorDeAula();
-        ArrayList listaReservas = new ArrayList();
+        List listaReservas = new ArrayList();
         for (int i=0; i<v.size(); i++){
+            listaReservas.add(v.get(i));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date fecha = new Date();
             Date h_fin = new Date();
@@ -42,13 +44,17 @@ public class GestorDeReserva {
             }
             List<Aula> aulas = gda.validarDisponibilidad(fecha, h_inicio, h_fin, tipoDeAula, cantAlumnos, null);
             if (aulas!=null && !aulas.isEmpty()){ //ENCONTRO AULA LIBRE
-                return aulas;
+                listaReservas.add(aulas);
             }
             else{
-                return null; 
+                listaReservas.add(null);
             }
         }
-        return null;
+        return listaReservas;
+    }
+    
+    public void registrarEsporadica(Aula aula, Bedel b, Actividad act, Docente d){
+        
     }
     
     

@@ -45,12 +45,16 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Object prevValIn;
     Object prevValFin;
+    DocenteDAO dd;
+    ActividadDAO ad;
     
     public RegistroEsporadica(Bedel b) {
         initComponents();
         this.b=b;
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.dd = new DocenteDAO();
+        this.ad = new ActividadDAO();
         this.gdr = new GestorDeReserva();
         this.modelo = (DefaultTableModel) this.tabla.getModel();
         this.fecha.setMinSelectableDate(new Date());
@@ -78,9 +82,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         comboTipo = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         info1 = new javax.swing.JLabel();
-        text2 = new javax.swing.JTextField();
         info2 = new javax.swing.JLabel();
-        text1 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         emailprofe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -101,6 +103,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         ComboDocente = new javax.swing.JComboBox<>();
         eliminar = new javax.swing.JButton();
+        combo1 = new javax.swing.JComboBox<>();
+        combo2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -123,6 +127,12 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel5.setText("Cantidad de Alumnos:");
+
+        cantAlumnos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cantAlumnosFocusGained(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel6.setText("Tipo de Aula:");
@@ -150,25 +160,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         info1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         info1.setText("Información");
 
-        text2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text2ActionPerformed(evt);
-            }
-        });
-
         info2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         info2.setText("Información");
-
-        text1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                text1FocusGained(evt);
-            }
-        });
-        text1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text1ActionPerformed(evt);
-            }
-        });
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel18.setText("E-mail:");
@@ -314,6 +307,30 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
+        combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
+        combo1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combo1ItemStateChanged(evt);
+            }
+        });
+        combo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo1ActionPerformed(evt);
+            }
+        });
+
+        combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
+        combo2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combo2ItemStateChanged(evt);
+            }
+        });
+        combo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -379,9 +396,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                     .addComponent(info2))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(115, 115, 115))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(368, 368, 368)
@@ -459,17 +476,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                     .addComponent(jLabel16)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(info1)
-                    .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(info2)
-                    .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(info2)
+                        .addGap(24, 24, 24)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -541,18 +559,23 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         //CREO OBJETOS NECESARIOS PARA RESERVA
-        DocenteDAO dd = new DocenteDAO();
         Docente doc = dd.read(this.emailprofe.getText());
-        ActividadDAO ad = new ActividadDAO();
-        List<Aula> aulas = gdr.registrarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
-        if(null!=aulas){
-            AulasDisponibles aulasd = new AulasDisponibles(aulas, gdr);
-            aulasd.setVisible(true);
-            this.dispose();
-        }
-        else{
-            ErrorNoExisteAula enea = new ErrorNoExisteAula();
-            enea.setVisible(true);
+//        Actividad act = ad.read(prevValIn, WIDTH);
+        List aulasPTodas = gdr.validarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
+        Aula selected = new Aula();
+        for(int i = 0; i<aulasPTodas.size(); i+=2){
+            if (aulasPTodas.get(i+1)!=null){
+                RegistroEsporadica esta = this;
+                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), gdr, selected);
+                aulasd.addWindowListener(new WindowAdapter(){
+                    public void windowClosed(WindowEvent e){
+//                        gdr.registrarEsporadica(selected, b, act, doc);
+                    }
+                });
+            }
+            else{
+                ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)));
+            }
         }
     }//GEN-LAST:event_aceptarActionPerformed
 
@@ -603,7 +626,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             erd.addWindowListener(new WindowAdapter(){
                 public void windowClosed(WindowEvent e){
                     esta.setEnabled(true);
-                    esta.text1.requestFocus();
+                    esta.cantAlumnos.requestFocus();
                 }
             });
             return ;
@@ -617,7 +640,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             erh.addWindowListener(new WindowAdapter(){
                 public void windowClosed(WindowEvent e){
                     esta.setEnabled(true);
-                    esta.text1.requestFocus();
+                    esta.cantAlumnos.requestFocus();
                 }
             });
             return ;
@@ -684,32 +707,40 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso": info2.setVisible(false);
-                          text2.setVisible(false);
+                          combo2.setVisible(false);
                           info1.setText("Nombre:");
                 break;
             case "Seminario": info2.setVisible(false);
-                              text2.setVisible(false);
+                              combo2.setVisible(false);
                               info1.setText("Nombre:");
                 break;
             case "Carrera de grado": info2.setVisible(true);
-                                     text2.setVisible(true);
+                                     combo2.setVisible(true);
                                      info1.setText("Carrera:");
                                      info2.setText("Catedra:");
                 break;            
         }
     }//GEN-LAST:event_comboTipoItemStateChanged
 
-    private void text2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text2ActionPerformed
+    private void combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo1ItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_text2ActionPerformed
+    }//GEN-LAST:event_combo1ItemStateChanged
 
-    private void text1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text1ActionPerformed
+    private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text1ActionPerformed
+    }//GEN-LAST:event_combo1ActionPerformed
 
-    private void text1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_text1FocusGained
+    private void combo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo2ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo2ItemStateChanged
+
+    private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo2ActionPerformed
+
+    private void cantAlumnosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cantAlumnosFocusGained
         this.setAlwaysOnTop(false);
-    }//GEN-LAST:event_text1FocusGained
+    }//GEN-LAST:event_cantAlumnosFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -718,6 +749,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JSpinner cantAlumnos;
     private javax.swing.JButton cargar;
+    private javax.swing.JComboBox<String> combo1;
+    private javax.swing.JComboBox<String> combo2;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel emailprofe;
@@ -744,8 +777,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton minimizeButton;
     private javax.swing.JTable tabla;
-    private javax.swing.JTextField text1;
-    private javax.swing.JTextField text2;
     private javax.swing.JComboBox<String> tipoDeAula;
     // End of variables declaration//GEN-END:variables
 }
