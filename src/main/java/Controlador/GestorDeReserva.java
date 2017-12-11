@@ -41,7 +41,7 @@ public class GestorDeReserva {
                 System.out.println("Excepcion.");
             }
             List<Aula> aulas = gda.validarDisponibilidad(fecha, h_inicio, h_fin, tipoDeAula, cantAlumnos, null);
-            if (aulas!=null){ //ENCONTRO AULA LIBRE
+            if (aulas!=null && !aulas.isEmpty()){ //ENCONTRO AULA LIBRE
                 return aulas;
             }
             else{

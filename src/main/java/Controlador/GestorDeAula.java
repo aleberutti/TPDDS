@@ -42,14 +42,16 @@ public class GestorDeAula {
     public List<Aula> validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
         AulasDAO adao = new AulasDAO();
         DiaReservaDAO drdao = new DiaReservaDAO();
-        boolean aulaDisponible=false;
         int cont = -1;
         List<Aula> listaAulas = adao.getPosibles(tipoDeAula, cantAlumnos);
+        List<Aula> resultado = new ArrayList();
         if (!listaAulas.isEmpty()){
             if(!(periodo==null)){//Periodica
-                boolean aulaDisponibleAux=true;
-                while(!aulaDisponible || cont<listaAulas.size()){
+                boolean aulaDisponibleAux;
+                Date fechaAux = fecha;
+                while(cont<listaAulas.size()){
                     cont++;
+                    aulaDisponibleAux=true;
                     Date fechaCiclo;
                     FechalectivasId fl = new FechalectivasId();
                     switch (periodo){
@@ -60,37 +62,36 @@ public class GestorDeAula {
                             fechaCiclo = fl.getFechafin2c();
                             break;
                     }
-                    while(aulaDisponibleAux && fecha.before(fechaCiclo)){
+                    fechaAux = fecha;
+                    while(aulaDisponibleAux && fechaAux.before(fechaCiclo)){
                         Calendar c = Calendar.getInstance();
-                        c.setTime(fecha);
+                        c.setTime(fechaAux);
                         c.add(Calendar.DATE, 7);
-                        fecha=c.getTime();
-                        List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
+                        fechaAux=c.getTime();
+                        List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fechaAux, h_inicio, h_fin);
                         if (!reservas.isEmpty()){ // SI LA LISTA ES VACIA SIGNIFICA QUE NO EXISTEN RESERVAS QUE COINCIDAN CON LA FECHA Y HORA EN ESE AULA, ES DECIR, ESTA DISPONIBLE
                             aulaDisponibleAux=false;
                         }
                     }
-                    if (fecha.after(fechaCiclo)){
-                        return listaAulas;
+                    if (fechaAux.after(fechaCiclo)){
+                        resultado.add(listaAulas.get(cont));
                     }
                 }
+                return resultado;
             }else{//Esporadica
-                while(!aulaDisponible || cont<listaAulas.size()){
+                while(cont<listaAulas.size()){
                     cont++;
                     List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
                     if (reservas.isEmpty()){
-                        aulaDisponible=true;
+                        resultado.add(listaAulas.get(cont));
                     }
                 }
-                if (aulaDisponible){
-                    return listaAulas;
-                }
+                return resultado;
             }
         }else{
             //NO HAY AULA DE ESE TIPO Y CANTIDAD
             return null;
         }
-        return null;
     }
 
     public void notificarError(){
