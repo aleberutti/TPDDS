@@ -29,6 +29,14 @@ public class Diareserva  implements java.io.Serializable {
        this.horainicio = horainicio;
        this.horafin = horafin;
     }
+    
+    public Diareserva(Aula aula, String diaSemana, Date fecha, Date horainicio, Date horafin) {
+       this.aula = aula;
+       this.diaSemana = diaSemana;
+       this.fecha = fecha;
+       this.horainicio = horainicio;
+       this.horafin = horafin;
+    }
    
     public Integer getDiaReservaId() {
         return this.diaReservaId;

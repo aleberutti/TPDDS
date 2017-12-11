@@ -19,17 +19,17 @@ public class AulasDisponibles extends javax.swing.JFrame {
     
     List<Aula> aulas;
     GestorDeReserva gdr;
-    Aula selected;
+    Vector fechas;
     
-    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, Aula selected) {
+    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr) {
         initComponents();
         this.aulas = aulas;
         this.gdr = gdr;
+        this.fechas = fechas;
         this.fecha.setText(fechas.get(0).toString());
         this.h_inicio.setText(fechas.get(2).toString());
         this.h_fin.setText(fechas.get(3).toString());
         completarTabla();
-        this.selected=selected;
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -153,7 +153,7 @@ public class AulasDisponibles extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(seleccionar)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
@@ -199,7 +199,7 @@ public class AulasDisponibles extends javax.swing.JFrame {
         // TODO add your handling code here:
         //REGISTRAR RESERVA CON ESTE AULA
         if (this.tabla.getSelectedRow()!=-1){
-            selected = this.aulas.get(this.tabla.getSelectedRow());
+            gdr.registrarEsporadica(this.aulas.get(this.tabla.getSelectedRow()), fechas);
         }
     }//GEN-LAST:event_seleccionarActionPerformed
 

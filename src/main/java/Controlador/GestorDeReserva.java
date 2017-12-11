@@ -3,13 +3,18 @@ package Controlador;
 import Modelo.Actividad;
 import Modelo.Aula;
 import Modelo.Bedel;
+import Modelo.Diareserva;
 import Modelo.Docente;
+import Modelo.Esporadica;
+import Modelo.Reserva;
 import java.util.List;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class GestorDeReserva {
 
     ReservaDAO rd;
+    Set<Diareserva> diaReservas = new HashSet();
     
     public GestorDeReserva() {
         rd = new ReservaDAO();
@@ -53,8 +59,34 @@ public class GestorDeReserva {
         return listaReservas;
     }
     
-    public void registrarEsporadica(Aula aula, Bedel b, Actividad act, Docente d){
-        
+    public void registrarEsporadica(Aula aula, Vector v){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = new Date();
+        Date h_fin = new Date();
+        Date h_inicio = new Date();
+        try{
+            fecha = sdf.parse((String)(v.get(0)));
+            sdf = new SimpleDateFormat("HH:mm");
+            h_inicio = sdf.parse((String)(v.get(2)));
+            h_fin = sdf.parse((String)(v.get(3)));
+        }catch(ParseException e){
+            System.out.println("Excepcion.");
+        }
+        Diareserva dr = new Diareserva(aula, (String)(v.get(2)), fecha, h_inicio, h_fin);
+        diaReservas.add(dr);
+    }
+    
+    public void registrarReserva(Bedel b, Actividad act, Docente doc, int cantAlumnos){
+        Reserva rsv = new Reserva(act, b, doc, cantAlumnos, new Date(), diaReservas);
+        Esporadica esp = new Esporadica(rsv);
+        rsv.setEsporadica(esp);
+        rd.createReserva(rsv);
+        rd.createEsporadica(esp);
+        diaReservas.forEach((e) ->  {
+                                    e.setReserva(rsv); 
+                                    rd.createDR(e);}
+                            );
+        this.diaReservas.clear();
     }
     
     

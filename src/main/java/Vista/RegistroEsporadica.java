@@ -9,6 +9,7 @@ import Controlador.ActividadDAO;
 import Controlador.DocenteDAO;
 import Controlador.GestorDeReserva;
 import Controlador.UsuarioDAO;
+import Modelo.Actividad;
 import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Docente;
@@ -580,23 +581,34 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         //CREO OBJETOS NECESARIOS PARA RESERVA
         Docente doc = dd.readObj(this.emailprofe.getText());
+        Actividad act = new Actividad();
 //        Actividad act = ad.read(prevValIn, WIDTH);
         List aulasPTodas = gdr.validarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
-        Aula selected = new Aula();
         for(int i = 0; i<aulasPTodas.size(); i+=2){
             if (aulasPTodas.get(i+1)!=null){
                 RegistroEsporadica esta = this;
-                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), gdr, selected);
+                this.setEnabled(false);
+                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr);
                 aulasd.addWindowListener(new WindowAdapter(){
                     public void windowClosed(WindowEvent e){
-//                        gdr.registrarEsporadica(selected, b, act, doc);
+                        System.out.println("Se cerro 1.");
+                        esta.setEnabled(true);
                     }
                 });
             }
             else{
+                RegistroEsporadica esta = this;
+                this.setEnabled(false);
                 ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)));
+                enea.addWindowListener(new WindowAdapter(){
+                    public void windowClosed(WindowEvent e){
+                        System.out.println("Se cerro 1.");
+                        esta.setEnabled(true);
+                    }
+                });
             }
         }
+        gdr.registrarReserva(b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
