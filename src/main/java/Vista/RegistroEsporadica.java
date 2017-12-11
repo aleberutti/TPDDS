@@ -12,6 +12,7 @@ import Controlador.UsuarioDAO;
 import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Docente;
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
@@ -46,10 +47,11 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Object prevValIn;
     Object prevValFin;
+    final static Color ROJOERROR = new Color(255, 000, 000);
+    final static Color NEGRO = new Color(000, 000, 000);
     
     public RegistroEsporadica(Bedel b) {
         initComponents();
-        setDocentes();
         this.b=b;
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -86,18 +88,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         aceptar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lcant = new javax.swing.JLabel();
         cantAlumnos = new javax.swing.JSpinner();
-        jLabel6 = new javax.swing.JLabel();
+        ltipoa = new javax.swing.JLabel();
         tipoDeAula = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        lapel = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
+        ltipo = new javax.swing.JLabel();
         info1 = new javax.swing.JLabel();
         text2 = new javax.swing.JTextField();
         info2 = new javax.swing.JLabel();
         text1 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
+        lmail = new javax.swing.JLabel();
         emailprofe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -137,16 +139,16 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/file.png"))); // NOI18N
         jLabel4.setText("Reserva Esporádica");
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel5.setText("Cantidad de Alumnos:");
+        lcant.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        lcant.setText("Cantidad de Alumnos:");
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel6.setText("Tipo de Aula:");
+        ltipoa.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        ltipoa.setText("Tipo de Aula:");
 
         tipoDeAula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multimedios", "Informática", "Sin Recursos Adicionales" }));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel7.setText("Apellido y nombre:");
+        lapel.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        lapel.setText("Apellido y nombre:");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "Curso", "Seminario", "Carrera de grado" }));
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -160,8 +162,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel16.setText("Tipo:");
+        ltipo.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        ltipo.setText("Tipo:");
 
         info1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         info1.setText("Información");
@@ -186,8 +188,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel18.setText("E-mail:");
+        lmail.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        lmail.setText("E-mail:");
 
         emailprofe.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         emailprofe.setText("email");
@@ -314,7 +316,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         });
 
-        ComboDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Docente 1", "Docente 2", "Docente 3" }));
+        ComboDocente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         ComboDocente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboDocenteItemStateChanged(evt);
@@ -378,10 +380,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel18))
+                                    .addComponent(lcant)
+                                    .addComponent(ltipoa)
+                                    .addComponent(lapel)
+                                    .addComponent(lmail))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(17, 17, 17)
@@ -395,7 +397,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                         .addComponent(emailprofe))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel16)
+                                    .addComponent(ltipo)
                                     .addComponent(info1)
                                     .addComponent(info2))
                                 .addGap(18, 18, 18)
@@ -461,23 +463,23 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addComponent(jSeparator4)
                         .addGap(22, 22, 22)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(lcant)
                     .addComponent(cantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ltipoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tipoDeAula, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lapel)
                     .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
+                    .addComponent(lmail)
                     .addComponent(emailprofe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
+                    .addComponent(ltipo)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -562,19 +564,30 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         //CREO OBJETOS NECESARIOS PARA RESERVA
-        DocenteDAO dd = new DocenteDAO();
-        Docente doc = dd.readObj(this.emailprofe.getText());
-        ActividadDAO ad = new ActividadDAO();
-        List<Aula> aulas = gdr.registrarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
-        if(null!=aulas){
-            AulasDisponibles aulasd = new AulasDisponibles(aulas, gdr);
-            aulasd.setVisible(true);
-            this.dispose();
+        if(emailprofe.getText().equals("Seleccione un docente de la lista")){
+            emailprofe.setForeground(ROJOERROR);
+        }else{
+            emailprofe.setForeground(NEGRO);
+            if(cantAlumnos.getValue().equals(0)){
+                cantAlumnos.setBackground(ROJOERROR);
+            }
+            else{
+                DocenteDAO dd = new DocenteDAO();
+                Docente doc = dd.readObj(this.emailprofe.getText());
+                ActividadDAO ad = new ActividadDAO();
+                List<Aula> aulas = gdr.registrarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
+                if(null!=aulas){
+                    AulasDisponibles aulasd = new AulasDisponibles(aulas, gdr);
+                    aulasd.setVisible(true);
+                    this.dispose();
+                }
+                else{
+                    ErrorNoExisteAula enea = new ErrorNoExisteAula();
+                    enea.setVisible(true);
+                }
+            }  
         }
-        else{
-            ErrorNoExisteAula enea = new ErrorNoExisteAula();
-            enea.setVisible(true);
-        }
+
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
@@ -732,6 +745,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
     private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
         //busco y seteo el mail del mismo a través del ID
+        setDocentes();
         DocenteDAO dd = new DocenteDAO();
         int docID = ComboDocente.getSelectedIndex()+1;
         String mailDoc = dd.readMail(docID).get(0).getEmail();
@@ -764,19 +778,19 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private javax.swing.JLabel info2;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lapel;
+    private javax.swing.JLabel lcant;
+    private javax.swing.JLabel lmail;
+    private javax.swing.JLabel ltipo;
+    private javax.swing.JLabel ltipoa;
     private javax.swing.JButton minimizeButton;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField text1;

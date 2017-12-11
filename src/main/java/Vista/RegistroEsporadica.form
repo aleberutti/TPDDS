@@ -114,10 +114,10 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel18" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lcant" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ltipoa" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lapel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lmail" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
@@ -138,7 +138,7 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ltipo" min="-2" max="-2" attributes="0"/>
                                       <Component id="info1" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="info2" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -225,27 +225,27 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lcant" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cantAlumnos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel6" max="32767" attributes="0"/>
+                      <Component id="ltipoa" max="32767" attributes="0"/>
                       <Component id="tipoDeAula" min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lapel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ComboDocente" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="emailprofe" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ltipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboTipo" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -293,7 +293,7 @@
             <Property name="text" type="java.lang.String" value="Reserva Espor&#xe1;dica"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lcant">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="0"/>
@@ -303,7 +303,7 @@
         </Component>
         <Component class="javax.swing.JSpinner" name="cantAlumnos">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="ltipoa">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="0"/>
@@ -325,7 +325,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="lapel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="0"/>
@@ -352,7 +352,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
+        <Component class="javax.swing.JLabel" name="ltipo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="0"/>
@@ -387,7 +387,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text1ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel18">
+        <Component class="javax.swing.JLabel" name="lmail">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="16" style="0"/>
@@ -743,11 +743,8 @@
         <Component class="javax.swing.JComboBox" name="ComboDocente">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="  "/>
-                <StringItem index="1" value="Docente 1"/>
-                <StringItem index="2" value="Docente 2"/>
-                <StringItem index="3" value="Docente 3"/>
+              <StringArray count="1">
+                <StringItem index="0" value=" "/>
               </StringArray>
             </Property>
           </Properties>
