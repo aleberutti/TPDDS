@@ -22,7 +22,29 @@ public class DocenteDAO extends GenericDAO{
     public DocenteDAO() {
     }
     
-    public Docente read(String email){
+    public List<Docente> readAll(){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM docente WHERE 1;";
+        Query query = SS.createSQLQuery(sentencia).addEntity(Docente.class);
+        List<Docente> lista = query.list();
+        SS.getTransaction().commit();
+        SS.close();
+        return lista;
+    }
+    
+    public List<Docente> readMail(int ID){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM docente WHERE docenteID=" + ID;
+        Query query = SS.createSQLQuery(sentencia).addEntity(Docente.class);
+        List<Docente> lista = query.list();
+        SS.getTransaction().commit();
+        SS.close();
+        return lista;
+    }
+    
+    public Docente readObj(String email){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
         String sentencia = "SELECT * FROM docente D WHERE D.email='" + email + "' LIMIT 0,1;";

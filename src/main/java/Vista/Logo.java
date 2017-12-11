@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
  *
  * @author juani
  */
-public class Logos extends javax.swing.JFrame {
+public class Logo extends javax.swing.JFrame {
 
     /**
      * Creates new form Logos
      */
-    public Logos() {
+    public Logo() {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(this);

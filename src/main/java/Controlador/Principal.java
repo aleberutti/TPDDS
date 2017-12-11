@@ -7,7 +7,7 @@ package Controlador;
 
 import Vista.Autenticacion;
 import Vista.ErrorBbdd;
-import Vista.Logos;
+import Vista.Logo;
 import javax.swing.ImageIcon;
 /**
  *
@@ -20,7 +20,7 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        Logos cp = new Logos();
+        Logo cp = new Logo();
         cp.setVisible(true);
         try{
         GenericDAO gd = new GenericDAO();
