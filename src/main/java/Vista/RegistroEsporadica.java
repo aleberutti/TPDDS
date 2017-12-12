@@ -177,6 +177,11 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         ltipoa.setText("Tipo de Aula:");
 
         tipoDeAula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multimedios", "Informática", "Sin Recursos Adicionales" }));
+        tipoDeAula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoDeAulaActionPerformed(evt);
+            }
+        });
 
         lapel.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         lapel.setText("Apellido y nombre:");
@@ -834,6 +839,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 if(i==0){
                     datos[i]="Seleccione el nombre de la carrera";
                 }else{
+                    
                     datos[i]=((Catedra)actividades.get(i-1)).getCarrera();
                 }
             }
@@ -871,6 +877,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo2ActionPerformed
+
+    private void tipoDeAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDeAulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoDeAulaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

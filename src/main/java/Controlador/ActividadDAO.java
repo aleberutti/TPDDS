@@ -33,22 +33,22 @@ public class ActividadDAO extends GenericDAO{
         List lista;
         switch (tipo){
             case "Curso":
-                sentencia = "SELECT A.* FROM curso C, actividad A WHERE A.actividadID=C.actividadID;";
+                sentencia = "SELECT DISTINCT A.* FROM curso C, actividad A WHERE A.actividadID=C.actividadID;";
                 query = SS.createSQLQuery(sentencia).addEntity(Actividad.class);
                 lista = query.list();
                 break;
             case "Seminario":
-                sentencia = "SELECT A.* FROM seminario S, actividad A WHERE A.actividadID=S.actividadID;";
+                sentencia = "SELECT DISTINCT A.* FROM seminario S, actividad A WHERE A.actividadID=S.actividadID;";
                 query = SS.createSQLQuery(sentencia).addEntity(Actividad.class);
                 lista = query.list();
                 break;
             case "Carrera de grado":
-                sentencia = "SELECT C.* FROM catedra C, actividad A WHERE A.actividadID=C.actividadID;";
+                sentencia = "SELECT DISTINCT C.* FROM catedra C, actividad A WHERE A.actividadID=C.actividadID;";
                 query = SS.createSQLQuery(sentencia).addEntity(Catedra.class);
                 lista = query.list();
                 break;
             default:
-                sentencia = "SELECT * FROM actividad;";
+                sentencia = "SELECT DISTINCT * FROM actividad;";
                 query = SS.createSQLQuery(sentencia).addEntity(Actividad.class);
                 lista = query.list();
                 break;
