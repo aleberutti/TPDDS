@@ -52,7 +52,10 @@ public class DocenteDAO extends GenericDAO{
         List<Docente> lista = query.list();
         SS.getTransaction().commit();
         SS.close();
-        return lista.get(0);
+        if (!lista.isEmpty())
+            return lista.get(0);
+        else
+            return null;
     }
     
 }

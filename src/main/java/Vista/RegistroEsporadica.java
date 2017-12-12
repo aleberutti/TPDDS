@@ -15,8 +15,10 @@ import Modelo.Bedel;
 import Modelo.Catedra;
 import Modelo.Docente;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +36,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 
 /**
@@ -48,7 +51,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     Bedel b;
     GestorDeReserva gdr;
     DefaultTableModel modelo;
-    List<Catedra> actividades;
+    List actividades;
+    List<Docente> docentes;
     Object prevValIn;
     Object prevValFin;
     DocenteDAO dd;
@@ -83,7 +87,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     public void setDocentes(){
         
         //seteo el combobox con nombre y apellido de los docentes de la bd
-        List<Docente> docentes = dd.readAll();
+        this.docentes = dd.readAll();
         String datos[] = new String [10];
         if(docentes.isEmpty()){
             JOptionPane.showMessageDialog(null,"No se encuentran docentes en la BD"); 
@@ -592,15 +596,14 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         //CREO OBJETOS NECESARIOS PARA RESERVA
-        Docente doc = dd.readObj(this.emailprofe.getText());
-        Actividad act = new Actividad();
-//        Actividad act = ad.read(prevValIn, WIDTH);
+        Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
+        Actividad act = (Actividad)actividades.get(this.combo1.getSelectedIndex()-1);
         List aulasPTodas = gdr.validarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
-        for(int i = 0; i<aulasPTodas.size(); i+=2){
+        List<Integer> contador = new ArrayList();
+        for(int i=0; i<aulasPTodas.size(); i+=2){
             if (aulasPTodas.get(i+1)!=null){
                 RegistroEsporadica esta = this;
-                this.setEnabled(false);
-                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr);
+                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
                 aulasd.addWindowListener(new WindowAdapter(){
                     public void windowClosed(WindowEvent e){
                         System.out.println("Se cerro 1.");
@@ -620,9 +623,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 });
             }
         }
-        gdr.registrarReserva(b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
+//        gdr.registrarReserva(b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
     }//GEN-LAST:event_aceptarActionPerformed
-
+    
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
         SimpleDateFormat sdf = new SimpleDateFormat(this.fecha.getDateFormatString());
         Date today = new Date();
@@ -754,16 +757,15 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 //        ArrayList <String> nombres= new ArrayList();
 //        nombres.add("nacho");
 //        AutoSuggestor autoSuggestor = new AutoSuggestor(this.texto1, this, nombres, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
-        List<Actividad> lista;
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":   info1.setVisible(true);
                             combo1.setVisible(true);
                             info2.setVisible(false);
                             combo2.setVisible(false);     
                             info1.setText("Nombre:");
-                            lista = ad.readPerType("Curso");
-                            if (lista!=null){
-                                this.setActividad(lista, false);
+                            actividades = ad.readPerType("Curso");
+                            if (actividades!=null){
+                                this.setActividad();
                             }
 //                            ArrayList <String> cursos= new ArrayList();
 //                            cursos.add("Reparacion");
@@ -782,9 +784,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                 info2.setVisible(false);
                                 combo2.setVisible(false);
                                 info1.setText("Nombre:");
-                                lista = ad.readPerType("Seminario");
-                                if (lista!=null){
-                                    this.setActividad(lista, false);
+                                actividades = ad.readPerType("Seminario");
+                                if (actividades!=null){
+                                    this.setActividad();
                                 }
 //                                ArrayList <String> sem= new ArrayList();
 //                                sem.add("ASd");
@@ -806,7 +808,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                         info2.setText("Cátedra:");
                                         actividades = ad.readPerType("Carrera de grado");
                                         if (actividades!=null){
-                                            this.setActividad(actividades, true);
+                                            this.setActividad();
                                         }else{
                                             JOptionPane.showMessageDialog(null,"No se encuentran carreras en la BD"); 
                                             combo1.setEnabled(false);
@@ -816,23 +818,23 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboTipoItemStateChanged
 
-    private void setActividad(List lista, boolean flag){
-        String datos[] = new String [lista.size()+1];
-        if (!flag){
-            for(int i=0;i<lista.size()+1;i++){
+    private void setActividad(){
+        String datos[] = new String [actividades.size()+1];
+        if (!combo2.isVisible()){
+            for(int i=0;i<actividades.size()+1;i++){
                 if(i==0){
                     datos[i]="Seleccione el nombre de la actividad";
                 }else{
-                    datos[i]=((Actividad)lista.get(i-1)).getNombre();
+                    datos[i]=((Actividad)actividades.get(i-1)).getNombre();
                 }
             }
             combo1.setModel(new DefaultComboBoxModel(datos));
         }else{
-            for(int i=0;i<lista.size()+1;i++){
+            for(int i=0;i<actividades.size()+1;i++){
                 if(i==0){
                     datos[i]="Seleccione el nombre de la carrera";
                 }else{
-                    datos[i]=((Catedra)lista.get(i-1)).getCarrera();
+                    datos[i]=((Catedra)actividades.get(i-1)).getCarrera();
                 }
             }
             combo1.setModel(new DefaultComboBoxModel(datos));
@@ -844,16 +846,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_cantAlumnosFocusGained
 
     private void combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo1ItemStateChanged
-        String datos[] = new String [actividades.size()+1];
-        List lista = ad.readCatedra(actividades.get(combo1.getSelectedIndex()-1));
-        for(int i=0;i<lista.size()+1;i++){
-            if(i==0){
-                datos[i]="Seleccione el nombre de la actividad";
-            }else{
-                datos[i]=lista.get(i-1).toString();
+        if (this.comboTipo.getSelectedItem().toString().equals("Carrera de grado")){
+            List lista = ad.readCatedra((Catedra)actividades.get(combo1.getSelectedIndex()-1));
+            String datos[] = new String [lista.size()+1];
+            for(int i=0;i<lista.size()+1;i++){
+                if(i==0){
+                    datos[i]="Seleccione el nombre de la actividad";
+                }else{
+                    datos[i]=lista.get(i-1).toString();
+                }
             }
+            combo2.setModel(new DefaultComboBoxModel(datos));
         }
-        combo2.setModel(new DefaultComboBoxModel(datos));
     }//GEN-LAST:event_combo1ItemStateChanged
 
     private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed

@@ -73,7 +73,11 @@ public class GestorDeReserva {
             System.out.println("Excepcion.");
         }
         Diareserva dr = new Diareserva(aula, (String)(v.get(2)), fecha, h_inicio, h_fin);
+        System.out.println("Diareserva:");
+        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
         diaReservas.add(dr);
+        System.out.println(diaReservas.size());
+        System.out.println(" ---------- ");
     }
     
     public void registrarReserva(Bedel b, Actividad act, Docente doc, int cantAlumnos){
@@ -82,7 +86,9 @@ public class GestorDeReserva {
         rsv.setEsporadica(esp);
         rd.createReserva(rsv);
         rd.createEsporadica(esp);
+        System.out.println(diaReservas.size());
         diaReservas.forEach((e) ->  {
+                                    System.out.println("Entra x;");
                                     e.setReserva(rsv); 
                                     rd.createDR(e);}
                             );

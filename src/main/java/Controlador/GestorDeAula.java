@@ -49,7 +49,7 @@ public class GestorDeAula {
             if(!(periodo==null)){//Periodica
                 boolean aulaDisponibleAux;
                 Date fechaAux = fecha;
-                while(cont<listaAulas.size()){
+                while(cont<listaAulas.size()-1){
                     cont++;
                     aulaDisponibleAux=true;
                     Date fechaCiclo;
@@ -79,7 +79,7 @@ public class GestorDeAula {
                 }
                 return resultado;
             }else{//Esporadica
-                while(cont<listaAulas.size()){
+                while(cont<listaAulas.size()-1){
                     cont++;
                     List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
                     if (reservas.isEmpty()){

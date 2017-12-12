@@ -6,7 +6,10 @@
 package Vista;
 
 import Controlador.GestorDeReserva;
+import Modelo.Actividad;
 import Modelo.Aula;
+import Modelo.Bedel;
+import Modelo.Docente;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -17,15 +20,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AulasDisponibles extends javax.swing.JFrame {
     
+    Actividad act;
+    Bedel b;
+    Docente doc;
+    int cantAlumnos;
     List<Aula> aulas;
     GestorDeReserva gdr;
+    int listsize;
     Vector fechas;
+    List<Integer> contador;
     
-    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr) {
+    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos) {
         initComponents();
         this.aulas = aulas;
+        this.cantAlumnos = cantAlumnos;
+        this.b = b;
+        this.act = act;
+        this.doc = doc;
+        this.listsize=listsize;
         this.gdr = gdr;
         this.fechas = fechas;
+        this.contador = contador;
         this.fecha.setText(fechas.get(0).toString());
         this.h_inicio.setText(fechas.get(2).toString());
         this.h_fin.setText(fechas.get(3).toString());
@@ -71,6 +86,7 @@ public class AulasDisponibles extends javax.swing.JFrame {
         jLabel10.setText("Hora de inicio:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
@@ -201,6 +217,13 @@ public class AulasDisponibles extends javax.swing.JFrame {
         if (this.tabla.getSelectedRow()!=-1){
             gdr.registrarEsporadica(this.aulas.get(this.tabla.getSelectedRow()), fechas);
         }
+        this.contador.add(1);
+        System.out.println(contador.size());
+        System.out.println(listsize);
+        if (contador.size()==listsize){
+            gdr.registrarReserva(b, act, doc, cantAlumnos);
+        }
+        this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
 
    

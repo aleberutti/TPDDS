@@ -32,15 +32,15 @@ public class AulasDAO {
         switch (tipo){
             case "Multimedios":
                 sentencia = "SELECT A.* FROM aulamultimedios AM, aula A WHERE AM.aulaID=A.aulaID "
-                        + "AND A.capacidad>=" + cant + "AND A.estado=HABILITADO;";
+                        + "AND A.capacidad>=" + cant + " AND A.estado='ACTIVA';";
                 query = SS.createSQLQuery(sentencia).addEntity(Aula.class);
                 lista = query.list();
                 SS.getTransaction().commit();
                 SS.close();
                 break;
             case "Informática":
-                sentencia = "SELECT A.* FROM aulasinformatica AI, aula A WHERE AI.aulaID=A.aulaID "
-                        + "AND A.capacidad>=" + cant + "AND A.estado=HABILITADO;";
+                sentencia = "SELECT A.* FROM aulainformatica AI, aula A WHERE AI.aulaID=A.aulaID "
+                        + "AND A.capacidad>=" + cant + " AND A.estado='HABILITADO';";
                 query = SS.createSQLQuery(sentencia).addEntity(Aula.class);
                 lista = query.list();
                 SS.getTransaction().commit();
@@ -48,7 +48,7 @@ public class AulasDAO {
                 break;
             case "Sin recursos adicionales":
                 sentencia = "SELECT A.* FROM aulasra ASRA, aula A WHERE ASRA.aulaID=A.aulaID "
-                        + "AND A.capacidad>=" + cant + "AND A.estado=HABILITADO;";
+                        + "AND A.capacidad>=" + cant + " AND A.estado='HABILITADO';";
                 query = SS.createSQLQuery(sentencia).addEntity(Aula.class);
                 lista = query.list();
                 SS.getTransaction().commit();
