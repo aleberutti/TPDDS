@@ -25,7 +25,7 @@ public class ActividadDAO extends GenericDAO{
     public ActividadDAO() {
     }
     
-    public List<Actividad> readPerType(String tipo){
+    public List readPerType(String tipo){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
         String sentencia;
@@ -33,17 +33,17 @@ public class ActividadDAO extends GenericDAO{
         List lista;
         switch (tipo){
             case "Curso":
-                sentencia = "SELECT A.nombre FROM curso C, actividad A WHERE A.actividadID=C.actividadID;";
+                sentencia = "SELECT A.* FROM curso C, actividad A WHERE A.actividadID=C.actividadID;";
                 query = SS.createSQLQuery(sentencia).addEntity(Actividad.class);
                 lista = query.list();
                 break;
             case "Seminario":
-                sentencia = "SELECT A.nombre FROM seminario S, actividad A WHERE A.actividadID=S.actividadID;";
+                sentencia = "SELECT A.* FROM seminario S, actividad A WHERE A.actividadID=S.actividadID;";
                 query = SS.createSQLQuery(sentencia).addEntity(Actividad.class);
                 lista = query.list();
                 break;
             case "Carrera de grado":
-                sentencia = "SELECT C.carrera, A.nombre FROM catedra C, actividad A WHERE A.actividadID=C.actividadID;";
+                sentencia = "SELECT C.* FROM catedra C, actividad A WHERE A.actividadID=C.actividadID;";
                 query = SS.createSQLQuery(sentencia).addEntity(Catedra.class);
                 lista = query.list();
                 break;
@@ -63,4 +63,22 @@ public class ActividadDAO extends GenericDAO{
             return lista;
         }
     }
+    
+    public List readCatedra(Catedra catedra){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT A.nombre FROM actividad A, catedra C WHERE C.actividadID=A.actividadID AND A.actividadID="+ catedra.getActividadId() +";";
+        Query query = SS.createSQLQuery(sentencia);
+        List lista = query.list();
+        if (lista.isEmpty()){
+            SS.getTransaction().commit();
+            SS.close();
+            return null;
+        }else{
+            SS.getTransaction().commit();
+            SS.close();
+            return lista;
+        }
+    }
+    
 }

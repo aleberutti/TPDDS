@@ -12,6 +12,7 @@ import Controlador.UsuarioDAO;
 import Modelo.Actividad;
 import Modelo.Aula;
 import Modelo.Bedel;
+import Modelo.Catedra;
 import Modelo.Docente;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -47,6 +48,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     Bedel b;
     GestorDeReserva gdr;
     DefaultTableModel modelo;
+    List<Catedra> actividades;
     Object prevValIn;
     Object prevValFin;
     DocenteDAO dd;
@@ -752,7 +754,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 //        ArrayList <String> nombres= new ArrayList();
 //        nombres.add("nacho");
 //        AutoSuggestor autoSuggestor = new AutoSuggestor(this.texto1, this, nombres, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
-        List lista;
+        List<Actividad> lista;
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":   info1.setVisible(true);
                             combo1.setVisible(true);
@@ -802,12 +804,13 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                         combo2.setVisible(true);
                                         info1.setText("Carrera:");
                                         info2.setText("Cátedra:");
-                                        lista = ad.readPerType("Seminario");
-                                        if (lista!=null){
-                                            this.setActividad(lista, true);
+                                        actividades = ad.readPerType("Carrera de grado");
+                                        if (actividades!=null){
+                                            this.setActividad(actividades, true);
                                         }else{
-                                            JOptionPane.showMessageDialog(null,"No se encuentran docentes en la BD"); 
-                                            ComboDocente.setEnabled(false);
+                                            JOptionPane.showMessageDialog(null,"No se encuentran carreras en la BD"); 
+                                            combo1.setEnabled(false);
+                                            combo2.setEnabled(false);
                                         }
                 break;            
         }
@@ -829,7 +832,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 if(i==0){
                     datos[i]="Seleccione el nombre de la carrera";
                 }else{
-                    datos[i]=((String[])lista.get(i-1))[0];
+                    datos[i]=((Catedra)lista.get(i-1)).getCarrera();
                 }
             }
             combo1.setModel(new DefaultComboBoxModel(datos));
@@ -841,7 +844,16 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_cantAlumnosFocusGained
 
     private void combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo1ItemStateChanged
-        // TODO add your handling code here:
+        String datos[] = new String [10];
+        List lista = ad.readCatedra(actividades.get(combo1.getSelectedIndex()-1));
+        for(int i=0;i<lista.size();i++){
+            if(i==0){
+                datos[i]="Seleccione el nombre de la actividad";
+            }else{
+                datos[i]=lista.get(i-1).toString();
+            }
+        }
+        combo2.setModel(new DefaultComboBoxModel(datos));
     }//GEN-LAST:event_combo1ItemStateChanged
 
     private void combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo1ActionPerformed
