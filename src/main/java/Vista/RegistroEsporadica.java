@@ -628,6 +628,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 });
             }
         }
+        DefaultTableModel dtm = (DefaultTableModel) this.tabla.getModel();
+        dtm.setRowCount(0);
 //        gdr.registrarReserva(b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
     }//GEN-LAST:event_aceptarActionPerformed
     
