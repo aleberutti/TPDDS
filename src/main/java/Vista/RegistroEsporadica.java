@@ -817,18 +817,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_comboTipoItemStateChanged
 
     private void setActividad(List lista, boolean flag){
-        String datos[] = new String [10];
+        String datos[] = new String [lista.size()+1];
         if (!flag){
-            for(int i=0;i<lista.size();i++){
+            for(int i=0;i<lista.size()+1;i++){
                 if(i==0){
                     datos[i]="Seleccione el nombre de la actividad";
                 }else{
-                    datos[i]=lista.get(i-1).toString();
+                    datos[i]=((Actividad)lista.get(i-1)).getNombre();
                 }
             }
             combo1.setModel(new DefaultComboBoxModel(datos));
         }else{
-            for(int i=0;i<lista.size();i++){
+            for(int i=0;i<lista.size()+1;i++){
                 if(i==0){
                     datos[i]="Seleccione el nombre de la carrera";
                 }else{
@@ -844,9 +844,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_cantAlumnosFocusGained
 
     private void combo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo1ItemStateChanged
-        String datos[] = new String [10];
+        String datos[] = new String [actividades.size()+1];
         List lista = ad.readCatedra(actividades.get(combo1.getSelectedIndex()-1));
-        for(int i=0;i<lista.size();i++){
+        for(int i=0;i<lista.size()+1;i++){
             if(i==0){
                 datos[i]="Seleccione el nombre de la actividad";
             }else{
