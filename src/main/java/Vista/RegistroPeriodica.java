@@ -5,12 +5,15 @@
  */
 package Vista;
 
-import Controlador.DocenteDAO;
+import Controlador.*;
 import Modelo.Bedel;
 import Modelo.Docente;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,34 +28,59 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     ButtonGroup bgPer = new ButtonGroup();
     ButtonGroup bgCuat = new ButtonGroup();
     Bedel b;
+    private AutoSuggestor a1;
+    private AutoSuggestor a2;
+    private AutoSuggestor a3;
+    private JComboBox carrera;
+    private GestorDeDocente gd= new GestorDeDocente();
+    private GestorDeActividad ga= new GestorDeActividad();
+    private ArrayList <String> curso = ga.getCursos();
+    private ArrayList <String> car = ga.getCursosCarrera();
+    private ArrayList <String> sem =ga.getSeminarios();
+    private ArrayList <String> themes =ga.getSeminariosThemes();
+    private ArrayList <String> carr =ga.getCatedrasCarrera();
+    private ArrayList <String> com =ga.getCatedrasComision();
     
     public RegistroPeriodica(Bedel b) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.a1 = new AutoSuggestor(this.text1, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
+        this.a2 = new AutoSuggestor(this.text2, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
+        this.a3 = new AutoSuggestor(this.text3, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
         bgPer.add(anual);
         bgPer.add(cuatrimestral);
         bgCuat.add(primero);
         bgCuat.add(segundo);
         this.b=b;
+        setDocentes();
+        ComboDocente.setSelectedIndex(0);
+        this.carrera =  new JComboBox();
+        this.carrera.setSize(this.text2.getSize());
+        this.carrera.setLocation(this.text2.getLocation());
+        this.carrera.setBackground(this.ComboDocente.getBackground());
+        this.carrera.setForeground(this.ComboDocente.getForeground());
+        this.jPanel1.add(carrera);
+        text1.setVisible(false);
+        text2.setVisible(false);
+        text3.setVisible(false);
+        carrera.setVisible(false);
+        carrera.setVisible(false);
         this.setVisible(true);
     }
     
     public void setDocentes(){
-        
         //seteo el combobox con nombre y apellido de los docentes de la bd
-        DocenteDAO dd = new DocenteDAO();
-        List<Docente> docentes = dd.readAll();
-        String datos[] = new String [10];
-        if(docentes.isEmpty()){
+        ArrayList <String> datos = new ArrayList(); 
+        datos.addAll(this.gd.getApellidoNombre());
+
+
+        if(datos.isEmpty()){
             JOptionPane.showMessageDialog(null,"No se encuentran docentes en la BD"); 
             ComboDocente.setEnabled(false);
             emailprofe.setText("No existen docentes en la BD");
         }else{
             emailprofe.setText("Seleccione un docente de la lista");
-            for(int i=0;i<docentes.size();i++){
-                datos[i]=docentes.get(i).getApellido()+", "+docentes.get(i).getNombre(); 
-            }
-            ComboDocente.setModel(new DefaultComboBoxModel(datos));  
+            ComboDocente.setModel(new DefaultComboBoxModel(datos.toArray()));  
         }      
     }
 
@@ -94,14 +122,14 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         jSpinner2 = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        apellidoNombre = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
+        tipo = new javax.swing.JLabel();
         info2 = new javax.swing.JLabel();
         text2 = new javax.swing.JTextField();
         info1 = new javax.swing.JLabel();
         text1 = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
         emailprofe = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
@@ -109,10 +137,13 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         minimizeButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         ComboDocente = new javax.swing.JComboBox<>();
+        text3 = new javax.swing.JTextField();
+        info3 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 153, 153));
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -272,8 +303,8 @@ public class RegistroPeriodica extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multimedios", "Informática", "Sin Recursos Adicionales" }));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel7.setText("Apellido y nombre:");
+        apellidoNombre.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        apellidoNombre.setText("Apellido y nombre:");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Curso", "Seminario", "Carrera de grado" }));
         comboTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -287,17 +318,17 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel16.setText("Tipo:");
+        tipo.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        tipo.setText("Tipo:");
 
         info2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        info2.setText("Información");
+        info2.setText("Información:");
 
         info1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        info1.setText("Información");
+        info1.setText("Información:");
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel18.setText("E-mail:");
+        email.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        email.setText("E-mail:");
 
         emailprofe.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         emailprofe.setText("email");
@@ -380,6 +411,9 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 ComboDocenteFocusGained(evt);
             }
         });
+
+        info3.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        info3.setText("Información:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -475,11 +509,12 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel16)
+                                    .addComponent(tipo)
                                     .addComponent(info2)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel18)
-                                    .addComponent(info1))
+                                    .addComponent(apellidoNombre)
+                                    .addComponent(email)
+                                    .addComponent(info1)
+                                    .addComponent(info3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -487,7 +522,8 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                     .addComponent(text2)
                                     .addComponent(text1)
                                     .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(text3))
                                 .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -556,15 +592,15 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                     .addComponent(jComboBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(apellidoNombre)
                     .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
+                    .addComponent(email)
                     .addComponent(emailprofe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
+                    .addComponent(tipo)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -574,8 +610,12 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(info2))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(info3)
+                    .addComponent(text3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
@@ -585,9 +625,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -598,6 +636,184 @@ public class RegistroPeriodica extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
+
+    }//GEN-LAST:event_ComboDocenteFocusGained
+
+    private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
+        //busco y seteo el mail del mismo a través del ID
+        String mailDoc=gd.getDocenteEmail(ComboDocente.getSelectedItem().toString());
+        if(mailDoc.isEmpty() || ComboDocente.getSelectedIndex()==0){
+            emailprofe.setText("Seleccione un docente de la lista");
+        }else{
+            emailprofe.setText(mailDoc);
+        }
+    }//GEN-LAST:event_ComboDocenteItemStateChanged
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        RegistroDeReserva rdr = new RegistroDeReserva(b);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void backButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseExited
+        // TODO add your handling code here:
+        backButton.setContentAreaFilled(false);
+    }//GEN-LAST:event_backButtonMouseExited
+
+    private void backButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseEntered
+        // TODO add your handling code here:
+        backButton.setContentAreaFilled(true);
+    }//GEN-LAST:event_backButtonMouseEntered
+
+    private void minimizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButtonActionPerformed
+        // TODO add your handling code here:
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_minimizeButtonActionPerformed
+
+    private void minimizeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseExited
+        // TODO add your handling code here:
+        minimizeButton.setContentAreaFilled(false);
+    }//GEN-LAST:event_minimizeButtonMouseExited
+
+    private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
+        // TODO add your handling code here:
+        minimizeButton.setContentAreaFilled(true);
+    }//GEN-LAST:event_minimizeButtonMouseEntered
+
+    private void exitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitButton1ActionPerformed
+
+    private void exitButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButton1MouseExited
+        // TODO add your handling code here:
+        exitButton1.setContentAreaFilled(false);
+    }//GEN-LAST:event_exitButton1MouseExited
+
+    private void exitButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButton1MouseEntered
+        // TODO add your handling code here:
+        exitButton1.setContentAreaFilled(true);
+    }//GEN-LAST:event_exitButton1MouseEntered
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTipoActionPerformed
+
+    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
+        
+        text2.setVisible(true);
+        if (comboTipo.getSelectedIndex()==0){
+            text1.setVisible(false);
+            text2.setVisible(false);
+            text3.setVisible(false);
+            carrera.setVisible(false);
+        }
+        switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+                text2.setVisible(false);
+                info1.setText("Nombre:");
+                text1.setVisible(true);
+                info2.setText("Carrera:");
+                carrera.setVisible(true);
+                this.a1.setDictionary(this.curso);
+                carrera.setModel(new DefaultComboBoxModel(this.car.toArray()));
+            break;
+            case "Seminario":
+                carrera.setVisible(false);
+                text3.setVisible(false);
+                info1.setText("Nombre:");
+                info2.setText("Tema:");
+                text1.setVisible(true);
+                text2.setVisible(true);
+                this.a1.setDictionary(this.sem);
+                this.a2.setDictionary(this.themes);
+            break;
+            case "Carrera de grado":
+                text2.setVisible(false);
+                info1.setText("Cátedra:");
+                text1.setVisible(true);
+                info2.setText("Carrera:");
+                carrera.setVisible(true);
+                info3.setText("Comisión:");
+                text3.setVisible(true);
+                ArrayList <String> cat =ga.getCatedras();
+                this.a1.setDictionary(cat);
+                carrera.setModel(new DefaultComboBoxModel(this.carr.toArray()));
+                this.a3.setDictionary(this.com);
+            break;
+        }
+    }//GEN-LAST:event_comboTipoItemStateChanged
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aceptarActionPerformed
+
+    private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
+        if (!this.viernes.isSelected()){
+            this.inicioV.setEnabled(false);
+            this.finV.setEnabled(false);
+        }else{
+            this.inicioV.setEnabled(true);
+            this.finV.setEnabled(true);
+        }
+    }//GEN-LAST:event_viernesActionPerformed
+
+    private void juevesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juevesActionPerformed
+        if (!this.jueves.isSelected()){
+            this.inicioJ.setEnabled(false);
+            this.finJ.setEnabled(false);
+        }else{
+            this.inicioJ.setEnabled(true);
+            this.finJ.setEnabled(true);
+        }
+    }//GEN-LAST:event_juevesActionPerformed
+
+    private void miercolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miercolesActionPerformed
+        if (!this.miercoles.isSelected()){
+            this.inicioX.setEnabled(false);
+            this.finX.setEnabled(false);
+        }else{
+            this.inicioX.setEnabled(true);
+            this.finX.setEnabled(true);
+        }
+    }//GEN-LAST:event_miercolesActionPerformed
+
+    private void martesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_martesActionPerformed
+        if (!this.martes.isSelected()){
+            this.inicioM.setEnabled(false);
+            this.finM.setEnabled(false);
+        }else{
+            this.inicioM.setEnabled(true);
+            this.finM.setEnabled(true);
+        }
+    }//GEN-LAST:event_martesActionPerformed
+
+    private void lunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lunesActionPerformed
+        if (!this.lunes.isSelected()){
+            this.inicioL.setEnabled(false);
+            this.finL.setEnabled(false);
+        }else{
+            this.inicioL.setEnabled(true);
+            this.finL.setEnabled(true);
+        }
+    }//GEN-LAST:event_lunesActionPerformed
+
+    private void segundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoActionPerformed
+        this.lunes.setEnabled(true);
+        this.martes.setEnabled(true);
+        this.miercoles.setEnabled(true);
+        this.jueves.setEnabled(true);
+        this.viernes.setEnabled(true);
+    }//GEN-LAST:event_segundoActionPerformed
+
+    private void primeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeroActionPerformed
+        this.lunes.setEnabled(true);
+        this.martes.setEnabled(true);
+        this.miercoles.setEnabled(true);
+        this.jueves.setEnabled(true);
+        this.viernes.setEnabled(true);
+    }//GEN-LAST:event_primeroActionPerformed
 
     private void anualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anualActionPerformed
         this.primero.setEnabled(false);
@@ -614,159 +830,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         this.segundo.setEnabled(true);
     }//GEN-LAST:event_cuatrimestralActionPerformed
 
-    private void lunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lunesActionPerformed
-        if (!this.lunes.isSelected()){
-            this.inicioL.setEnabled(false);
-            this.finL.setEnabled(false);
-        }else{
-            this.inicioL.setEnabled(true);
-            this.finL.setEnabled(true);
-        }
-    }//GEN-LAST:event_lunesActionPerformed
-
-    private void martesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_martesActionPerformed
-        if (!this.martes.isSelected()){
-            this.inicioM.setEnabled(false);
-            this.finM.setEnabled(false);
-        }else{
-            this.inicioM.setEnabled(true);
-            this.finM.setEnabled(true);
-        }
-    }//GEN-LAST:event_martesActionPerformed
-
-    private void miercolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miercolesActionPerformed
-        if (!this.miercoles.isSelected()){
-            this.inicioX.setEnabled(false);
-            this.finX.setEnabled(false);
-        }else{
-            this.inicioX.setEnabled(true);
-            this.finX.setEnabled(true);
-        }
-    }//GEN-LAST:event_miercolesActionPerformed
-
-    private void juevesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juevesActionPerformed
-        if (!this.jueves.isSelected()){
-            this.inicioJ.setEnabled(false);
-            this.finJ.setEnabled(false);
-        }else{
-            this.inicioJ.setEnabled(true);
-            this.finJ.setEnabled(true);
-        }
-    }//GEN-LAST:event_juevesActionPerformed
-
-    private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
-        if (!this.viernes.isSelected()){
-            this.inicioV.setEnabled(false);
-            this.finV.setEnabled(false);
-        }else{
-            this.inicioV.setEnabled(true);
-            this.finV.setEnabled(true);
-        }
-    }//GEN-LAST:event_viernesActionPerformed
-
-    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboTipoActionPerformed
-
-    private void exitButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButton1MouseEntered
-        // TODO add your handling code here:
-        exitButton1.setContentAreaFilled(true);
-    }//GEN-LAST:event_exitButton1MouseEntered
-
-    private void exitButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButton1MouseExited
-        // TODO add your handling code here:
-        exitButton1.setContentAreaFilled(false);
-    }//GEN-LAST:event_exitButton1MouseExited
-
-    private void exitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButton1ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_exitButton1ActionPerformed
-
-    private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
-        // TODO add your handling code here:
-        minimizeButton.setContentAreaFilled(true);
-    }//GEN-LAST:event_minimizeButtonMouseEntered
-
-    private void minimizeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseExited
-        // TODO add your handling code here:
-        minimizeButton.setContentAreaFilled(false);
-    }//GEN-LAST:event_minimizeButtonMouseExited
-
-    private void minimizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButtonActionPerformed
-        // TODO add your handling code here:
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_minimizeButtonActionPerformed
-
-    private void backButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseEntered
-        // TODO add your handling code here:
-        backButton.setContentAreaFilled(true);
-    }//GEN-LAST:event_backButtonMouseEntered
-
-    private void backButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseExited
-        // TODO add your handling code here:
-        backButton.setContentAreaFilled(false);
-    }//GEN-LAST:event_backButtonMouseExited
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        RegistroDeReserva rdr = new RegistroDeReserva(b);
-        this.dispose();
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void primeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeroActionPerformed
-        this.lunes.setEnabled(true);
-        this.martes.setEnabled(true);
-        this.miercoles.setEnabled(true);
-        this.jueves.setEnabled(true);
-        this.viernes.setEnabled(true);
-    }//GEN-LAST:event_primeroActionPerformed
-
-    private void segundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoActionPerformed
-        this.lunes.setEnabled(true);
-        this.martes.setEnabled(true);
-        this.miercoles.setEnabled(true);
-        this.jueves.setEnabled(true);
-        this.viernes.setEnabled(true);
-    }//GEN-LAST:event_segundoActionPerformed
-
-    private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
-        //busco y seteo el mail del mismo a través del ID
-        DocenteDAO dd = new DocenteDAO();
-        int docID = ComboDocente.getSelectedIndex()+1;
-        String mailDoc = dd.readMail(docID).get(0).getEmail();
-        if(mailDoc.isEmpty() || docID==0){
-            emailprofe.setText("El email no existe en la BD");
-        }else{
-            emailprofe.setText(mailDoc);
-        }
-    }//GEN-LAST:event_ComboDocenteItemStateChanged
-
-    private void comboTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTipoItemStateChanged
-                switch(comboTipo.getSelectedItem().toString()){
-            case "Curso": info2.setVisible(false);
-            text2.setVisible(false);
-            info1.setText("Nombre:");
-            break;
-            case "Seminario": info2.setVisible(false);
-            text2.setVisible(false);
-            info1.setText("Nombre:");
-            break;
-            case "Carrera de grado": info2.setVisible(true);
-            text2.setVisible(true);
-            info1.setText("Carrera:");
-            info2.setText("Cátedra:");
-            break;
-        }
-    }//GEN-LAST:event_comboTipoItemStateChanged
-
-    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aceptarActionPerformed
-
-    private void ComboDocenteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboDocenteFocusGained
-        setDocentes();
-    }//GEN-LAST:event_ComboDocenteFocusGained
-
     /**
      * @param args the command line arguments
      */
@@ -775,9 +838,11 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboDocente;
     private javax.swing.JButton aceptar;
     private javax.swing.JRadioButton anual;
+    private javax.swing.JLabel apellidoNombre;
     private javax.swing.JButton backButton;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JRadioButton cuatrimestral;
+    private javax.swing.JLabel email;
     private javax.swing.JLabel emailprofe;
     private javax.swing.JButton exitButton1;
     private javax.swing.JSpinner finJ;
@@ -787,6 +852,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JSpinner finX;
     private javax.swing.JLabel info1;
     private javax.swing.JLabel info2;
+    private javax.swing.JLabel info3;
     private javax.swing.JSpinner inicioJ;
     private javax.swing.JSpinner inicioL;
     private javax.swing.JSpinner inicioM;
@@ -796,12 +862,9 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator4;
@@ -820,6 +883,8 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JRadioButton segundo;
     private javax.swing.JTextField text1;
     private javax.swing.JTextField text2;
+    private javax.swing.JTextField text3;
+    private javax.swing.JLabel tipo;
     private javax.swing.JCheckBox viernes;
     // End of variables declaration//GEN-END:variables
 }

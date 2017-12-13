@@ -25,7 +25,7 @@ public class DocenteDAO extends GenericDAO{
     public List<Docente> readAll(){
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
-        String sentencia = "SELECT * FROM docente WHERE 1;";
+        String sentencia = "SELECT * FROM docente;";
         Query query = SS.createSQLQuery(sentencia).addEntity(Docente.class);
         List<Docente> lista = query.list();
         SS.getTransaction().commit();
