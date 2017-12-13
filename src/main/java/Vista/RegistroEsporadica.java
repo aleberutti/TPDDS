@@ -61,7 +61,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     DocenteDAO dd;
     ActividadDAO ad;
     
-    public RegistroEsporadica(Bedel b) {
+    public RegistroEsporadica(Bedel b){
         initComponents();
         this.b=b;
         this.setLocationRelativeTo(null);
@@ -70,7 +70,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.ad = new ActividadDAO();
         this.gdr = new GestorDeReserva();
         this.modelo = (DefaultTableModel) this.tabla.getModel();
-//        this.fecha.setMinSelectableDate(new Date());
         this.setearDayChooser();
         this.prevValIn=this.hora_inicio.getValue();
         this.prevValFin=this.hora_fin.getValue();
@@ -556,9 +555,22 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private void setearDayChooser(){
         FechasLectivasDAO fld = new FechasLectivasDAO();
         FechalectivasId fd = fld.readFechas();
-        this.fecha.setMinSelectableDate(fd.getFechainicio1c());
+        if (fd==null){
+            JOptionPane.showMessageDialog(null,"No se encuentran docentes en la BD");
+            return ;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(new Date());
+        try{
+            if (sdf.parse(today).after(fd.getFechainicio1c())){
+                this.fecha.setMinSelectableDate(sdf.parse(today));
+            }else{
+                this.fecha.setMinSelectableDate(fd.getFechainicio1c());
+            }
+        }catch(ParseException e){
+            
+        }
         this.fecha.setMaxSelectableDate(fd.getFechafin2c());
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        System.out.println("Fecha fin 2 c: " + sdf.format(fd.getFechafin2c()) + " Fecha incio 1 c : " + sdf.format(fd.getFechainicio1c()));
         RangeEvaluator re2 = new RangeEvaluator();
         re2.setStartDate(fd.getFechafin1c());
