@@ -608,22 +608,23 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         for(int i=0; i<aulasPTodas.size(); i+=2){
             if (aulasPTodas.get(i+1)!=null){
                 RegistroEsporadica esta = this;
-                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
+                this.setEnabled(false);
+                this.setAlwaysOnTop(true);
+                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()), this);
                 aulasd.addWindowListener(new WindowAdapter(){
                     public void windowClosed(WindowEvent e){
-                        System.out.println("Se cerro 1.");
-                        esta.setEnabled(true);
+                        esta.cantAlumnos.requestFocus();
                     }
                 });
             }
             else{
                 RegistroEsporadica esta = this;
+                esta.setAlwaysOnTop(true);
                 this.setEnabled(false);
-                ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
+                ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()), this);
                 enea.addWindowListener(new WindowAdapter(){
                     public void windowClosed(WindowEvent e){
-                        System.out.println("Se cerro 1.");
-                        esta.setEnabled(true);
+                        esta.cantAlumnos.requestFocus();
                     }
                 });
             }

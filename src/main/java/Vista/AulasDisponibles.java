@@ -29,8 +29,9 @@ public class AulasDisponibles extends javax.swing.JFrame {
     int listsize;
     Vector fechas;
     List<Integer> contador;
+    RegistroEsporadica padre;
     
-    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos) {
+    public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos, RegistroEsporadica padre) {
         initComponents();
         this.aulas = aulas;
         this.cantAlumnos = cantAlumnos;
@@ -41,11 +42,13 @@ public class AulasDisponibles extends javax.swing.JFrame {
         this.gdr = gdr;
         this.fechas = fechas;
         this.contador = contador;
+        this.padre = padre;
         this.fecha.setText(fechas.get(0).toString());
         this.h_inicio.setText(fechas.get(2).toString());
         this.h_fin.setText(fechas.get(3).toString());
         completarTabla();
         this.setLocationRelativeTo(null);
+        this.setAlwaysOnTop(true);
         this.setVisible(true);
     }
     
