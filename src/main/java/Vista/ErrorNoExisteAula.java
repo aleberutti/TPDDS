@@ -5,7 +5,12 @@
  */
 package Vista;
 
+import Controlador.GestorDeReserva;
+import Modelo.Actividad;
+import Modelo.Bedel;
+import Modelo.Docente;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JFrame;
 
@@ -18,12 +23,27 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
     /**
      * Creates new form AutenticacionConError
      */
-    public ErrorNoExisteAula(Vector fechas) {
+    List<Integer> contador;
+    Bedel b;
+    Docente doc;
+    Actividad act;
+    int cantAlumnos;
+    int listsize;
+    GestorDeReserva gdr;
+    
+    public ErrorNoExisteAula(Vector fechas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.cantAlumnos = cantAlumnos;
+        this.b = b;
+        this.act = act;
+        this.doc = doc;
+        this.listsize=listsize;
+        this.gdr = gdr;
         this.fecha.setText(fechas.get(0).toString());
         this.h_inicio.setText(fechas.get(2).toString());
         this.h_fin.setText(fechas.get(3).toString());
+        this.contador = contador;
         this.setVisible(true);
     }
 
@@ -158,17 +178,32 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
+        contador.add(0);
+        if (contador.size()==listsize && contador.contains(1)){
+            gdr.registrarReserva(b, act, doc, cantAlumnos);
+            RegistroExitoso rex = new RegistroExitoso();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.dispose();
+            contador.add(0);
+            if (contador.size()==listsize && contador.contains(1)){
+                gdr.registrarReserva(b, act, doc, cantAlumnos);
+                RegistroExitoso rex = new RegistroExitoso();
+            }
         }
     }//GEN-LAST:event_jButton1KeyPressed
 
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             this.dispose();
+            contador.add(0);
+            if (contador.size()==listsize && contador.contains(1)){
+                gdr.registrarReserva(b, act, doc, cantAlumnos);
+                RegistroExitoso rex = new RegistroExitoso();
+            }
         }
     }//GEN-LAST:event_jPanel2KeyPressed
 

@@ -472,7 +472,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13))
@@ -486,17 +486,17 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                     .addComponent(hora_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(cargar)
-                                .addGap(45, 45, 45))
+                                .addGap(40, 40, 40))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                                .addGap(6, 6, 6)
                                 .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSeparator4)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lcant)
@@ -538,13 +538,13 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -619,7 +619,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             else{
                 RegistroEsporadica esta = this;
                 this.setEnabled(false);
-                ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)));
+                ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
                 enea.addWindowListener(new WindowAdapter(){
                     public void windowClosed(WindowEvent e){
                         System.out.println("Se cerro 1.");
@@ -628,9 +628,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 });
             }
         }
-        DefaultTableModel dtm = (DefaultTableModel) this.tabla.getModel();
-        dtm.setRowCount(0);
-//        gdr.registrarReserva(b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()));
+        this.modelo.setRowCount(0);
     }//GEN-LAST:event_aceptarActionPerformed
     
     private void hora_inicioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hora_inicioStateChanged
@@ -768,7 +766,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             case "Curso":   info1.setVisible(true);
                             combo1.setVisible(true);
                             info2.setVisible(false);
-                            combo2.setVisible(false);     
+                            combo2.setVisible(false);
                             info1.setText("Nombre:");
                             actividades = ad.readPerType("Curso");
                             if (actividades!=null){
@@ -815,13 +813,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                         info2.setText("Cátedra:");
                                         actividades = ad.readPerType("Carrera de grado");
                                         if (actividades!=null){
+                                            combo1.setEnabled(true);
+                                            combo2.setEnabled(true);
                                             this.setActividad();
                                         }else{
                                             JOptionPane.showMessageDialog(null,"No se encuentran carreras en la BD"); 
                                             combo1.setEnabled(false);
                                             combo2.setEnabled(false);
                                         }
-                break;            
+                break;
+            default:
+                this.setNullCombos();
+                break;
         }
     }//GEN-LAST:event_comboTipoItemStateChanged
 

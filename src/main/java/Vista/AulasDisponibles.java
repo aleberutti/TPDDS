@@ -269,15 +269,14 @@ public class AulasDisponibles extends javax.swing.JFrame {
         //REGISTRAR RESERVA CON ESTE AULA
         if (this.tabla.getSelectedRow()!=-1){
             gdr.registrarEsporadica(this.aulas.get(this.tabla.getSelectedRow()), fechas);
+            this.contador.add(1);
         }
-        this.contador.add(1);
         System.out.println(contador.size());
         System.out.println(listsize);
         if (contador.size()==listsize){
             gdr.registrarReserva(b, act, doc, cantAlumnos);
+            RegistroExitoso rex = new RegistroExitoso();
         }
-        RegistroExitoso rex = new RegistroExitoso();
-        
         this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
 
