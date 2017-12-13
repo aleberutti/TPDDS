@@ -72,7 +72,7 @@ public class GestorDeReserva {
         }catch(ParseException e){
             System.out.println("Excepcion.");
         }
-        Diareserva dr = new Diareserva(aula, (String)(v.get(2)), fecha, h_inicio, h_fin);
+        Diareserva dr = new Diareserva(aula, (String)(v.get(1)), fecha, h_inicio, h_fin);
         System.out.println("Diareserva:");
         System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
         diaReservas.add(dr);
@@ -145,4 +145,5 @@ public class GestorDeReserva {
         }
         return existe;
     }
+    
 }

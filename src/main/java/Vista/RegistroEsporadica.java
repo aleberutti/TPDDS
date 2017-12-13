@@ -7,13 +7,16 @@ package Vista;
 
 import Controlador.ActividadDAO;
 import Controlador.DocenteDAO;
+import Controlador.FechasLectivasDAO;
 import Controlador.GestorDeReserva;
 import Controlador.UsuarioDAO;
+import Controlador.RangeEvaluator;
 import Modelo.Actividad;
 import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Catedra;
 import Modelo.Docente;
+import Modelo.FechalectivasId;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
@@ -57,8 +60,6 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     Object prevValFin;
     DocenteDAO dd;
     ActividadDAO ad;
-    private JTextField text1;
-
     
     public RegistroEsporadica(Bedel b) {
         initComponents();
@@ -69,7 +70,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.ad = new ActividadDAO();
         this.gdr = new GestorDeReserva();
         this.modelo = (DefaultTableModel) this.tabla.getModel();
-        this.fecha.setMinSelectableDate(new Date());
+//        this.fecha.setMinSelectableDate(new Date());
+        this.setearDayChooser();
         this.prevValIn=this.hora_inicio.getValue();
         this.prevValFin=this.hora_fin.getValue();
         setDocentes();
@@ -550,7 +552,20 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    private void setearDayChooser(){
+        FechasLectivasDAO fld = new FechasLectivasDAO();
+        FechalectivasId fd = fld.readFechas();
+        this.fecha.setMinSelectableDate(fd.getFechainicio1c());
+        this.fecha.setMaxSelectableDate(fd.getFechafin2c());
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        System.out.println("Fecha fin 2 c: " + sdf.format(fd.getFechafin2c()) + " Fecha incio 1 c : " + sdf.format(fd.getFechainicio1c()));
+        RangeEvaluator re2 = new RangeEvaluator();
+        re2.setStartDate(fd.getFechafin1c());
+        re2.setEndDate(fd.getFechainicio2c());
+        this.fecha.getJCalendar().getDayChooser().addDateEvaluator(re2);
+    }
+    
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTipoActionPerformed
@@ -684,6 +699,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             });
             return ;
         }
+        
         
         if(gdr.existe(date1, horaIn, horaFin, modelo)){
             this.setEnabled(false);
