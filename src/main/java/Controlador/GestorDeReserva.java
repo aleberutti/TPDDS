@@ -73,14 +73,14 @@ public class GestorDeReserva {
             System.out.println("Excepcion.");
         }
         Diareserva dr = new Diareserva(aula, (String)(v.get(1)), fecha, h_inicio, h_fin);
-        System.out.println("Diareserva:");
-        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
+//        System.out.println("Diareserva:");
+//        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
         diaReservas.add(dr);
         System.out.println(diaReservas.size());
-        System.out.println(" ---------- ");
+//        System.out.println(" ---------- ");
     }
     
-    public void registrarReserva(Bedel b, Actividad act, Docente doc, int cantAlumnos){
+    public void registrarReservaEsp(Bedel b, Actividad act, Docente doc, int cantAlumnos){
         Reserva rsv = new Reserva(act, b, doc, cantAlumnos, new Date(), diaReservas);
         Esporadica esp = new Esporadica(rsv);
         rsv.setEsporadica(esp);
@@ -88,7 +88,7 @@ public class GestorDeReserva {
         rd.createEsporadica(esp);
         System.out.println(diaReservas.size());
         diaReservas.forEach((e) ->  {
-                                    System.out.println("Entra x;");
+//                                    System.out.println("Entra x;");
                                     e.setReserva(rsv); 
                                     rd.createDR(e);}
                             );
@@ -124,7 +124,7 @@ public class GestorDeReserva {
         Date horaFin = new Date();
         try{
             horaIn = sdfH.parse(horaInS);
-            horaFin = sdfH.parse(horaFinS);            
+            horaFin = sdfH.parse(horaFinS);
         }catch(ParseException e){
             return false;
         }

@@ -42,6 +42,7 @@ public class GestorDeAula {
     public List<Aula> validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
         AulasDAO adao = new AulasDAO();
         DiaReservaDAO drdao = new DiaReservaDAO();
+        FechasLectivasDAO fld = new FechasLectivasDAO();
         int cont = -1;
         List<Aula> listaAulas = adao.getPosibles(tipoDeAula, cantAlumnos);
         List<Aula> resultado = new ArrayList();
@@ -53,7 +54,7 @@ public class GestorDeAula {
                     cont++;
                     aulaDisponibleAux=true;
                     Date fechaCiclo;
-                    FechalectivasId fl = new FechalectivasId();
+                    FechalectivasId fl = fld.readFechas();
                     switch (periodo){
                         case PRIMERC:
                             fechaCiclo = fl.getFechafin1c();

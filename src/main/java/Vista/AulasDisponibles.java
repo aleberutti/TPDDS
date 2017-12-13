@@ -277,7 +277,7 @@ public class AulasDisponibles extends javax.swing.JFrame {
         System.out.println(contador.size());
         System.out.println(listsize);
         if (contador.size()==listsize){
-            gdr.registrarReserva(b, act, doc, cantAlumnos);
+            gdr.registrarReservaEsp(b, act, doc, cantAlumnos);
             RegistroExitoso rex = new RegistroExitoso(padre);
         }
         this.dispose();

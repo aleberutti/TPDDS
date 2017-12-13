@@ -184,7 +184,7 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
         contador.add(0);
         if (contador.size()==listsize){
             if (contador.contains(1)){
-            gdr.registrarReserva(b, act, doc, cantAlumnos);
+            gdr.registrarReservaEsp(b, act, doc, cantAlumnos);
             RegistroExitoso rex = new RegistroExitoso(padre);
             }else{
                 padre.setEnabled(true);
