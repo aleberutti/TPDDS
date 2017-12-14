@@ -639,14 +639,7 @@ public class ModificarBedel extends javax.swing.JFrame {
             username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
         }else{
             if (!this.username.getText().equals(b.getUsuario().getNombreUsuario())){
-                Usuario us = new Usuario();
-                try{
-                    UsuarioDAO ud = new UsuarioDAO();
-                    us = ud.readUsername(this.username.getText());
-                }catch(Exception e){
-                    e.printStackTrace();
-                    ErrorBbdd eb = new ErrorBbdd();
-                }
+                Usuario us = gdb.devolverNombreUsuario(username.getText());
                 if (!(us == null)){
                     this.username.setBackground(ROJOERROR);
                     username.setToolTipText("El nombre de usuario ya existe.");

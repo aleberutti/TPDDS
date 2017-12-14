@@ -895,14 +895,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.username.setBackground(ROJOERROR);
             username.setToolTipText("No puede utilizarse un nombre de usuario vacío.");
         }else{
-            Usuario us = new Usuario();
-            try{
-                UsuarioDAO ud = new UsuarioDAO();
-                us = ud.readUsername(this.username.getText());
-            }catch(Exception e){
-                e.printStackTrace();
-                ErrorBbdd eb = new ErrorBbdd();
-            }
+            Usuario us = gdb.devolverNombreUsuario(username.getText());
             if (!(us == null)){
                 this.username.setBackground(ROJOERROR);
                 username.setToolTipText("El nombre de usuario ya existe.");
@@ -943,15 +936,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
             this.id.setBackground(ROJOERROR);
             id.setToolTipText("No puede utilizarse un ID vacío.");
         }else{
-            Usuario us = new Usuario();
-            int idAux = parseInt(id.getText());
-            try{
-                UsuarioDAO ud = new UsuarioDAO();
-                us = ud.read(Usuario.class, idAux);
-            }catch(Exception e){
-                e.printStackTrace();
-                ErrorBbdd eb = new ErrorBbdd();
-            }
+            Usuario us = gdb.devolverUsuario(id.getText());
             if (!(us == null)){
                 this.id.setBackground(ROJOERROR);
                 id.setToolTipText("El ID ya existe.");

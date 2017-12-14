@@ -54,7 +54,31 @@ public class GestorDeBedel {
     public Politicascontrasenia getPoliticas(){
         return pc;
     }
-
+    
+    public Usuario devolverNombreUsuario(String username){
+        Usuario us = new Usuario();
+        try{          
+            us = ud.readUsername(username);
+        }catch(Exception e){
+            e.printStackTrace();
+            ErrorBbdd eb = new ErrorBbdd();
+        }
+        return us;
+    }
+    
+    public Usuario devolverUsuario(String id){
+        Usuario us = new Usuario();
+            int idAux = parseInt(id);
+            try{
+                UsuarioDAO ud = new UsuarioDAO();
+                us = ud.read(Usuario.class, idAux);
+            }catch(Exception e){
+                e.printStackTrace();
+                ErrorBbdd eb = new ErrorBbdd();
+            
+           }
+        return us;
+    }
     public boolean verificarOpcion(Object opc){
         return false;
     }
