@@ -147,7 +147,7 @@ public class GestorDeReserva {
         System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+dia +" - Fecha: "+ fecha +  " - h_inicio: " + horaI + " - h_fin: "+ horaF);
         diaReservas.add(dre);
         System.out.println(diaReservas.size());
-        System.out.println(" ---------- ");
+//        System.out.println(" ---------- ");
     }
     
     public void registrarReservaE(Bedel b, Actividad act, Docente doc, int cantAlumnos){
@@ -158,7 +158,7 @@ public class GestorDeReserva {
         rd.createEsporadica(esp);
         System.out.println(diaReservas.size());
         diaReservas.forEach((e) ->  {
-                                    System.out.println("Entra x;");
+//                                    System.out.println("Entra x;");
                                     e.setReserva(rsv); 
                                     dr.createDR(e);}
                             );
@@ -214,7 +214,7 @@ public class GestorDeReserva {
         Date horaFin = new Date();
         try{
             horaIn = sdfH.parse(horaInS);
-            horaFin = sdfH.parse(horaFinS);            
+            horaFin = sdfH.parse(horaFinS);
         }catch(ParseException e){
             return false;
         }
