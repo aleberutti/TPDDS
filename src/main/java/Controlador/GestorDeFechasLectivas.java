@@ -5,17 +5,20 @@
  */
 package Controlador;
 
+import Modelo.FechalectivasId;
+
 /**
  *
  * @author juani
  */
 public class GestorDeFechasLectivas {
-
+    private FechasLectivasDAO fld;
     public GestorDeFechasLectivas() {
+        this.fld= new FechasLectivasDAO();
     }
     
-    public void obtenerFechas(){
-
+    public FechalectivasId obtenerFechas(){
+        return this.fld.readFechas();
     }
 
     public void notificarError(){

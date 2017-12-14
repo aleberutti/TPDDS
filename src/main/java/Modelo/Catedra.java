@@ -23,10 +23,12 @@ public class Catedra extends Actividad implements java.io.Serializable {
        this.comision = comision;
     }
    
+    @Override
     public Integer getActividadId() {
         return this.actividadId;
     }
     
+   
     public void setActividadId(int actividadId) {
         this.actividadId = actividadId;
     }

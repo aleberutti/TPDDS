@@ -22,14 +22,22 @@ public class GestorDeActividad {
         this.ad= new ActividadDAO();
     }
     
-    public Actividad obtenerActividad(){
-        return new Actividad();
+    public List <Actividad> obtenerActividad(){
+        return this.ad.readAll();
     }
 
     public void notificarError(){
 
     }
-    
+    public List <Curso> getAllCursos(){
+        return this.ad.readCursosCarrera();
+    }
+    public List <Catedra> getAllCatedras(){
+        return this.ad.readCatedras();
+    }
+    public List <Seminario> getAllSeminarios(){
+        return this.ad.readSeminariosThemes();
+    }
     public ArrayList <String> getCursos(){
         List<Actividad> lista = this.ad.readCursosNames();
         ArrayList <String> datos = new ArrayList();

@@ -6,11 +6,18 @@
 package Vista;
 
 import Controlador.*;
+import Modelo.Actividad;
+import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Docente;
+import Modelo.Periodo;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -32,8 +39,12 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private AutoSuggestor a2;
     private AutoSuggestor a3;
     private JComboBox carrera;
+    private List <Actividad> actividades;
+    private List<Docente> docentes;
     private GestorDeDocente gd= new GestorDeDocente();
     private GestorDeActividad ga= new GestorDeActividad();
+    private GestorDeAula gda = new GestorDeAula();
+    private GestorDeReserva gdr = new GestorDeReserva();
     private ArrayList <String> curso = ga.getCursos();
     private ArrayList <String> car = ga.getCursosCarrera();
     private ArrayList <String> sem =ga.getSeminarios();
@@ -64,13 +75,15 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         text2.setVisible(false);
         text3.setVisible(false);
         carrera.setVisible(false);
-        carrera.setVisible(false);
+        this.actividades=this.ga.obtenerActividad();
         this.setVisible(true);
+        emailprofe.setText("Seleccione un docente de la lista");
     }
     
     public void setDocentes(){
         //seteo el combobox con nombre y apellido de los docentes de la bd
-        ArrayList <String> datos = new ArrayList(); 
+        ArrayList <String> datos = new ArrayList();
+        this.docentes=this.gd.getDocentes();
         datos.addAll(this.gd.getApellidoNombre());
 
 
@@ -83,6 +96,15 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             ComboDocente.setModel(new DefaultComboBoxModel(datos.toArray()));  
         }      
     }
+    private Actividad getActividad (String nombre){
+        
+        for (Actividad a: this.actividades){
+                    if (a.getNombre().equals(nombre)){
+                        return a;
+                    }
+        }
+        return null;
+    }    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -119,9 +141,9 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         aceptar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        cantAlumnos = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tipoDeAula = new javax.swing.JComboBox<>();
         apellidoNombre = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
         tipo = new javax.swing.JLabel();
@@ -301,7 +323,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel6.setText("Tipo de Aula:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multimedios", "Informática", "Sin Recursos Adicionales" }));
+        tipoDeAula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multimedios", "Informática", "Sin Recursos Adicionales" }));
 
         apellidoNombre.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         apellidoNombre.setText("Apellido y nombre:");
@@ -406,11 +428,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 ComboDocenteItemStateChanged(evt);
             }
         });
-        ComboDocente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ComboDocenteFocusGained(evt);
-            }
-        });
 
         info3.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         info3.setText("Información:");
@@ -498,7 +515,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                 .addGap(42, 42, 42)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -517,7 +534,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                     .addComponent(info3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tipoDeAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(emailprofe)
                                     .addComponent(text2)
                                     .addComponent(text1)
@@ -585,11 +602,11 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
+                    .addComponent(tipoDeAula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apellidoNombre)
@@ -642,7 +659,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboDocenteFocusGained
 
     private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
-        //busco y seteo el mail del mismo a través del ID
+
         String mailDoc=gd.getDocenteEmail(ComboDocente.getSelectedItem().toString());
         if(mailDoc.isEmpty() || ComboDocente.getSelectedIndex()==0){
             emailprofe.setText("Seleccione un docente de la lista");
@@ -745,8 +762,77 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboTipoItemStateChanged
 
+    
+    public HashMap<String, ArrayList<String>> obtenerReservas(){
+        HashMap<String, ArrayList<String>> reservas= new HashMap();
+        ArrayList <String> horas= new ArrayList();
+        if (this.lunes.isSelected()){
+            horas.clear();
+            horas.add(this.inicioL.getValue().toString());
+            horas.add(this.finL.getValue().toString());
+            reservas.put("LUNES", horas);
+            
+        }
+        if (this.martes.isSelected()){
+            horas.clear();
+            horas.add(this.inicioM.getValue().toString());
+            horas.add(this.finM.getValue().toString());
+            reservas.put("MARTES", horas);
+
+        }
+        if (this.miercoles.isSelected()){
+            horas.clear();
+            horas.add(this.inicioX.getValue().toString());
+            horas.add(this.finX.getValue().toString());
+            reservas.put("MIÉRCOLES", horas);
+
+        }
+        if (this.jueves.isSelected()){
+            horas.clear();
+            horas.add(this.inicioJ.getValue().toString());
+            horas.add(this.finJ.getValue().toString());
+            reservas.put("JUEVES", horas);
+
+        }
+        if (this.viernes.isSelected()){
+            horas.clear();
+            horas.add(this.inicioV.getValue().toString());
+            horas.add(this.finV.getValue().toString());
+            reservas.put("VIERNES", horas);
+        }
+        return reservas;
+        
+    }
+    public Periodo obtenerPeriodo(){
+        if(cuatrimestral.isSelected() && primero.isSelected()) return Periodo.PRIMERC;
+        if(cuatrimestral.isSelected() && segundo.isSelected()) return Periodo.SEGUNDOC;
+        if(anual.isSelected()) return Periodo.ANUAL;
+        return null;
+    }
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        // TODO add your handling code here:
+        //CREO OBJETOS NECESARIOS PARA RESERVA
+        Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
+        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1 ));
+        HashMap<String, ArrayList<String>> r= this.obtenerReservas();
+        List<Integer> contador = new ArrayList();
+        for (HashMap.Entry<String, ArrayList<String>> entry : r.entrySet()){
+            List <Aula> aulas = this.gdr.validarPeriodica(entry.getKey(), entry.getValue().get(0),entry.getValue().get(1) ,Integer.parseInt(this.cantAlumnos.getValue().toString()),this.tipoDeAula.getSelectedItem().toString(), this.obtenerPeriodo());
+            
+            RegistroPeriodica esta = this;
+            this.setEnabled(false);
+            this.setAlwaysOnTop(true);AulasDisponibles aulasd = new AulasDisponibles(entry.getKey(),entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
+            aulasd.addWindowListener(new WindowAdapter(){
+                public void windowClosed(WindowEvent e){
+                        esta.cantAlumnos.requestFocus();
+                    }
+                });
+            
+            
+        }
+
+            
+            
+        
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
@@ -840,6 +926,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JRadioButton anual;
     private javax.swing.JLabel apellidoNombre;
     private javax.swing.JButton backButton;
+    private javax.swing.JSpinner cantAlumnos;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JRadioButton cuatrimestral;
     private javax.swing.JLabel email;
@@ -858,7 +945,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JSpinner inicioM;
     private javax.swing.JSpinner inicioV;
     private javax.swing.JSpinner inicioX;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -873,7 +959,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JCheckBox jueves;
     private javax.swing.JCheckBox lunes;
     private javax.swing.JCheckBox martes;
@@ -885,6 +970,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private javax.swing.JTextField text2;
     private javax.swing.JTextField text3;
     private javax.swing.JLabel tipo;
+    private javax.swing.JComboBox<String> tipoDeAula;
     private javax.swing.JCheckBox viernes;
     // End of variables declaration//GEN-END:variables
 }

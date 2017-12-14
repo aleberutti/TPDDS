@@ -19,8 +19,9 @@ import java.util.Date;
  * @author juani
  */
 public class GestorDeAula {
-
+    FechasLectivasDAO fld;
     public GestorDeAula() {
+        this.fld= new FechasLectivasDAO();
     }
     
     public void buscarAula(Aula a){
@@ -49,11 +50,11 @@ public class GestorDeAula {
             if(!(periodo==null)){//Periodica
                 boolean aulaDisponibleAux;
                 Date fechaAux = fecha;
-                while(cont<listaAulas.size()){
+                while(cont<listaAulas.size()-1){
                     cont++;
                     aulaDisponibleAux=true;
                     Date fechaCiclo;
-                    FechalectivasId fl = new FechalectivasId();
+                    FechalectivasId fl = this.fld.readFechas();
                     switch (periodo){
                         case PRIMERC:
                             fechaCiclo = fl.getFechafin1c();
@@ -79,7 +80,7 @@ public class GestorDeAula {
                 }
                 return resultado;
             }else{//Esporadica
-                while(cont<listaAulas.size()){
+                while(cont<listaAulas.size()-1){
                     cont++;
                     List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
                     if (reservas.isEmpty()){

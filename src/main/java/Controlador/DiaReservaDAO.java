@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Diareserva;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
@@ -22,14 +23,25 @@ public class DiaReservaDAO extends GenericDAO{
     
     public DiaReservaDAO() {
     }
-    
+    public void createDR(Diareserva dr){
+        SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        SS.save(dr);
+        SS.getTransaction().commit();
+        SS.close();
+    }
     public List<Diareserva> getReservas(int aulaID, Date fecha, Date h_in, Date h_fin){ // DEVUELVE LAS RESERVAS QUE MATCHEEN CON LOS PARAMETROS
         SS = HU.getSessionFactory().openSession();
         SS.beginTransaction();
-        //formatear dates antes
-        String sentencia = "SELECT * FROM diareserva D WHERE D.aulaID='" + aulaID + "' AND D.fecha='" + fecha + "' "
-                + "AND ((D.horainicio<='" + h_in + "' AND D.horafin>'" + h_in + "') OR (D.horainicio<'" + h_fin + "' "
-                + "AND D.horafin>='" + h_fin + "'));";
+        String fechaS, h_inicioS, h_finS;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        fechaS = sdf.format(fecha);
+        sdf = new SimpleDateFormat("HH:mm");
+        h_inicioS = sdf.format(h_in);
+        h_finS = sdf.format(h_fin);
+        String sentencia = "SELECT * FROM diareserva D WHERE D.aulaID='" + aulaID + "' AND D.fecha='" + fechaS + "' "
+                + "AND ((D.horainicio<='" + h_inicioS + "' AND D.horafin>'" + h_inicioS + "') OR (D.horainicio<'" + h_finS + "' "
+                + "AND D.horafin>='" + h_finS + "'));";
         Query query = SS.createSQLQuery(sentencia).addEntity(Diareserva.class);
         List<Diareserva> lista = query.list();
         SS.getTransaction().commit();

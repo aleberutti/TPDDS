@@ -17,9 +17,27 @@ public class RegistroExitoso extends javax.swing.JFrame {
     /**
      * Creates new form AutenticacionConError
      */
+    RegistroEsporadica padre;
+    RegistroPeriodica padre2;
+    
     public RegistroExitoso() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setAlwaysOnTop(true);
+    }
+    
+    public RegistroExitoso(RegistroEsporadica padre){
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.padre = padre;
+        this.setVisible(true);
+        this.setAlwaysOnTop(true);
+    }
+    public RegistroExitoso(RegistroPeriodica padre){
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.padre2 = padre;
         this.setVisible(true);
         this.setAlwaysOnTop(true);
     }
@@ -118,6 +136,12 @@ public class RegistroExitoso extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         this.dispose();
+        if (this.padre2==null){
+        padre.setEnabled(true);
+        }
+        else{
+            padre2.setEnabled(true);
+        }
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed

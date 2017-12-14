@@ -20,7 +20,10 @@ public class Curso extends Actividad implements java.io.Serializable {
        this.actividad = actividad;
        this.carrera = carrera;
     }
+    
+
    
+    @Override
     public Integer getActividadId() {
         return this.actividadId;
     }

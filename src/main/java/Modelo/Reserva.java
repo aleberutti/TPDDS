@@ -35,6 +35,17 @@ public class Reserva  implements java.io.Serializable {
         this.fechaSolicitud = fechaSolicitud;
         this.periodo = periodo;
     }
+    
+    public Reserva(Actividad actividad, Bedel bedel, Docente docente, int cantAlumnos, Date fechaSolicitud, Set diareservas) {
+        this.actividad = actividad;
+        this.bedel = bedel;
+        this.docente = docente;
+        this.cantAlumnos = cantAlumnos;
+        this.fechaSolicitud = fechaSolicitud;
+        this.diareservas = diareservas;
+        this.periodo = "PRIMERC";
+    }
+    
     public Reserva(Actividad actividad, Bedel bedel, Docente docente, int cantAlumnos, Date fechaSolicitud, String periodo, Periodica periodica, Set diareservas, Esporadica esporadica) {
        this.actividad = actividad;
        this.bedel = bedel;
@@ -117,6 +128,7 @@ public class Reserva  implements java.io.Serializable {
     public void setEsporadica(Esporadica esporadica) {
         this.esporadica = esporadica;
     }
+  
 
 
 

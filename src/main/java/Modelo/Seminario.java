@@ -20,7 +20,11 @@ public class Seminario extends Actividad implements java.io.Serializable {
        this.actividad = actividad;
        this.tema = tema;
     }
+    
+
    
+    
+    @Override
     public Integer getActividadId() {
         return this.actividadId;
     }
