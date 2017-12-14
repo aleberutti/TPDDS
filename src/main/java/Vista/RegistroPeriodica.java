@@ -897,6 +897,73 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     
     
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        if(!selecOption()){
+            JOptionPane.showMessageDialog(null,"Debe seleccionar el periodo");
+        }else{
+            if(!(lunes.isSelected() || martes.isSelected() || miercoles.isSelected() || jueves.isSelected() || viernes.isSelected())){
+                JOptionPane.showMessageDialog(null,"Debe seleccionar el/los días");
+            }else{
+                if(cantAlumnos.getValue().equals(0)){
+                    JOptionPane.showMessageDialog(null,"La cantidad de alumnos no es correcta");
+                }else{
+                    if(ComboDocente.getSelectedItem().toString().equals("Seleccione un docente de la lista")){
+                        JOptionPane.showMessageDialog(null,"Debe seleccionar un docente");
+                    }else{
+                        if(comboTipo.getSelectedIndex()==0){
+                            JOptionPane.showMessageDialog(null,"Debe seleccionar un Tipo");
+                        }else{
+                            if(selecTipo()){
+                                JOptionPane.showMessageDialog(null,"No se pueden omitir campos"); 
+                            }else{
+                                registrarReserva();
+                            }
+                        } 
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_aceptarActionPerformed
+    public boolean selecOption(){
+        if(cuatrimestral.isSelected()){
+            if(primero.isSelected() || segundo.isSelected()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if(anual.isSelected()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+    public boolean selecTipo(){
+        
+        switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+                    if(text1.getText().equals("")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+            case "Seminario":
+                    if(text1.getText().equals("") || text2.getText().equals("")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+            case "Carrera de grado":
+                 if(text1.getText().equals("") || text3.getText().equals("")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+            default:    return true;
+        }
+    }
+    private void registrarReserva(){
         //CREO OBJETOS NECESARIOS PARA RESERVA
         if(this.verificarCampos()){
             Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
@@ -915,8 +982,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_aceptarActionPerformed
-
+    }
     private boolean verificarCampos(){
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":

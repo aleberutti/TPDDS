@@ -20,8 +20,13 @@ import java.util.Date;
  */
 public class GestorDeAula {
     FechasLectivasDAO fld;
+    AulasDAO adao;
+    DiaReservaDAO drdao;
     public GestorDeAula() {
         this.fld= new FechasLectivasDAO();
+        this.drdao = new DiaReservaDAO();
+        this.adao = new AulasDAO();
+        
     }
     
     public void buscarAula(Aula a){
@@ -41,9 +46,6 @@ public class GestorDeAula {
     }
 
     public List<Aula> validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
-        AulasDAO adao = new AulasDAO();
-        DiaReservaDAO drdao = new DiaReservaDAO();
-        FechasLectivasDAO fld = new FechasLectivasDAO();
         int cont = -1;
         List<Aula> listaAulas = adao.getPosibles(tipoDeAula, cantAlumnos);
         List<Aula> resultado = new ArrayList();

@@ -631,6 +631,54 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        //VALIDACIONES
+        if(tabla.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null,"No existen registros en la tabla");
+        }else{
+            if(cantAlumnos.getValue().equals(0)){
+                JOptionPane.showMessageDialog(null,"La cantidad de alumnos no es correcta");
+            }else{
+                if(ComboDocente.getSelectedItem().toString().equals("Seleccione un docente de la lista")){
+                    JOptionPane.showMessageDialog(null,"Debe seleccionar un docente");
+                }else{
+                    if(comboTipo.getSelectedIndex()==0){
+                       JOptionPane.showMessageDialog(null,"Debe seleccionar un Tipo"); 
+                    }else{
+                       if(selecTipo()){
+                           JOptionPane.showMessageDialog(null,"No se pueden omitir campos"); 
+                       }else{
+                           registrarReserva();
+                       } 
+                    }
+                }
+            }    
+        }
+    }//GEN-LAST:event_aceptarActionPerformed
+    public boolean selecTipo(){
+        
+        switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+                    if(text1.getText().equals("")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+            case "Seminario":
+                    if(text1.getText().equals("") || text2.getText().equals("")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+            case "Carrera de grado":
+                 if(text1.getText().equals("") || text3.getText().equals("")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+            default:    return true;
+        }
+    }
+    private void registrarReserva(){
         //CREO OBJETOS NECESARIOS PARA RESERVA
         Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
         Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1 ));
@@ -661,7 +709,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
             }
         }
         this.modelo.setRowCount(0);
-    }//GEN-LAST:event_aceptarActionPerformed
+    }
     private Actividad getActividad (String nombre){
         
         for (Actividad a: this.actividades){
@@ -695,6 +743,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }//GEN-LAST:event_hora_inicioStateChanged
 
     private void cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActionPerformed
+        
+        if(fecha.getDate() == null){
+            JOptionPane.showMessageDialog(null,"Olvidó colocar una fecha");
+        }else{
         
         String datos[] = new String [4];
         
@@ -742,6 +794,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         
         if (!horaIn.equals(horaFin) && !gdr.existe(date1, horaIn, horaFin, modelo)){
             modelo.addRow(datos);
+        }
+        
         }
     }//GEN-LAST:event_cargarActionPerformed
 
