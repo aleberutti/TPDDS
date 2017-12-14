@@ -11,6 +11,7 @@ import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Docente;
 import Modelo.Periodo;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -32,13 +33,11 @@ public class AulasDisponibles extends javax.swing.JFrame {
     Periodo p;
     Boolean periodo;
     List<Integer> contador;
-    List<Integer> contador2;
     RegistroEsporadica padre;
     RegistroPeriodica padre2;
     String hora_i;
     String hora_f;
     String dia;
-    int tamaño;
     
     public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos, RegistroEsporadica padre) {
         initComponents();
@@ -73,14 +72,15 @@ public class AulasDisponibles extends javax.swing.JFrame {
         this.p=pe;
         this.padre2 = padre;
         this.periodo=true;
-        this.contador2=contador;
+        this.contador=contador;
         this.dia=dia;
         this.hora_i=horaI;
         this.hora_f=horaF;
-        this.fecha.setText(dia);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        this.fecha.setText(sdf.format(gdr.getFechaSegunDia(dia)));
         this.h_inicio.setText(horaI);
         this.h_fin.setText(horaF);
-        this.tamaño=t;
+        this.listsize=t;
         completarTabla();
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
@@ -306,25 +306,25 @@ public class AulasDisponibles extends javax.swing.JFrame {
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
         // TODO add your handling code here:
         //REGISTRAR RESERVA CON ESTE AULA
-        if (this.tabla.getSelectedRow()!=-1 && !this.periodo){
-            gdr.registrarEsporadica(this.aulas.get(this.tabla.getSelectedRow()), fechas);
-            this.contador.add(1);
-            if (contador.size()==listsize){
-            gdr.registrarReservaE(b, act, doc, cantAlumnos);
-            RegistroExitoso rex = new RegistroExitoso(padre);
+        if (this.tabla.getSelectedRow()!=-1){
+            if (!this.periodo){
+                gdr.registrarEsporadica(this.aulas.get(this.tabla.getSelectedRow()), fechas);
+                this.contador.add(1);
+                if (contador.size()==listsize){
+                    gdr.registrarReservaE(b, act, doc, cantAlumnos);
+                    RegistroExitoso rex = new RegistroExitoso(padre);
+                }
             }
-        }
-        else {
-            if (this.tabla.getSelectedRow()!=-1){
+            else {
                 this.gdr.registrarPeriodica(this.aulas.get(this.tabla.getSelectedRow()), this.dia, this.hora_i, this.hora_f);
-                this.contador2.add(1);
-                if(this.contador2.size()==this.tamaño){
+                this.contador.add(1);
+                if(this.contador.size()==this.listsize){
                     this.gdr.registrarReservaP(b, act, doc, cantAlumnos, p);
                     RegistroExitoso rex = new RegistroExitoso(padre2);
                 }
             }
+            this.dispose();
         }
-        this.dispose();
     }//GEN-LAST:event_seleccionarActionPerformed
 
     private void backButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseEntered
@@ -337,8 +337,17 @@ public class AulasDisponibles extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonMouseExited
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        
         this.dispose();
+        this.contador.add(0);
+        if(this.contador.size()==this.listsize){
+            if (this.padre!=null){
+                this.padre.setEnabled(true);
+                this.padre.setAlwaysOnTop(false);
+            }else{
+                this.padre2.setEnabled(true);
+                this.padre2.setAlwaysOnTop(false);
+            }
+        }
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered

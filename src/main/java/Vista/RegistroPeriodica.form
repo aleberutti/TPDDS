@@ -165,12 +165,6 @@
                                   <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cantAlumnos" min="-2" pref="45" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -190,16 +184,20 @@
                                       <Component id="email" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="info1" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="info3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tipoDeAula" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="emailprofe" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="text2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="text1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="comboTipo" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="ComboDocente" min="-2" pref="422" max="-2" attributes="0"/>
-                                      <Component id="text3" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tipoDeAula" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="emailprofe" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="text2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="text1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="comboTipo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="ComboDocente" min="-2" pref="422" max="-2" attributes="0"/>
+                                          <Component id="text3" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="cantAlumnos" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -473,12 +471,13 @@
                 <ListItem value="22:45"/>
                 <ListItem value="23:00"/>
                 <ListItem value="23:15"/>
-                <ListItem value="23:30"/>
-                <ListItem value="23:45"/>
               </SpinnerModel>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inicioLStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="lunes">
           <Properties>
@@ -499,8 +498,6 @@
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel type="list">
-                <ListItem value="07:00"/>
-                <ListItem value="07:15"/>
                 <ListItem value="07:30"/>
                 <ListItem value="07:45"/>
                 <ListItem value="08:00"/>
@@ -571,6 +568,9 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="finLStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="inicioM">
           <Properties>
@@ -642,19 +642,18 @@
                 <ListItem value="22:45"/>
                 <ListItem value="23:00"/>
                 <ListItem value="23:15"/>
-                <ListItem value="23:30"/>
-                <ListItem value="23:45"/>
               </SpinnerModel>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inicioMStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="finM">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel type="list">
-                <ListItem value="07:00"/>
-                <ListItem value="07:15"/>
                 <ListItem value="07:30"/>
                 <ListItem value="07:45"/>
                 <ListItem value="08:00"/>
@@ -725,6 +724,9 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="finMStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="martes">
           <Properties>
@@ -811,12 +813,13 @@
                 <ListItem value="22:45"/>
                 <ListItem value="23:00"/>
                 <ListItem value="23:15"/>
-                <ListItem value="23:30"/>
-                <ListItem value="23:45"/>
               </SpinnerModel>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inicioXStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="miercoles">
           <Properties>
@@ -837,8 +840,6 @@
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel type="list">
-                <ListItem value="07:00"/>
-                <ListItem value="07:15"/>
                 <ListItem value="07:30"/>
                 <ListItem value="07:45"/>
                 <ListItem value="08:00"/>
@@ -909,13 +910,14 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="finXStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="finJ">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel type="list">
-                <ListItem value="07:00"/>
-                <ListItem value="07:15"/>
                 <ListItem value="07:30"/>
                 <ListItem value="07:45"/>
                 <ListItem value="08:00"/>
@@ -986,6 +988,9 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="finJStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="inicioJ">
           <Properties>
@@ -1057,12 +1062,13 @@
                 <ListItem value="22:45"/>
                 <ListItem value="23:00"/>
                 <ListItem value="23:15"/>
-                <ListItem value="23:30"/>
-                <ListItem value="23:45"/>
               </SpinnerModel>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inicioJStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="jueves">
           <Properties>
@@ -1164,19 +1170,18 @@
                 <ListItem value="22:45"/>
                 <ListItem value="23:00"/>
                 <ListItem value="23:15"/>
-                <ListItem value="23:30"/>
-                <ListItem value="23:45"/>
               </SpinnerModel>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inicioVStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="finV">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel type="list">
-                <ListItem value="07:00"/>
-                <ListItem value="07:15"/>
                 <ListItem value="07:30"/>
                 <ListItem value="07:45"/>
                 <ListItem value="08:00"/>
@@ -1247,6 +1252,9 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="finVStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator5">
           <Properties>
@@ -1309,6 +1317,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="cantAlumnos">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cantAlumnosFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>

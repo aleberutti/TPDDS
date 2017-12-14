@@ -7,12 +7,14 @@ package Vista;
 
 import Controlador.GestorDeReserva;
 import Modelo.Actividad;
+import Modelo.Aula;
 import Modelo.Bedel;
 import Modelo.Docente;
+import Modelo.Periodo;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JFrame;
 
 /**
  *
@@ -31,6 +33,10 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
     int listsize;
     GestorDeReserva gdr;
     RegistroEsporadica padre;
+    Periodo p;
+    Boolean periodo;
+    RegistroPeriodica padre2;
+
     
     public ErrorNoExisteAula(Vector fechas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos, RegistroEsporadica padre) {
         initComponents();
@@ -48,6 +54,27 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
         this.contador = contador;
         this.setVisible(true);
         this.setAlwaysOnTop(true);
+    }
+    
+    public ErrorNoExisteAula (String dia, String horaI, String horaF ,Periodo pe, List<Aula> aulas, GestorDeReserva gdr, Bedel b, Actividad act, Docente doc, int cantAlumnos, RegistroPeriodica padre, int t, List<Integer> contador){
+        initComponents();
+        this.cantAlumnos = cantAlumnos;
+        this.b = b;
+        this.act = act;
+        this.doc = doc;
+        this.gdr = gdr;
+        this.p=pe;
+        this.padre2 = padre;
+        this.periodo=true;
+        this.contador=contador;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        this.fecha.setText(sdf.format(gdr.getFechaSegunDia(dia)));
+        this.h_inicio.setText(horaI);
+        this.h_fin.setText(horaF);
+        this.listsize=t;
+        this.setLocationRelativeTo(null);
+        this.setAlwaysOnTop(true);
+        this.setVisible(true);
     }
 
     /**
@@ -183,11 +210,22 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
         this.dispose();
         contador.add(0);
         if (contador.size()==listsize){
-            if (contador.contains(1)){
-            gdr.registrarReservaE(b, act, doc, cantAlumnos);
-            RegistroExitoso rex = new RegistroExitoso(padre);
+            if(!this.periodo){
+                if (contador.contains(1)){
+                    gdr.registrarReservaE(b, act, doc, cantAlumnos);
+                    RegistroExitoso rex = new RegistroExitoso(padre);
+                }else{
+                    padre.setEnabled(true);
+                    padre.setAlwaysOnTop(false);
+                }
             }else{
-                padre.setEnabled(true);
+                if (contador.contains(1)){
+                    this.gdr.registrarReservaP(b, act, doc, cantAlumnos, p);
+                    RegistroExitoso rex = new RegistroExitoso(padre2);
+                }else{
+                    padre2.setEnabled(true);
+                    padre2.setAlwaysOnTop(false);
+                }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -12,16 +12,19 @@ import Modelo.Bedel;
 import Modelo.Docente;
 import Modelo.Periodo;
 import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -35,6 +38,16 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     ButtonGroup bgPer = new ButtonGroup();
     ButtonGroup bgCuat = new ButtonGroup();
     Bedel b;
+    private Object prevValInL;
+    private Object prevValFinL;
+    private Object prevValInM;
+    private Object prevValFinM;
+    private Object prevValInX;
+    private Object prevValFinX;
+    private Object prevValInJ;
+    private Object prevValFinJ;
+    private Object prevValInV;
+    private Object prevValFinV;
     private AutoSuggestor a1;
     private AutoSuggestor a2;
     private AutoSuggestor a3;
@@ -78,6 +91,16 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         this.actividades=this.ga.obtenerActividad();
         this.setVisible(true);
         emailprofe.setText("Seleccione un docente de la lista");
+        this.prevValInL = inicioL.getValue();
+        this.prevValFinL = finL.getValue();
+        this.prevValInM = inicioM.getValue();
+        this.prevValFinM = finM.getValue();
+        this.prevValInX = inicioX.getValue();
+        this.prevValFinX = finX.getValue();
+        this.prevValInJ = inicioJ.getValue();
+        this.prevValFinJ = finJ.getValue();
+        this.prevValInV = inicioV.getValue();
+        this.prevValFinV = finV.getValue();
     }
     
     public void setDocentes(){
@@ -215,8 +238,13 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel11.setText("Hora de fin:");
 
-        inicioL.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        inicioL.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         inicioL.setEnabled(false);
+        inicioL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                inicioLStateChanged(evt);
+            }
+        });
 
         lunes.setBackground(new java.awt.Color(153, 153, 153));
         lunes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -228,14 +256,29 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             }
         });
 
-        finL.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        finL.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
         finL.setEnabled(false);
+        finL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                finLStateChanged(evt);
+            }
+        });
 
-        inicioM.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        inicioM.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         inicioM.setEnabled(false);
+        inicioM.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                inicioMStateChanged(evt);
+            }
+        });
 
-        finM.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        finM.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
         finM.setEnabled(false);
+        finM.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                finMStateChanged(evt);
+            }
+        });
 
         martes.setBackground(new java.awt.Color(153, 153, 153));
         martes.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -247,8 +290,13 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             }
         });
 
-        inicioX.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        inicioX.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         inicioX.setEnabled(false);
+        inicioX.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                inicioXStateChanged(evt);
+            }
+        });
 
         miercoles.setBackground(new java.awt.Color(153, 153, 153));
         miercoles.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -260,14 +308,29 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             }
         });
 
-        finX.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        finX.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
         finX.setEnabled(false);
+        finX.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                finXStateChanged(evt);
+            }
+        });
 
-        finJ.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        finJ.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
         finJ.setEnabled(false);
+        finJ.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                finJStateChanged(evt);
+            }
+        });
 
-        inicioJ.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        inicioJ.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         inicioJ.setEnabled(false);
+        inicioJ.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                inicioJStateChanged(evt);
+            }
+        });
 
         jueves.setBackground(new java.awt.Color(153, 153, 153));
         jueves.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -289,11 +352,21 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             }
         });
 
-        inicioV.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        inicioV.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15"}));
         inicioV.setEnabled(false);
+        inicioV.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                inicioVStateChanged(evt);
+            }
+        });
 
-        finV.setModel(new javax.swing.SpinnerListModel(new String[] {"07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
+        finV.setModel(new javax.swing.SpinnerListModel(new String[] {"07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45"}));
         finV.setEnabled(false);
+        finV.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                finVStateChanged(evt);
+            }
+        });
 
         jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -319,6 +392,13 @@ public class RegistroPeriodica extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel5.setText("Cantidad de Alumnos:");
+
+        cantAlumnos.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        cantAlumnos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cantAlumnosFocusGained(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel6.setText("Tipo de Aula:");
@@ -510,12 +590,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                 .addComponent(anual))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel4)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -531,16 +606,19 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                     .addComponent(apellidoNombre)
                                     .addComponent(email)
                                     .addComponent(info1)
-                                    .addComponent(info3))
+                                    .addComponent(info3)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tipoDeAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(emailprofe)
-                                    .addComponent(text2)
-                                    .addComponent(text1)
-                                    .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(text3))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tipoDeAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(emailprofe)
+                                        .addComponent(text2)
+                                        .addComponent(text1)
+                                        .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ComboDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(text3))
+                                    .addComponent(cantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -804,37 +882,53 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         
     }
     public Periodo obtenerPeriodo(){
-        if(cuatrimestral.isSelected() && primero.isSelected()) return Periodo.PRIMERC;
-        if(cuatrimestral.isSelected() && segundo.isSelected()) return Periodo.SEGUNDOC;
-        if(anual.isSelected()) return Periodo.ANUAL;
+        if(cuatrimestral.isSelected() && primero.isSelected()){
+            return Periodo.PRIMERC;
+        }
+        if(cuatrimestral.isSelected() && segundo.isSelected()){
+            return Periodo.SEGUNDOC;
+        }
+        if(anual.isSelected()){
+            return Periodo.ANUAL;
+        }
         return null;
     }
+    
+    
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         //CREO OBJETOS NECESARIOS PARA RESERVA
-        Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
-        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1 ));
-        HashMap<String, ArrayList<String>> r= this.obtenerReservas();
-        List<Integer> contador = new ArrayList();
-        for (HashMap.Entry<String, ArrayList<String>> entry : r.entrySet()){
-            List <Aula> aulas = this.gdr.validarPeriodica(entry.getKey(), entry.getValue().get(0),entry.getValue().get(1) ,Integer.parseInt(this.cantAlumnos.getValue().toString()),this.tipoDeAula.getSelectedItem().toString(), this.obtenerPeriodo());
-            
-            RegistroPeriodica esta = this;
-            this.setEnabled(false);
-            this.setAlwaysOnTop(true);AulasDisponibles aulasd = new AulasDisponibles(entry.getKey(),entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
-            aulasd.addWindowListener(new WindowAdapter(){
-                public void windowClosed(WindowEvent e){
-                        esta.cantAlumnos.requestFocus();
-                    }
-                });
-            
-            
+        if(this.verificarCampos()){
+            Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
+            Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1));
+            HashMap<String, ArrayList<String>> r= this.obtenerReservas();
+            List<Integer> contador = new ArrayList();
+            for (HashMap.Entry<String, ArrayList<String>> entry : r.entrySet()){
+                List <Aula> aulas = this.gdr.validarPeriodica(entry.getKey(), entry.getValue().get(0),entry.getValue().get(1) ,Integer.parseInt(this.cantAlumnos.getValue().toString()),this.tipoDeAula.getSelectedItem().toString(), this.obtenerPeriodo());
+                RegistroPeriodica esta = this;
+                this.setEnabled(false);
+                this.setAlwaysOnTop(true);
+                if (aulas!=null){
+                    AulasDisponibles aulasd = new AulasDisponibles(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
+                }else{
+                    ErrorNoExisteAula enea = new ErrorNoExisteAula(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
+                }
+            }
         }
-
-            
-            
-        
     }//GEN-LAST:event_aceptarActionPerformed
 
+    private boolean verificarCampos(){
+        switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+               return (this.curso.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)));
+            case "Seminario":
+                return (this.sem.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.themes.contains(this.text2.getText().substring(0, this.text2.getText().length()-1)));
+            case "Carrera de grado":
+                return (this.carr.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.com.contains(this.text3.getText().substring(0, this.text3.getText().length()-1)));
+            default:
+                return false;
+        }
+    }
+    
     private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
         if (!this.viernes.isSelected()){
             this.inicioV.setEnabled(false);
@@ -916,6 +1010,122 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         this.segundo.setEnabled(true);
     }//GEN-LAST:event_cuatrimestralActionPerformed
 
+    private void cantAlumnosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cantAlumnosFocusGained
+
+    }//GEN-LAST:event_cantAlumnosFocusGained
+
+    private void inicioLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inicioLStateChanged
+        this.validarSpinnerInicio("LUNES", inicioL);
+        this.finLStateChanged(evt);
+    }//GEN-LAST:event_inicioLStateChanged
+
+    private void finLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_finLStateChanged
+        Object[] valoresPrevios = this.validarSpinerFin(prevValInL, prevValFinL, inicioL, finL);
+        this.prevValInL=valoresPrevios[0];
+        this.prevValFinL=valoresPrevios[1];
+    }//GEN-LAST:event_finLStateChanged
+
+    private void inicioMStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inicioMStateChanged
+        this.validarSpinnerInicio("MARTES", inicioM);
+        this.finMStateChanged(evt);
+    }//GEN-LAST:event_inicioMStateChanged
+
+    private void finMStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_finMStateChanged
+        Object[] valoresPrevios = this.validarSpinerFin(prevValInM, prevValFinM, inicioM, finM);
+        this.prevValInM=valoresPrevios[0];
+        this.prevValFinM=valoresPrevios[1];
+    }//GEN-LAST:event_finMStateChanged
+
+    private void inicioXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inicioXStateChanged
+        this.validarSpinnerInicio("MIÉRCOLES", inicioX);
+        this.finXStateChanged(evt);
+    }//GEN-LAST:event_inicioXStateChanged
+
+    private void finXStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_finXStateChanged
+        Object[] valoresPrevios = this.validarSpinerFin(prevValInX, prevValFinX, inicioX, finX);
+        this.prevValInX=valoresPrevios[0];
+        this.prevValFinX=valoresPrevios[1];
+    }//GEN-LAST:event_finXStateChanged
+
+    private void inicioJStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inicioJStateChanged
+        this.validarSpinnerInicio("JUEVES", inicioJ);
+        this.finJStateChanged(evt);
+    }//GEN-LAST:event_inicioJStateChanged
+
+    private void finJStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_finJStateChanged
+        Object[] valoresPrevios = this.validarSpinerFin(prevValInJ, prevValFinJ, inicioJ, finJ);
+        this.prevValInJ=valoresPrevios[0];
+        this.prevValFinJ=valoresPrevios[1];
+    }//GEN-LAST:event_finJStateChanged
+
+    private void inicioVStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inicioVStateChanged
+        this.validarSpinnerInicio("VIERNES", inicioV);
+        this.finVStateChanged(evt);
+    }//GEN-LAST:event_inicioVStateChanged
+
+    private void finVStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_finVStateChanged
+        Object[] valoresPrevios = this.validarSpinerFin(prevValInV, prevValFinV, inicioV, finV);
+        this.prevValInV=valoresPrevios[0];
+        this.prevValFinV=valoresPrevios[1];
+    }//GEN-LAST:event_finVStateChanged
+
+    private void validarSpinnerInicio(String dia, JSpinner hora_inicio){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        String seleccionada = sdf.format(this.gdr.getFechaSegunDia(dia));
+        String hoy = sdf.format(today);
+        if (hoy.equals(seleccionada)){
+            sdf = new SimpleDateFormat("HH:mm");
+            Date h_i = null;
+            try {
+                h_i = sdf.parse(hora_inicio.getValue().toString());
+                Date hora_hoy = sdf.parse(today.getHours() + ":" + today.getMinutes());
+                while(h_i.before(hora_hoy)){
+                    hora_inicio.setValue(hora_inicio.getNextValue());
+                    h_i = sdf.parse(hora_inicio.getValue().toString());
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(RegistroEsporadica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private Object[] validarSpinerFin(Object prevValIn, Object prevValFin, JSpinner hora_inicio, JSpinner hora_fin){
+        Object[] valoresPrevios = new Object[2];
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date h_f, h_i;
+        try {
+            h_f = sdf.parse(hora_fin.getValue().toString());
+            h_i = sdf.parse(hora_inicio.getValue().toString());
+            if (h_f.before(h_i) || h_f.equals(h_i)){
+                hora_fin.setValue(hora_inicio.getNextValue());
+            }
+            int aux = h_f.getMinutes() - h_i.getMinutes();
+            if (prevValFin.equals(hora_fin.getNextValue())){ //DECREMENTE EL SPINNER
+                if (aux%30!=0){
+                    if(!hora_fin.getPreviousValue().equals(hora_inicio.getValue())){
+                        hora_fin.setValue(hora_fin.getPreviousValue());
+                    }else{
+                        hora_fin.setValue(hora_fin.getNextValue());
+                    }
+                }
+            }else{
+                if (aux%30!=0){
+                    if (prevValIn.equals(hora_inicio.getNextValue())){
+                        hora_fin.setValue(hora_fin.getPreviousValue());
+                    }else{
+                        hora_fin.setValue(hora_fin.getNextValue());
+                    }
+                }
+            }
+        } catch (ParseException ex) {
+            System.out.println("Error parseo.");
+        }
+        valoresPrevios[0]=hora_inicio.getValue();
+        valoresPrevios[1]=hora_fin.getValue();
+        return valoresPrevios;
+    }
+    
     /**
      * @param args the command line arguments
      */

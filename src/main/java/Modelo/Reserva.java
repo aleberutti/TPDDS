@@ -46,6 +46,16 @@ public class Reserva  implements java.io.Serializable {
         this.periodo = "N/A";
     }
     
+    public Reserva(Actividad actividad, Bedel bedel, Docente docente, int cantAlumnos, Date fechaSolicitud, Set diareservas, String periodo) {
+        this.actividad = actividad;
+        this.bedel = bedel;
+        this.docente = docente;
+        this.cantAlumnos = cantAlumnos;
+        this.fechaSolicitud = fechaSolicitud;
+        this.diareservas = diareservas;
+        this.periodo = periodo;
+    }
+    
     public Reserva(Actividad actividad, Bedel bedel, Docente docente, int cantAlumnos, Date fechaSolicitud, String periodo, Periodica periodica, Set diareservas, Esporadica esporadica) {
        this.actividad = actividad;
        this.bedel = bedel;

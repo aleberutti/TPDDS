@@ -66,31 +66,24 @@ public class GestorDeReserva {
         }
         return listaReservas;
     }
-    public List<Aula> validarPeriodica(String dia, String horaI, String horaF , int cantAlumnos, String tipoDeAula, Periodo p){
- 
-        List <Aula> listaReservas = new ArrayList();
-            
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                Date h_fin = new Date();
-                Date h_inicio = new Date();
-                try{
-                
-                h_inicio = sdf.parse(horaI);
-                h_fin = sdf.parse(horaF);
-                }catch(ParseException e){
-                System.out.println("Excepcion.");
-                }
     
-                List<Aula> aulas = gda.validarDisponibilidad(this.getFechaSegunDia(dia), h_inicio, h_fin, tipoDeAula, cantAlumnos, p);
-                System.out.println(aulas);
-                if (aulas!=null && !aulas.isEmpty()){ //ENCONTRO AULA LIBRE
-                    listaReservas.addAll(aulas);
-                }
-            
-            
-             
-        return listaReservas;
-        
+    
+    public List<Aula> validarPeriodica(String dia, String horaI, String horaF , int cantAlumnos, String tipoDeAula, Periodo p){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date h_fin = new Date();
+        Date h_inicio = new Date();
+        try{
+            h_inicio = sdf.parse(horaI);
+            h_fin = sdf.parse(horaF);
+        }catch(ParseException e){
+            System.out.println("Excepcion.");
+        }
+        List<Aula> aulas = gda.validarDisponibilidad(this.getFechaSegunDia(dia), h_inicio, h_fin, tipoDeAula, cantAlumnos, p);
+        if (aulas!=null && !aulas.isEmpty()){ //ENCONTRO AULA LIBRE
+            return aulas;
+        }else{
+            return null;
+        }
     }
     
     public Date getFechaSegunDia(String dia){
@@ -129,13 +122,15 @@ public class GestorDeReserva {
         System.out.println(diaReservas.size());
 //        System.out.println(" ---------- ");
     }
+    
+    
     public void registrarPeriodica(Aula aula, String dia, String horaI, String horaF){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = new Date();
         Date h_fin = new Date();
         Date h_inicio = new Date();
         try{
-            fecha = sdf.parse(this.getFechaSegunDia(dia).toString());
+            fecha = sdf.parse(sdf.format(this.getFechaSegunDia(dia)));
             sdf = new SimpleDateFormat("HH:mm");
             h_inicio = sdf.parse(horaI);
             h_fin = sdf.parse(horaF);
@@ -143,8 +138,8 @@ public class GestorDeReserva {
             System.out.println("Excepcion.");
         }
         Diareserva dre = new Diareserva(aula, dia, fecha, h_inicio, h_fin);
-        System.out.println("Diareserva:");
-        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+dia +" - Fecha: "+ fecha +  " - h_inicio: " + horaI + " - h_fin: "+ horaF);
+//        System.out.println("Diareserva:");
+//        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+ dia +" - Fecha: "+ fecha +  " - h_inicio: " + horaI + " - h_fin: "+ horaF);
         diaReservas.add(dre);
         System.out.println(diaReservas.size());
 //        System.out.println(" ---------- ");
@@ -164,9 +159,11 @@ public class GestorDeReserva {
                             );
         this.diaReservas.clear();
     }
+    
+    
     public void registrarReservaP (Bedel b, Actividad act, Docente doc, int cantAlumnos, Periodo p){
-        Reserva rsv = new Reserva(act, b, doc, cantAlumnos, new Date(), diaReservas);
-        String tipo="";
+        Reserva rsv = new Reserva(act, b, doc, cantAlumnos, new Date(), diaReservas, p.toString());
+        String tipo;
         if(p.equals(Periodo.ANUAL)){
             tipo="ANUAL";
         }
@@ -179,7 +176,7 @@ public class GestorDeReserva {
         rd.createPeriodica(per);
         diaReservas.forEach((e) ->  {
                                     System.out.println("Entra x;");
-                                    e.setReserva(rsv); 
+                                    e.setReserva(rsv);
                                     dr.createDR(e);}
                             );
         this.diaReservas.clear();
