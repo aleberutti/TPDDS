@@ -127,7 +127,7 @@ public class GestorDeReserva {
         System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
         diaReservas.add(dre);
         System.out.println(diaReservas.size());
-        System.out.println(" ---------- ");
+//        System.out.println(" ---------- ");
     }
     public void registrarPeriodica(Aula aula, String dia, String horaI, String horaF){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
