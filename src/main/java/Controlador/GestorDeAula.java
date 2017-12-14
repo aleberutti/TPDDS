@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -85,7 +86,10 @@ public class GestorDeAula {
             }else{//Esporadica
                 while(cont<listaAulas.size()-1){
                     cont++;
+                    String diaFecha = obtenerDia(fecha); 
                     List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
+                    List<Diareserva> reservasP = drdao.getReservasPeriodicas(listaAulas.get(cont).getAulaId(), fecha, h_fin, h_fin, diaFecha);
+                    reservas = obtenerReservasSinPeriodicas(reservas, reservasP);
                     if (reservas.isEmpty()){
                         resultado.add(listaAulas.get(cont));
                     }
@@ -97,7 +101,33 @@ public class GestorDeAula {
             return null;
         }
     }
-
+   
+    public String obtenerDia(Date fecha){
+        String diaFecha = null;
+        switch(fecha.getDay()){
+            case 0: diaFecha = "DOMINGO"; break;
+            case 1: diaFecha = "LUNES"; break;
+            case 2: diaFecha = "MARTES"; break;
+            case 3: diaFecha = "MIERCOLES"; break;
+            case 4: diaFecha = "JUEVES"; break;
+            case 5: diaFecha = "VIERNES"; break;
+            case 6: diaFecha = "SABADO"; break;
+        } 
+        
+        return diaFecha;
+    }
+    
+    public List<Diareserva> obtenerReservasSinPeriodicas(List<Diareserva> r, List<Diareserva> rp){
+        java.util.List<Diareserva> reservas= null;
+        for(int i=0; i<r.size(); i++){
+            if(r.contains(rp.get(i))){
+                reservas.add(rp.get(i));
+            }
+        }
+        
+        return reservas;
+    }
+    
     public void notificarError(){
 
     }
