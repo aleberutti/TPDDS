@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.AutoSuggestor;
 import Controlador.*;
 import Modelo.Actividad;
 import Modelo.Aula;

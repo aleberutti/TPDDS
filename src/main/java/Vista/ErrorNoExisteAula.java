@@ -52,6 +52,7 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
         this.h_inicio.setText(fechas.get(2).toString());
         this.h_fin.setText(fechas.get(3).toString());
         this.contador = contador;
+        this.periodo = false;
         this.setVisible(true);
         this.setAlwaysOnTop(true);
     }

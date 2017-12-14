@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.AutoSuggestor;
 import Controlador.ActividadDAO;
 import Controlador.DocenteDAO;
 import Controlador.FechasLectivasDAO;

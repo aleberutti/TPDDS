@@ -116,10 +116,9 @@ public class GestorDeReserva {
             System.out.println("Excepcion.");
         }
         Diareserva dre = new Diareserva(aula, (String)(v.get(1)), fecha, h_inicio, h_fin);
-        System.out.println("Diareserva:");
-        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
+//        System.out.println("Diareserva:");
+//        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+(String)(v.get(2)) +" - Fecha: "+ (String)(v.get(0)) + " - h_inicio: " + (String)(v.get(2)) + " - h_fin: "+ (String)(v.get(3)));
         diaReservas.add(dre);
-        System.out.println(diaReservas.size());
 //        System.out.println(" ---------- ");
     }
     
@@ -138,11 +137,7 @@ public class GestorDeReserva {
             System.out.println("Excepcion.");
         }
         Diareserva dre = new Diareserva(aula, dia, fecha, h_inicio, h_fin);
-//        System.out.println("Diareserva:");
-//        System.out.println("Aula: "+aula.getAulaId()+ " - Dia: "+ dia +" - Fecha: "+ fecha +  " - h_inicio: " + horaI + " - h_fin: "+ horaF);
         diaReservas.add(dre);
-        System.out.println(diaReservas.size());
-//        System.out.println(" ---------- ");
     }
     
     public void registrarReservaE(Bedel b, Actividad act, Docente doc, int cantAlumnos){
