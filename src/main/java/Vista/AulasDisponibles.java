@@ -14,6 +14,7 @@ import Modelo.Periodo;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,6 +42,7 @@ public class AulasDisponibles extends javax.swing.JFrame {
     
     public AulasDisponibles(Vector fechas, List<Aula> aulas, GestorDeReserva gdr, List<Integer> contador, int listsize, Bedel b, Actividad act, Docente doc, int cantAlumnos, RegistroEsporadica padre) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.aulas = aulas;
         this.cantAlumnos = cantAlumnos;
         this.b = b;
@@ -63,6 +65,7 @@ public class AulasDisponibles extends javax.swing.JFrame {
     
     public AulasDisponibles (String dia, String horaI, String horaF ,Periodo pe, List<Aula> aulas, GestorDeReserva gdr, Bedel b, Actividad act, Docente doc, int cantAlumnos, RegistroPeriodica padre, int t, List<Integer> contador ){
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.aulas = aulas;
         this.cantAlumnos = cantAlumnos;
         this.b = b;

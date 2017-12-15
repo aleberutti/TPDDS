@@ -42,6 +42,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -81,6 +82,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     
     public RegistroEsporadica(Bedel b){
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.b=b;
         this.setLocationRelativeTo(null);
         this.a1 = new AutoSuggestor(this.text1, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);

@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -68,6 +69,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     
     public RegistroPeriodica(Bedel b) {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icono.png")).getImage());
         this.setLocationRelativeTo(null);
         this.a1 = new AutoSuggestor(this.text1, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
         this.a2 = new AutoSuggestor(this.text2, this, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f);
