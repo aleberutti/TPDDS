@@ -41,7 +41,8 @@ public class DiaReservaDAO extends GenericDAO{
         h_inicioS = sdf.format(h_in);
         h_finS = sdf.format(h_fin);
         String sentencia = "SELECT D.* FROM diareserva D, reserva R WHERE D.aulaID='" + aulaID + "' AND R.reservaID=D.reservaID "
-                + "AND (D.fecha='" + fechaS + "' OR (R.periodo='" + periodoSolicitado + "' AND D.diasemana='" + diaFecha + "')) "
+                + "AND (D.fecha='" + fechaS + "' OR ((R.periodo='" + periodoSolicitado + "' OR R.periodo = 'ANUAL') "
+                + "AND D.diasemana='" + diaFecha + "')) "
                 + "AND ((D.horainicio<='" + h_inicioS + "' AND D.horafin>'" + h_inicioS + "') OR (D.horainicio<'" + h_finS + "' "
                 + "AND D.horafin>='" + h_finS + "'));";
         Query query = SS.createSQLQuery(sentencia).addEntity(Diareserva.class);
