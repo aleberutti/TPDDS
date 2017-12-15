@@ -304,7 +304,9 @@ public class AulasDisponibles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionarActionPerformed
-        // TODO add your handling code here:
+        
+        
+        
         //REGISTRAR RESERVA CON ESTE AULA
         if (this.tabla.getSelectedRow()!=-1){
             if (!this.periodo){
