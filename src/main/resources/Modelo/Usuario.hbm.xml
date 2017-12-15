@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2017 11:09:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Usuario" table="usuario" catalog="tpdds" optimistic-lock="version">
+        <id name="userId" type="int">
+            <column name="userID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="clave" class="Modelo.Clave" fetch="select">
+            <column name="claveID" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="nombreUsuario" type="string">
+            <column name="nombreUsuario" length="15" not-null="true" unique="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="20" not-null="true" />
+        </property>
+        <one-to-one name="bedel" class="Modelo.Bedel"></one-to-one>
+        <set name="claves" table="clave" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="userID" />
+            </key>
+            <one-to-many class="Modelo.Clave" />
+        </set>
+        <one-to-one name="admin" class="Modelo.Admin"></one-to-one>
+    </class>
+</hibernate-mapping>

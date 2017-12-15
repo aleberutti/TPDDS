@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2017 11:09:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Aula" table="aula" catalog="tpdds" optimistic-lock="version">
+        <id name="aulaId" type="java.lang.Integer">
+            <column name="aulaID" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <property name="capacidad" type="java.lang.Integer">
+            <column name="capacidad" />
+        </property>
+        <property name="piso" type="java.lang.Integer">
+            <column name="piso" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="15" />
+        </property>
+        <property name="aireacond" type="java.lang.Boolean">
+            <column name="aireacond" />
+        </property>
+        <property name="pizarron" type="string">
+            <column name="pizarron" length="10" />
+        </property>
+        <property name="ventiladores" type="java.lang.Integer">
+            <column name="ventiladores" />
+        </property>
+        <set name="diareservas" table="diareserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="aulaID" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Diareserva" />
+        </set>
+        <one-to-one name="aulasra" class="Modelo.Aulasra"></one-to-one>
+        <one-to-one name="aulainformatica" class="Modelo.Aulainformatica"></one-to-one>
+        <one-to-one name="aulamultimedios" class="Modelo.Aulamultimedios"></one-to-one>
+    </class>
+</hibernate-mapping>

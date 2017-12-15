@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2017 11:09:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Esporadica" table="esporadica" catalog="tpdds" optimistic-lock="version">
+        <id name="reservaId" type="java.lang.Integer">
+            <column name="reservaID" />
+            <generator class="foreign">
+                <param name="property">reserva</param>
+            </generator>
+        </id>
+        <one-to-one name="reserva" class="Modelo.Reserva" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>
