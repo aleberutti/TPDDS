@@ -64,6 +64,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     private ArrayList <String> car = ga.getCursosCarrera();
     private ArrayList <String> sem =ga.getSeminarios();
     private ArrayList <String> themes =ga.getSeminariosThemes();
+    private ArrayList <String> cat =ga.getCatedras();
     private ArrayList <String> carr =ga.getCatedrasCarrera();
     private ArrayList <String> com =ga.getCatedrasComision();
     
@@ -855,7 +856,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 carrera.setVisible(true);
                 info3.setText("Comisión:");
                 text3.setVisible(true);
-                ArrayList <String> cat =ga.getCatedras();
                 this.a1.setDictionary(cat);
                 carrera.setModel(new DefaultComboBoxModel(this.carr.toArray()));
                 this.a3.setDictionary(this.com);
@@ -943,12 +943,17 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                 ErrorCamposVacios ecv = new ErrorCamposVacios();
                                 ecv.setVisible(true);
                             }else{
-                                if (!this.validarActividades()){
-                                    ErrorActividad ea= new ErrorActividad();
-                                    ea.setVisible(true);
+                                if(!this.verificarCampos()){
+                                    JOptionPane.showMessageDialog(null, "Limitarse a valores sugeridos", "ERROR", JOptionPane.WARNING_MESSAGE);
                                 }
                                 else {
-                                    registrarReserva();
+                                    if (!this.validarActividades()){
+                                    ErrorActividad ea= new ErrorActividad();
+                                    ea.setVisible(true);
+                                    }
+                                    else {
+                                        registrarReserva();
+                                    }
                                 }
                             }
                         } 
@@ -999,36 +1004,36 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     }
     private void registrarReserva(){
         //CREO OBJETOS NECESARIOS PARA RESERVA
-        if(this.verificarCampos()){
-            Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
-            Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1));
-            HashMap<String, ArrayList<String>> r= this.obtenerReservas();
-            List<Integer> contador = new ArrayList();
-            for (HashMap.Entry<String, ArrayList<String>> entry : r.entrySet()){
-                List <Aula> aulas = this.gdr.validarPeriodica(entry.getKey(), entry.getValue().get(0),entry.getValue().get(1) ,Integer.parseInt(this.cantAlumnos.getValue().toString()),this.tipoDeAula.getSelectedItem().toString(), this.obtenerPeriodo());
-                RegistroPeriodica esta = this;
-                this.setEnabled(false);
-                this.setAlwaysOnTop(true);
-                if (aulas!=null){
-                    AulasDisponibles aulasd = new AulasDisponibles(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
-                }else{
-                    ErrorNoExisteAula enea = new ErrorNoExisteAula(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
-                }
+        Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
+        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1));
+        HashMap<String, ArrayList<String>> r= this.obtenerReservas();
+        List<Integer> contador = new ArrayList();
+        for (HashMap.Entry<String, ArrayList<String>> entry : r.entrySet()){
+            List <Aula> aulas = this.gdr.validarPeriodica(entry.getKey(), entry.getValue().get(0),entry.getValue().get(1) ,Integer.parseInt(this.cantAlumnos.getValue().toString()),this.tipoDeAula.getSelectedItem().toString(), this.obtenerPeriodo());
+            RegistroPeriodica esta = this;
+            this.setEnabled(false);
+            this.setAlwaysOnTop(true);
+            if (aulas!=null){
+                AulasDisponibles aulasd = new AulasDisponibles(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
+            }else{
+                ErrorNoExisteAula enea = new ErrorNoExisteAula(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1), this.obtenerPeriodo(), aulas,this.gdr,this.b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()),this, r.size(),contador);
             }
         }
+        
+        
     }
-    /*private boolean verificarCampos(){
+    private boolean verificarCampos(){
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":
                return (this.curso.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)));
             case "Seminario":
                 return (this.sem.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.themes.contains(this.text2.getText().substring(0, this.text2.getText().length()-1)));
             case "Carrera de grado":
-                return (this.carr.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.com.contains(this.text3.getText().substring(0, this.text3.getText().length()-1)));
+                return (this.cat.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.com.contains(this.text3.getText().substring(0, this.text3.getText().length()-1)));
             default:
                 return false;
         }
-    }*/
+    }
     
     private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
         if (!this.viernes.isSelected()){
