@@ -831,6 +831,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":
                 text2.setVisible(false);
+                text3.setVisible(false);
                 info1.setText("Nombre:");
                 text1.setVisible(true);
                 info2.setText("Carrera:");
