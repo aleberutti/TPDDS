@@ -6,6 +6,7 @@ import Modelo.Bedel;
 import Modelo.Diareserva;
 import Modelo.Docente;
 import Modelo.Esporadica;
+import Modelo.FechalectivasId;
 import Modelo.Periodica;
 import Modelo.Periodo;
 import Modelo.Reserva;
@@ -89,6 +90,11 @@ public class GestorDeReserva {
     
     public Date getFechaSegunDia(String dia){
         Date fecha = new Date();
+        GestorDeFechasLectivas gdfl = new GestorDeFechasLectivas();
+        FechalectivasId fl = gdfl.obtenerFechas();
+        if (fecha.before(fl.getFechainicio1c())){
+            fecha = fl.getFechainicio1c();
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fecha);
         
