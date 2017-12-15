@@ -18,6 +18,7 @@ public class ErrorValueCero extends javax.swing.JFrame {
      */
     public ErrorValueCero() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,6 +36,7 @@ public class ErrorValueCero extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel14.setBackground(new java.awt.Color(153, 153, 153));
         jPanel14.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
@@ -110,25 +112,19 @@ public class ErrorValueCero extends javax.swing.JFrame {
 
     private void aceptar12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptar12KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        this.aceptar.doClick();
+        this.aceptar12.doClick();
     }//GEN-LAST:event_aceptar12KeyPressed
 
     private void jPanel14KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel14KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        this.aceptar.doClick();
+        this.aceptar12.doClick();
     }//GEN-LAST:event_jPanel14KeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptar;
-    private javax.swing.JButton aceptar1;
     private javax.swing.JButton aceptar12;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

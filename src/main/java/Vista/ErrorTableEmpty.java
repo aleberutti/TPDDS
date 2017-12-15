@@ -18,6 +18,8 @@ public class ErrorTableEmpty extends javax.swing.JFrame {
      */
     public ErrorTableEmpty() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -35,6 +37,7 @@ public class ErrorTableEmpty extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel14.setBackground(new java.awt.Color(153, 153, 153));
         jPanel14.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2)));
@@ -110,54 +113,18 @@ public class ErrorTableEmpty extends javax.swing.JFrame {
 
     private void aceptar12KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptar12KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        this.aceptar.doClick();
+        this.aceptar12.doClick();
     }//GEN-LAST:event_aceptar12KeyPressed
 
     private void jPanel14KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel14KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        this.aceptar.doClick();
+        this.aceptar12.doClick();
     }//GEN-LAST:event_jPanel14KeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptar;
-    private javax.swing.JButton aceptar1;
-    private javax.swing.JButton aceptar10;
-    private javax.swing.JButton aceptar11;
     private javax.swing.JButton aceptar12;
-    private javax.swing.JButton aceptar2;
-    private javax.swing.JButton aceptar3;
-    private javax.swing.JButton aceptar4;
-    private javax.swing.JButton aceptar5;
-    private javax.swing.JButton aceptar6;
-    private javax.swing.JButton aceptar7;
-    private javax.swing.JButton aceptar8;
-    private javax.swing.JButton aceptar9;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
