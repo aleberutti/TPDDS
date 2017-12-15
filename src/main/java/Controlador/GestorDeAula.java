@@ -25,10 +25,8 @@ public class GestorDeAula {
     AulasDAO adao;
     DiaReservaDAO drdao;
     public GestorDeAula() {
-        
         this.drdao = new DiaReservaDAO();
-        this.adao = new AulasDAO();
-        
+        this.adao = new AulasDAO();  
     }
     
     public void buscarAula(Aula a){
