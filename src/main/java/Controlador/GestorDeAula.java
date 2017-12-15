@@ -9,6 +9,7 @@ import Modelo.Aula;
 import Modelo.Diareserva;
 import Modelo.FechalectivasId;
 import Modelo.Periodo;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,9 +49,15 @@ public class GestorDeAula {
 
     public List<Aula> validarDisponibilidad(Date fecha, Date h_inicio, Date h_fin, String tipoDeAula, int cantAlumnos, Periodo periodo){
         int cont = -1;
+        GestorDeFechasLectivas gdfl = new GestorDeFechasLectivas();
         List<Aula> listaAulas = adao.getPosibles(tipoDeAula, cantAlumnos);
         List<Aula> resultado = new ArrayList();
         if (!listaAulas.isEmpty()){
+            String diaFecha = obtenerDia(fecha);
+            String periodoSolicitado = gdfl.getPeriodo(fecha);
+//            System.out.println("Dia: " + diaFecha + " periodo: " + periodoSolicitado);
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            System.out.println(sdf.format(fecha));
             if(!(periodo==null)){//Periodica
                 boolean aulaDisponibleAux;
                 Date fechaAux = fecha;
@@ -73,7 +80,7 @@ public class GestorDeAula {
                         c.setTime(fechaAux);
                         c.add(Calendar.DATE, 7);
                         fechaAux=c.getTime();
-                        List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fechaAux, h_inicio, h_fin);
+                        List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fechaAux, h_inicio, h_fin, diaFecha, periodoSolicitado);
                         if (!reservas.isEmpty()){ // SI LA LISTA ES VACIA SIGNIFICA QUE NO EXISTEN RESERVAS QUE COINCIDAN CON LA FECHA Y HORA EN ESE AULA, ES DECIR, ESTA DISPONIBLE
                             aulaDisponibleAux=false;
                         }
@@ -86,10 +93,7 @@ public class GestorDeAula {
             }else{//Esporadica
                 while(cont<listaAulas.size()-1){
                     cont++;
-                    String diaFecha = obtenerDia(fecha); 
-                    List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin);
-                    List<Diareserva> reservasP = drdao.getReservasPeriodicas(listaAulas.get(cont).getAulaId(), fecha, h_fin, h_fin, diaFecha);
-                    reservas = obtenerReservasSinPeriodicas(reservas, reservasP);
+                    List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin, diaFecha, periodoSolicitado);
                     if (reservas.isEmpty()){
                         resultado.add(listaAulas.get(cont));
                     }

@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.FechalectivasId;
+import java.util.Date;
 
 /**
  *
@@ -23,5 +24,17 @@ public class GestorDeFechasLectivas {
 
     public void notificarError(){
 
+    }
+
+    public String getPeriodo(Date fecha){
+        FechalectivasId fechasLectivas = this.obtenerFechas();
+        if (fecha.after(fechasLectivas.getFechainicio1c()) && fecha.before(fechasLectivas.getFechafin1c())){
+            return "PRIMERC";
+        }else{
+            if (fecha.after(fechasLectivas.getFechainicio2c()) && fecha.before(fechasLectivas.getFechafin2c())){
+                return "PRIMERC";
+            }else
+                return "ANUAL";
+        }
     }
 }

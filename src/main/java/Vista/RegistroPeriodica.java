@@ -738,7 +738,6 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboDocenteFocusGained
 
     private void ComboDocenteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDocenteItemStateChanged
-
         String mailDoc=gd.getDocenteEmail(ComboDocente.getSelectedItem().toString());
         if(mailDoc.isEmpty() || ComboDocente.getSelectedIndex()==0){
             emailprofe.setText("Seleccione un docente de la lista");
