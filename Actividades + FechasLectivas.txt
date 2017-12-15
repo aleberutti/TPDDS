@@ -1,0 +1,18 @@
+INSERT INTO fechalectivas VALUES ('2018/02/04', '2018/07/07', '2018/07/25', '2018/12/21');
+
+
+INSERT INTO actividad VALUES (null, "AMI"),
+(null, "AMII"), (null, "ARQ DE LAS COMPUTADORAS"), (null, "AEDD"), (null, "AGA"),
+(null, "HTML"), (null, "OFFICE"), (null, "FIBRA ÓPTICA"), (null, "TELECOMUNICACIONES"),
+(null, "ELECTRICIDAD DOMÉSTICA"), (null, "TORNERÍA"), (null, "JAVA"), (null, "PHP"),
+(null, "ELECTROTECNIA"), (null, "MECÁNICA DE LOS FLUIDOS"), (null, "GESTIÓN"), (null, "CARPINTERÍA"),
+(null, "ESGRIMA"), (null, "AJEDREZ"), (null, "ESCULTURA"), (null, "REDES");
+
+INSERT INTO catedra VALUES (1, "ISI", "A"), (2, "INDUSTRIAL", "B"), (3, "ISI", "B"),
+(4, "ISI", "D"), (5, "MECANICA", "C"), (10, "ELECTRICA", "D"), (14, "INDUSTRIAL", "A"), (15, "CIVIL", "B"); 
+
+INSERT INTO curso VALUES (6, "ISI"), (7, "INDUSTRIAL"), (11, "MECANICA"), (12, "ISI"),
+(13, "ISI"), (17, "CIVIL"), (21, "ISI");
+
+INSERT INTO seminario VALUES (8, "COMUNICACIONES"), (9,"CONECTIVIDAD"),
+(16, "NEGOCIOS"), (18, "DEPORTE"), (19, "DEPORTE"), (20,"ARTE");
