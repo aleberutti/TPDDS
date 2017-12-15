@@ -130,7 +130,28 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                     }
         }
         return null;
-    }    
+    }
+    private Boolean validarActividades(){
+        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1));
+        if (comboTipo.getSelectedIndex()!=0){
+            switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+                return this.ga.validarCurso(act, this.carrera.getSelectedItem().toString());
+            
+            case "Seminario":
+                return this.ga.validarSeminario(act, (this.text2.getText().substring(0, this.text2.getText().length()-1)));
+            
+            case "Carrera de grado":
+                return this.ga.validarCatedra(act, this.carrera.getSelectedItem().toString(), (this.text3.getText().substring(0, this.text3.getText().length()-1)));
+            
+        }
+        }
+        
+        return false;
+        
+
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -922,7 +943,13 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                                 ErrorCamposVacios ecv = new ErrorCamposVacios();
                                 ecv.setVisible(true);
                             }else{
-                                registrarReserva();
+                                if (!this.validarActividades()){
+                                    ErrorActividad ea= new ErrorActividad();
+                                    ea.setVisible(true);
+                                }
+                                else {
+                                    registrarReserva();
+                                }
                             }
                         } 
                     }

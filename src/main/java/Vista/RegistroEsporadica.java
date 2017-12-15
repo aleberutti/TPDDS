@@ -587,6 +587,26 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         re2.setEndDate(fd.getFechainicio2c());
         this.fecha.getJCalendar().getDayChooser().addDateEvaluator(re2);
     }
+    private Boolean validarActividades(){
+        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1));
+        if (comboTipo.getSelectedIndex()!=0){
+            switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+                return this.ga.validarCurso(act, this.carrera.getSelectedItem().toString());
+            
+            case "Seminario":
+                return this.ga.validarSeminario(act, (this.text2.getText().substring(0, this.text2.getText().length()-1)));
+            
+            case "Carrera de grado":
+                return this.ga.validarCatedra(act, this.carrera.getSelectedItem().toString(), (this.text3.getText().substring(0, this.text3.getText().length()-1)));
+            
+        }
+        }
+        
+        return false;
+        
+
+    }
     
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
         // TODO add your handling code here:
@@ -654,7 +674,13 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                            ErrorCamposVacios ecv = new ErrorCamposVacios();
                            ecv.setVisible(true);
                        }else{
-                           registrarReserva();
+                           if (!this.validarActividades()){
+                                    ErrorActividad ea= new ErrorActividad();
+                                    ea.setVisible(true);
+                                }
+                                else {
+                                    registrarReserva();
+                                }
                        } 
                     }
                 }
