@@ -50,7 +50,6 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         backButton2 = new javax.swing.JButton();
-        minimizeButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -87,23 +86,19 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(55, 64, 70));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Número:");
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Piso:");
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Capacidad:");
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estado:");
 
         jButton3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -114,47 +109,39 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Al presionar Modificar se habilitan los cambios de los campos y el botón Guardar");
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Televisor:");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Aula multimedios");
 
         jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(55, 64, 70));
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
         jTextField2.setEnabled(false);
 
         jTextField8.setEditable(false);
-        jTextField8.setBackground(new java.awt.Color(55, 64, 70));
+        jTextField8.setBackground(new java.awt.Color(255, 255, 255));
         jTextField8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jTextField8.setForeground(new java.awt.Color(255, 255, 255));
         jTextField8.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Cañón:");
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tipo pizzarrón:");
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Computadora:");
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("DVD:");
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("A/C:");
 
         backButton2.setBackground(new java.awt.Color(55, 64, 70));
@@ -175,27 +162,6 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
         backButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButton2ActionPerformed(evt);
-            }
-        });
-
-        minimizeButton.setBackground(new java.awt.Color(55, 64, 70));
-        minimizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/diminish.png"))); // NOI18N
-        minimizeButton.setBorder(null);
-        minimizeButton.setBorderPainted(false);
-        minimizeButton.setContentAreaFilled(false);
-        minimizeButton.setFocusPainted(false);
-        minimizeButton.setFocusable(false);
-        minimizeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                minimizeButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                minimizeButtonMouseExited(evt);
-            }
-        });
-        minimizeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minimizeButtonActionPerformed(evt);
             }
         });
 
@@ -220,25 +186,21 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jComboBox2.setEnabled(false);
         jComboBox2.setLightWeightPopupEnabled(false);
 
-        jComboBox1.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jComboBox1.setEnabled(false);
         jComboBox1.setLightWeightPopupEnabled(false);
 
-        jComboBox3.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jComboBox3.setEnabled(false);
         jComboBox3.setLightWeightPopupEnabled(false);
 
-        jComboBox4.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "1", "2", "3" }));
         jComboBox4.setEnabled(false);
@@ -249,7 +211,6 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
             }
         });
 
-        jComboBox5.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jComboBox5.setEnabled(false);
@@ -260,19 +221,16 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
             }
         });
 
-        jComboBox6.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jComboBox6.setEnabled(false);
         jComboBox6.setLightWeightPopupEnabled(false);
 
-        jComboBox7.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         jComboBox7.setEnabled(false);
         jComboBox7.setLightWeightPopupEnabled(false);
 
-        jComboBox8.setBackground(new java.awt.Color(55, 64, 70));
         jComboBox8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Ocupada", "Libre" }));
         jComboBox8.setEnabled(false);
@@ -343,8 +301,6 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(minimizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addComponent(jSeparator1)
@@ -363,10 +319,8 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(exitButton)
-                            .addComponent(minimizeButton))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(exitButton)
+                        .addGap(0, 24, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(backButton2)))
@@ -462,21 +416,6 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_backButton2ActionPerformed
 
-    private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
-        // TODO add your handling code here:
-        minimizeButton.setContentAreaFilled(true);
-    }//GEN-LAST:event_minimizeButtonMouseEntered
-
-    private void minimizeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseExited
-        // TODO add your handling code here:
-        minimizeButton.setContentAreaFilled(false);
-    }//GEN-LAST:event_minimizeButtonMouseExited
-
-    private void minimizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButtonActionPerformed
-        // TODO add your handling code here:
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_minimizeButtonActionPerformed
-
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
         // TODO add your handling code here:
         exitButton.setContentAreaFilled(true);
@@ -547,6 +486,5 @@ public class ModificarAulaMultimedios extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private java.awt.Label label1;
-    private javax.swing.JButton minimizeButton;
     // End of variables declaration//GEN-END:variables
 }
