@@ -77,7 +77,7 @@ public class ErrorSeleccDia extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(127, 127, 127)
                 .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
             .addComponent(jSeparator1)
         );
         jPanel2Layout.setVerticalGroup(
