@@ -830,9 +830,11 @@ public class RegistroPeriodica extends javax.swing.JFrame {
         }
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":
+                text3.setVisible(true);
+                text3.setEnabled(false);
                 text2.setVisible(false);
-                text3.setVisible(false);
                 info1.setText("Nombre:");
+                info3.setText("Información");
                 text1.setVisible(true);
                 info2.setText("Carrera:");
                 carrera.setVisible(true);
@@ -841,9 +843,11 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             break;
             case "Seminario":
                 carrera.setVisible(false);
-                text3.setVisible(false);
+                text3.setVisible(true);
+                text3.setEnabled(false);
                 info1.setText("Nombre:");
                 info2.setText("Tema:");
+                info3.setText("Información");
                 text1.setVisible(true);
                 text2.setVisible(true);
                 this.a1.setDictionary(this.sem);
@@ -857,6 +861,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
                 carrera.setVisible(true);
                 info3.setText("Comisión:");
                 text3.setVisible(true);
+                text3.setEnabled(true);
                 this.a1.setDictionary(cat);
                 carrera.setModel(new DefaultComboBoxModel(this.carr.toArray()));
                 this.a3.setDictionary(this.com);

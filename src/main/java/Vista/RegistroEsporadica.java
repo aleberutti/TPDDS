@@ -102,8 +102,8 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         this.carrera.setBackground(this.ComboDocente.getBackground());
         this.carrera.setForeground(this.ComboDocente.getForeground());
         this.jPanel1.add(carrera);
-        text1.setVisible(false);
         text2.setVisible(false);
+        text1.setVisible(false);
         text3.setVisible(false);
         carrera.setVisible(false);
         emailprofe.setText("Seleccione un docente de la lista");
@@ -165,10 +165,10 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         text3 = new javax.swing.JTextField();
         info3 = new javax.swing.JLabel();
         info2 = new javax.swing.JLabel();
-        text2 = new javax.swing.JTextField();
         text1 = new javax.swing.JTextField();
         info1 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox<>();
+        text2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -385,6 +385,15 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(368, 368, 368)
+                        .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(ltipo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -420,11 +429,14 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lcant)
-                            .addComponent(ltipoa)
-                            .addComponent(lapel)
-                            .addComponent(lmail))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lcant, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ltipoa, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lapel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(info2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(info1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(info3, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
@@ -435,38 +447,21 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                                     .addComponent(cantAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emailprofe))))
-                        .addGap(115, 115, 115))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(text3, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(emailprofe)
+                                        .addComponent(comboTipo, 0, 420, Short.MAX_VALUE)
+                                        .addComponent(text1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(text2, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                        .addGap(115, 115, 115))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(minimizeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(368, 368, 368)
-                                .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(196, 196, 196)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(info2)
-                                    .addComponent(info1)
-                                    .addComponent(info3)
-                                    .addComponent(ltipo))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(text3)
-                                    .addComponent(text1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                                    .addComponent(text2))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -527,19 +522,23 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ltipo)
                     .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(info1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(text1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(info2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(info3)
-                    .addComponent(text3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(info2))
+                        .addGap(91, 91, 91))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(info1))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(text3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(info3))
+                        .addGap(57, 57, 57)))
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -607,6 +606,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         return false;
         
 
+    }
+    private void text1ActionPerformed(java.awt.event.MouseEvent evt){
+        
     }
     
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
@@ -916,22 +918,21 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
         text2.setVisible(true);
         if (comboTipo.getSelectedIndex()==0){
-            text1.setEnabled(false);
             text2.setEnabled(false);
+            text1.setEnabled(false);
             text3.setEnabled(false);
             carrera.setVisible(false);
         }
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":
-                text2.setVisible(false);
-                text3.setVisible(false);
-                info1.setText("Nombre:");
                 text1.setVisible(true);
+                info1.setText("Nombre:");
+                text2.setVisible(false);
                 info2.setText("Carrera:");
                 info3.setText("Información");
+                carrera.setVisible(true);
                 text3.setVisible(true);
                 text3.setEnabled(false);
-                carrera.setVisible(true);
                 this.a1.setDictionary(this.curso);
                 carrera.setModel(new DefaultComboBoxModel(this.car.toArray()));
             break;
@@ -942,21 +943,20 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 text3.setEnabled(false);
                 info1.setText("Nombre:");
                 info2.setText("Tema:");
-                text1.setVisible(true);
                 text2.setVisible(true);
+                text1.setVisible(true);
                 this.a1.setDictionary(this.sem);
                 this.a2.setDictionary(this.themes);
             break;
             case "Carrera de grado":
-                text2.setVisible(false);
-                info1.setText("Cátedra:");
                 text1.setVisible(true);
+                info1.setText("Cátedra:");
+                text2.setVisible(false);
                 info2.setText("Carrera:");
                 carrera.setVisible(true);
                 info3.setText("Comisión:");
                 text3.setVisible(true);
                 text3.setEnabled(true);
-                
                 this.a1.setDictionary(cat);
                 carrera.setModel(new DefaultComboBoxModel(this.carr.toArray()));
                 this.a3.setDictionary(this.com);
