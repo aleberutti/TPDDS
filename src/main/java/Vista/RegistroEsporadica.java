@@ -870,9 +870,9 @@ public class RegistroEsporadica extends javax.swing.JFrame {
 
         text2.setVisible(true);
         if (comboTipo.getSelectedIndex()==0){
-            text1.setVisible(false);
-            text2.setVisible(false);
-            text3.setVisible(false);
+            text1.setEnabled(false);
+            text2.setEnabled(false);
+            text3.setEnabled(false);
             carrera.setVisible(false);
         }
         switch(comboTipo.getSelectedItem().toString()){
@@ -881,13 +881,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 info1.setText("Nombre:");
                 text1.setVisible(true);
                 info2.setText("Carrera:");
+                info3.setText("Información");
+                text3.setVisible(true);
+                text3.setEnabled(false);
                 carrera.setVisible(true);
                 this.a1.setDictionary(this.curso);
                 carrera.setModel(new DefaultComboBoxModel(this.car.toArray()));
             break;
             case "Seminario":
                 carrera.setVisible(false);
-                text3.setVisible(false);
+                info3.setText("Información");
+                text3.setVisible(true);
+                text3.setEnabled(false);
                 info1.setText("Nombre:");
                 info2.setText("Tema:");
                 text1.setVisible(true);
@@ -903,6 +908,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 carrera.setVisible(true);
                 info3.setText("Comisión:");
                 text3.setVisible(true);
+                text3.setEnabled(true);
                 ArrayList <String> cat =ga.getCatedras();
                 this.a1.setDictionary(cat);
                 carrera.setModel(new DefaultComboBoxModel(this.carr.toArray()));
