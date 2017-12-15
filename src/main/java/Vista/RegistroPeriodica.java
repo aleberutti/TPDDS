@@ -897,22 +897,28 @@ public class RegistroPeriodica extends javax.swing.JFrame {
     
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         if(!selecOption()){
-            JOptionPane.showMessageDialog(null,"Debe seleccionar el periodo");
+            ErrorSeleccPeriodo esp = new ErrorSeleccPeriodo();
+            esp.setVisible(true);
         }else{
             if(!(lunes.isSelected() || martes.isSelected() || miercoles.isSelected() || jueves.isSelected() || viernes.isSelected())){
-                JOptionPane.showMessageDialog(null,"Debe seleccionar el/los días");
+                ErrorSeleccDia esd = new ErrorSeleccDia();
+                esd.setVisible(true);
             }else{
                 if(cantAlumnos.getValue().equals(0)){
-                    JOptionPane.showMessageDialog(null,"La cantidad de alumnos no es correcta");
+                    ErrorValueCero evc = new ErrorValueCero();
+                    evc.setVisible(true);
                 }else{
                     if(ComboDocente.getSelectedItem().toString().equals("Seleccione un docente de la lista")){
-                        JOptionPane.showMessageDialog(null,"Debe seleccionar un docente");
+                        ErrorSeleccDocente esd = new ErrorSeleccDocente();
+                        esd.setVisible(true);
                     }else{
                         if(comboTipo.getSelectedIndex()==0){
-                            JOptionPane.showMessageDialog(null,"Debe seleccionar un Tipo");
+                            ErrorSeleccTipo est = new ErrorSeleccTipo();
+                            est.setVisible(true);
                         }else{
                             if(selecTipo()){
-                                JOptionPane.showMessageDialog(null,"No se pueden omitir campos"); 
+                                ErrorCamposVacios ecv = new ErrorCamposVacios();
+                                ecv.setVisible(true);
                             }else{
                                 registrarReserva();
                             }
