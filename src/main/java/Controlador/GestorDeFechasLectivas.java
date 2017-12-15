@@ -26,7 +26,9 @@ public class GestorDeFechasLectivas {
     public void notificarError(){
 
     }
-
+    public FechalectivasId getFechas(){
+        return fld.readFechas();
+    }
     public String getPeriodo(Date fecha){
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
