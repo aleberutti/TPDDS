@@ -1017,7 +1017,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             }
         }
     }
-    private boolean verificarCampos(){
+    /*private boolean verificarCampos(){
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":
                return (this.curso.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)));
@@ -1028,7 +1028,7 @@ public class RegistroPeriodica extends javax.swing.JFrame {
             default:
                 return false;
         }
-    }
+    }*/
     
     private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
         if (!this.viernes.isSelected()){
