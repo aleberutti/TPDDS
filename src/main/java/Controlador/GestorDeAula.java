@@ -54,13 +54,15 @@ public class GestorDeAula {
         List<Aula> resultado = new ArrayList();
         if (!listaAulas.isEmpty()){
             String diaFecha = obtenerDia(fecha);
-            String periodoSolicitado = gdfl.getPeriodo(fecha);
-//            System.out.println("Dia: " + diaFecha + " periodo: " + periodoSolicitado);
+            String periodoSolicitado;
+            
+           
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //            System.out.println(sdf.format(fecha));
             if(!(periodo==null)){//Periodica
                 boolean aulaDisponibleAux;
                 Date fechaAux = fecha;
+                periodoSolicitado = periodo.toString();
                 while(cont<listaAulas.size()-1){
                     cont++;
                     aulaDisponibleAux=true;
@@ -89,8 +91,10 @@ public class GestorDeAula {
                         resultado.add(listaAulas.get(cont));
                     }
                 }
+                System.out.println("Dia: " + diaFecha + " periodo: " + periodoSolicitado);
                 return resultado;
             }else{//Esporadica
+                periodoSolicitado = gdfl.getPeriodo(fecha);
                 while(cont<listaAulas.size()-1){
                     cont++;
                     List<Diareserva> reservas = drdao.getReservas(listaAulas.get(cont).getAulaId(), fecha, h_inicio, h_fin, diaFecha, periodoSolicitado);
@@ -98,12 +102,15 @@ public class GestorDeAula {
                         resultado.add(listaAulas.get(cont));
                     }
                 }
+                System.out.println("Dia: " + diaFecha + " periodo: " + periodoSolicitado);
                 return resultado;
             }
+            
         }else{
             //NO HAY AULA DE ESE TIPO Y CANTIDAD
             return null;
         }
+        
     }
    
     public String obtenerDia(Date fecha){
