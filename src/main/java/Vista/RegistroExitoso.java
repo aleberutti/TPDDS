@@ -136,7 +136,8 @@ public class RegistroExitoso extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         this.dispose();
-        if (this.padre2==null){
+        if(!(this.padre==null && this.padre2==null)){
+            if (this.padre2==null){
             padre.setEnabled(true);
             padre.setAlwaysOnTop(false);
         }
@@ -144,6 +145,8 @@ public class RegistroExitoso extends javax.swing.JFrame {
             padre2.setEnabled(true);
             padre2.setAlwaysOnTop(false);
         }
+        }
+        
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void jPanel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyPressed
