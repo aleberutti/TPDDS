@@ -12,7 +12,9 @@ import Modelo.Bedel;
 import Modelo.Docente;
 import Modelo.Periodo;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -69,7 +71,7 @@ public class ErrorNoExisteAula extends javax.swing.JFrame {
         this.periodo=true;
         this.contador=contador;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        this.fecha.setText(sdf.format(gdr.getFechaSegunDia(dia)));
+        this.fecha.setText(dia);
         this.h_inicio.setText(horaI);
         this.h_fin.setText(horaF);
         this.listsize=t;

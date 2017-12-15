@@ -99,4 +99,35 @@ public class ActividadDAO extends GenericDAO{
         SS.close();
         return lista;        
     }
+   public List<Curso> getCurso(Integer id, String carrera){
+       SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM curso WHERE curso.actividadID='"+id+"' AND curso.carrera='"+carrera+"';";
+        Query query = SS.createSQLQuery(sentencia).addEntity(Curso.class);
+        List<Curso> lista = query.list();
+        SS.getTransaction().commit();
+        SS.close();
+        return lista; 
+   }
+   public List<Seminario> getSeminario(Integer id, String tema){
+       SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM seminario WHERE seminario.actividadID='"+id+"' AND seminario.tema='"+tema+"';";
+        Query query = SS.createSQLQuery(sentencia).addEntity(Seminario.class);
+        List<Seminario> lista = query.list();
+        SS.getTransaction().commit();
+        SS.close();
+        return lista; 
+   }
+   public List<Catedra> getCatedra(Integer id, String carrera, String comision){
+       SS = HU.getSessionFactory().openSession();
+        SS.beginTransaction();
+        String sentencia = "SELECT * FROM catedra WHERE catedra.actividadID='"+id+
+                    "' AND catedra.carrera='"+carrera+"' AND catedra.comision='"+comision+"';";
+        Query query = SS.createSQLQuery(sentencia).addEntity(Catedra.class);
+        List<Catedra> lista = query.list();
+        SS.getTransaction().commit();
+        SS.close();
+        return lista; 
+   }
 }
