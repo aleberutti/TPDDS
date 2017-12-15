@@ -25,10 +25,8 @@ public class GestorDeAula {
     AulasDAO adao;
     DiaReservaDAO drdao;
     public GestorDeAula() {
-        this.fld= new FechasLectivasDAO();
         this.drdao = new DiaReservaDAO();
-        this.adao = new AulasDAO();
-        
+        this.adao = new AulasDAO();  
     }
     
     public void buscarAula(Aula a){
@@ -55,8 +53,7 @@ public class GestorDeAula {
         if (!listaAulas.isEmpty()){
             String diaFecha = obtenerDia(fecha);
             String periodoSolicitado;
-            
-           
+
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //            System.out.println(sdf.format(fecha));
             if(!(periodo==null)){//Periodica
@@ -67,7 +64,7 @@ public class GestorDeAula {
                     cont++;
                     aulaDisponibleAux=true;
                     Date fechaCiclo;
-                    FechalectivasId fl = this.fld.readFechas();
+                    FechalectivasId fl = gdfl.getFechas();
                     switch (periodo){
                         case PRIMERC:
                             fechaCiclo = fl.getFechafin1c();

@@ -105,4 +105,33 @@ public class GestorDeActividad {
         }
         return datos;
     }
+    public Boolean validarCurso(Actividad act, String carrera){
+        List<Curso> curso= this.ad.getCurso(act.getActividadId(), carrera);
+        System.out.println(curso);
+        if(!(curso.isEmpty())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public Boolean validarSeminario(Actividad act, String tema){
+        List<Seminario> sem= this.ad.getSeminario(act.getActividadId(), tema);
+        if(!sem.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public Boolean validarCatedra(Actividad act, String carrera, String comision){
+        List<Catedra> cat= this.ad.getCatedra(act.getActividadId(), carrera, comision);
+        System.out.println(cat);
+        if(!cat.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

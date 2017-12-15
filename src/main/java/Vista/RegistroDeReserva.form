@@ -107,8 +107,6 @@
                       </Group>
                   </Group>
               </Group>
-              <Component id="periodica" max="32767" attributes="0"/>
-              <Component id="esporadica" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

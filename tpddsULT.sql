@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.5.1
 -- http://www.phpmyadmin.net
 --
@@ -167,21 +167,6 @@ CREATE TABLE IF NOT EXISTS `bedel` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45667 ;
 
---
--- Volcado de datos para la tabla `bedel`
---
-
-INSERT INTO `bedel` (`userID`, `turno`, `email`) VALUES
-(46, 'Noche', 'JUANIGNACIOCABRERA@LIVE.COM'),
-(456, 'Mañana', 'JUANIGNACIOCABRERA@LIVE.COM'),
-(666, 'NOCHE', 'asd@asd.com'),
-(789, 'NOCHE', 'JUANIGNACIOCABRERA@LIVE.COM'),
-(888, 'Tarde', 'JUAN@.COM'),
-(1545, 'Mañana', 'JUANIGNACIOCABRERA@LIVE.COM'),
-(4569, 'Noche', 'JUAN@LIVE.COM'),
-(4588, 'NOCHE', 'asd@.com'),
-(45666, 'NOCHE', 'JUAN@JUAN.COM');
-
 -- --------------------------------------------------------
 
 --
@@ -213,21 +198,6 @@ CREATE TABLE IF NOT EXISTS `clave` (
   KEY `clave_ibfk_1` (`userID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
---
--- Volcado de datos para la tabla `clave`
---
-
-INSERT INTO `clave` (`claveID`, `valor`, `fecha`, `hora`, `userID`, `politicaID`) VALUES
-(1, 'as', '2017-10-25', '22:01:45', 46, 1),
-(2, '45', '2017-10-25', '22:28:36', 45666, 1),
-(3, '12', '2017-10-26', '20:12:17', 789, 1),
-(4, '15', '2017-10-26', '20:36:49', 456, 1),
-(5, '12', '2017-10-26', '20:52:48', 666, 1),
-(6, '46', '2017-10-26', '20:57:12', 4588, 1),
-(7, '66', '2017-10-26', '21:53:16', 888, 1),
-(8, '1545', '2017-12-07', '14:18:46', 1545, 1),
-(9, 'as', '2017-12-07', '14:43:13', 4569, 1),
-(10, '156', '2017-12-07', '20:09:57', 456, 1);
 
 -- --------------------------------------------------------
 
@@ -398,21 +368,6 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   UNIQUE KEY `nombreUsuario` (`nombreUsuario`),
   UNIQUE KEY `claveID` (`claveID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`userID`, `nombreUsuario`, `nombre`, `apellido`, `claveID`) VALUES
-(46, 'NACHOOAKD1545', 'JUAN IGNACIO', 'CABRERA', 1),
-(456, 'JcabreraFrsff', 'JUAN IGNACIO', 'CABRERA', 10),
-(666, 'asd', 'ASD', 'ASD', 5),
-(789, 'JcabreraFrsf', 'JUAN ', 'CABRERA', 3),
-(888, 'Username', 'Nacho', 'Cabrerar', 7),
-(1545, 'jcabrerafrsfa', 'JUAN IGNACIO', 'CABRERA', 8),
-(4569, 'Jcabrera', 'JUAN', 'CABRERA', 9),
-(4588, 'asddd', 'ASD', 'ASD', 6),
-(45666, 'NachoAkd', 'JUAN', 'CABRERA', 2);
 
 --
 -- Restricciones para tablas volcadas

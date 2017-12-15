@@ -77,6 +77,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     private ArrayList <String> car = ga.getCursosCarrera();
     private ArrayList <String> sem =ga.getSeminarios();
     private ArrayList <String> themes =ga.getSeminariosThemes();
+    private ArrayList <String> cat =ga.getCatedras();
     private ArrayList <String> carr =ga.getCatedrasCarrera();
     private ArrayList <String> com =ga.getCatedrasComision();
     
@@ -587,6 +588,26 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         re2.setEndDate(fd.getFechainicio2c());
         this.fecha.getJCalendar().getDayChooser().addDateEvaluator(re2);
     }
+    private Boolean validarActividades(){
+        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1));
+        if (comboTipo.getSelectedIndex()!=0){
+            switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+                return this.ga.validarCurso(act, this.carrera.getSelectedItem().toString());
+            
+            case "Seminario":
+                return this.ga.validarSeminario(act, (this.text2.getText().substring(0, this.text2.getText().length()-1)));
+            
+            case "Carrera de grado":
+                return this.ga.validarCatedra(act, this.carrera.getSelectedItem().toString(), (this.text3.getText().substring(0, this.text3.getText().length()-1)));
+            
+        }
+        }
+        
+        return false;
+        
+
+    }
     
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
         // TODO add your handling code here:
@@ -654,7 +675,18 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                            ErrorCamposVacios ecv = new ErrorCamposVacios();
                            ecv.setVisible(true);
                        }else{
-                           registrarReserva();
+                            if(!this.verificarCampos()){
+                                JOptionPane.showMessageDialog(null, "Limitarse a valores sugeridos", "ERROR", JOptionPane.WARNING_MESSAGE);            
+                            }
+                            else { 
+                                if (!this.validarActividades()){
+                                        ErrorActividad ea= new ErrorActividad();
+                                        ea.setVisible(true);
+                                }
+                                else {
+                                    registrarReserva();
+                                }
+                            }
                        } 
                     }
                 }
@@ -687,35 +719,49 @@ public class RegistroEsporadica extends javax.swing.JFrame {
     }
     private void registrarReserva(){
         //CREO OBJETOS NECESARIOS PARA RESERVA
-        Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
-        Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1 ));
-        List aulasPTodas = gdr.validarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
-        List<Integer> contador = new ArrayList();
-        for(int i=0; i<aulasPTodas.size(); i+=2){
-            if (aulasPTodas.get(i+1)!=null){
-                RegistroEsporadica esta = this;
-                this.setEnabled(false);
-                this.setAlwaysOnTop(true);
-                AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()), this);
-                aulasd.addWindowListener(new WindowAdapter(){
-                    public void windowClosed(WindowEvent e){
-                        esta.cantAlumnos.requestFocus();
-                    }
-                });
+
+            Docente doc = docentes.get(this.ComboDocente.getSelectedIndex()-1);
+            Actividad act = this.getActividad(this.text1.getText().substring(0, this.text1.getText().length()-1 ));
+            List aulasPTodas = gdr.validarReservaEsporadica(this.modelo.getDataVector(), Integer.parseInt(this.cantAlumnos.getValue().toString()), this.tipoDeAula.getSelectedItem().toString());
+            List<Integer> contador = new ArrayList();
+            for(int i=0; i<aulasPTodas.size(); i+=2){
+                if (aulasPTodas.get(i+1)!=null){
+                    RegistroEsporadica esta = this;
+                    this.setEnabled(false);
+                    this.setAlwaysOnTop(true);
+                    AulasDisponibles aulasd = new AulasDisponibles(((Vector)aulasPTodas.get(i)),((List<Aula>)aulasPTodas.get(i+1)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()), this);
+                    aulasd.addWindowListener(new WindowAdapter(){
+                        public void windowClosed(WindowEvent e){
+                            esta.cantAlumnos.requestFocus();
+                        }
+                    });
+                }
+                else{
+                    RegistroEsporadica esta = this;
+                    esta.setAlwaysOnTop(true);
+                    this.setEnabled(false);
+                    ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()), this);
+                    enea.addWindowListener(new WindowAdapter(){
+                      public void windowClosed(WindowEvent e){
+                          esta.cantAlumnos.requestFocus();
+                      }
+                    });
+                }
             }
-            else{
-                RegistroEsporadica esta = this;
-                esta.setAlwaysOnTop(true);
-                this.setEnabled(false);
-                ErrorNoExisteAula enea = new ErrorNoExisteAula(((Vector)aulasPTodas.get(i)), this.gdr, contador, (aulasPTodas.size()/2), b, act, doc, Integer.parseInt(this.cantAlumnos.getValue().toString()), this);
-                enea.addWindowListener(new WindowAdapter(){
-                    public void windowClosed(WindowEvent e){
-                        esta.cantAlumnos.requestFocus();
-                    }
-                });
-            }
+            this.modelo.setRowCount(0);
+        
+    }
+    private boolean verificarCampos(){
+        switch(comboTipo.getSelectedItem().toString()){
+            case "Curso":
+               return (this.curso.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)));
+            case "Seminario":
+                return (this.sem.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.themes.contains(this.text2.getText().substring(0, this.text2.getText().length()-1)));
+            case "Carrera de grado":
+                return (this.cat.contains(this.text1.getText().substring(0, this.text1.getText().length()-1)) && this.com.contains(this.text3.getText().substring(0, this.text3.getText().length()-1)));
+            default:
+                return false;
         }
-        this.modelo.setRowCount(0);
     }
     private Actividad getActividad (String nombre){
         
@@ -878,6 +924,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
         switch(comboTipo.getSelectedItem().toString()){
             case "Curso":
                 text2.setVisible(false);
+                text3.setVisible(false);
                 info1.setText("Nombre:");
                 text1.setVisible(true);
                 info2.setText("Carrera:");
@@ -909,7 +956,7 @@ public class RegistroEsporadica extends javax.swing.JFrame {
                 info3.setText("Comisión:");
                 text3.setVisible(true);
                 text3.setEnabled(true);
-                ArrayList <String> cat =ga.getCatedras();
+                
                 this.a1.setDictionary(cat);
                 carrera.setModel(new DefaultComboBoxModel(this.carr.toArray()));
                 this.a3.setDictionary(this.com);

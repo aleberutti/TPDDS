@@ -678,7 +678,7 @@ public class RegistrarBedel extends javax.swing.JFrame {
     }//GEN-LAST:event_idActionPerformed
 
     private void idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyTyped
-        if (!(evt.getKeyChar()>=48 && evt.getKeyChar()<=57) || this.id.getText().length()>10)
+        if (!(evt.getKeyChar()>=48 && evt.getKeyChar()<=57) || this.id.getText().length()>9)
             evt.consume();
     }//GEN-LAST:event_idKeyTyped
 
